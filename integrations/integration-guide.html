@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third-Party Integration Guide - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #c9d1d9;
+        }
+        .code-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+        .code-block.has-header {
+            border-radius: 0 0 8px 8px;
+            margin-top: 0;
+        }
+        .json-key { color: #79c0ff; }
+        .json-string { color: #a5d6ff; }
+        .json-number { color: #79c0ff; }
+        .json-boolean { color: #ff7b72; }
+        .json-null { color: #ffa657; }
+        .comment { color: #8b949e; font-style: italic; }
+
+        .integration-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        .integration-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+        .integration-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .integration-icon {
+            font-size: 2.5rem;
+        }
+        .integration-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .integration-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .endpoint-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+        .endpoint-table thead {
+            background: var(--bg-secondary);
+        }
+        .endpoint-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-teal);
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        .endpoint-table td {
+            padding: 1rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        .endpoint-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .endpoint-table code {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+        }
+
+        .method-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+        }
+        .method-get { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .method-post { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+        .method-put { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+        .method-delete { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        .info-box.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: var(--accent-yellow);
+        }
+        .info-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+        .info-box.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-left-color: var(--accent-red);
+        }
+        .info-box-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .info-box-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .flow-diagram {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 2;
+        }
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+        .flow-number {
+            background: var(--accent-blue);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .flow-arrow {
+            color: var(--accent-teal);
+            margin: 0 1rem;
+        }
+        .flow-text {
+            color: var(--text-secondary);
+        }
+
+        .data-mapping-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .data-mapping-table th {
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-teal);
+            border: 1px solid var(--border-color);
+        }
+        .data-mapping-table td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .data-mapping-table code {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+        .checklist li:before {
+            content: "☐";
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .pricing-tier {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .pricing-tier:hover {
+            border-color: var(--accent-blue);
+        }
+        .tier-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+        .tier-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .tier-unit {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .tier-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .tier-features li:before {
+            content: "✓";
+            color: var(--accent-green);
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../integrations/" class="nav-link active">Integrations</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../integrations/" class="breadcrumb-link">Integrations</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Integration Guide</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Technical Documentation</div>
+                <h1 class="page-title">Third-Party Integration Guide</h1>
+                <p class="page-description">Comprehensive technical guide for integrating Plaid VOA, TRUV VOIE, and Prove Identity verification into Smart App 2.0. Includes API specifications, authentication flows, webhook handlers, error handling, and production deployment strategies.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🔗</span>
+                        <span>3 Core Integrations</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔐</span>
+                        <span>OAuth 2.0 / API Key Auth</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📡</span>
+                        <span>Webhook Enabled</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🛡️</span>
+                        <span>SOC 2 Compliant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Table of Contents -->
+        <section class="content-section">
+            <h2 class="content-section-title">Table of Contents</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">1. Overview & Architecture</h3>
+                    <p class="card-description">Integration overview, system architecture, and vendor comparison</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">2. Plaid VOA</h3>
+                    <p class="card-description">Asset verification through bank account linking</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">3. TRUV VOIE</h3>
+                    <p class="card-description">Income and employment verification</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">4. Prove Identity</h3>
+                    <p class="card-description">Phone-centric identity verification</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">5. Security & Compliance</h3>
+                    <p class="card-description">API security, PII handling, encryption standards</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">6. Deployment & Testing</h3>
+                    <p class="card-description">Environment setup, testing strategies, go-live checklist</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Overview & Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">1. Overview & Architecture</h2>
+
+            <h3 class="content-section-subtitle">Integration Overview</h3>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Smart App 2.0 integrates with three critical third-party verification services to streamline the mortgage application process. Each integration serves a specific verification need while maintaining security, compliance, and optimal user experience.
+            </p>
+
+            <div class="integration-card">
+                <div class="integration-header">
+                    <span class="integration-icon">🏦</span>
+                    <div>
+                        <h3 class="integration-title">Plaid - Verification of Assets (VOA)</h3>
+                        <p class="integration-subtitle">Instant bank account linking and asset verification</p>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Plaid enables borrowers to securely connect their bank accounts and automatically verify asset balances without manual statement uploads. Supports 12,000+ financial institutions with real-time balance retrieval.
+                </p>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4 class="card-title">Use Case</h4>
+                        <p class="card-description">Verify down payment funds, reserves, and asset documentation</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Data Retrieved</h4>
+                        <p class="card-description">Account balances, transaction history, account ownership</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Integration Type</h4>
+                        <p class="card-description">OAuth 2.0 + Link SDK (client-side) + API (server-side)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <div class="integration-header">
+                    <span class="integration-icon">💼</span>
+                    <div>
+                        <h3 class="integration-title">TRUV - Verification of Income & Employment (VOIE)</h3>
+                        <p class="integration-subtitle">Automated employment and income verification</p>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    TRUV connects directly to payroll providers and HR systems to verify employment status, income, and employment history. Eliminates the need for pay stubs and employment verification letters.
+                </p>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4 class="card-title">Use Case</h4>
+                        <p class="card-description">Verify employment, income, pay frequency, and job stability</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Data Retrieved</h4>
+                        <p class="card-description">Employment status, income, employer info, pay history</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Integration Type</h4>
+                        <p class="card-description">Bridge SDK (client-side) + REST API (server-side)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <div class="integration-header">
+                    <span class="integration-icon">📱</span>
+                    <div>
+                        <h3 class="integration-title">Prove - Identity Verification</h3>
+                        <p class="integration-subtitle">Phone-centric identity verification and authentication</p>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Prove uses phone number intelligence and device data to verify borrower identity instantly. Provides Trust Score, identity verification, and phone ownership confirmation with minimal borrower friction.
+                </p>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4 class="card-title">Use Case</h4>
+                        <p class="card-description">Identity verification, fraud prevention, ownership validation</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Data Retrieved</h4>
+                        <p class="card-description">Identity match, Trust Score, phone ownership, risk signals</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Integration Type</h4>
+                        <p class="card-description">REST API with optional SDK for mobile apps</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">System Architecture</h3>
+            <div class="flow-diagram">
+                <div style="color: var(--accent-teal); font-weight: 600; margin-bottom: 1rem;">Smart App 2.0 Integration Architecture</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-text">Borrower initiates verification in Smart App UI</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div class="flow-text">Frontend requests Link Token / Session Token from Smart App Backend</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div class="flow-text">Backend calls third-party API to create token (Plaid/TRUV/Prove)</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div class="flow-text">Frontend launches vendor SDK/widget with token</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">5</div>
+                    <div class="flow-text">Borrower completes verification flow (OAuth, credentials, etc.)</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">6</div>
+                    <div class="flow-text">Vendor SDK returns success + public token/transaction ID</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">7</div>
+                    <div class="flow-text">Frontend sends public token to Smart App Backend</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">8</div>
+                    <div class="flow-text">Backend exchanges token for access token (if applicable)</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">9</div>
+                    <div class="flow-text">Backend retrieves verification data via API calls</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">10</div>
+                    <div class="flow-text">Data stored in Smart App database + mapped to URLA fields</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">11</div>
+                    <div class="flow-text">Webhook listeners handle async updates (optional)</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box-title">
+                    <span>💡</span>
+                    Architecture Design Principles
+                </div>
+                <div class="info-box-content">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li><strong>Security First:</strong> All API keys and secrets stored in environment variables, never in code</li>
+                        <li><strong>Token Exchange Pattern:</strong> Public tokens exchanged on backend to prevent credential exposure</li>
+                        <li><strong>Webhook Validation:</strong> All webhooks verified via signature validation before processing</li>
+                        <li><strong>Idempotency:</strong> API calls designed to be idempotent to handle retries safely</li>
+                        <li><strong>Data Minimization:</strong> Only retrieve and store necessary PII fields required for mortgage processing</li>
+                        <li><strong>Audit Logging:</strong> All API calls and data access logged for compliance and debugging</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Vendor Comparison Matrix</h3>
+            <table class="endpoint-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Plaid VOA</th>
+                        <th>TRUV VOIE</th>
+                        <th>Prove Identity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary Function</strong></td>
+                        <td>Asset Verification</td>
+                        <td>Income/Employment Verification</td>
+                        <td>Identity Verification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authentication Type</strong></td>
+                        <td>OAuth 2.0 + Link Token</td>
+                        <td>Bridge Token + OAuth</td>
+                        <td>API Key + Client Secret</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SDK Required</strong></td>
+                        <td>Yes (Link SDK)</td>
+                        <td>Yes (Bridge SDK)</td>
+                        <td>Optional (REST API primary)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Webhook Support</strong></td>
+                        <td>✓ Yes</td>
+                        <td>✓ Yes</td>
+                        <td>✗ No (polling only)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sandbox Environment</strong></td>
+                        <td>✓ Full featured</td>
+                        <td>✓ Full featured</td>
+                        <td>✓ Demo environment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rate Limits (Production)</strong></td>
+                        <td>100 req/sec per endpoint</td>
+                        <td>60 req/min per IP</td>
+                        <td>1000 req/hour</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SLA Uptime</strong></td>
+                        <td>99.9%</td>
+                        <td>99.5%</td>
+                        <td>99.9%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Response Time</strong></td>
+                        <td>< 500ms</td>
+                        <td>< 2 seconds</td>
+                        <td>< 300ms</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Retention</strong></td>
+                        <td>30 days (configurable)</td>
+                        <td>90 days default</td>
+                        <td>7 days (logs only)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compliance</strong></td>
+                        <td>SOC 2, GDPR, CCPA</td>
+                        <td>SOC 2, FCRA</td>
+                        <td>SOC 2, GLBA, TCPA</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 2: Plaid VOA Integration -->
+        <section class="content-section">
+            <h2 class="content-section-title">2. Plaid VOA Integration</h2>
+
+            <h3 class="content-section-subtitle">2.1 Authentication & Setup</h3>
+
+            <div class="info-box">
+                <div class="info-box-title">
+                    <span>🔐</span>
+                    API Credentials
+                </div>
+                <div class="info-box-content">
+                    Plaid uses a Client ID and Secret for authentication. You'll receive different credentials for Sandbox, Development, and Production environments.
+                </div>
+            </div>
+
+            <div class="code-header">Environment Variables (.env)</div>
+            <div class="code-block has-header"><span class="comment"># Plaid Configuration</span>
+PLAID_CLIENT_ID=your_client_id_here
+PLAID_SECRET_SANDBOX=your_sandbox_secret_here
+PLAID_SECRET_DEVELOPMENT=your_development_secret_here
+PLAID_SECRET_PRODUCTION=your_production_secret_here
+PLAID_ENVIRONMENT=sandbox  <span class="comment"># sandbox | development | production</span>
+
+<span class="comment"># Webhook Configuration</span>
+PLAID_WEBHOOK_URL=https://your-domain.com/api/webhooks/plaid
+PLAID_WEBHOOK_SECRET=your_webhook_verification_secret</div>
+
+            <h3 class="content-section-subtitle">2.2 API Endpoints</h3>
+
+            <table class="endpoint-table">
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">Method</th>
+                        <th>Endpoint</th>
+                        <th>Purpose</th>
+                        <th>Auth Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/link/token/create</code></td>
+                        <td>Generate Link token for frontend SDK</td>
+                        <td>Client ID + Secret</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/item/public_token/exchange</code></td>
+                        <td>Exchange public token for access token</td>
+                        <td>Client ID + Secret</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/accounts/get</code></td>
+                        <td>Retrieve account information and balances</td>
+                        <td>Access Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/accounts/balance/get</code></td>
+                        <td>Get real-time account balances</td>
+                        <td>Access Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/transactions/get</code></td>
+                        <td>Retrieve transaction history</td>
+                        <td>Access Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/identity/get</code></td>
+                        <td>Get account holder identity data</td>
+                        <td>Access Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/asset_report/create</code></td>
+                        <td>Generate VOA asset report</td>
+                        <td>Access Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/asset_report/get</code></td>
+                        <td>Retrieve generated asset report</td>
+                        <td>Asset Report Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/item/webhook/update</code></td>
+                        <td>Update webhook URL for item</td>
+                        <td>Access Token</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge method-post">POST</span></td>
+                        <td><code>/item/remove</code></td>
+                        <td>Remove item and revoke access</td>
+                        <td>Access Token</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box warning">
+                <div class="info-box-title">
+                    <span>⚠️</span>
+                    Important: Base URL by Environment
+                </div>
+                <div class="info-box-content">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li><strong>Sandbox:</strong> <code>https://sandbox.plaid.com</code></li>
+                        <li><strong>Development:</strong> <code>https://development.plaid.com</code></li>
+                        <li><strong>Production:</strong> <code>https://production.plaid.com</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">2.3 Integration Flow</h3>
+
+            <div class="flow-diagram">
+                <div style="color: var(--accent-teal); font-weight: 600; margin-bottom: 1rem;">Plaid Link Integration Sequence</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-text"><strong>Frontend:</strong> User clicks "Connect Bank Account" button</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div class="flow-text"><strong>Frontend → Backend:</strong> POST /api/plaid/create-link-token</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div class="flow-text"><strong>Backend → Plaid:</strong> POST /link/token/create with user context</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div class="flow-text"><strong>Plaid → Backend:</strong> Returns link_token</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">5</div>
+                    <div class="flow-text"><strong>Backend → Frontend:</strong> Returns link_token to client</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">6</div>
+                    <div class="flow-text"><strong>Frontend:</strong> Initialize Plaid Link SDK with link_token</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">7</div>
+                    <div class="flow-text"><strong>User:</strong> Completes OAuth flow with bank (credentials, MFA, etc.)</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">8</div>
+                    <div class="flow-text"><strong>Plaid Link:</strong> Returns public_token on success</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">9</div>
+                    <div class="flow-text"><strong>Frontend → Backend:</strong> POST /api/plaid/exchange-token with public_token</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">10</div>
+                    <div class="flow-text"><strong>Backend → Plaid:</strong> POST /item/public_token/exchange</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">11</div>
+                    <div class="flow-text"><strong>Plaid → Backend:</strong> Returns access_token and item_id</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">12</div>
+                    <div class="flow-text"><strong>Backend:</strong> Store access_token (encrypted) + item_id in database</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">13</div>
+                    <div class="flow-text"><strong>Backend → Plaid:</strong> POST /accounts/get to retrieve account data</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">14</div>
+                    <div class="flow-text"><strong>Backend:</strong> Map account data to URLA fields, store in database</div>
+                </div>
+                <div style="margin-left: 44px; color: var(--accent-teal);">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-number">15</div>
+                    <div class="flow-text"><strong>Backend → Frontend:</strong> Return success with account summary</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">2.4 Code Examples</h3>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Backend: Create Link Token (Node.js)</h4>
+
+            <div class="code-header">server/routes/plaid.js</div>
+            <div class="code-block has-header">const express = require('express');
+const { Configuration, PlaidApi, PlaidEnvironments, Products, CountryCode } = require('plaid');
+const router = express.Router();
+
+<span class="comment">// Initialize Plaid client</span>
+const configuration = new Configuration({
+  basePath: PlaidEnvironments[process.env.PLAID_ENVIRONMENT],
+  baseOptions: {
+    headers: {
+      'PLAID-CLIENT-ID': process.env.PLAID_CLIENT_ID,
+      'PLAID-SECRET': process.env[`PLAID_SECRET_${process.env.PLAID_ENVIRONMENT.toUpperCase()}`],
+    },
+  },
+});
+
+const plaidClient = new PlaidApi(configuration);
+
+<span class="comment">// Create Link Token endpoint</span>
+router.post('/create-link-token', async (req, res) => {
+  try {
+    const { userId, applicationId } = req.body;
+
+    const request = {
+      user: {
+        client_user_id: userId, <span class="comment">// Unique ID from your system</span>
+      },
+      client_name: 'Smart App 2.0',
+      products: [Products.Auth, Products.Transactions, Products.Identity],
+      country_codes: [CountryCode.Us],
+      language: 'en',
+      webhook: process.env.PLAID_WEBHOOK_URL,
+      account_filters: {
+        depository: {
+          account_subtypes: ['checking', 'savings'],
+        },
+      },
+      <span class="comment">// Optional: Redirect URI for OAuth institutions</span>
+      redirect_uri: process.env.PLAID_REDIRECT_URI || null,
+    };
+
+    const response = await plaidClient.linkTokenCreate(request);
+
+    <span class="comment">// Store link token association in database for audit</span>
+    await db.plaid_sessions.create({
+      user_id: userId,
+      application_id: applicationId,
+      link_token: response.data.link_token,
+      expiration: response.data.expiration,
+      created_at: new Date(),
+    });
+
+    res.json({
+      link_token: response.data.link_token,
+      expiration: response.data.expiration,
+    });
+
+  } catch (error) {
+    console.error('Error creating link token:', error);
+    res.status(500).json({
+      error: 'Failed to create link token',
+      message: error.message,
+    });
+  }
+});
+
+module.exports = router;</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Backend: Exchange Public Token (Node.js)</h4>
+
+            <div class="code-header">server/routes/plaid.js (continued)</div>
+            <div class="code-block has-header"><span class="comment">// Exchange public token for access token</span>
+router.post('/exchange-token', async (req, res) => {
+  try {
+    const { publicToken, userId, applicationId, metadata } = req.body;
+
+    <span class="comment">// Exchange public token for access token</span>
+    const tokenResponse = await plaidClient.itemPublicTokenExchange({
+      public_token: publicToken,
+    });
+
+    const accessToken = tokenResponse.data.access_token;
+    const itemId = tokenResponse.data.item_id;
+
+    <span class="comment">// Encrypt access token before storing (use crypto library)</span>
+    const encryptedAccessToken = encryptToken(accessToken);
+
+    <span class="comment">// Store access token and item ID in database</span>
+    await db.plaid_items.create({
+      user_id: userId,
+      application_id: applicationId,
+      item_id: itemId,
+      access_token: encryptedAccessToken,
+      institution_id: metadata.institution.institution_id,
+      institution_name: metadata.institution.name,
+      created_at: new Date(),
+    });
+
+    <span class="comment">// Retrieve account information</span>
+    const accountsResponse = await plaidClient.accountsGet({
+      access_token: accessToken,
+    });
+
+    const accounts = accountsResponse.data.accounts;
+
+    <span class="comment">// Store account details</span>
+    for (const account of accounts) {
+      await db.plaid_accounts.create({
+        user_id: userId,
+        application_id: applicationId,
+        item_id: itemId,
+        account_id: account.account_id,
+        account_type: account.type,
+        account_subtype: account.subtype,
+        account_name: account.name,
+        mask: account.mask,
+        current_balance: account.balances.current,
+        available_balance: account.balances.available,
+        currency_code: account.balances.iso_currency_code,
+        official_name: account.official_name,
+        created_at: new Date(),
+      });
+    }
+
+    <span class="comment">// Retrieve identity information for account ownership verification</span>
+    const identityResponse = await plaidClient.identityGet({
+      access_token: accessToken,
+    });
+
+    const identityData = identityResponse.data.accounts;
+
+    res.json({
+      success: true,
+      accounts: accounts.map(acc => ({
+        id: acc.account_id,
+        name: acc.name,
+        type: acc.type,
+        subtype: acc.subtype,
+        mask: acc.mask,
+        balance: acc.balances.current,
+      })),
+      message: 'Bank accounts successfully connected',
+    });
+
+  } catch (error) {
+    console.error('Error exchanging token:', error);
+    res.status(500).json({
+      error: 'Failed to exchange token',
+      message: error.message,
+    });
+  }
+});
+
+<span class="comment">// Helper function to encrypt tokens (example using crypto)</span>
+function encryptToken(token) {
+  const crypto = require('crypto');
+  const algorithm = 'aes-256-gcm';
+  const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
+  const iv = crypto.randomBytes(16);
+
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(token, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+
+  const authTag = cipher.getAuthTag();
+
+  return JSON.stringify({
+    encrypted,
+    iv: iv.toString('hex'),
+    authTag: authTag.toString('hex'),
+  });
+}</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Frontend: Plaid Link Integration (React)</h4>
+
+            <div class="code-header">client/components/PlaidLink.jsx</div>
+            <div class="code-block has-header">import React, { useState, useCallback } from 'react';
+import { usePlaidLink } from 'react-plaid-link';
+import axios from 'axios';
+
+const PlaidLinkComponent = ({ userId, applicationId, onSuccess }) => {
+  const [linkToken, setLinkToken] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  <span class="comment">// Create link token</span>
+  const createLinkToken = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post('/api/plaid/create-link-token', {
+        userId,
+        applicationId,
+      });
+      setLinkToken(response.data.link_token);
+    } catch (error) {
+      console.error('Error creating link token:', error);
+      alert('Failed to initialize bank connection. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  <span class="comment">// Handle successful bank connection</span>
+  const onSuccessCallback = useCallback(async (publicToken, metadata) => {
+    setLoading(true);
+    try {
+      const response = await axios.post('/api/plaid/exchange-token', {
+        publicToken,
+        userId,
+        applicationId,
+        metadata,
+      });
+
+      if (response.data.success) {
+        onSuccess(response.data.accounts);
+      }
+    } catch (error) {
+      console.error('Error exchanging token:', error);
+      alert('Failed to connect bank account. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [userId, applicationId, onSuccess]);
+
+  <span class="comment">// Initialize Plaid Link</span>
+  const config = {
+    token: linkToken,
+    onSuccess: onSuccessCallback,
+    onExit: (err, metadata) => {
+      if (err) {
+        console.error('Plaid Link exit error:', err);
+      }
+      console.log('Plaid Link exited:', metadata);
+    },
+    onEvent: (eventName, metadata) => {
+      console.log('Plaid Link event:', eventName, metadata);
+    },
+  };
+
+  const { open, ready } = usePlaidLink(config);
+
+  <span class="comment">// Open Plaid Link when token is ready</span>
+  React.useEffect(() => {
+    if (ready) {
+      open();
+    }
+  }, [ready, open]);
+
+  return (
+    <div>
+      <button
+        onClick={createLinkToken}
+        disabled={loading || linkToken}
+        className="btn btn-primary"
+      >
+        {loading ? 'Connecting...' : 'Connect Bank Account'}
+      </button>
+    </div>
+  );
+};
+
+export default PlaidLinkComponent;</div>
+
+            <h3 class="content-section-subtitle">2.5 Request/Response Examples</h3>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Create Link Token</h4>
+
+            <div class="code-header">POST /link/token/create - Request</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"client_id"</span>: <span class="json-string">"your_client_id"</span>,
+  <span class="json-key">"secret"</span>: <span class="json-string">"your_secret"</span>,
+  <span class="json-key">"user"</span>: {
+    <span class="json-key">"client_user_id"</span>: <span class="json-string">"user-12345"</span>
+  },
+  <span class="json-key">"client_name"</span>: <span class="json-string">"Smart App 2.0"</span>,
+  <span class="json-key">"products"</span>: [<span class="json-string">"auth"</span>, <span class="json-string">"transactions"</span>, <span class="json-string">"identity"</span>],
+  <span class="json-key">"country_codes"</span>: [<span class="json-string">"US"</span>],
+  <span class="json-key">"language"</span>: <span class="json-string">"en"</span>,
+  <span class="json-key">"webhook"</span>: <span class="json-string">"https://your-domain.com/api/webhooks/plaid"</span>,
+  <span class="json-key">"account_filters"</span>: {
+    <span class="json-key">"depository"</span>: {
+      <span class="json-key">"account_subtypes"</span>: [<span class="json-string">"checking"</span>, <span class="json-string">"savings"</span>]
+    }
+  }
+}</div>
+
+            <div class="code-header">POST /link/token/create - Response</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"link_token"</span>: <span class="json-string">"link-sandbox-12345678-abcd-1234-abcd-123456789012"</span>,
+  <span class="json-key">"expiration"</span>: <span class="json-string">"2024-01-22T10:30:00Z"</span>,
+  <span class="json-key">"request_id"</span>: <span class="json-string">"req-abc123"</span>
+}</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Exchange Public Token</h4>
+
+            <div class="code-header">POST /item/public_token/exchange - Request</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"client_id"</span>: <span class="json-string">"your_client_id"</span>,
+  <span class="json-key">"secret"</span>: <span class="json-string">"your_secret"</span>,
+  <span class="json-key">"public_token"</span>: <span class="json-string">"public-sandbox-abc123"</span>
+}</div>
+
+            <div class="code-header">POST /item/public_token/exchange - Response</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"access_token"</span>: <span class="json-string">"access-sandbox-12345678-abcd-1234-abcd-123456789012"</span>,
+  <span class="json-key">"item_id"</span>: <span class="json-string">"item-sandbox-xyz789"</span>,
+  <span class="json-key">"request_id"</span>: <span class="json-string">"req-def456"</span>
+}</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Get Accounts</h4>
+
+            <div class="code-header">POST /accounts/get - Request</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"client_id"</span>: <span class="json-string">"your_client_id"</span>,
+  <span class="json-key">"secret"</span>: <span class="json-string">"your_secret"</span>,
+  <span class="json-key">"access_token"</span>: <span class="json-string">"access-sandbox-12345678-abcd-1234-abcd-123456789012"</span>
+}</div>
+
+            <div class="code-header">POST /accounts/get - Response</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"accounts"</span>: [
+    {
+      <span class="json-key">"account_id"</span>: <span class="json-string">"account-abc123"</span>,
+      <span class="json-key">"balances"</span>: {
+        <span class="json-key">"available"</span>: <span class="json-number">95000.00</span>,
+        <span class="json-key">"current"</span>: <span class="json-number">97500.00</span>,
+        <span class="json-key">"iso_currency_code"</span>: <span class="json-string">"USD"</span>,
+        <span class="json-key">"limit"</span>: <span class="json-null">null</span>,
+        <span class="json-key">"unofficial_currency_code"</span>: <span class="json-null">null</span>
+      },
+      <span class="json-key">"mask"</span>: <span class="json-string">"0000"</span>,
+      <span class="json-key">"name"</span>: <span class="json-string">"Plaid Checking"</span>,
+      <span class="json-key">"official_name"</span>: <span class="json-string">"Plaid Gold Standard 0% Interest Checking"</span>,
+      <span class="json-key">"subtype"</span>: <span class="json-string">"checking"</span>,
+      <span class="json-key">"type"</span>: <span class="json-string">"depository"</span>
+    },
+    {
+      <span class="json-key">"account_id"</span>: <span class="json-string">"account-def456"</span>,
+      <span class="json-key">"balances"</span>: {
+        <span class="json-key">"available"</span>: <span class="json-number">45000.00</span>,
+        <span class="json-key">"current"</span>: <span class="json-number">45000.00</span>,
+        <span class="json-key">"iso_currency_code"</span>: <span class="json-string">"USD"</span>,
+        <span class="json-key">"limit"</span>: <span class="json-null">null</span>,
+        <span class="json-key">"unofficial_currency_code"</span>: <span class="json-null">null</span>
+      },
+      <span class="json-key">"mask"</span>: <span class="json-string">"1111"</span>,
+      <span class="json-key">"name"</span>: <span class="json-string">"Plaid Saving"</span>,
+      <span class="json-key">"official_name"</span>: <span class="json-string">"Plaid Silver Standard 0.1% Interest Saving"</span>,
+      <span class="json-key">"subtype"</span>: <span class="json-string">"savings"</span>,
+      <span class="json-key">"type"</span>: <span class="json-string">"depository"</span>
+    }
+  ],
+  <span class="json-key">"item"</span>: {
+    <span class="json-key">"available_products"</span>: [<span class="json-string">"investments"</span>, <span class="json-string">"liabilities"</span>],
+    <span class="json-key">"billed_products"</span>: [<span class="json-string">"auth"</span>, <span class="json-string">"transactions"</span>],
+    <span class="json-key">"consent_expiration_time"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"error"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"institution_id"</span>: <span class="json-string">"ins_3"</span>,
+    <span class="json-key">"item_id"</span>: <span class="json-string">"item-sandbox-xyz789"</span>,
+    <span class="json-key">"webhook"</span>: <span class="json-string">"https://your-domain.com/api/webhooks/plaid"</span>
+  },
+  <span class="json-key">"request_id"</span>: <span class="json-string">"req-ghi789"</span>
+}</div>
+
+            <h3 class="content-section-subtitle">2.6 Webhook Configuration</h3>
+
+            <div class="info-box">
+                <div class="info-box-title">
+                    <span>🔔</span>
+                    Webhook Events
+                </div>
+                <div class="info-box-content">
+                    Plaid sends webhook notifications for important events like transaction updates, item errors, and account changes. All webhooks must be validated using the webhook verification signature.
+                </div>
+            </div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Webhook Handler Example (Node.js)</h4>
+
+            <div class="code-header">server/routes/webhooks/plaid.js</div>
+            <div class="code-block has-header">const express = require('express');
+const crypto = require('crypto');
+const router = express.Router();
+
+<span class="comment">// Webhook endpoint (must be publicly accessible)</span>
+router.post('/plaid', express.raw({ type: 'application/json' }), async (req, res) => {
+  try {
+    <span class="comment">// Verify webhook signature</span>
+    const signature = req.headers['plaid-verification'];
+    const body = req.body.toString();
+
+    const isValid = verifyWebhookSignature(body, signature);
+
+    if (!isValid) {
+      console.error('Invalid webhook signature');
+      return res.status(401).json({ error: 'Invalid signature' });
+    }
+
+    <span class="comment">// Parse webhook payload</span>
+    const payload = JSON.parse(body);
+    const { webhook_type, webhook_code, item_id } = payload;
+
+    console.log(`Received webhook: ${webhook_type}.${webhook_code} for item ${item_id}`);
+
+    <span class="comment">// Handle different webhook types</span>
+    switch (webhook_type) {
+      case 'TRANSACTIONS':
+        await handleTransactionsWebhook(payload);
+        break;
+
+      case 'ITEM':
+        await handleItemWebhook(payload);
+        break;
+
+      case 'ASSETS':
+        await handleAssetsWebhook(payload);
+        break;
+
+      case 'AUTH':
+        await handleAuthWebhook(payload);
+        break;
+
+      default:
+        console.log(`Unhandled webhook type: ${webhook_type}`);
+    }
+
+    <span class="comment">// Respond with 200 to acknowledge receipt</span>
+    res.status(200).json({ received: true });
+
+  } catch (error) {
+    console.error('Webhook processing error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+<span class="comment">// Verify Plaid webhook signature</span>
+function verifyWebhookSignature(body, signature) {
+  const secret = process.env.PLAID_WEBHOOK_SECRET;
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(body)
+    .digest('hex');
+
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(expectedSignature)
+  );
+}
+
+<span class="comment">// Handle TRANSACTIONS webhooks</span>
+async function handleTransactionsWebhook(payload) {
+  const { webhook_code, item_id, new_transactions } = payload;
+
+  switch (webhook_code) {
+    case 'INITIAL_UPDATE':
+      console.log(`Initial transactions available for item ${item_id}`);
+      await fetchAndStoreTransactions(item_id);
+      break;
+
+    case 'HISTORICAL_UPDATE':
+      console.log(`Historical transactions available for item ${item_id}`);
+      await fetchAndStoreTransactions(item_id);
+      break;
+
+    case 'DEFAULT_UPDATE':
+      console.log(`${new_transactions} new transactions for item ${item_id}`);
+      await fetchAndStoreTransactions(item_id);
+      break;
+
+    case 'TRANSACTIONS_REMOVED':
+      console.log(`Transactions removed for item ${item_id}`);
+      await removeTransactions(payload.removed_transactions);
+      break;
+  }
+}
+
+<span class="comment">// Handle ITEM webhooks</span>
+async function handleItemWebhook(payload) {
+  const { webhook_code, item_id, error } = payload;
+
+  switch (webhook_code) {
+    case 'ERROR':
+      console.error(`Item error for ${item_id}:`, error);
+      await updateItemStatus(item_id, 'error', error);
+      <span class="comment">// Notify user to reconnect account</span>
+      await notifyUserItemError(item_id, error);
+      break;
+
+    case 'PENDING_EXPIRATION':
+      console.log(`Item ${item_id} consent expiring soon`);
+      await notifyUserConsentExpiring(item_id);
+      break;
+
+    case 'USER_PERMISSION_REVOKED':
+      console.log(`User revoked permission for item ${item_id}`);
+      await updateItemStatus(item_id, 'revoked');
+      break;
+
+    case 'WEBHOOK_UPDATE_ACKNOWLEDGED':
+      console.log(`Webhook URL updated for item ${item_id}`);
+      break;
+  }
+}
+
+module.exports = router;</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Common Webhook Events</h4>
+
+            <table class="endpoint-table">
+                <thead>
+                    <tr>
+                        <th>Webhook Type</th>
+                        <th>Webhook Code</th>
+                        <th>Description</th>
+                        <th>Action Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>TRANSACTIONS</code></td>
+                        <td><code>INITIAL_UPDATE</code></td>
+                        <td>Initial transaction data available</td>
+                        <td>Fetch transactions via API</td>
+                    </tr>
+                    <tr>
+                        <td><code>TRANSACTIONS</code></td>
+                        <td><code>DEFAULT_UPDATE</code></td>
+                        <td>New transactions available</td>
+                        <td>Fetch new transactions</td>
+                    </tr>
+                    <tr>
+                        <td><code>TRANSACTIONS</code></td>
+                        <td><code>HISTORICAL_UPDATE</code></td>
+                        <td>Historical transactions ready</td>
+                        <td>Fetch historical data</td>
+                    </tr>
+                    <tr>
+                        <td><code>ITEM</code></td>
+                        <td><code>ERROR</code></td>
+                        <td>Item requires user action</td>
+                        <td>Notify user, provide reauth</td>
+                    </tr>
+                    <tr>
+                        <td><code>ITEM</code></td>
+                        <td><code>PENDING_EXPIRATION</code></td>
+                        <td>Consent expiring within 7 days</td>
+                        <td>Notify user to reauthorize</td>
+                    </tr>
+                    <tr>
+                        <td><code>ITEM</code></td>
+                        <td><code>USER_PERMISSION_REVOKED</code></td>
+                        <td>User revoked bank access</td>
+                        <td>Mark item as revoked</td>
+                    </tr>
+                    <tr>
+                        <td><code>ASSETS</code></td>
+                        <td><code>PRODUCT_READY</code></td>
+                        <td>Asset report ready for retrieval</td>
+                        <td>Fetch asset report</td>
+                    </tr>
+                    <tr>
+                        <td><code>AUTH</code></td>
+                        <td><code>AUTOMATICALLY_VERIFIED</code></td>
+                        <td>Auth verification completed</td>
+                        <td>Update account status</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">2.7 Error Handling & Retry Logic</h3>
+
+            <div class="info-box warning">
+                <div class="info-box-title">
+                    <span>⚠️</span>
+                    Common Error Scenarios
+                </div>
+                <div class="info-box-content">
+                    Plaid integrations can fail for various reasons including network issues, authentication failures, item errors, and rate limiting. Implement robust error handling and retry logic.
+                </div>
+            </div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Error Response Example</h4>
+
+            <div class="code-header">Error Response Structure</div>
+            <div class="code-block has-header">{
+  <span class="json-key">"error_type"</span>: <span class="json-string">"ITEM_ERROR"</span>,
+  <span class="json-key">"error_code"</span>: <span class="json-string">"ITEM_LOGIN_REQUIRED"</span>,
+  <span class="json-key">"error_message"</span>: <span class="json-string">"the login details of this item have changed"</span>,
+  <span class="json-key">"display_message"</span>: <span class="json-string">"The login details for this account have changed. Please reconnect."</span>,
+  <span class="json-key">"request_id"</span>: <span class="json-string">"req-abc123"</span>,
+  <span class="json-key">"causes"</span>: [],
+  <span class="json-key">"status"</span>: <span class="json-number">400</span>,
+  <span class="json-key">"documentation_url"</span>: <span class="json-string">"https://plaid.com/docs/errors/item/#item_login_required"</span>,
+  <span class="json-key">"suggested_action"</span>: <span class="json-null">null</span>
+}</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Error Handling Implementation</h4>
+
+            <div class="code-header">server/utils/plaidErrorHandler.js</div>
+            <div class="code-block has-header">class PlaidErrorHandler {
+  static async handleError(error, context = {}) {
+    const errorData = error.response?.data || {};
+    const errorType = errorData.error_type;
+    const errorCode = errorData.error_code;
+
+    console.error('Plaid API Error:', {
+      type: errorType,
+      code: errorCode,
+      message: errorData.error_message,
+      context,
+    });
+
+    <span class="comment">// Log error for monitoring</span>
+    await this.logError(error, context);
+
+    <span class="comment">// Handle specific error types</span>
+    switch (errorType) {
+      case 'ITEM_ERROR':
+        return this.handleItemError(errorCode, errorData, context);
+
+      case 'INVALID_REQUEST':
+        return this.handleInvalidRequest(errorCode, errorData, context);
+
+      case 'RATE_LIMIT_EXCEEDED':
+        return this.handleRateLimit(errorData, context);
+
+      case 'API_ERROR':
+        return this.handleApiError(errorData, context);
+
+      case 'ASSET_REPORT_ERROR':
+        return this.handleAssetReportError(errorCode, errorData, context);
+
+      default:
+        return this.handleUnknownError(errorData, context);
+    }
+  }
+
+  static handleItemError(code, errorData, context) {
+    switch (code) {
+      case 'ITEM_LOGIN_REQUIRED':
+        <span class="comment">// User needs to reauthorize</span>
+        return {
+          requiresUserAction: true,
+          action: 'reauthorize',
+          message: 'Please reconnect your bank account',
+          userMessage: errorData.display_message,
+        };
+
+      case 'ITEM_LOCKED':
+        <span class="comment">// Account is locked at institution</span>
+        return {
+          requiresUserAction: true,
+          action: 'contact_bank',
+          message: 'Your account is locked. Please contact your bank.',
+          userMessage: errorData.display_message,
+        };
+
+      case 'ITEM_NOT_FOUND':
+        <span class="comment">// Item no longer exists</span>
+        return {
+          requiresUserAction: true,
+          action: 'reconnect',
+          message: 'Bank connection not found. Please reconnect.',
+          userMessage: errorData.display_message,
+        };
+
+      default:
+        return {
+          requiresUserAction: true,
+          action: 'contact_support',
+          message: 'An error occurred with your bank connection',
+          userMessage: errorData.display_message || 'Please contact support',
+        };
+    }
+  }
+
+  static async handleRateLimit(errorData, context) {
+    <span class="comment">// Implement exponential backoff</span>
+    const retryAfter = errorData.retry_after || 60;
+
+    console.warn(`Rate limit exceeded. Retrying after ${retryAfter} seconds`);
+
+    return {
+      shouldRetry: true,
+      retryAfter: retryAfter * 1000, <span class="comment">// Convert to milliseconds</span>
+      message: 'Rate limit exceeded',
+    };
+  }
+
+  static async handleApiError(errorData, context) {
+    <span class="comment">// Plaid API errors - usually temporary</span>
+    return {
+      shouldRetry: true,
+      retryAfter: 5000, <span class="comment">// 5 seconds</span>
+      maxRetries: 3,
+      message: 'Temporary API error',
+      userMessage: 'We\'re experiencing technical difficulties. Please try again.',
+    };
+  }
+
+  static async logError(error, context) {
+    <span class="comment">// Log to monitoring service (e.g., Sentry, CloudWatch)</span>
+    await db.error_logs.create({
+      service: 'plaid',
+      error_type: error.response?.data?.error_type,
+      error_code: error.response?.data?.error_code,
+      error_message: error.response?.data?.error_message,
+      context: JSON.stringify(context),
+      timestamp: new Date(),
+    });
+  }
+}
+
+module.exports = PlaidErrorHandler;</div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Retry Logic with Exponential Backoff</h4>
+
+            <div class="code-header">server/utils/retryHandler.js</div>
+            <div class="code-block has-header">async function retryWithBackoff(fn, options = {}) {
+  const {
+    maxRetries = 3,
+    initialDelay = 1000,
+    maxDelay = 10000,
+    backoffMultiplier = 2,
+    shouldRetry = (error) => true,
+  } = options;
+
+  let lastError;
+  let delay = initialDelay;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+
+      <span class="comment">// Check if we should retry</span>
+      if (attempt === maxRetries || !shouldRetry(error)) {
+        throw error;
+      }
+
+      <span class="comment">// Calculate delay with exponential backoff</span>
+      const currentDelay = Math.min(delay, maxDelay);
+
+      console.log(`Retry attempt ${attempt + 1}/${maxRetries} after ${currentDelay}ms`);
+
+      <span class="comment">// Wait before retrying</span>
+      await new Promise(resolve => setTimeout(resolve, currentDelay));
+
+      <span class="comment">// Increase delay for next attempt</span>
+      delay *= backoffMultiplier;
+    }
+  }
+
+  throw lastError;
+}
+
+<span class="comment">// Usage example</span>
+const accountsResponse = await retryWithBackoff(
+  () => plaidClient.accountsGet({ access_token: accessToken }),
+  {
+    maxRetries: 3,
+    initialDelay: 1000,
+    shouldRetry: (error) => {
+      const errorType = error.response?.data?.error_type;
+      return errorType === 'API_ERROR' || errorType === 'RATE_LIMIT_EXCEEDED';
+    },
+  }
+);
+
+module.exports = { retryWithBackoff };</div>
+
+            <h3 class="content-section-subtitle">2.8 Data Mapping to URLA Fields</h3>
+
+            <table class="data-mapping-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Plaid Field</th>
+                        <th style="width: 30%;">URLA Field</th>
+                        <th style="width: 40%;">Mapping Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>accounts[].account_id</code></td>
+                        <td><code>AssetID</code></td>
+                        <td>Unique identifier for tracking</td>
+                    </tr>
+                    <tr>
+                        <td><code>accounts[].type</code></td>
+                        <td><code>AssetType</code></td>
+                        <td>Map "depository" → "CheckingAccount" or "SavingsAccount"</td>
+                    </tr>
+                    <tr>
+                        <td><code>accounts[].balances.current</code></td>
+                        <td><code>AssetCashOrMarketValueAmount</code></td>
+                        <td>Current balance as asset value</td>
+                    </tr>
+                    <tr>
+                        <td><code>accounts[].official_name</code></td>
+                        <td><code>AssetAccountIdentifier</code></td>
+                        <td>Full account name</td>
+                    </tr>
+                    <tr>
+                        <td><code>identity[].owners[].names[]</code></td>
+                        <td><code>BorrowerName</code></td>
+                        <td>Verify name matches borrower</td>
+                    </tr>
+                    <tr>
+                        <td><code>identity[].owners[].addresses[]</code></td>
+                        <td><code>BorrowerAddress</code></td>
+                        <td>Verify address for consistency</td>
+                    </tr>
+                    <tr>
+                        <td><code>institution.name</code></td>
+                        <td><code>FinancialInstitutionName</code></td>
+                        <td>Bank/credit union name</td>
+                    </tr>
+                    <tr>
+                        <td><code>accounts[].mask</code></td>
+                        <td><code>AccountNumber</code></td>
+                        <td>Last 4 digits only (partial)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">2.9 Rate Limiting & Throttling</h3>
+
+            <div class="info-box">
+                <div class="info-box-title">
+                    <span>🚦</span>
+                    Rate Limit Guidelines
+                </div>
+                <div class="info-box-content">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li><strong>Default Limit:</strong> 100 requests per second per endpoint</li>
+                        <li><strong>Asset Reports:</strong> 25 reports per minute per client</li>
+                        <li><strong>Link Token Creation:</strong> 200 tokens per minute</li>
+                        <li><strong>Best Practice:</strong> Implement client-side rate limiting and request queuing</li>
+                        <li><strong>Response Header:</strong> Check <code>X-RateLimit-Remaining</code> header</li>
+                        <li><strong>429 Status:</strong> Exponential backoff with max 60 second delay</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Rate Limiter Implementation</h4>
+
+            <div class="code-header">server/utils/rateLimiter.js</div>
+            <div class="code-block has-header">const Bottleneck = require('bottleneck');
+
+<span class="comment">// Create rate limiter for Plaid API</span>
+const plaidLimiter = new Bottleneck({
+  maxConcurrent: 10, <span class="comment">// Max concurrent requests</span>
+  minTime: 10,       <span class="comment">// Min time between requests (ms)</span>
+  reservoir: 100,    <span class="comment">// Initial token count</span>
+  reservoirRefreshAmount: 100,
+  reservoirRefreshInterval: 1000, <span class="comment">// Refill every 1 second</span>
+});
+
+<span class="comment">// Wrap Plaid API calls with rate limiter</span>
+const rateLimitedPlaidCall = async (apiCall) => {
+  return plaidLimiter.schedule(() => apiCall());
+};
+
+<span class="comment">// Usage example</span>
+const accounts = await rateLimitedPlaidCall(() =>
+  plaidClient.accountsGet({ access_token: accessToken })
+);
+
+module.exports = { rateLimitedPlaidCall, plaidLimiter };</div>
+
+            <h3 class="content-section-subtitle">2.10 Testing with Sandbox</h3>
+
+            <div class="info-box success">
+                <div class="info-box-title">
+                    <span>✅</span>
+                    Sandbox Test Credentials
+                </div>
+                <div class="info-box-content">
+                    Plaid provides a full-featured sandbox environment with test credentials to simulate various scenarios including successful auth, MFA, and error states.
+                </div>
+            </div>
+
+            <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Sandbox Test Credentials</h4>
+
+            <table class="endpoint-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Scenario</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>user_good</code></td>
+                        <td><code>pass_good</code></td>
+                        <td>Successful auth</td>
+                        <td>Returns account data with balances</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_custom</code></td>
+                        <td><code>pass_good</code></td>
+                        <td>Customizable accounts</td>
+                        <td>Configure account types and balances</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_mfa</code></td>
+                        <td><code>pass_good</code></td>
+                        <td>MFA challenge</td>
+                        <td>Requires MFA code (use "1234")</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_bad</code></td>
+                        <td><code>pass_good</code></td>
+                        <td>Invalid credentials</td>
+                        <td>Returns ITEM_LOGIN_REQUIRED error</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_locked</code></td>
+                        <td><code>pass_good</code></td>
+                        <td>Account locked</td>
+                        <td>Returns ITEM_LOCKED error</td>
+                    </tr>
+                    <tr>
+                        <td><code>user_reset</code></td>
+                        <td><code>pass_good</code></td>
+                        <td>Password reset required</td>
+                        <td>Returns ITEM_LOGIN_REQUIRED error</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-header">Sandbox Test Institution</div>
+            <div class="code-block has-header"><span class="comment"># In Plaid Link, search for:</span>
+"First Platypus Bank"  <span class="comment"># ins_109508</span>
+
+<span class="comment"># This is the primary test institution with full product support</span>
+<span class="comment"># Supports: Auth, Transactions, Identity, Assets, Liabilities</span></div>
+
+        </section>
+
+        <!-- Continue button for Part 2 -->
+        <div class="info-box" style="margin: 3rem 0;">
+            <div class="info-box-title">
+                <span>📄</span>
+                Documentation Continues
+            </div>
+            <div class="info-box-content">
+                This is Part 1 of the comprehensive integration guide. The following sections cover:
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li><strong>Section 3:</strong> TRUV VOIE Integration (Income & Employment Verification)</li>
+                    <li><strong>Section 4:</strong> Prove Identity Integration (Phone-centric Verification)</li>
+                    <li><strong>Section 5:</strong> Security & Compliance (PII Handling, Encryption, GLBA)</li>
+                    <li><strong>Section 6:</strong> Deployment & Testing (Environment Setup, Go-Live Checklist)</li>
+                    <li><strong>Section 7:</strong> Troubleshooting & Support (Common Issues, Debug Guide)</li>
+                    <li><strong>Section 8:</strong> Cost Analysis & Pricing (Vendor Comparison, Budget Planning)</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">The remaining sections will be added to complete this comprehensive technical guide.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

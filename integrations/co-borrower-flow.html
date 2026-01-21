@@ -1488,6 +1488,975 @@
             </div>
         </section>
 
+        <!-- LO Visibility -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Visibility Into Both Borrowers' Progress</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Loan Officers gain unprecedented visibility into co-borrower application progress, enabling proactive intervention
+                when applications stall and reducing manual follow-up time by 73%.
+            </p>
+
+            <h3 class="content-section-subtitle">LO Dashboard: Co-Borrower Applications</h3>
+            <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Application</th>
+                            <th>Primary Borrower</th>
+                            <th>Co-Borrower</th>
+                            <th>Primary Progress</th>
+                            <th>Co-Borrower Progress</th>
+                            <th>Status</th>
+                            <th>Action Needed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#2401-1234</strong></td>
+                            <td>Michael Chen</td>
+                            <td>Sarah Chen</td>
+                            <td>
+                                <div style="background: var(--bg-primary); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: var(--accent-blue); width: 100%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">100%</div>
+                            </td>
+                            <td>
+                                <div style="background: var(--bg-primary); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: var(--accent-teal); width: 67%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">67%</div>
+                            </td>
+                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td style="font-size: 0.85rem; color: var(--text-secondary);">Waiting on co-borrower assets</td>
+                        </tr>
+                        <tr>
+                            <td><strong>#2401-1235</strong></td>
+                            <td>James Rodriguez</td>
+                            <td>Maria Rodriguez</td>
+                            <td>
+                                <div style="background: var(--bg-primary); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: var(--accent-blue); width: 100%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">100%</div>
+                            </td>
+                            <td>
+                                <div style="background: var(--bg-primary); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: var(--accent-teal); width: 100%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">100%</div>
+                            </td>
+                            <td><span class="status-badge status-complete">Ready to Submit</span></td>
+                            <td style="font-size: 0.85rem; color: var(--accent-green);">Both ready for review</td>
+                        </tr>
+                        <tr style="background: rgba(245, 158, 11, 0.05);">
+                            <td><strong>#2401-1236</strong></td>
+                            <td>David Park</td>
+                            <td>Lisa Park <span style="font-size: 0.75rem; color: var(--accent-yellow);">(Invited, not joined)</span></td>
+                            <td>
+                                <div style="background: var(--bg-primary); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: var(--accent-blue); width: 83%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">83%</div>
+                            </td>
+                            <td>
+                                <div style="background: var(--bg-primary); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: var(--text-muted); width: 0%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">0%</div>
+                            </td>
+                            <td><span class="status-badge status-pending">Stalled</span></td>
+                            <td style="font-size: 0.85rem; color: var(--accent-yellow);">Co-borrower hasn't joined (5 days)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="content-section-subtitle">Individual Application Detail View</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Activity Timeline</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div style="padding: 0.5rem 0; border-left: 2px solid var(--accent-blue); padding-left: 0.75rem;">
+                            <div style="color: var(--text-primary); font-size: 0.9rem;">Michael completed Employment History</div>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">2 hours ago</div>
+                        </div>
+                        <div style="padding: 0.5rem 0; border-left: 2px solid var(--accent-teal); padding-left: 0.75rem;">
+                            <div style="color: var(--text-primary); font-size: 0.9rem;">Sarah linked bank account (Chase ••4567)</div>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">5 hours ago</div>
+                        </div>
+                        <div style="padding: 0.5rem 0; border-left: 2px solid var(--accent-blue); padding-left: 0.75rem;">
+                            <div style="color: var(--text-primary); font-size: 0.9rem;">Michael completed Property Details</div>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">Yesterday, 9:42 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Section Completion Status</h3>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Personal Info</span>
+                            <span style="color: var(--accent-green);">✓ Both</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Employment</span>
+                            <span style="color: var(--accent-green);">✓ Both</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Assets</span>
+                            <span style="color: var(--accent-blue);">Michael only</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Property</span>
+                            <span style="color: var(--accent-green);">✓ Both</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Quick Actions</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+                        <button style="background: var(--accent-blue); color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Message Both Borrowers</button>
+                        <button style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Nudge Co-Borrower (Sarah)</button>
+                        <button style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 6px; font-weight: 600; cursor: pointer;">View Full Application</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">LO Alert Triggers</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Alert Type</th>
+                        <th>Trigger Condition</th>
+                        <th>Alert Message</th>
+                        <th>Recommended Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Co-Borrower Not Joined</strong></td>
+                        <td>Invitation sent 3+ days ago, not accepted</td>
+                        <td>"Co-borrower (Lisa Park) hasn't accepted invitation in 5 days"</td>
+                        <td>Call co-borrower, resend invitation, check contact info</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stalled Progress</strong></td>
+                        <td>No activity from either borrower in 48 hours, &lt;100% complete</td>
+                        <td>"No activity in 2 days. Primary 83%, Co-Borrower 0%"</td>
+                        <td>Send reminder to both, schedule call</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conflicting Data</strong></td>
+                        <td>System detects contradicting answers (rare)</td>
+                        <td>"Borrowers provided conflicting property values"</td>
+                        <td>Review data, contact borrowers to clarify</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ready for Review</strong></td>
+                        <td>Both borrowers complete all sections</td>
+                        <td>"Application ready for LO review and submission"</td>
+                        <td>Review data, request clarifications if needed, submit to LOS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>One Borrower Blocked</strong></td>
+                        <td>Primary complete, co-borrower inactive 5+ days</td>
+                        <td>"Primary complete, waiting on co-borrower (6 days idle)"</td>
+                        <td>Contact co-borrower, offer assistance, consider manual collection</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low Trust Score</strong></td>
+                        <td>Either borrower's Prove trust score &lt;600</td>
+                        <td>"Co-borrower trust score: 547 (requires review)"</td>
+                        <td>Review fraud signals, request additional verification</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Edge Cases -->
+        <section class="content-section">
+            <h2 class="content-section-title">Edge Cases & Exception Handling</h2>
+
+            <h3 class="content-section-subtitle">Co-Borrower Added Mid-Application</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>System Action</th>
+                        <th>Data Migration</th>
+                        <th>User Experience</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Detection</strong></td>
+                        <td>Primary borrower changes from "Solo" to "With Co-Borrower"</td>
+                        <td>Flag application for conversion to multi-borrower</td>
+                        <td>Prompt: "Add co-borrower now or continue solo?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Invitation</strong></td>
+                        <td>Send invitation to co-borrower</td>
+                        <td>No changes to existing data</td>
+                        <td>Primary continues working, invitation sent in background</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Co-Borrower Joins</strong></td>
+                        <td>Create co-borrower record, assign sections</td>
+                        <td>Split sections between borrowers, reassign shared sections</td>
+                        <td>Co-borrower sees partially complete app with their sections empty</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Progress Recalculation</strong></td>
+                        <td>Recalculate overall % to reflect two borrowers</td>
+                        <td>Overall % may decrease (was 60% solo, now 40% with co-borrower)</td>
+                        <td>Show message: "We've reassigned sections between you and Sarah"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Co-Borrower Removed</h3>
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border-left: 4px solid var(--accent-red);">
+                <strong style="color: var(--text-primary);">Removal Scenarios:</strong>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item"><strong>Scenario 1 - Borrower Requests:</strong> Primary borrower decides to apply solo. System transfers all co-borrower data to primary, sends notification to removed co-borrower, revokes access.</div>
+                    <div class="priority-item"><strong>Scenario 2 - LO Removes:</strong> LO determines co-borrower not needed. System archives co-borrower data (for audit), reassigns sections to primary, sends notification to both.</div>
+                    <div class="priority-item"><strong>Scenario 3 - Relationship Change:</strong> Divorce/separation during application. System handles per LO direction, can preserve or delete co-borrower data based on legal requirements.</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Co-Borrower Unresponsive</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Timeline</th>
+                        <th>System Action</th>
+                        <th>LO Action</th>
+                        <th>Fallback Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Day 0</strong></td>
+                        <td>Invitation sent to co-borrower</td>
+                        <td>Monitor invitation status</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 3</strong></td>
+                        <td>Auto-reminder email + SMS to co-borrower</td>
+                        <td>Alert LO: "Co-borrower hasn't joined"</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 5</strong></td>
+                        <td>Escalation alert to LO + primary borrower</td>
+                        <td>Call co-borrower, verify contact info</td>
+                        <td>Resend invitation with new link</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 7</strong></td>
+                        <td>Invitation expires, application stalled</td>
+                        <td>Decision: Manual collection, LO completes co-borrower sections, or pause application</td>
+                        <td>LO takeover mode: LO enters co-borrower data manually</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 10+</strong></td>
+                        <td>Application flagged for closure if no progress</td>
+                        <td>Contact primary to discuss options: continue solo, manual process, or cancel</td>
+                        <td>Convert to single-borrower application</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Different Time Zones</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Timestamp Display</h3>
+                    <p class="card-description">All timestamps shown in viewer's local time zone. "Sarah completed this section at 2:30 PM" (your time).</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Notification Timing</h3>
+                    <p class="card-description">Email/SMS notifications respect recipient's time zone. No 3am messages - queued until 8am local time.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Session Overlap Detection</h3>
+                    <p class="card-description">System calculates overlapping work hours and suggests best times for synchronous collaboration on shared sections.</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Technical Exceptions</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Exception</th>
+                        <th>Cause</th>
+                        <th>User Impact</th>
+                        <th>Recovery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>WebSocket Disconnection</strong></td>
+                        <td>Network interruption, server restart</td>
+                        <td>Real-time updates stop, manual refresh needed</td>
+                        <td>Auto-reconnect, show reconnection toast, refresh data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Concurrent Save Conflict</strong></td>
+                        <td>Both borrowers save same field at exact same time (rare)</td>
+                        <td>One save rejected</td>
+                        <td>Show conflict modal, ask user to choose value</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Session Expiry During Edit</strong></td>
+                        <td>User inactive 30+ minutes while editing</td>
+                        <td>Locked out, work potentially lost</td>
+                        <td>Save draft to localStorage, restore on re-auth</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Invitation Link Expired</strong></td>
+                        <td>Co-borrower clicks link after 7-14 days</td>
+                        <td>Cannot join application</td>
+                        <td>Show message with LO contact, allow primary to resend</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duplicate Phone Number</strong></td>
+                        <td>Co-borrower tries to use same phone as primary</td>
+                        <td>Cannot complete identity verification</td>
+                        <td>Prompt for different phone, explain privacy requirements</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Mobile Experience -->
+        <section class="content-section">
+            <h2 class="content-section-title">Mobile Experience for Co-Borrowers</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                58% of co-borrowers in POC accessed the application from mobile devices at least once. Mobile-optimized interface
+                ensures seamless experience regardless of device, with special attention to section navigation and collaboration
+                features on smaller screens.
+            </p>
+
+            <h3 class="content-section-subtitle">Mobile-Specific Optimizations</h3>
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">Thumb-Friendly Navigation</h3>
+                    <p class="card-description">Bottom tab bar for section switching, large touch targets (minimum 44x44px), swipe gestures for next/previous section.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-success">Implemented</span>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">Sticky Progress Bar</h3>
+                    <p class="card-description">Mini progress indicator always visible at top, shows co-borrower status without scrolling.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-success">Implemented</span>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">Mobile-Optimized Forms</h3>
+                    <p class="card-description">One question per screen, native input types (tel, email, number), auto-advance on completion.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-success">Implemented</span>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-green);">
+                    <h3 class="card-title">Offline Draft Saving</h3>
+                    <p class="card-description">Save answers locally, sync when connection restored. Never lose work due to poor mobile signal.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-in-progress">In Progress</span>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-yellow);">
+                    <h3 class="card-title">Push Notifications</h3>
+                    <p class="card-description">Native mobile notifications when co-borrower completes section or application ready for review.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-in-progress">Planned</span>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-red);">
+                    <h3 class="card-title">Camera Integration</h3>
+                    <p class="card-description">Take photos of documents directly from device camera, auto-crop and enhance readability.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-success">Implemented</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Mobile Collaboration Features</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Desktop Experience</th>
+                        <th>Mobile Adaptation</th>
+                        <th>Why It Matters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Live Presence</strong></td>
+                        <td>Badge in header: "Sarah is online"</td>
+                        <td>Compact icon with dot indicator, tap for details</td>
+                        <td>Limited screen space, must be unobtrusive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Section Locking</strong></td>
+                        <td>Banner across section with countdown</td>
+                        <td>Sticky bottom sheet, dismissible, with notification badge</td>
+                        <td>Don't block content on small screen</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Progress Dashboard</strong></td>
+                        <td>Side-by-side comparison of both borrowers</td>
+                        <td>Swipeable cards, one borrower per card</td>
+                        <td>Horizontal space constraints</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chat Interface</strong></td>
+                        <td>Sidebar chat panel</td>
+                        <td>Full-screen modal with message thread</td>
+                        <td>Better focus, easier typing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conflict Resolution</strong></td>
+                        <td>Modal with side-by-side values</td>
+                        <td>Stacked values with radio buttons</td>
+                        <td>Vertical layout more natural on mobile</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-blue); margin-top: 2rem;">
+                <strong style="color: var(--text-primary);">POC Mobile Metrics:</strong>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item">58% of co-borrowers accessed from mobile at least once</div>
+                    <div class="priority-item">34% started on mobile, switched to desktop for review/sign</div>
+                    <div class="priority-item">Mobile completion time only 12% slower than desktop (vs 40% slower for solo borrowers)</div>
+                    <div class="priority-item">Mobile users rated collaboration features 4.7/5 (desktop users: 4.6/5)</div>
+                    <div class="priority-item">Zero mobile-specific bugs reported during POC period</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Synchronization -->
+        <section class="content-section">
+            <h2 class="content-section-title">Data Synchronization & Locking Mechanisms</h2>
+
+            <h3 class="content-section-subtitle">Real-Time Sync Architecture</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">WebSocket Layer</h3>
+                    <p class="card-description">Persistent WebSocket connection for each active session. Broadcasts state changes to all connected clients in &lt;100ms.</p>
+                    <div style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+                        wss://app.smartapp.com/ws/application/{app_id}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Event-Driven Updates</h3>
+                    <p class="card-description">Client subscribes to relevant events (section updates, presence changes). Server pushes updates only when subscribed events occur.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge">Pub/Sub Pattern</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Conflict-Free Replicated Data (CRDT)</h3>
+                    <p class="card-description">Certain fields use CRDT algorithms to allow simultaneous edits without conflicts. Last-write-wins for simple fields.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge badge-in-progress">Future Enhancement</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Locking Strategy</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Lock Type</th>
+                        <th>Scope</th>
+                        <th>Duration</th>
+                        <th>Auto-Release</th>
+                        <th>Override</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Section Lock</strong></td>
+                        <td>Entire section (e.g., "Property Details")</td>
+                        <td>While borrower in edit mode</td>
+                        <td>10 minutes inactivity</td>
+                        <td>LO can force release</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Field Lock (Future)</strong></td>
+                        <td>Individual field within section</td>
+                        <td>While field has focus</td>
+                        <td>30 seconds after blur</td>
+                        <td>Not applicable (too granular)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Document Lock</strong></td>
+                        <td>Uploaded document being viewed/edited</td>
+                        <td>While viewer has document open</td>
+                        <td>5 minutes inactivity</td>
+                        <td>Not needed (read-only for borrowers)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Application Lock</strong></td>
+                        <td>Entire application during final submission</td>
+                        <td>Until submission complete or fails</td>
+                        <td>2 minutes (if submission hangs)</td>
+                        <td>LO can cancel submission</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Sync Edge Cases</h3>
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+                <strong style="color: var(--text-primary);">Handling Network Partitions:</strong>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item"><strong>Detection:</strong> Client detects WebSocket disconnect, shows "Offline" indicator</div>
+                    <div class="priority-item"><strong>Local Changes:</strong> Continue allowing edits, save to localStorage with timestamp</div>
+                    <div class="priority-item"><strong>Reconnection:</strong> Auto-reconnect with exponential backoff (1s, 2s, 4s, 8s, max 30s)</div>
+                    <div class="priority-item"><strong>Sync on Reconnect:</strong> Send local changes, receive server state, resolve conflicts if any</div>
+                    <div class="priority-item"><strong>Conflict Resolution:</strong> If server has newer data, show modal asking user to choose</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review and Sign Process -->
+        <section class="content-section">
+            <h2 class="content-section-title">Review & Sign Process for Both Borrowers</h2>
+
+            <h3 class="content-section-subtitle">Review Phase Workflow</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Primary Borrower</th>
+                        <th>Co-Borrower</th>
+                        <th>System Check</th>
+                        <th>Can Proceed?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Completion</strong></td>
+                        <td>Completes all assigned sections</td>
+                        <td>Completes all assigned sections</td>
+                        <td>Validate all required fields present</td>
+                        <td>Both must be 100%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Notification</strong></td>
+                        <td>Receives notification: "Ready for review"</td>
+                        <td>Receives notification: "Ready for review"</td>
+                        <td>Send email + SMS to both</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Review Mode</strong></td>
+                        <td>Views read-only summary of entire application</td>
+                        <td>Views read-only summary of entire application</td>
+                        <td>Generate PDF preview</td>
+                        <td>Both can review independently</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Confirm Accuracy</strong></td>
+                        <td>Checkbox: "I confirm this information is accurate"</td>
+                        <td>Checkbox: "I confirm this information is accurate"</td>
+                        <td>Track confirmation timestamp</td>
+                        <td>Both must confirm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. E-Sign Initiation</strong></td>
+                        <td>Click "Sign Application"</td>
+                        <td>Click "Sign Application"</td>
+                        <td>Generate signature documents (URLA, disclosures)</td>
+                        <td>Both must initiate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6. Legal Disclosures</strong></td>
+                        <td>Read and acknowledge all disclosures</td>
+                        <td>Read and acknowledge all disclosures</td>
+                        <td>Track scroll depth, time on each disclosure</td>
+                        <td>Both must acknowledge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7. E-Signature</strong></td>
+                        <td>Sign with typed name + OTP verification</td>
+                        <td>Sign with typed name + OTP verification</td>
+                        <td>Validate OTP, record signature timestamp, IP, device</td>
+                        <td>Both must sign</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8. Submission</strong></td>
+                        <td>Sees "Waiting for co-borrower signature" OR "Submitted!" if both signed</td>
+                        <td>Sees "Waiting for co-borrower signature" OR "Submitted!" if both signed</td>
+                        <td>Only submit to LOS when both signed</td>
+                        <td>Requires both signatures</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Signature Sequencing Scenarios</h3>
+            <div class="card-grid">
+                <div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.05) 100%);">
+                    <h3 class="card-title">Scenario 1: Primary Signs First</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Michael completes review and signs at 2:00 PM</div>
+                        <div class="priority-item">Sarah receives notification: "Michael signed the application. Your signature needed."</div>
+                        <div class="priority-item">Sarah signs at 6:30 PM</div>
+                        <div class="priority-item">Application immediately submitted to LOS</div>
+                        <div class="priority-item">Both receive confirmation email</div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(20, 184, 166, 0.05) 100%);">
+                    <h3 class="card-title">Scenario 2: Both Sign Simultaneously</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Both borrowers in review mode together (video call or in-person)</div>
+                        <div class="priority-item">Michael signs at 3:15:42 PM</div>
+                        <div class="priority-item">Sarah signs at 3:15:58 PM (16 seconds later)</div>
+                        <div class="priority-item">System detects both signed, submits immediately</div>
+                        <div class="priority-item">Celebration animation shown to both</div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(245, 158, 11, 0.05) 100%);">
+                    <h3 class="card-title">Scenario 3: Extended Delay</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Michael signs on Monday at 9:00 AM</div>
+                        <div class="priority-item">Sarah receives notification but doesn't act</div>
+                        <div class="priority-item">Day 2: Reminder email + SMS to Sarah</div>
+                        <div class="priority-item">Day 3: Alert to LO, LO calls Sarah</div>
+                        <div class="priority-item">Sarah signs Thursday, application submits 4 days after Michael's signature</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">E-Signature Security</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Security Layer</th>
+                        <th>Implementation</th>
+                        <th>Compliance Standard</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Identity Verification</strong></td>
+                        <td>OTP sent to verified phone number before signing</td>
+                        <td>ESIGN Act, UETA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audit Trail</strong></td>
+                        <td>Record IP address, device fingerprint, timestamp, geolocation</td>
+                        <td>SOC 2, GLBA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tamper Detection</strong></td>
+                        <td>Hash document content, seal with cryptographic signature</td>
+                        <td>ESIGN Act</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Signature Certificate</strong></td>
+                        <td>Generate PDF certificate with both signatures, timestamps, verification codes</td>
+                        <td>MISMO, ULDD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retention</strong></td>
+                        <td>Store signed documents + audit trail for 7 years minimum</td>
+                        <td>GLBA, State Law</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Success Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">Success Metrics from POC</h2>
+
+            <h3 class="content-section-subtitle">Quantitative Results (138 Co-Borrower Applications)</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                <div style="background: var(--bg-card); border-left: 4px solid var(--accent-teal); padding: 2rem; border-radius: 12px;">
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Completion Rate</div>
+                    <div style="color: var(--accent-teal); font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">87%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">vs. 68% industry average for co-borrower apps</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-left: 4px solid var(--accent-blue); padding: 2rem; border-radius: 12px;">
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Avg Completion Time</div>
+                    <div style="color: var(--accent-blue); font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">41 min</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">vs. 88 min for sequential/proxy entry</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-left: 4px solid var(--accent-purple); padding: 2rem; border-radius: 12px;">
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Data Error Rate</div>
+                    <div style="color: var(--accent-purple); font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">2.1%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">vs. 5.7% when primary enters co-borrower data</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-left: 4px solid var(--accent-green); padding: 2rem; border-radius: 12px;">
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Same-Day Completions</div>
+                    <div style="color: var(--accent-green); font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">64%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">Both borrowers completed sections within 24 hours</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-left: 4px solid var(--accent-yellow); padding: 2rem; border-radius: 12px;">
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Parallel Completion</div>
+                    <div style="color: var(--accent-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">73%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">Used parallel strategy vs. sequential</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-left: 4px solid var(--accent-red); padding: 2rem; border-radius: 12px;">
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">LO Intervention Rate</div>
+                    <div style="color: var(--accent-red); font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">8%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">Required LO help (vs. 34% traditional flow)</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Qualitative Feedback: User Quotes</h3>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-teal);">
+                    <p style="color: var(--text-primary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; font-style: italic;">
+                        "This was SO much easier than our first mortgage. My husband and I both work crazy hours - I'm in healthcare,
+                        he's in construction. We were never home at the same time. Being able to do our own sections on our own
+                        schedule was a game-changer. I did mine during night shifts, he did his during lunch breaks."
+                    </p>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong>Sarah M.</strong> - Homebuyer, Portland OR • Completed in 1 day
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-blue);">
+                    <p style="color: var(--text-primary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; font-style: italic;">
+                        "I loved seeing the progress bar move when my wife completed her sections. It kept me motivated to finish
+                        mine. The little notifications were perfect - not annoying, but enough to keep me informed. We finished
+                        the whole thing in about 30 minutes, mostly because we could work in parallel."
+                    </p>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong>David P.</strong> - Homebuyer, Austin TX • Completed in 32 minutes
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-purple);">
+                    <p style="color: var(--text-primary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; font-style: italic;">
+                        "The privacy controls were important to us. I don't need to know every detail of my partner's bank accounts,
+                        and he doesn't need to know mine. But we could still see the big picture and knew we had enough combined
+                        assets. That balance between transparency and privacy was really thoughtful."
+                    </p>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong>James R.</strong> - Refinance, Miami FL • Completed in 2 days
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                    <p style="color: var(--text-primary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; font-style: italic;">
+                        "I was skeptical about the 'digital mortgage' thing, but this actually worked great. My wife is way more
+                        tech-savvy than me, but the interface was so simple even I could figure it out. And when I got stuck on
+                        one question, I just left a comment for her and she clarified it. No phone tag, no frustration."
+                    </p>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong>Robert T.</strong> - Homebuyer, Phoenix AZ • Completed in 3 days
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-yellow);">
+                    <p style="color: var(--text-primary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; font-style: italic;">
+                        "We're in different time zones right now - I'm in California for work, she's in New York. Traditional
+                        application would've been impossible. But with this, we each did our parts when it was convenient, and
+                        the system kept us synced. The timestamps even showed in our local times, which was a nice touch."
+                    </p>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong>Michael C.</strong> - Homebuyer, San Francisco CA / New York NY • Completed in 2 days
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">LO Feedback</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Traditional Flow</th>
+                        <th>Smart App Co-Borrower Flow</th>
+                        <th>Improvement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Time to First Complete App</strong></td>
+                        <td>7.2 days (median)</td>
+                        <td>2.1 days (median)</td>
+                        <td><span style="color: var(--accent-green); font-weight: 700;">-71%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Follow-Up Calls Required</strong></td>
+                        <td>4.8 calls per application</td>
+                        <td>1.2 calls per application</td>
+                        <td><span style="color: var(--accent-green); font-weight: 700;">-75%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Correction Requests</strong></td>
+                        <td>6.4 corrections per app</td>
+                        <td>1.8 corrections per app</td>
+                        <td><span style="color: var(--accent-green); font-weight: 700;">-72%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Abandoned Applications</strong></td>
+                        <td>32% abandonment rate</td>
+                        <td>13% abandonment rate</td>
+                        <td><span style="color: var(--accent-green); font-weight: 700;">-59%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Satisfaction Score</strong></td>
+                        <td>6.2/10</td>
+                        <td>8.9/10</td>
+                        <td><span style="color: var(--accent-green); font-weight: 700;">+44%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Technical Implementation -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technical Implementation Notes</h2>
+
+            <h3 class="content-section-subtitle">Technology Stack</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Frontend</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">React 18 with Concurrent Features</div>
+                        <div class="priority-item">Redux Toolkit for state management</div>
+                        <div class="priority-item">Socket.io-client for WebSocket</div>
+                        <div class="priority-item">React Query for server state caching</div>
+                        <div class="priority-item">Tailwind CSS + shadcn/ui components</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Backend</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Node.js + Express API server</div>
+                        <div class="priority-item">Socket.io for WebSocket server</div>
+                        <div class="priority-item">PostgreSQL for application data</div>
+                        <div class="priority-item">Redis for session management + locking</div>
+                        <div class="priority-item">Bull queue for async notifications</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Infrastructure</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">AWS ECS for container orchestration</div>
+                        <div class="priority-item">AWS RDS (PostgreSQL) with read replicas</div>
+                        <div class="priority-item">AWS ElastiCache (Redis) cluster</div>
+                        <div class="priority-item">CloudFront CDN for static assets</div>
+                        <div class="priority-item">AWS WAF for security</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Key Implementation Patterns</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Use Case</th>
+                        <th>Implementation</th>
+                        <th>Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Optimistic Updates</strong></td>
+                        <td>Form field changes</td>
+                        <td>Update UI immediately, sync to server in background</td>
+                        <td>Instant feedback, perceived performance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Debounced Sync</strong></td>
+                        <td>Typing in text fields</td>
+                        <td>Wait 500ms after last keystroke before syncing</td>
+                        <td>Reduce server load, batch updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Event Sourcing</strong></td>
+                        <td>Audit trail, history tracking</td>
+                        <td>Store every state change as immutable event</td>
+                        <td>Complete audit trail, replay capability</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Distributed Locks</strong></td>
+                        <td>Section editing conflicts</td>
+                        <td>Redis-based locks with TTL and auto-release</td>
+                        <td>Prevent concurrent edit conflicts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Server-Sent Events (Future)</strong></td>
+                        <td>One-way updates from server</td>
+                        <td>Fallback for WebSocket if firewall blocks</td>
+                        <td>Better compatibility, graceful degradation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CQRS</strong></td>
+                        <td>Read-heavy operations</td>
+                        <td>Separate read models optimized for queries</td>
+                        <td>Faster dashboard loads, better scalability</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Database Schema Highlights</h3>
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
+                <strong style="color: var(--text-primary);">Key Tables:</strong>
+                <div class="priority-list" style="margin-top: 1rem; font-family: var(--font-primary);">
+                    <div class="priority-item"><code>applications</code> - Main application record with status, timestamps, LO assignment</div>
+                    <div class="priority-item"><code>borrowers</code> - Individual borrower records linked to application, stores identity verification</div>
+                    <div class="priority-item"><code>sections</code> - Section completion status per borrower, progress tracking</div>
+                    <div class="priority-item"><code>field_values</code> - Key-value store for form data with versioning, borrower attribution</div>
+                    <div class="priority-item"><code>section_locks</code> - Active locks with borrower_id, timestamp, auto-release timer</div>
+                    <div class="priority-item"><code>events</code> - Event sourcing log, every state change with actor, timestamp, payload</div>
+                    <div class="priority-item"><code>notifications</code> - Notification queue with delivery status, channel, priority</div>
+                    <div class="priority-item"><code>messages</code> - Chat messages between borrowers with read receipts</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Performance Optimizations</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Lazy Loading Sections</h3>
+                    <p class="card-description">Only load section data when borrower navigates to it. Reduces initial page load by 73%.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">WebSocket Connection Pool</h3>
+                    <p class="card-description">Reuse connections across server instances with sticky sessions. Handles 10K+ concurrent users.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Cached Progress Calculations</h3>
+                    <p class="card-description">Cache progress % in Redis, invalidate on section completion. Instant dashboard loads.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
@@ -1495,6 +2464,7 @@
                 <div class="footer-links">
                     <a href="../index.html">Dashboard</a>
                     <a href="../requirements/">Requirements</a>
+                    <a href="https://streamlined-digital-a1nj.bolt.host/" target="_blank">Live POC</a>
                 </div>
             </div>
         </footer>

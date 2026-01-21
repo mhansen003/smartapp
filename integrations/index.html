@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Patterns & Design System - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../integrations/" class="nav-link active">UX Patterns</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">UX Patterns & Design System</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Design System</div>
+                <h1 class="page-title">UX Patterns & Design System</h1>
+                <p class="page-description">Comprehensive documentation of user experience patterns, interaction design, and design system components that power the Smart App 2.0 mortgage application experience.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🎨</span>
+                        <span>User Experience</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📐</span>
+                        <span>Design System</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">♿</span>
+                        <span>Accessibility</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../index.html" class="back-button">← Back to Home</a>
+
+        <!-- Core UX Patterns -->
+        <section class="content-section">
+            <h2 class="content-section-title">Core UX Patterns</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Foundational design patterns that shape the Smart App 2.0 user experience. Each pattern is backed by extensive user research, A/B testing, and accessibility compliance.
+            </p>
+
+            <div class="card-grid">
+                <a href="progressive-disclosure.html" class="card" style="text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 1rem;">
+                            🎯
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="margin-bottom: 0.25rem;">Progressive Disclosure</h3>
+                            <p style="color: var(--text-tertiary); font-size: 0.875rem;">Primary Pattern</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Breaking down complex mortgage applications into 8 manageable steps, revealing information only when contextually relevant. Increased completion rates by 134% and reduced time-to-complete by 56%.</p>
+                    <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span class="badge badge-success">78% Completion Rate</span>
+                        <span class="badge badge-info">18.6 min avg</span>
+                        <span class="badge badge-design">WCAG 2.1 AA</span>
+                    </div>
+                </a>
+
+                <div class="card" style="opacity: 0.6; cursor: not-allowed;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 1rem;">
+                            💬
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="margin-bottom: 0.25rem;">Conversational UI</h3>
+                            <p style="color: var(--text-tertiary); font-size: 0.875rem;">Coming Soon</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Natural language interface using AI to guide borrowers through the application with conversational prompts and intelligent follow-up questions.</p>
+                    <div style="margin-top: 1.5rem;">
+                        <span class="badge" style="background: var(--background-elevated); color: var(--text-tertiary);">Q2 2026</span>
+                    </div>
+                </div>
+
+                <div class="card" style="opacity: 0.6; cursor: not-allowed;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 1rem;">
+                            🎭
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="margin-bottom: 0.25rem;">Adaptive Interfaces</h3>
+                            <p style="color: var(--text-tertiary); font-size: 0.875rem;">Coming Soon</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Dynamic UI that adapts based on borrower type, device, time of day, and completion patterns to optimize the experience for each individual.</p>
+                    <div style="margin-top: 1.5rem;">
+                        <span class="badge" style="background: var(--background-elevated); color: var(--text-tertiary);">Q3 2026</span>
+                    </div>
+                </div>
+
+                <div class="card" style="opacity: 0.6; cursor: not-allowed;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 1rem;">
+                            🔔
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="margin-bottom: 0.25rem;">Proactive Assistance</h3>
+                            <p style="color: var(--text-tertiary); font-size: 0.875rem;">Coming Soon</p>
+                        </div>
+                    </div>
+                    <p class="card-description">Smart notifications and contextual help that anticipates borrower needs based on behavior patterns and common friction points.</p>
+                    <div style="margin-top: 1.5rem;">
+                        <span class="badge" style="background: var(--background-elevated); color: var(--text-tertiary);">Q3 2026</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design System Components -->
+        <section class="content-section">
+            <h2 class="content-section-title">Design System Components</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Reusable component library with comprehensive documentation, usage guidelines, and accessibility specifications.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Form Components</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Text Input (single-line, multi-line)</div>
+                        <div class="priority-item">Currency Input with formatting</div>
+                        <div class="priority-item">Phone Input with masking</div>
+                        <div class="priority-item">Date Picker (single, range)</div>
+                        <div class="priority-item">Dropdown Select (standard, searchable)</div>
+                        <div class="priority-item">Radio Button Groups</div>
+                        <div class="priority-item">Checkbox (single, group)</div>
+                        <div class="priority-item">Address Autocomplete</div>
+                        <div class="priority-item">File Upload with drag-drop</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Navigation Components</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Progress Bar (linear, stepped)</div>
+                        <div class="priority-item">Breadcrumbs</div>
+                        <div class="priority-item">Stepper (horizontal, vertical)</div>
+                        <div class="priority-item">Tabs</div>
+                        <div class="priority-item">Pagination</div>
+                        <div class="priority-item">Skip Links</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Feedback Components</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Alert Banners (success, error, warning, info)</div>
+                        <div class="priority-item">Inline Validation Messages</div>
+                        <div class="priority-item">Toast Notifications</div>
+                        <div class="priority-item">Loading Indicators (spinner, skeleton)</div>
+                        <div class="priority-item">Empty States</div>
+                        <div class="priority-item">Error Pages</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Layout Components</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Cards</div>
+                        <div class="priority-item">Modal Dialogs</div>
+                        <div class="priority-item">Accordions</div>
+                        <div class="priority-item">Tooltips & Popovers</div>
+                        <div class="priority-item">Dividers</div>
+                        <div class="priority-item">Spacing Utilities</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Data Display</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Tables (responsive, sortable)</div>
+                        <div class="priority-item">Lists (ordered, unordered, definition)</div>
+                        <div class="priority-item">Badges & Tags</div>
+                        <div class="priority-item">Status Indicators</div>
+                        <div class="priority-item">Avatars</div>
+                        <div class="priority-item">Icons (system, custom)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Interactive Elements</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Buttons (primary, secondary, tertiary)</div>
+                        <div class="priority-item">Button Groups</div>
+                        <div class="priority-item">Links</div>
+                        <div class="priority-item">Toggle Switches</div>
+                        <div class="priority-item">Sliders</div>
+                        <div class="priority-item">Drag & Drop Areas</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accessibility Standards -->
+        <section class="content-section">
+            <h2 class="content-section-title">Accessibility Standards</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                All components and patterns comply with WCAG 2.1 Level AA standards, ensuring the mortgage application is usable by everyone regardless of ability.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Standard</th>
+                        <th>Requirement</th>
+                        <th>Implementation</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>WCAG 2.1 AA</td>
+                        <td>Full compliance with Level AA success criteria</td>
+                        <td>Automated testing via Axe-core + manual audits</td>
+                        <td><span class="status-badge status-complete">Compliant</span></td>
+                    </tr>
+                    <tr>
+                        <td>Section 508</td>
+                        <td>Federal accessibility requirements</td>
+                        <td>Semantic HTML, ARIA labels, keyboard navigation</td>
+                        <td><span class="status-badge status-complete">Compliant</span></td>
+                    </tr>
+                    <tr>
+                        <td>ADA Compliance</td>
+                        <td>Americans with Disabilities Act requirements</td>
+                        <td>Screen reader testing, color contrast, focus indicators</td>
+                        <td><span class="status-badge status-complete">Compliant</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Accessibility Features</h3>
+            <div class="priority-list">
+                <div class="priority-item"><strong>Screen Reader Support:</strong> Full NVDA, JAWS, and VoiceOver compatibility</div>
+                <div class="priority-item"><strong>Keyboard Navigation:</strong> All functionality accessible via keyboard with visible focus indicators</div>
+                <div class="priority-item"><strong>Color Contrast:</strong> Minimum 4.5:1 for normal text, 3:1 for large text and UI components</div>
+                <div class="priority-item"><strong>Responsive Text:</strong> Zoom up to 200% without loss of functionality or content</div>
+                <div class="priority-item"><strong>Alternative Text:</strong> Descriptive alt text for all images and icons</div>
+                <div class="priority-item"><strong>Error Identification:</strong> Clear, descriptive error messages with suggestions for correction</div>
+                <div class="priority-item"><strong>Skip Links:</strong> Allow users to bypass repetitive navigation</div>
+                <div class="priority-item"><strong>ARIA Landmarks:</strong> Proper semantic structure for assistive technologies</div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="content-section">
+            <h2 class="content-section-title">Resources & Tools</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Figma Design Files</h3>
+                    <p class="card-description">Complete component library with all states, variants, and responsive breakpoints. Includes interactive prototypes.</p>
+                    <a href="#" style="color: var(--accent); font-weight: 600; margin-top: 1rem; display: inline-block;">Access Figma →</a>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Storybook Documentation</h3>
+                    <p class="card-description">Interactive component explorer with code examples, props documentation, and accessibility notes.</p>
+                    <a href="#" style="color: var(--accent); font-weight: 600; margin-top: 1rem; display: inline-block;">View Storybook →</a>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">GitHub Repository</h3>
+                    <p class="card-description">Source code for all components with TypeScript definitions, unit tests, and usage examples.</p>
+                    <a href="#" style="color: var(--accent); font-weight: 600; margin-top: 1rem; display: inline-block;">View on GitHub →</a>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">NPM Package</h3>
+                    <p class="card-description">Install the design system in your project via NPM. Includes React components and utility functions.</p>
+                    <a href="#" style="color: var(--accent); font-weight: 600; margin-top: 1rem; display: inline-block;">NPM Package →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • UX Patterns & Design System</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="../research/">Research</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
