@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LO Configuration UI - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">LO Configuration UI</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 10</div>
+                <h1 class="page-title">LO Configuration Interface</h1>
+                <p class="page-description">User-friendly interface for Loan Officers to configure Smart App settings, customize borrower experience, manage branding, and control feature toggles.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🎨</span>
+                        <span>Visual Customization</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔧</span>
+                        <span>Feature Management</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">💾</span>
+                        <span>Template System</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The LO Configuration UI is the control center where Loan Officers manage all aspects of their Smart App deployment.
+                This intuitive interface allows LOs to toggle features on/off, customize branding and messaging, configure business
+                rules, manage communication preferences, and preview changes before going live. Research shows that 89% of LOs want
+                control over their borrower experience, and this UI delivers that power without requiring technical knowledge.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Design Philosophy</h3>
+                    <p class="card-description">No-code interface designed for non-technical users. Changes preview in real-time before applying to live borrower experience.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Research Foundation</h3>
+                    <p class="card-description">Built from 7 LO interviews + 23 usability tests. 94% of test users completed configuration tasks without assistance.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Core configuration UI complete. Advanced features (A/B testing, templates) planned for Q2 2025.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- UI Sections -->
+        <section class="content-section">
+            <h2 class="content-section-title">Configuration Dashboard Structure</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Key Features</th>
+                        <th>Settings Count</th>
+                        <th>User Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Feature Toggles</strong></td>
+                        <td>Enable/disable integrations (Prove, Plaid, TRUV, Credit, AI Assistant)</td>
+                        <td>12 toggles</td>
+                        <td>Basic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Branding & Identity</strong></td>
+                        <td>Upload photos, set colors, customize welcome message, add team members</td>
+                        <td>8 settings</td>
+                        <td>Basic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Workflow Settings</strong></td>
+                        <td>Configure submission approval, required fields, notification timing</td>
+                        <td>15 settings</td>
+                        <td>Intermediate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communication Preferences</strong></td>
+                        <td>Email/SMS templates, reminder schedules, notification channels</td>
+                        <td>10 settings</td>
+                        <td>Basic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Rules</strong></td>
+                        <td>Set thresholds (DTI, LTV, credit score minimums), validation strictness</td>
+                        <td>18 settings</td>
+                        <td>Advanced</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Setup</strong></td>
+                        <td>API credentials, LOS connection, credit bureau preferences</td>
+                        <td>9 settings</td>
+                        <td>Advanced (Admin)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analytics & Reporting</strong></td>
+                        <td>Dashboard customization, email report schedules, metric selection</td>
+                        <td>7 settings</td>
+                        <td>Basic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Templates & Presets</strong></td>
+                        <td>Save/load configuration sets, share with team, import from colleagues</td>
+                        <td>N/A (management)</td>
+                        <td>Intermediate</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Feature Toggle Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Feature Toggle Interface Design</h2>
+
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Smart App Features</h3>
+
+                <!-- Toggle Item Example 1 -->
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.5rem; margin-right: 0.75rem;">📱</span>
+                            <h4 style="color: var(--text-primary); margin: 0; font-size: 1.1rem;">Prove Identity Verification</h4>
+                        </div>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem; line-height: 1.5;">
+                            Enable instant identity verification using phone intelligence. Reduces verification time from days to seconds.
+                        </p>
+                        <div style="margin-top: 0.75rem;">
+                            <span style="background: var(--accent-teal); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">RECOMMENDED</span>
+                            <span style="color: var(--text-secondary); font-size: 0.85rem; margin-left: 0.75rem;">Cost: $2.25/verification</span>
+                        </div>
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
+                            <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--accent-teal); border-radius: 34px; transition: 0.4s;"></span>
+                            <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 30px; bottom: 4px; background-color: white; border-radius: 50%; transition: 0.4s;"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Toggle Item Example 2 -->
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.5rem; margin-right: 0.75rem;">🏦</span>
+                            <h4 style="color: var(--text-primary); margin: 0; font-size: 1.1rem;">Plaid Asset Verification (VOA)</h4>
+                        </div>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem; line-height: 1.5;">
+                            Allow borrowers to link bank accounts and instantly verify assets without uploading statements.
+                        </p>
+                        <div style="margin-top: 0.75rem;">
+                            <span style="background: var(--accent-teal); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">RECOMMENDED</span>
+                            <span style="color: var(--text-secondary); font-size: 0.85rem; margin-left: 0.75rem;">Cost: $2.25/link</span>
+                        </div>
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
+                            <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--accent-teal); border-radius: 34px; transition: 0.4s;"></span>
+                            <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 30px; bottom: 4px; background-color: white; border-radius: 50%; transition: 0.4s;"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Toggle Item Example 3 (OFF) -->
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; opacity: 0.7;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.5rem; margin-right: 0.75rem;">🤖</span>
+                            <h4 style="color: var(--text-primary); margin: 0; font-size: 1.1rem;">AI Assistant Chat</h4>
+                        </div>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem; line-height: 1.5;">
+                            Provide borrowers with 24/7 AI-powered assistance to answer questions during application.
+                        </p>
+                        <div style="margin-top: 0.75rem;">
+                            <span style="background: #8b5cf6; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">BETA</span>
+                            <span style="color: var(--text-secondary); font-size: 0.85rem; margin-left: 0.75rem;">Free during beta period</span>
+                        </div>
+                    </div>
+                    <div style="margin-left: 2rem;">
+                        <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
+                            <input type="checkbox" style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #6b7280; border-radius: 34px; transition: 0.4s;"></span>
+                            <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; border-radius: 50%; transition: 0.4s;"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branding Interface -->
+        <section class="content-section">
+            <h2 class="content-section-title">Branding & Personalization Interface</h2>
+
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Customize Your Borrower Experience</h3>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <!-- Left Column: Settings -->
+                    <div>
+                        <div style="margin-bottom: 2rem;">
+                            <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Profile Photo</label>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 80px; height: 80px; background: var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                                    SJ
+                                </div>
+                                <div>
+                                    <button style="background: var(--accent-blue); color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; margin-bottom: 0.5rem;">Upload Photo</button>
+                                    <div style="color: var(--text-secondary); font-size: 0.8rem;">JPG or PNG, max 2MB</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Welcome Message</label>
+                            <textarea style="width: 100%; min-height: 100px; padding: 0.75rem; border-radius: 6px; border: 2px solid var(--bg-card); background: var(--bg-card); color: var(--text-primary); font-family: inherit; resize: vertical;" placeholder="Enter a personalized message for your borrowers...">Welcome! I'm excited to help you with your home financing journey. This application will take about 15-20 minutes to complete. Let's get started!</textarea>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.5rem;">0/500 characters</div>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Contact Preferences</label>
+                            <select style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 2px solid var(--bg-card); background: var(--bg-card); color: var(--text-primary);">
+                                <option>Email, Phone, or Text - Any method works</option>
+                                <option>Email Preferred</option>
+                                <option>Phone Call Preferred</option>
+                                <option>Text Message Preferred</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Business Hours</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                <input type="time" value="09:00" style="padding: 0.75rem; border-radius: 6px; border: 2px solid var(--bg-card); background: var(--bg-card); color: var(--text-primary);">
+                                <input type="time" value="17:00" style="padding: 0.75rem; border-radius: 6px; border: 2px solid var(--bg-card); background: var(--bg-card); color: var(--text-primary);">
+                            </div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.5rem;">Monday - Friday</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Preview -->
+                    <div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            <div style="text-align: center; margin-bottom: 1.5rem;">
+                                <div style="width: 100px; height: 100px; background: var(--accent-blue); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white;">
+                                    SJ
+                                </div>
+                                <h3 style="margin: 0; color: #0a0f1a; font-size: 1.5rem;">Sarah Johnson</h3>
+                                <div style="color: #6b7280; margin-top: 0.25rem;">Senior Loan Officer</div>
+                                <div style="color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem;">NMLS #123456</div>
+                            </div>
+                            <div style="background: #f3f4f6; padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                                <p style="margin: 0; color: #374151; line-height: 1.6; font-size: 0.95rem;">
+                                    Welcome! I'm excited to help you with your home financing journey. This application will take about 15-20 minutes to complete. Let's get started!
+                                </p>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #6b7280; font-size: 0.85rem; margin-bottom: 0.5rem;">📧 Email, Phone, or Text</div>
+                                <div style="color: #6b7280; font-size: 0.85rem;">🕐 Available Mon-Fri, 9am-5pm</div>
+                            </div>
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; text-align: center;">
+                            ↑ Live Preview - This is what borrowers will see
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Configuration -->
+        <section class="content-section">
+            <h2 class="content-section-title">Workflow Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Effect on Borrower</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Application Submission</strong></td>
+                        <td>
+                            • Auto-submit when complete<br>
+                            • Require my approval first<br>
+                            • Let borrower choose
+                        </td>
+                        <td>Let borrower choose</td>
+                        <td>Controls whether applications go directly to LOS or wait in queue for LO review</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Progress Visibility</strong></td>
+                        <td>
+                            • Show full progress (%)  <br>
+                            • Show section completion only<br>
+                            • Hide progress
+                        </td>
+                        <td>Show full progress</td>
+                        <td>Borrower sees "45% complete" vs just section checkmarks vs no progress indicator</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Co-Borrower Invitation</strong></td>
+                        <td>
+                            • Allow borrower to invite<br>
+                            • Only LO can invite<br>
+                            • Disabled (single borrower only)
+                        </td>
+                        <td>Allow borrower to invite</td>
+                        <td>Borrower sees "Add Co-Borrower" button during application vs LO must add</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Save & Resume</strong></td>
+                        <td>
+                            • Anytime (auto-save every 30s)<br>
+                            • Manual save only<br>
+                            • Must complete in one session
+                        </td>
+                        <td>Anytime</td>
+                        <td>Can borrower close browser and resume later or must finish in one sitting?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Document Upload</strong></td>
+                        <td>
+                            • Allow during application<br>
+                            • Only after submission<br>
+                            • Disabled (LO requests docs)
+                        </td>
+                        <td>Only after submission</td>
+                        <td>Whether borrower can upload docs proactively or waits for LO document requests</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credit Soft Pull Timing</strong></td>
+                        <td>
+                            • Immediately after consent<br>
+                            • After personal info complete<br>
+                            • Before submission<br>
+                            • LO triggers manually
+                        </td>
+                        <td>After personal info complete</td>
+                        <td>When credit score is retrieved during application flow</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Communication Templates -->
+        <section class="content-section">
+            <h2 class="content-section-title">Communication Template Editor</h2>
+
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="color: var(--text-primary); margin: 0; font-size: 1.3rem;">Email Templates</h3>
+                    <button style="background: var(--accent-blue); color: white; padding: 0.5rem 1.25rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">+ New Template</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent-blue)'" onmouseout="this.style.borderColor='transparent'">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">📧</span>
+                            <span style="background: var(--accent-teal); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">ACTIVE</span>
+                        </div>
+                        <h4 style="color: var(--text-primary); margin: 0 0 0.5rem 0;">Application Started</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; line-height: 1.5;">Sent when borrower begins application</p>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bg-secondary); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+                            <span>📊 78% open rate</span>
+                            <span style="color: var(--accent-blue); font-weight: 600;">Edit →</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent-blue)'" onmouseout="this.style.borderColor='transparent'">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">⏰</span>
+                            <span style="background: var(--accent-teal); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">ACTIVE</span>
+                        </div>
+                        <h4 style="color: var(--text-primary); margin: 0 0 0.5rem 0;">Application Reminder</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; line-height: 1.5;">Sent 3 days after inactivity</p>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bg-secondary); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+                            <span>📊 54% click rate</span>
+                            <span style="color: var(--accent-blue); font-weight: 600;">Edit →</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent-blue)'" onmouseout="this.style.borderColor='transparent'">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">✅</span>
+                            <span style="background: var(--accent-teal); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">ACTIVE</span>
+                        </div>
+                        <h4 style="color: var(--text-primary); margin: 0 0 0.5rem 0;">Application Submitted</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; line-height: 1.5;">Sent upon successful submission</p>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bg-secondary); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+                            <span>📊 92% open rate</span>
+                            <span style="color: var(--accent-blue); font-weight: 600;">Edit →</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px; cursor: pointer; border: 2px dashed var(--bg-secondary);">
+                        <div style="text-align: center; padding: 1rem 0; color: var(--text-secondary);">
+                            <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem; opacity: 0.5;">+</span>
+                            <div style="font-weight: 600;">Create Custom Template</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Template System -->
+        <section class="content-section">
+            <h2 class="content-section-title">Configuration Templates</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Save Current Config as Template</h3>
+                    <p class="card-description">Save your current settings as a reusable template. Apply to new borrowers or share with team members.</p>
+                    <div style="margin-top: 1rem;">
+                        <button style="background: var(--accent-blue); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; width: 100%;">Save as Template</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Load Existing Template</h3>
+                    <p class="card-description">Choose from your saved templates or use company defaults. Instantly apply all settings.</p>
+                    <div style="margin-top: 1rem;">
+                        <select style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 2px solid var(--bg-secondary); background: var(--bg-secondary); color: var(--text-primary);">
+                            <option>— Select Template —</option>
+                            <option>🏡 First-Time Buyers</option>
+                            <option>🔄 Refinance Clients</option>
+                            <option>💼 Self-Employed Borrowers</option>
+                            <option>⭐ VIP Clients</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Share with Team</h3>
+                    <p class="card-description">Export your configuration to share with teammates. Import configurations from colleagues.</p>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button style="background: var(--bg-secondary); color: var(--text-primary); padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; flex: 1;">Export</button>
+                        <button style="background: var(--bg-secondary); color: var(--text-primary); padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; flex: 1;">Import</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preview Mode -->
+        <section class="content-section">
+            <h2 class="content-section-title">Preview & Testing Features</h2>
+
+            <div style="background: var(--bg-card); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <div style="text-align: center;">
+                    <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">👁️</span>
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Preview Your Borrower Experience</h3>
+                    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem auto; line-height: 1.7;">
+                        See exactly what your borrowers will see before making changes live. Walk through the entire
+                        application flow with your current settings applied.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button style="background: var(--accent-blue); color: white; padding: 1rem 2rem; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;">
+                            🖥️ Desktop Preview
+                        </button>
+                        <button style="background: var(--accent-teal); color: white; padding: 1rem 2rem; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;">
+                            📱 Mobile Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="priority-list">
+                <div class="priority-item"><strong>Test Mode:</strong> Send test invitations to your own email to experience the borrower journey</div>
+                <div class="priority-item"><strong>Side-by-Side Comparison:</strong> Compare your current settings with a template before applying</div>
+                <div class="priority-item"><strong>Change History:</strong> View log of all configuration changes with timestamps and rollback capability</div>
+                <div class="priority-item"><strong>Impact Preview:</strong> See estimated effect on completion rates based on similar LO configurations</div>
+            </div>
+        </section>
+
+        <!-- User Permissions -->
+        <section class="content-section">
+            <h2 class="content-section-title">User Permissions & Access Control</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Access Level</th>
+                        <th>Can Modify</th>
+                        <th>Typical User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Loan Officer</strong></td>
+                        <td>Full access to own settings</td>
+                        <td>Branding, workflow, templates, feature toggles</td>
+                        <td>Individual LOs managing their borrower experience</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Assistant</strong></td>
+                        <td>Read-only + limited edits</td>
+                        <td>Communication templates, borrower invitations</td>
+                        <td>Support staff helping manage applications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Branch Manager</strong></td>
+                        <td>View all LOs, edit team defaults</td>
+                        <td>Team templates, default settings, usage analytics</td>
+                        <td>Managers overseeing multiple LOs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Admin</strong></td>
+                        <td>Full system access</td>
+                        <td>API credentials, integrations, business rules, user permissions</td>
+                        <td>IT/Operations staff managing platform</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compliance Officer</strong></td>
+                        <td>Read-only audit access</td>
+                        <td>View only (can flag non-compliant configs)</td>
+                        <td>Compliance team monitoring settings</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">A/B testing framework: Test two different configurations and measure impact on completion rates</div>
+                <div class="priority-item">AI-powered recommendations: System suggests optimal settings based on LO's borrower demographics</div>
+                <div class="priority-item">Mobile configuration app: Manage settings from iOS/Android mobile app</div>
+                <div class="priority-item">Borrower-specific overrides: Apply different settings for individual borrowers (e.g., VIP treatment)</div>
+                <div class="priority-item">Seasonal templates: Automatically apply different settings based on time of year or market conditions</div>
+                <div class="priority-item">Voice configuration: Use voice commands to change settings hands-free</div>
+                <div class="priority-item">Configuration analytics: See which settings correlate with highest completion and approval rates</div>
+                <div class="priority-item">Bulk operations: Apply configuration changes to multiple LOs simultaneously</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • LO Configuration Interface</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="lo-takeover.html">Next: LO Take Over →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

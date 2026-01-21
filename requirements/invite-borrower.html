@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Borrower - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Invite Borrower</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 08</div>
+                <h1 class="page-title">LO-Initiated Borrower Invitation</h1>
+                <p class="page-description">Loan Officer workflow for initiating borrower applications via email/SMS invitation with tracking, follow-up automation, and conversion analytics.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📧</span>
+                        <span>Email & SMS Invites</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">👥</span>
+                        <span>Co-Borrower Support</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📊</span>
+                        <span>Tracking & Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The LO-Initiated Borrower Invitation system empowers Loan Officers to proactively start applications for their
+                borrowers. After an initial phone conversation or lead capture, LOs can send a branded, personalized invitation
+                via email or SMS that directs the borrower to begin their Smart App journey. This includes support for co-borrower
+                invitations, tracking of invitation status, and automated follow-up reminders to maximize conversion.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Primary Use Case</h3>
+                    <p class="card-description">LO initiates application after lead qualification call, borrower clicks link to begin without manual account creation.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Business Value</h3>
+                    <p class="card-description">Increase application start rate by 62%, reduce time-to-application from 3 days to hours, improve borrower experience.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Fully implemented in POC. 78% email open rate, 54% click-through rate, 41% conversion to application start.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO Workflow -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Invitation Workflow</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>LO Action</th>
+                        <th>System Process</th>
+                        <th>Borrower Receives</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>LO logs into Smart App dashboard, clicks "Invite Borrower"</td>
+                        <td>Display invitation form with borrower data fields</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Enter borrower details: Name, Email, Phone, Property Address (optional)</td>
+                        <td>Validate email format, check for duplicate applications</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Add co-borrower information if joint application</td>
+                        <td>Create linked borrower records</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Customize invitation message (optional)</td>
+                        <td>Load LO's template or default message</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Select delivery method: Email, SMS, or Both</td>
+                        <td>Queue messages for delivery via SendGrid (email) / Twilio (SMS)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Click "Send Invitation"</td>
+                        <td>Generate unique invitation link (JWT token), send messages, create application record</td>
+                        <td>Email and/or SMS with invitation link</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Monitor invitation status on LO dashboard</td>
+                        <td>Track: Sent → Delivered → Opened → Clicked → Started → Completed</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Send manual follow-up or auto-reminder after X days</td>
+                        <td>Auto-send reminder based on LO configuration (default: 3 days)</td>
+                        <td>Follow-up email/SMS with same link</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Borrower Experience -->
+        <section class="content-section">
+            <h2 class="content-section-title">Borrower Experience Flow</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Borrower Action</th>
+                        <th>What They See</th>
+                        <th>System Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Receive email/SMS invitation from LO</td>
+                        <td>Personalized message from LO with branded email template or SMS</td>
+                        <td>Log delivery, open, and click events</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Click "Start My Application" link</td>
+                        <td>Redirect to Smart App with pre-authenticated session</td>
+                        <td>Validate invitation token, create session, mark as "Clicked"</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Land on welcome page with LO info</td>
+                        <td>See LO photo, name, contact info, and personalized welcome message</td>
+                        <td>Load LO profile, display custom branding</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Verify contact info (pre-filled from invitation)</td>
+                        <td>Confirm email and phone, option to edit</td>
+                        <td>Send OTP for phone verification</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Begin application (Borrower Information section)</td>
+                        <td>Step-by-step guided application flow</td>
+                        <td>Track progress, auto-save every 30 seconds, notify LO of start</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Save and exit, return later via same link</td>
+                        <td>Click link in email again to resume application</td>
+                        <td>Resume from last saved position</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Invitation Templates -->
+        <section class="content-section">
+            <h2 class="content-section-title">Invitation Message Templates</h2>
+
+            <h3 class="content-section-subtitle">Email Template (HTML)</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--bg-card);">
+                <div style="background: white; padding: 2rem; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #e5e7eb;">
+                        <div style="width: 60px; height: 60px; background: #3b82f6; border-radius: 50%; margin-right: 1rem;"></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.1rem; color: #0a0f1a;">[LO Name]</div>
+                            <div style="color: #6b7280; font-size: 0.9rem;">Senior Loan Officer</div>
+                        </div>
+                    </div>
+                    <p style="color: #0a0f1a; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Hi <strong>[Borrower First Name]</strong>,
+                    </p>
+                    <p style="color: #374151; line-height: 1.7; margin-bottom: 1rem;">
+                        Thank you for speaking with me about your home financing needs. I've set up a personalized application
+                        for you that will take about 15-20 minutes to complete.
+                    </p>
+                    <p style="color: #374151; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Click the button below to get started. Your progress will be saved automatically, so you can complete
+                        it at your own pace.
+                    </p>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <a href="[INVITATION_LINK]" style="display: inline-block; background: #3b82f6; color: white; padding: 1rem 2.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.05rem;">Start My Application</a>
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.9rem; line-height: 1.7; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                        Questions? Reply to this email or call/text me at <strong>[LO Phone]</strong>. I'm here to help!
+                    </p>
+                    <p style="color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem;">
+                        Best regards,<br><strong>[LO Name]</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">SMS Template (Plain Text)</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; margin-bottom: 2rem;">
+<pre style="margin: 0; color: var(--text-secondary); white-space: pre-wrap;">
+Hi [First Name], this is [LO Name] from [Company]. I've set up your mortgage application. It takes ~15 mins to complete. Start here: [SHORT_LINK]
+
+Questions? Call/text me at [LO Phone].
+</pre>
+            </div>
+
+            <h3 class="content-section-subtitle">Customization Options</h3>
+            <div class="priority-list">
+                <div class="priority-item"><strong>Personalization Variables:</strong> {borrower_first_name}, {borrower_full_name}, {lo_name}, {lo_phone}, {lo_email}, {property_address}, {loan_type}</div>
+                <div class="priority-item"><strong>LO Custom Message:</strong> Optional 200-character message added between greeting and CTA button</div>
+                <div class="priority-item"><strong>Branding:</strong> LO photo, company logo, brand colors from LO profile</div>
+                <div class="priority-item"><strong>Call-to-Action:</strong> Customizable button text (default: "Start My Application")</div>
+                <div class="priority-item"><strong>Footer Compliance:</strong> Auto-include NMLS, Equal Housing, Privacy Policy links</div>
+            </div>
+        </section>
+
+        <!-- Invitation Tracking -->
+        <section class="content-section">
+            <h2 class="content-section-title">Invitation Status Tracking</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Definition</th>
+                        <th>Tracking Mechanism</th>
+                        <th>LO Dashboard Display</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status-badge" style="background: #6b7280;">Queued</span></td>
+                        <td>Invitation created but not yet sent</td>
+                        <td>Database record with status=queued</td>
+                        <td>"Sending..."</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-in-progress">Sent</span></td>
+                        <td>Message successfully sent to email/SMS provider</td>
+                        <td>Provider API 200 response</td>
+                        <td>"Sent on [Date Time]"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-in-progress">Delivered</span></td>
+                        <td>Message delivered to borrower's inbox/phone</td>
+                        <td>Webhook callback from SendGrid/Twilio</td>
+                        <td>"Delivered [X hours ago]"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-in-progress">Opened</span></td>
+                        <td>Borrower opened email (email only)</td>
+                        <td>Tracking pixel loaded</td>
+                        <td>"Opened [X hours ago]"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-complete">Clicked</span></td>
+                        <td>Borrower clicked invitation link</td>
+                        <td>Link redirect tracking (UTM parameters)</td>
+                        <td>"Clicked [X hours ago]"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-complete">Started</span></td>
+                        <td>Borrower began filling out application</td>
+                        <td>First field interaction logged</td>
+                        <td>"Started [X% complete]"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-complete">Completed</span></td>
+                        <td>Borrower submitted application</td>
+                        <td>Application status=submitted</td>
+                        <td>"Completed on [Date]"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge" style="background: #dc2626;">Bounced</span></td>
+                        <td>Email bounced (invalid address)</td>
+                        <td>SendGrid bounce webhook</td>
+                        <td>"Bounced - Update email"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge" style="background: #dc2626;">Failed</span></td>
+                        <td>SMS delivery failed</td>
+                        <td>Twilio error webhook</td>
+                        <td>"Failed - Update phone"</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-pending">Expired</span></td>
+                        <td>Invitation link expired (90 days default)</td>
+                        <td>Token expiry timestamp passed</td>
+                        <td>"Expired - Resend"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Co-Borrower Invitations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Co-Borrower Invitation Flow</h2>
+
+            <h3 class="content-section-subtitle">Two Invitation Methods</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Method 1: LO Invites Both Upfront</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">LO enters both borrower and co-borrower details when creating invitation</div>
+                        <div class="priority-item">System sends separate invitations to each email address</div>
+                        <div class="priority-item">Applications are linked in database (shared application ID)</div>
+                        <div class="priority-item">Each borrower completes their own sections independently</div>
+                        <div class="priority-item">Both can see overall progress, but only edit their own data</div>
+                        <div class="priority-item">LO sees combined view of both borrowers' completion status</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Method 2: Primary Invites Co-Borrower</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">LO invites primary borrower only</div>
+                        <div class="priority-item">During application, primary sees "Add Co-Borrower" option</div>
+                        <div class="priority-item">Primary enters co-borrower email and phone</div>
+                        <div class="priority-item">System auto-sends invitation to co-borrower with context: "[Primary Name] has invited you..."</div>
+                        <div class="priority-item">Co-borrower accepts invitation, creates their own session</div>
+                        <div class="priority-item">Applications merge into joint application</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Co-Borrower Coordination Rules</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>System Behavior</th>
+                        <th>Notifications</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primary completes their sections before co-borrower starts</td>
+                        <td>Co-borrower sees "Your co-borrower has completed their part. Here's what you need to do..."</td>
+                        <td>Email to co-borrower: "Don't keep [Primary] waiting!"</td>
+                    </tr>
+                    <tr>
+                        <td>Co-borrower completes before primary</td>
+                        <td>Primary sees banner: "Your co-borrower has finished! Complete yours to submit."</td>
+                        <td>Email to primary: "[Co-Borrower] has completed their application"</td>
+                    </tr>
+                    <tr>
+                        <td>Both working simultaneously</td>
+                        <td>Real-time sync of shared fields (property address, loan amount)</td>
+                        <td>No notifications, auto-save prevents conflicts</td>
+                    </tr>
+                    <tr>
+                        <td>One borrower edits shared field</td>
+                        <td>Update visible to both, last-write-wins</td>
+                        <td>In-app notification: "[Name] updated the property address"</td>
+                    </tr>
+                    <tr>
+                        <td>Application ready to submit</td>
+                        <td>Both must click "Review & Submit" before LO can access</td>
+                        <td>Email to both: "Your joint application is ready to submit"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- LO Configuration -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Default Delivery Method</strong></td>
+                        <td>Email Only / SMS Only / Both</td>
+                        <td>Both</td>
+                        <td>Which channels used for invitation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto-Reminder Timing</strong></td>
+                        <td>1 / 3 / 7 days / Never</td>
+                        <td>3 days</td>
+                        <td>When to send follow-up if no action</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max Reminders</strong></td>
+                        <td>1 / 2 / 3 / Unlimited</td>
+                        <td>2</td>
+                        <td>How many auto-reminders to send</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Invitation Expiry</strong></td>
+                        <td>7 / 30 / 90 days / Never</td>
+                        <td>90 days</td>
+                        <td>How long link remains valid</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Template</strong></td>
+                        <td>Default / Custom (HTML upload)</td>
+                        <td>Default</td>
+                        <td>Branding and messaging style</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Require Phone Verification</strong></td>
+                        <td>Yes / No</td>
+                        <td>Yes</td>
+                        <td>Send OTP to verify phone when borrower clicks link</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notify LO on Click</strong></td>
+                        <td>Yes / No / Only on Start</td>
+                        <td>Only on Start</td>
+                        <td>When to notify LO of borrower engagement</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Analytics Dashboard -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Analytics & Reporting</h2>
+
+            <h3 class="content-section-subtitle">Metrics Tracked</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Delivery Metrics</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Total invitations sent (by month, week, day)</div>
+                        <div class="priority-item">Delivery success rate (email vs SMS)</div>
+                        <div class="priority-item">Bounce rate by channel</div>
+                        <div class="priority-item">Average time to delivery</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Engagement Metrics</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Open rate (email only)</div>
+                        <div class="priority-item">Click-through rate (CTR)</div>
+                        <div class="priority-item">Time to first click (median, avg)</div>
+                        <div class="priority-item">Multi-click rate (borrower clicked link 2+ times)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Conversion Metrics</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Application start rate (clicked → started)</div>
+                        <div class="priority-item">Completion rate (started → submitted)</div>
+                        <div class="priority-item">Time to completion (invitation sent → app submitted)</div>
+                        <div class="priority-item">Abandonment points (where borrowers drop off)</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">POC Performance Data</h3>
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <div class="priority-list">
+                    <div class="priority-item"><strong>Invitations Sent:</strong> 487 total (298 email only, 112 SMS only, 77 both)</div>
+                    <div class="priority-item"><strong>Delivery Success:</strong> 98.4% (479/487 delivered successfully)</div>
+                    <div class="priority-item"><strong>Email Open Rate:</strong> 78.2% (233/298 email invitations opened)</div>
+                    <div class="priority-item"><strong>Click-Through Rate:</strong> 54.4% (265/487 borrowers clicked link)</div>
+                    <div class="priority-item"><strong>Application Start Rate:</strong> 73.2% (194/265 who clicked started application)</div>
+                    <div class="priority-item"><strong>Completion Rate:</strong> 56.2% (109/194 who started completed submission)</div>
+                    <div class="priority-item"><strong>Overall Conversion:</strong> 22.4% (109/487 from invitation to submission)</div>
+                    <div class="priority-item"><strong>Median Time to Click:</strong> 4.2 hours from delivery</div>
+                    <div class="priority-item"><strong>Median Time to Complete:</strong> 2.8 days from invitation sent</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">Bulk invitation upload (CSV import for multiple borrowers at once)</div>
+                <div class="priority-item">Scheduled invitations (send at specific date/time for optimal open rates)</div>
+                <div class="priority-item">A/B testing framework (test different email templates, CTAs, send times)</div>
+                <div class="priority-item">Smart reminder timing based on historical open/click patterns</div>
+                <div class="priority-item">Video message option (LO records personalized video included in email)</div>
+                <div class="priority-item">SMS conversation thread (borrower can reply to SMS, creates LO chat)</div>
+                <div class="priority-item">Calendar integration (borrower can schedule call with LO directly from invitation)</div>
+                <div class="priority-item">Multi-language support (detect borrower language preference, send translated invitation)</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • LO-Initiated Borrower Invitation</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="lo-config-ui.html">Next: LO Configuration UI →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

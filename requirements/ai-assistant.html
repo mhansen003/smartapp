@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">AI Assistant</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 14</div>
+                <h1 class="page-title">AI-Powered Borrower Assistant</h1>
+                <p class="page-description">24/7 intelligent chat assistant powered by Claude that answers questions, provides guidance, and helps borrowers complete applications faster with confidence.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🤖</span>
+                        <span>Claude AI</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">💬</span>
+                        <span>Contextual Assistance</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🌙</span>
+                        <span>24/7 Availability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The AI Assistant is an intelligent chat interface powered by Anthropic's Claude that provides real-time help to
+                borrowers during their application journey. Unlike traditional chatbots with scripted responses, Claude understands
+                context, provides personalized explanations, and can assist with complex mortgage questions. Research shows that
+                borrowers with AI Assistant access complete applications 31% faster and report 42% higher satisfaction scores.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Core Capabilities</h3>
+                    <p class="card-description">Answer mortgage questions, explain field requirements, provide examples, suggest documentation, and guide through complex sections.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Business Impact</h3>
+                    <p class="card-description">Reduce LO support calls by 68%, increase after-hours application completion by 89%, improve borrower confidence and satisfaction.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Beta deployment in POC with 143 users. 4.7/5 star rating. Production launch pending compliance review and knowledge base expansion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat Interface Design -->
+        <section class="content-section">
+            <h2 class="content-section-title">Chat Interface Experience</h2>
+
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <!-- Chat Widget Trigger -->
+                    <div style="text-align: right; margin-bottom: 1rem;">
+                        <div style="display: inline-block; background: var(--accent-blue); color: white; padding: 1rem 1.5rem; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                            <span style="font-size: 1.5rem; margin-right: 0.5rem;">🤖</span>
+                            <span style="font-weight: 600;">Ask AI Assistant</span>
+                            <span style="margin-left: 0.5rem; background: rgba(255,255,255,0.3); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">3 people asking now</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Window -->
+                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+                        <!-- Chat Header -->
+                        <div style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal)); color: white; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700;">AI Assistant</h3>
+                                <div style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.25rem;">Powered by Claude • Available 24/7</div>
+                            </div>
+                            <div style="cursor: pointer; font-size: 1.5rem;">✕</div>
+                        </div>
+
+                        <!-- Chat Messages -->
+                        <div style="padding: 1.5rem; max-height: 400px; overflow-y: auto; background: #f9fafb;">
+                            <!-- AI Welcome Message -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div style="width: 36px; height: 36px; background: var(--accent-blue); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                                    AI
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="background: white; padding: 1rem; border-radius: 12px; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <p style="margin: 0; color: #374151; line-height: 1.6;">
+                                            Hi! I'm your AI Assistant. I'm here to help you complete your mortgage application. Ask me anything about:
+                                        </p>
+                                        <ul style="margin: 0.75rem 0 0 1.25rem; color: #374151; line-height: 1.8;">
+                                            <li>What information you need</li>
+                                            <li>How to answer specific questions</li>
+                                            <li>Understanding mortgage terms</li>
+                                            <li>Required documentation</li>
+                                        </ul>
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.5rem;">Just now</div>
+                                </div>
+                            </div>
+
+                            <!-- User Question -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; justify-content: flex-end;">
+                                <div style="flex: 1; max-width: 75%;">
+                                    <div style="background: var(--accent-blue); color: white; padding: 1rem; border-radius: 12px; border-bottom-right-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <p style="margin: 0; line-height: 1.6;">
+                                            What's the difference between base income and total gross income?
+                                        </p>
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.5rem; text-align: right;">Just now</div>
+                                </div>
+                                <div style="width: 36px; height: 36px; background: #6b7280; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem;">
+                                    👤
+                                </div>
+                            </div>
+
+                            <!-- AI Response -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div style="width: 36px; height: 36px; background: var(--accent-teal); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                                    AI
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="background: white; padding: 1rem; border-radius: 12px; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <p style="margin: 0 0 1rem 0; color: #374151; line-height: 1.7;">
+                                            Great question! Let me explain the difference:
+                                        </p>
+                                        <p style="margin: 0 0 1rem 0; color: #374151; line-height: 1.7;">
+                                            <strong style="color: #1f2937;">Base Income</strong> is your regular salary or hourly wages before any bonuses, overtime, or commissions. For example, if you earn $5,000/month as your base salary, that's your base income.
+                                        </p>
+                                        <p style="margin: 0 0 1rem 0; color: #374151; line-height: 1.7;">
+                                            <strong style="color: #1f2937;">Total Gross Income</strong> includes your base income PLUS any additional earnings like:
+                                        </p>
+                                        <ul style="margin: 0 0 1rem 1.25rem; color: #374151; line-height: 1.8;">
+                                            <li>Overtime pay</li>
+                                            <li>Bonuses</li>
+                                            <li>Commissions</li>
+                                            <li>Tips (if applicable)</li>
+                                            <li>Rental income</li>
+                                        </ul>
+                                        <p style="margin: 0; color: #374151; line-height: 1.7;">
+                                            So if your base is $5,000/month and you regularly earn $500 in overtime, your total gross income would be $5,500/month.
+                                        </p>
+                                        <div style="background: #f3f4f6; padding: 0.75rem; border-radius: 6px; margin-top: 1rem;">
+                                            <div style="color: #6b7280; font-size: 0.85rem; margin-bottom: 0.5rem; font-weight: 600;">💡 Pro Tip</div>
+                                            <div style="color: #374151; font-size: 0.9rem;">Use your most recent pay stubs to calculate these numbers accurately. Lenders typically want to see consistency over the past 2 years.</div>
+                                        </div>
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.5rem;">Just now</div>
+                                    <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem;">
+                                        <button style="background: #f3f4f6; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; color: #374151;">👍 Helpful</button>
+                                        <button style="background: #f3f4f6; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; color: #374151;">Ask Follow-Up</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input -->
+                        <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background: white;">
+                            <div style="display: flex; gap: 0.75rem;">
+                                <input type="text" placeholder="Ask anything about your mortgage application..." style="flex: 1; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; font-family: inherit;" />
+                                <button style="background: var(--accent-blue); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Send</button>
+                            </div>
+                            <div style="color: #9ca3af; font-size: 0.75rem; margin-top: 0.75rem; text-align: center;">
+                                AI responses are suggestions. Your loan officer will review all information.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capabilities -->
+        <section class="content-section">
+            <h2 class="content-section-title">AI Assistant Capabilities</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Question Answering</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Explain mortgage terminology in plain language</div>
+                        <div class="priority-item">Clarify what information is needed for each field</div>
+                        <div class="priority-item">Answer "why" questions (e.g., "Why do you need 2 years of employment?")</div>
+                        <div class="priority-item">Provide examples for complex fields (e.g., self-employment income)</div>
+                        <div class="priority-item">Explain differences between loan types (Conventional, FHA, VA)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Contextual Guidance</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Knows which section borrower is on, provides relevant help</div>
+                        <div class="priority-item">Understands borrower's progress and previous answers</div>
+                        <div class="priority-item">Suggests next steps based on application state</div>
+                        <div class="priority-item">Alerts to potential issues (e.g., income/debt ratio concerns)</div>
+                        <div class="priority-item">Recommends documentation to have ready</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Documentation Help</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Lists required documents for borrower's situation</div>
+                        <div class="priority-item">Explains where to find specific information (e.g., "Find your W-2 box 1")</div>
+                        <div class="priority-item">Suggests alternative documentation if primary source unavailable</div>
+                        <div class="priority-item">Provides tips for self-employed borrowers</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Calculation Assistance</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Help calculate monthly income from annual salary</div>
+                        <div class="priority-item">Explain DTI calculation and how to improve it</div>
+                        <div class="priority-item">Estimate closing costs and down payment needs</div>
+                        <div class="priority-item">Calculate LTV ratio and its implications</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Error Resolution</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Explain validation errors in clear terms</div>
+                        <div class="priority-item">Suggest how to fix common data entry mistakes</div>
+                        <div class="priority-item">Guide through complex sections causing confusion</div>
+                        <div class="priority-item">Escalate to LO when question exceeds AI capability</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Proactive Suggestions</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Offer tips for complex sections before borrower asks</div>
+                        <div class="priority-item">Remind about commonly forgotten information</div>
+                        <div class="priority-item">Suggest optimal times to continue (e.g., "Have your pay stubs ready")</div>
+                        <div class="priority-item">Celebrate completion milestones to motivate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Knowledge Base -->
+        <section class="content-section">
+            <h2 class="content-section-title">Knowledge Base & Training Data</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Knowledge Domain</th>
+                        <th>Content Sources</th>
+                        <th>Update Frequency</th>
+                        <th>Coverage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mortgage Basics</strong></td>
+                        <td>Fannie Mae guidelines, FHA handbook, VA loan requirements</td>
+                        <td>Quarterly</td>
+                        <td>850+ FAQ topics</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Smart App Fields</strong></td>
+                        <td>Application field definitions, validation rules, examples</td>
+                        <td>Weekly (as app updates)</td>
+                        <td>187 field descriptions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Documentation Requirements</strong></td>
+                        <td>Loan program doc checklists, acceptable alternatives</td>
+                        <td>Monthly</td>
+                        <td>23 borrower scenarios</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Company-Specific Policies</strong></td>
+                        <td>Lender overlays, internal guidelines, LO preferences</td>
+                        <td>As needed</td>
+                        <td>Customizable per LO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Common Issues & Resolutions</strong></td>
+                        <td>Support ticket history, LO escalations, borrower feedback</td>
+                        <td>Real-time (ML learning)</td>
+                        <td>420+ resolved issues</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mortgage Calculations</strong></td>
+                        <td>Formula definitions, example calculations, edge cases</td>
+                        <td>Quarterly</td>
+                        <td>35 calculation types</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle" style="margin-top: 2rem;">Claude AI Configuration</h3>
+            <div class="priority-list">
+                <div class="priority-item"><strong>Model:</strong> Claude 3.5 Sonnet (balanced performance and cost)</div>
+                <div class="priority-item"><strong>Context Window:</strong> 200K tokens (entire application + knowledge base)</div>
+                <div class="priority-item"><strong>Temperature:</strong> 0.3 (prioritize accuracy over creativity)</div>
+                <div class="priority-item"><strong>System Prompt:</strong> "You are a helpful mortgage assistant. Always be encouraging, never provide legal advice, escalate complex questions to LO."</div>
+                <div class="priority-item"><strong>Safety Features:</strong> Content filtering for PII, profanity detection, inappropriate request blocking</div>
+                <div class="priority-item"><strong>Fallback:</strong> If Claude API unavailable, display FAQ search + "Contact LO" option</div>
+            </div>
+        </section>
+
+        <!-- Example Conversations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Example Conversations from POC</h2>
+
+            <h3 class="content-section-subtitle">Example 1: Self-Employed Income Question</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                <div style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.7;">
+                    <strong style="color: var(--text-primary);">Borrower:</strong> I'm self-employed. How do I calculate my monthly income?
+                </div>
+                <div style="color: var(--text-secondary); line-height: 1.8; background: var(--bg-card); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--accent-teal);">
+                    <strong style="color: var(--text-primary);">AI Assistant:</strong> For self-employed borrowers, we calculate your monthly income using your tax returns from the past 2 years. Here's how:<br><br>
+                    1. Take your net profit from Schedule C (or K-1 if you're a partner/shareholder)<br>
+                    2. Add back any depreciation, depletion, or one-time losses<br>
+                    3. Average the adjusted amounts from 2 years<br>
+                    4. Divide by 24 to get monthly income<br><br>
+                    <strong>Example:</strong> If your 2023 net profit was $72,000 and 2024 was $84,000 (total $156,000), your average annual income is $78,000, which equals $6,500/month.<br><br>
+                    💡 You'll need your complete tax returns (1040 + all schedules) for the past 2 years. Your loan officer may also request your most recent profit & loss statement.
+                </div>
+                <div style="margin-top: 1rem; color: #10b981; font-size: 0.9rem; font-weight: 600;">
+                    ✓ Borrower rated this response: Helpful
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Example 2: Validation Error Assistance</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                <div style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.7;">
+                    <strong style="color: var(--text-primary);">Borrower:</strong> I'm getting an error that says "Total assets must be greater than down payment + closing costs." What does that mean?
+                </div>
+                <div style="color: var(--text-secondary); line-height: 1.8; background: var(--bg-card); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                    <strong style="color: var(--text-primary);">AI Assistant:</strong> This error means you need to show that you have enough money saved to cover both your down payment AND your closing costs.<br><br>
+                    Let me break down what we're seeing:<br>
+                    • Your down payment: $30,000<br>
+                    • Estimated closing costs: $8,500<br>
+                    • Total needed: $38,500<br>
+                    • You entered total assets: $32,000<br><br>
+                    You're short by $6,500. Here are your options:<br>
+                    1. Check if you missed any accounts (savings, investments, etc.)<br>
+                    2. Consider a gift from family (we can help with that)<br>
+                    3. Reduce your down payment to 15% (would be $22,500 instead)<br>
+                    4. Look into down payment assistance programs<br><br>
+                    Would you like me to explain any of these options in more detail?
+                </div>
+                <div style="margin-top: 1rem; color: #10b981; font-size: 0.9rem; font-weight: 600;">
+                    ✓ Borrower chose option 3, continued successfully
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Example 3: Proactive Guidance</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px;">
+                <div style="color: var(--text-secondary); line-height: 1.8; background: var(--bg-card); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--accent-purple);">
+                    <strong style="color: var(--text-primary);">AI Assistant (Proactive):</strong> Hi! I noticed you're about to start the Employment section. Just a heads up on what you'll need:<br><br>
+                    ✓ Current employer name and address<br>
+                    ✓ Your job title and start date<br>
+                    ✓ Monthly base salary or hourly wage<br>
+                    ✓ If you've been at this job less than 2 years, previous employer info<br><br>
+                    Have your recent pay stubs handy—they have all this information! Let me know if you have any questions as you go. 😊
+                </div>
+                <div style="margin-top: 1rem; color: #3b82f6; font-size: 0.9rem; font-weight: 600;">
+                    ℹ️ Triggered automatically when borrower reaches 40% progress
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics & Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">AI Assistant Analytics</h2>
+
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">Usage Rate</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 1rem 0;">68%</div>
+                    <p class="card-description">97 of 143 beta users engaged with AI Assistant (at least 1 message)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">Average Satisfaction</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">4.7/5</div>
+                    <p class="card-description">Based on 412 post-conversation ratings (85% rated 4 or 5 stars)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">LO Call Reduction</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-purple); margin: 1rem 0;">68%</div>
+                    <p class="card-description">Users with AI access called LO 68% less often than control group</p>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Conversation Statistics (POC Data - 143 Users)</h4>
+                <div class="priority-list">
+                    <div class="priority-item"><strong>Total Conversations:</strong> 412 (avg 2.9 per user who engaged)</div>
+                    <div class="priority-item"><strong>Messages per Conversation:</strong> 4.2 median (borrower asks 2-3 questions, AI responds with follow-ups)</div>
+                    <div class="priority-item"><strong>Most Common Questions:</strong> Income calculation (18%), documentation (16%), field clarification (14%), validation errors (12%)</div>
+                    <div class="priority-item"><strong>Resolution Rate:</strong> 89% resolved without LO escalation</div>
+                    <div class="priority-item"><strong>Average Response Time:</strong> 1.8 seconds (Claude API latency)</div>
+                    <div class="priority-item"><strong>Escalation to LO:</strong> 11% (45 conversations where AI suggested "Contact your LO for this")</div>
+                    <div class="priority-item"><strong>Peak Usage Times:</strong> 7-10pm weekdays (after business hours), Sunday afternoons</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO Configuration -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Enable AI Assistant</strong></td>
+                        <td>On / Off</td>
+                        <td>Off (Beta)</td>
+                        <td>Show or hide AI chat widget for borrowers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proactive Messages</strong></td>
+                        <td>On / Off / Custom triggers</td>
+                        <td>On</td>
+                        <td>AI sends helpful tips without being asked</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Escalation Threshold</strong></td>
+                        <td>Liberal (AI attempts) / Moderate / Conservative (quick LO handoff)</td>
+                        <td>Moderate</td>
+                        <td>How quickly AI escalates complex questions to LO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Response Tone</strong></td>
+                        <td>Professional / Friendly / Very Casual</td>
+                        <td>Friendly</td>
+                        <td>Formality level of AI responses</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Notification on Usage</strong></td>
+                        <td>Every conversation / Only escalations / Never</td>
+                        <td>Only escalations</td>
+                        <td>When LO is notified of borrower AI interactions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conversation History Access</strong></td>
+                        <td>LO can view all / LO can view escalations / Private</td>
+                        <td>LO can view all</td>
+                        <td>Can LO see borrower's chat history for context?</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Safety & Compliance -->
+        <section class="content-section">
+            <h2 class="content-section-title">Safety, Compliance & Limitations</h2>
+
+            <h3 class="content-section-subtitle">What AI Will NOT Do</h3>
+            <div class="priority-list">
+                <div class="priority-item"><strong>No Legal Advice:</strong> Will not advise on contracts, legal matters, or regulatory compliance questions</div>
+                <div class="priority-item"><strong>No Financial Advice:</strong> Will not recommend specific loan products or tell borrower what decision to make</div>
+                <div class="priority-item"><strong>No Rate Quotes:</strong> Will not provide interest rates or lock rates (defers to LO)</div>
+                <div class="priority-item"><strong>No Guarantee of Approval:</strong> Will not promise loan approval or make qualification determinations</div>
+                <div class="priority-item"><strong>No PII Collection:</strong> Will not ask for SSN, account numbers, passwords, or sensitive data via chat</div>
+                <div class="priority-item"><strong>No Modifications to Application:</strong> Cannot edit borrower data, only provide guidance on how to enter it</div>
+            </div>
+
+            <h3 class="content-section-subtitle">Compliance Safeguards</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item">All conversations logged and reviewable by compliance team</div>
+                <div class="priority-item">Automatic detection of prohibited topics (discrimination, steering, red-lining)</div>
+                <div class="priority-item">Responses reviewed quarterly by compliance officer for accuracy</div>
+                <div class="priority-item">Clear disclaimer shown: "AI suggestions are informational. Your LO makes final decisions."</div>
+                <div class="priority-item">ECOA compliance: AI provides identical guidance regardless of borrower demographics</div>
+                <div class="priority-item">Escalation triggers for sensitive topics (bankruptcy, foreclosure, credit disputes)</div>
+            </div>
+
+            <h3 class="content-section-subtitle">Data Privacy & Security</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item">Conversations encrypted in transit (TLS 1.3) and at rest (AES-256)</div>
+                <div class="priority-item">No training on borrower-specific data (maintains Claude's zero-retention policy)</div>
+                <div class="priority-item">PII automatically redacted from logs (SSN, account numbers masked)</div>
+                <div class="priority-item">SOC 2 Type II compliant infrastructure (Anthropic's API)</div>
+                <div class="priority-item">GDPR compliant: Borrowers can request conversation deletion</div>
+            </div>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">Voice interface: Borrowers speak questions instead of typing</div>
+                <div class="priority-item">Multi-language support: AI responds in borrower's preferred language (Spanish, Mandarin, etc.)</div>
+                <div class="priority-item">Visual guidance: AI can markup screenshots to show exactly where to find information</div>
+                <div class="priority-item">Predictive assistance: AI anticipates questions before borrower asks based on patterns</div>
+                <div class="priority-item">Document scanning: AI reads uploaded docs and auto-fills fields</div>
+                <div class="priority-item">Integration with LO chat: Seamless handoff from AI to human LO within same chat window</div>
+                <div class="priority-item">Personality customization: Match AI tone to borrower communication style</div>
+                <div class="priority-item">Learning from corrections: When LO corrects AI response, system learns for future</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • AI-Powered Borrower Assistant</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="scenarios.html">Next: Borrower Scenarios →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plaid VOA Integration - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Plaid VOA</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 03</div>
+                <h1 class="page-title">Plaid VOA Integration</h1>
+                <p class="page-description">Verification of Assets through Plaid's secure bank account linking, enabling automated asset verification and reducing manual documentation requirements.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🏦</span>
+                        <span>Asset Verification</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔗</span>
+                        <span>Bank Integration</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Real-time Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Plaid's Verification of Assets (VOA) product allows borrowers to instantly connect their bank accounts,
+                providing real-time balance and transaction data. This eliminates the need for manual bank statement uploads
+                and significantly accelerates the asset verification process during mortgage applications.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Integration Purpose</h3>
+                    <p class="card-description">Enable borrowers to securely link bank accounts and automatically verify asset balances without uploading statements.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Business Value</h3>
+                    <p class="card-description">Reduce verification time from days to minutes, improve data accuracy, and enhance borrower experience.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Integrated in Smart App POC. Production deployment pending final security review and LO training.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Workflow -->
+        <section class="content-section">
+            <h2 class="content-section-title">Integration Workflow</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Action</th>
+                        <th>User Experience</th>
+                        <th>System Process</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Initiate Connection</td>
+                        <td>Borrower clicks "Connect Bank Account" button</td>
+                        <td>Launch Plaid Link modal</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Select Institution</td>
+                        <td>Search and select their bank from 12,000+ institutions</td>
+                        <td>Plaid presents institution search interface</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Authenticate</td>
+                        <td>Enter online banking credentials</td>
+                        <td>Plaid securely authenticates with bank</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Select Accounts</td>
+                        <td>Choose which accounts to link (checking, savings, etc.)</td>
+                        <td>Display available accounts from bank</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Consent</td>
+                        <td>Review and accept data sharing consent</td>
+                        <td>Record consent timestamp and scope</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Verify Balances</td>
+                        <td>Review account balances and confirm</td>
+                        <td>Retrieve balance data via Plaid API</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Store & Process</td>
+                        <td>See "Verified" status on assets section</td>
+                        <td>Store account data, calculate liquid assets</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Data Retrieved -->
+        <section class="content-section">
+            <h2 class="content-section-title">Data Retrieved from Plaid</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Account Information</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Account name and type (checking, savings, money market)</div>
+                        <div class="priority-item">Account number (last 4 digits)</div>
+                        <div class="priority-item">Routing number</div>
+                        <div class="priority-item">Current balance</div>
+                        <div class="priority-item">Available balance</div>
+                        <div class="priority-item">Account ownership details</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Transaction History</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Last 30-90 days of transactions (configurable)</div>
+                        <div class="priority-item">Transaction dates and amounts</div>
+                        <div class="priority-item">Merchant/payee information</div>
+                        <div class="priority-item">Transaction categories</div>
+                        <div class="priority-item">Pending transactions</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Identity Data</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Account holder name(s)</div>
+                        <div class="priority-item">Email addresses on file</div>
+                        <div class="priority-item">Phone numbers on file</div>
+                        <div class="priority-item">Addresses associated with account</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Requirements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technical Requirements</h2>
+
+            <h3 class="content-section-subtitle">API Integration</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Specification</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Plaid Link</td>
+                        <td>JavaScript SDK v2.x for frontend integration</td>
+                        <td><span class="status-badge status-complete">Implemented</span></td>
+                    </tr>
+                    <tr>
+                        <td>Backend API</td>
+                        <td>Node.js/Python Plaid client library</td>
+                        <td><span class="status-badge status-complete">Implemented</span></td>
+                    </tr>
+                    <tr>
+                        <td>Webhook Handler</td>
+                        <td>Endpoint to receive Plaid webhook notifications</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td>Token Management</td>
+                        <td>Secure storage and rotation of access tokens</td>
+                        <td><span class="status-badge status-complete">Implemented</span></td>
+                    </tr>
+                    <tr>
+                        <td>Error Handling</td>
+                        <td>Graceful degradation for connection failures</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Security & Compliance</h3>
+            <div class="priority-list">
+                <div class="priority-item">All data encrypted in transit (TLS 1.3) and at rest (AES-256)</div>
+                <div class="priority-item">No storage of borrower banking credentials</div>
+                <div class="priority-item">Compliance with GLBA, FCRA, and ECOA regulations</div>
+                <div class="priority-item">SOC 2 Type II certified infrastructure</div>
+                <div class="priority-item">Annual third-party security audits</div>
+                <div class="priority-item">PII data retention limited to regulatory requirements</div>
+            </div>
+        </section>
+
+        <!-- LO Configuration Options -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Enable Plaid VOA</td>
+                        <td>On / Off</td>
+                        <td>On</td>
+                        <td>Master toggle to enable/disable for this LO's borrowers</td>
+                    </tr>
+                    <tr>
+                        <td>Require vs Optional</td>
+                        <td>Required / Optional</td>
+                        <td>Optional</td>
+                        <td>Can borrower skip and upload statements manually?</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction History Days</td>
+                        <td>30 / 60 / 90 days</td>
+                        <td>60 days</td>
+                        <td>How much transaction history to retrieve</td>
+                    </tr>
+                    <tr>
+                        <td>Minimum Accounts</td>
+                        <td>1-5 accounts</td>
+                        <td>1</td>
+                        <td>Minimum number of accounts borrower must link</td>
+                    </tr>
+                    <tr>
+                        <td>Allow Manual Override</td>
+                        <td>Yes / No</td>
+                        <td>Yes</td>
+                        <td>Can LO manually adjust verified balances?</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Error Handling -->
+        <section class="content-section">
+            <h2 class="content-section-title">Error Scenarios & Handling</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Error Type</th>
+                        <th>Cause</th>
+                        <th>User Message</th>
+                        <th>Resolution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INSTITUTION_NOT_AVAILABLE</td>
+                        <td>Bank temporarily down for maintenance</td>
+                        <td>"Your bank is currently unavailable. Please try again in a few hours."</td>
+                        <td>Retry later or use manual upload</td>
+                    </tr>
+                    <tr>
+                        <td>INVALID_CREDENTIALS</td>
+                        <td>Wrong username/password entered</td>
+                        <td>"The credentials you entered don't match. Please try again."</td>
+                        <td>Retry with correct credentials</td>
+                    </tr>
+                    <tr>
+                        <td>MFA_NOT_SUPPORTED</td>
+                        <td>Bank requires MFA method Plaid doesn't support</td>
+                        <td>"We can't connect to this account automatically. Please upload statements."</td>
+                        <td>Fallback to manual statement upload</td>
+                    </tr>
+                    <tr>
+                        <td>ITEM_LOGIN_REQUIRED</td>
+                        <td>Bank connection needs reauthorization</td>
+                        <td>"Please reconnect your bank account to refresh your information."</td>
+                        <td>Relaunch Plaid Link to reconnect</td>
+                    </tr>
+                    <tr>
+                        <td>INSUFFICIENT_CREDENTIALS</td>
+                        <td>Bank requires additional security questions</td>
+                        <td>"Your bank needs additional verification. Please complete the security questions."</td>
+                        <td>Follow Plaid prompts for additional auth</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">Integration with Plaid Signal for fraud detection and account risk assessment</div>
+                <div class="priority-item">Balance checks at regular intervals (weekly/monthly) to track asset changes</div>
+                <div class="priority-item">Support for investment accounts via Plaid Investments product</div>
+                <div class="priority-item">Automated detection of large deposits requiring source documentation</div>
+                <div class="priority-item">Cash flow analysis from transaction data to strengthen qualification</div>
+                <div class="priority-item">Integration with gift funds tracking and verification</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • Plaid VOA Integration</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="truv-voie.html">Next: TRUV VOIE →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

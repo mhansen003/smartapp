@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Pull Credit - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Soft Pull Credit</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 07</div>
+                <h1 class="page-title">Soft Pull Credit Integration</h1>
+                <p class="page-description">Early credit assessment without impacting borrower's credit score, enabling accurate pre-qualification and loan product recommendations before formal application.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📊</span>
+                        <span>No Score Impact</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Instant Results</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎯</span>
+                        <span>Pre-Qualification</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The Soft Pull Credit integration allows Loan Officers to assess a borrower's creditworthiness early in the
+                process without triggering a hard inquiry that impacts credit scores. This enables accurate pre-qualification,
+                helps borrowers understand their options, and reduces wasted effort on applications unlikely to succeed. Unlike
+                hard pulls, soft pulls can be performed multiple times without penalty.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Integration Purpose</h3>
+                    <p class="card-description">Provide accurate credit assessment for pre-qualification without negatively impacting borrower credit scores.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Business Value</h3>
+                    <p class="card-description">Reduce application fallout by 40%, improve loan product matching, and set accurate borrower expectations early.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Integrated with Experian and Equifax. TransUnion integration in progress. Production ready for soft pull only.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soft Pull vs Hard Pull -->
+        <section class="content-section">
+            <h2 class="content-section-title">Soft Pull vs Hard Pull Comparison</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Soft Pull (Inquiry)</th>
+                        <th>Hard Pull (Inquiry)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Credit Score Impact</strong></td>
+                        <td><span class="status-badge status-complete">No impact</span></td>
+                        <td><span class="status-badge" style="background: #f59e0b;">-5 to -10 points typically</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Appears on Credit Report</strong></td>
+                        <td>Only visible to borrower (not lenders)</td>
+                        <td>Visible to all lenders for 24 months</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Borrower Consent Required</strong></td>
+                        <td>Simplified consent (checkboxes, e-signature)</td>
+                        <td>Full written authorization required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frequency Limits</strong></td>
+                        <td>Unlimited (no penalty for multiple pulls)</td>
+                        <td>Multiple pulls within 14-45 days counted as one</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Retrieved</strong></td>
+                        <td>Credit score, tradelines, payment history, utilization</td>
+                        <td>Full credit report with all details</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use Case</strong></td>
+                        <td>Pre-qualification, early assessment, monitoring</td>
+                        <td>Final underwriting, loan approval decision</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Regulatory Category</strong></td>
+                        <td>Permissible purpose: Pre-qualification offer</td>
+                        <td>Permissible purpose: Credit application</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost</strong></td>
+                        <td>$1.50 - $3.00 per bureau</td>
+                        <td>$15 - $25 per tri-merge report</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Workflow -->
+        <section class="content-section">
+            <h2 class="content-section-title">Soft Pull Workflow</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Action</th>
+                        <th>User Experience</th>
+                        <th>System Process</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Borrower Consent</td>
+                        <td>Review and check "I authorize a soft credit inquiry"</td>
+                        <td>Display consent language per FCRA requirements</td>
+                        <td>15-30 sec</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>PII Collection</td>
+                        <td>Confirm name, DOB, SSN, current address</td>
+                        <td>Validate SSN format, address against USPS</td>
+                        <td>30-60 sec</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Bureau Selection</td>
+                        <td>Transparent to borrower (system decision)</td>
+                        <td>Select bureau based on LO preference (default: Experian)</td>
+                        <td>&lt;1 sec</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>API Request</td>
+                        <td>See "Retrieving your credit information..." spinner</td>
+                        <td>POST to credit bureau API with encrypted PII</td>
+                        <td>2-8 sec</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Data Retrieval</td>
+                        <td>Background process, loading indicator</td>
+                        <td>Receive credit score, tradelines, payment history, utilization</td>
+                        <td>3-10 sec</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Score Display</td>
+                        <td>See credit score with contextual guidance</td>
+                        <td>Calculate risk tier, determine eligible loan products</td>
+                        <td>&lt;1 sec</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Results Review</td>
+                        <td>View summary of credit profile and recommended next steps</td>
+                        <td>Store credit data, log inquiry, trigger LO notification</td>
+                        <td>User-driven</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-teal); margin-top: 2rem;">
+                <strong style="color: var(--text-primary);">Total Soft Pull Time:</strong>
+                <span style="color: var(--accent-teal); font-size: 1.25rem; font-weight: 700;">5-15 seconds</span>
+                <br>
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">From submit to credit score displayed (median: 8 seconds)</span>
+            </div>
+        </section>
+
+        <!-- Data Retrieved -->
+        <section class="content-section">
+            <h2 class="content-section-title">Credit Data Retrieved</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Credit Scores</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">FICO Score 8 (primary scoring model for mortgages)</div>
+                        <div class="priority-item">VantageScore 3.0 (alternative scoring model)</div>
+                        <div class="priority-item">Score range (300-850) and risk tier classification</div>
+                        <div class="priority-item">Key factors affecting score (top 4-5 reasons)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Tradeline Summary</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Total number of accounts (open and closed)</div>
+                        <div class="priority-item">Total credit limit and available credit</div>
+                        <div class="priority-item">Credit utilization percentage</div>
+                        <div class="priority-item">Age of oldest account and average account age</div>
+                        <div class="priority-item">Recent inquiries count (last 6 months)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Payment History</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">On-time payment percentage (last 24 months)</div>
+                        <div class="priority-item">Late payments (30/60/90/120 days) count and recency</div>
+                        <div class="priority-item">Public records (bankruptcies, foreclosures, liens)</div>
+                        <div class="priority-item">Collections accounts (count, total balance)</div>
+                        <div class="priority-item">Charge-offs and settled accounts</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Debt Obligations</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Revolving debt total (credit cards, lines of credit)</div>
+                        <div class="priority-item">Installment loan total (auto, student, personal)</div>
+                        <div class="priority-item">Mortgage accounts (current balances, payment amounts)</div>
+                        <div class="priority-item">Monthly minimum payments across all accounts</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credit Score Tiers -->
+        <section class="content-section">
+            <h2 class="content-section-title">Credit Score Tiers & Loan Implications</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Score Range</th>
+                        <th>Tier</th>
+                        <th>Typical Rate Impact</th>
+                        <th>Loan Products Available</th>
+                        <th>LTV Limits</th>
+                        <th>Special Considerations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>760-850</strong></td>
+                        <td><span class="status-badge status-complete">Excellent</span></td>
+                        <td>Best rates available</td>
+                        <td>All products (Conventional, FHA, VA, Jumbo)</td>
+                        <td>Up to 97% LTV (Conventional)</td>
+                        <td>May qualify for reduced MI, portfolio products</td>
+                    </tr>
+                    <tr>
+                        <td><strong>700-759</strong></td>
+                        <td><span class="status-badge status-complete">Very Good</span></td>
+                        <td>+0.125% to +0.25%</td>
+                        <td>All products, some portfolio options</td>
+                        <td>Up to 97% LTV</td>
+                        <td>Standard terms, competitive pricing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>660-699</strong></td>
+                        <td><span class="status-badge status-in-progress">Good</span></td>
+                        <td>+0.375% to +0.50%</td>
+                        <td>Conventional, FHA, VA (limited jumbo)</td>
+                        <td>Up to 95% LTV</td>
+                        <td>Higher MI, may need compensating factors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>620-659</strong></td>
+                        <td><span class="status-badge status-in-progress">Fair</span></td>
+                        <td>+0.75% to +1.25%</td>
+                        <td>FHA, VA, limited Conventional</td>
+                        <td>Up to 90% LTV (Conventional), 96.5% (FHA)</td>
+                        <td>Require strong compensating factors (reserves, low DTI)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>580-619</strong></td>
+                        <td><span class="status-badge status-pending">Weak</span></td>
+                        <td>+1.5% to +2.5%</td>
+                        <td>FHA only (3.5% down requires 580+)</td>
+                        <td>FHA: 90% LTV, 10% down required for 500-579</td>
+                        <td>Manual underwriting likely, extensive documentation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&lt;580</strong></td>
+                        <td><span class="status-badge" style="background: #dc2626;">Poor</span></td>
+                        <td>Non-QM or subprime only</td>
+                        <td>Non-QM, hard money, seller financing</td>
+                        <td>Varies by lender (typically 60-75% LTV)</td>
+                        <td>Credit repair recommended before proceeding</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bureau Integration -->
+        <section class="content-section">
+            <h2 class="content-section-title">Credit Bureau Integration Details</h2>
+
+            <h3 class="content-section-subtitle">Supported Bureaus</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Bureau</th>
+                        <th>API Version</th>
+                        <th>Response Time</th>
+                        <th>Cost per Pull</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Experian</strong></td>
+                        <td>Connect API v3.2</td>
+                        <td>3-6 seconds avg</td>
+                        <td>$2.25</td>
+                        <td><span class="status-badge status-complete">Production Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Equifax</strong></td>
+                        <td>Credit Profile API v2.1</td>
+                        <td>4-8 seconds avg</td>
+                        <td>$1.95</td>
+                        <td><span class="status-badge status-complete">Production Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TransUnion</strong></td>
+                        <td>CreditVision API v4.0</td>
+                        <td>5-10 seconds avg</td>
+                        <td>$2.50</td>
+                        <td><span class="status-badge status-in-progress">Integration in Progress</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">API Security & Compliance</h3>
+            <div class="priority-list">
+                <div class="priority-item">All API calls over TLS 1.3 with mutual TLS authentication (client certificates)</div>
+                <div class="priority-item">SSN encrypted in transit using bureau-provided public keys (RSA-4096)</div>
+                <div class="priority-item">PII encrypted at rest using AES-256-GCM with key rotation every 90 days</div>
+                <div class="priority-item">FCRA compliance: Permissible purpose code "Pre-qualification offer" (15 U.S.C. § 1681b)</div>
+                <div class="priority-item">Borrower consent captured and stored for 7 years (regulatory requirement)</div>
+                <div class="priority-item">Adverse action notices auto-generated if credit score below threshold</div>
+                <div class="priority-item">Audit trail of every credit pull with timestamp, user ID, IP address, consent proof</div>
+            </div>
+        </section>
+
+        <!-- LO Configuration -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Auto Soft Pull</strong></td>
+                        <td>On (with consent) / Off (LO triggers manually)</td>
+                        <td>On</td>
+                        <td>Pull credit automatically during application vs. wait for LO approval</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Preferred Bureau</strong></td>
+                        <td>Experian / Equifax / TransUnion / Auto-select best</td>
+                        <td>Experian</td>
+                        <td>Which bureau to query for soft pull</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Show Score to Borrower</strong></td>
+                        <td>Yes / No / Only if above threshold</td>
+                        <td>Yes</td>
+                        <td>Display actual credit score to borrower or hide it</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minimum Score for Auto-Continue</strong></td>
+                        <td>580 / 620 / 640 / 660 / No minimum</td>
+                        <td>620</td>
+                        <td>Below this score, application pauses for LO review</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credit Repair Referral</strong></td>
+                        <td>Enable / Disable</td>
+                        <td>Enable</td>
+                        <td>Offer credit repair partner if score below 620</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Re-Pull Frequency</strong></td>
+                        <td>30 / 60 / 90 days / Manual only</td>
+                        <td>60 days</td>
+                        <td>Automatically re-pull credit if application exceeds this age</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alert Threshold</strong></td>
+                        <td>Notify LO if score &lt; X</td>
+                        <td>640</td>
+                        <td>Send immediate notification to LO for review</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Borrower Messaging -->
+        <section class="content-section">
+            <h2 class="content-section-title">Borrower Communication & Transparency</h2>
+
+            <h3 class="content-section-subtitle">Consent Language Example</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.7;">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    <strong style="color: var(--text-primary);">Credit Inquiry Authorization</strong>
+                </p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    By checking this box, I authorize [Lender Name] to obtain a soft credit inquiry from one or more consumer
+                    reporting agencies for the purpose of evaluating my eligibility for a mortgage pre-qualification. I understand that:
+                </p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 0;">
+                    <li>This is a "soft pull" that will NOT impact my credit score</li>
+                    <li>This inquiry will only be visible to me on my credit report, not to other lenders</li>
+                    <li>This is for pre-qualification purposes only; a hard credit pull will be required for final approval</li>
+                    <li>My information will be handled securely in compliance with all applicable privacy laws</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">Score Display Messaging</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Score Scenario</th>
+                        <th>Borrower Message</th>
+                        <th>Recommended Next Step</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>740+</strong></td>
+                        <td>"Great news! Your credit score of {SCORE} qualifies you for our best rates. You're on track for competitive loan terms."</td>
+                        <td>Continue to full application</td>
+                    </tr>
+                    <tr>
+                        <td><strong>660-739</strong></td>
+                        <td>"Your credit score of {SCORE} qualifies you for a mortgage. We have several loan options available for you."</td>
+                        <td>Continue to full application, discuss product options</td>
+                    </tr>
+                    <tr>
+                        <td><strong>620-659</strong></td>
+                        <td>"Your credit score of {SCORE} qualifies you for an FHA loan. Your loan officer will discuss the best path forward for your situation."</td>
+                        <td>LO review, discuss FHA vs credit improvement</td>
+                    </tr>
+                    <tr>
+                        <td><strong>580-619</strong></td>
+                        <td>"Your credit score is {SCORE}. You may qualify for an FHA loan with a larger down payment. We recommend speaking with your loan officer about improving your credit for better terms."</td>
+                        <td>LO consultation required, credit repair referral</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&lt;580</strong></td>
+                        <td>"Thank you for your interest. Your credit score of {SCORE} is below the minimum for most loan programs. We recommend working on credit improvement first. Your loan officer will contact you to discuss next steps."</td>
+                        <td>Credit repair referral, delay application 90-120 days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Error Handling -->
+        <section class="content-section">
+            <h2 class="content-section-title">Error Scenarios & Recovery</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Error Type</th>
+                        <th>Cause</th>
+                        <th>User Message</th>
+                        <th>Recovery Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>THIN_FILE</strong></td>
+                        <td>Borrower has insufficient credit history</td>
+                        <td>"We couldn't find enough credit history to generate a score. You may still qualify through alternative verification."</td>
+                        <td>Escalate to LO, offer manual underwriting path</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FROZEN_CREDIT</strong></td>
+                        <td>Borrower has security freeze on credit file</td>
+                        <td>"Your credit file appears to be frozen. Please temporarily lift the freeze with {BUREAU} and try again."</td>
+                        <td>Provide bureau unfreeze instructions, retry button</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SSN_MISMATCH</strong></td>
+                        <td>SSN doesn't match name/DOB in bureau records</td>
+                        <td>"We couldn't verify your information. Please double-check your SSN and date of birth."</td>
+                        <td>Allow correction, offer LO assistance after 2 failures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BUREAU_TIMEOUT</strong></td>
+                        <td>Credit bureau API not responding within 30 seconds</td>
+                        <td>"The credit bureau is experiencing delays. We'll retry automatically in a moment."</td>
+                        <td>Auto-retry with exponential backoff (3 attempts)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BUREAU_UNAVAILABLE</strong></td>
+                        <td>Bureau API returning 503 (maintenance)</td>
+                        <td>"Credit services are temporarily unavailable. Please try again in 15 minutes, or your LO can run this manually."</td>
+                        <td>Queue for background retry, notify LO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FRAUD_ALERT</strong></td>
+                        <td>Credit file has fraud alert or identity theft flag</td>
+                        <td>"There's a fraud alert on your credit file. Please contact your loan officer to proceed."</td>
+                        <td>Immediate LO notification, manual verification required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DECEASED_INDICATOR</strong></td>
+                        <td>SSN flagged as deceased in credit bureau data</td>
+                        <td>"We encountered an issue with your credit file. Your loan officer will contact you shortly to resolve this."</td>
+                        <td>High-priority LO alert, manual resolution (likely SSN error)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">Tri-merge soft pull option (all 3 bureaus simultaneously) for more complete picture</div>
+                <div class="priority-item">Credit score simulator: show borrowers how payoff/actions would impact score</div>
+                <div class="priority-item">Alternative credit data integration (rent, utility, cell phone payment history) for thin-file borrowers</div>
+                <div class="priority-item">Credit monitoring: ongoing soft pulls to alert borrower of score changes</div>
+                <div class="priority-item">Automated credit improvement recommendations based on specific tradelines</div>
+                <div class="priority-item">Integration with rapid rescore vendors for pre-approval credit optimization</div>
+                <div class="priority-item">ML model to predict likelihood of hard pull score being higher/lower than soft pull</div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">Performance Metrics (POC Data)</h2>
+
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">Soft Pull Success Rate</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 1rem 0;">97.3%</div>
+                    <p class="card-description">474 of 487 borrowers successfully retrieved credit score (13 failures: 8 frozen, 3 thin file, 2 bureau timeout)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">Average Response Time</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">6.8 sec</div>
+                    <p class="card-description">From submit to score displayed (median: 5.2s, 95th percentile: 12.3s)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">Pre-Qual Accuracy</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-purple); margin: 1rem 0;">94%</div>
+                    <p class="card-description">Borrowers pre-qualified via soft pull successfully obtained final approval (hard pull confirmation)</p>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Score Distribution (474 Successful Pulls)</h4>
+                <div class="priority-list">
+                    <div class="priority-item">760-850 (Excellent): 23.2% (110 borrowers)</div>
+                    <div class="priority-item">700-759 (Very Good): 31.4% (149 borrowers)</div>
+                    <div class="priority-item">660-699 (Good): 22.8% (108 borrowers)</div>
+                    <div class="priority-item">620-659 (Fair): 14.6% (69 borrowers)</div>
+                    <div class="priority-item">580-619 (Weak): 5.9% (28 borrowers)</div>
+                    <div class="priority-item">&lt;580 (Poor): 2.1% (10 borrowers)</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • Soft Pull Credit Integration</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="invite-borrower.html">Next: Invite Borrower →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

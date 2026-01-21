@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUV VOIE Integration - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">TRUV VOIE</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 04</div>
+                <h1 class="page-title">TRUV VOIE Integration</h1>
+                <p class="page-description">Verification of Income and Employment through TRUV's automated payroll data integration, eliminating the need for manual paystub and W-2 collection in most cases.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">💼</span>
+                        <span>Employment Verification</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">💰</span>
+                        <span>Income Verification</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🚀</span>
+                        <span>Instant Results</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                TRUV (The Registry of Unverified income & Verification) connects directly to payroll systems like ADP, Paychex, Gusto, and 160+ other providers. Borrowers securely log in to their payroll account, and TRUV instantly retrieves employment history, income details, YTD earnings, tax withholdings, and more - replacing weeks of document chasing with a 2-minute process.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">160+</div>
+                    <div class="stat-label">Payroll Providers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2 min</div>
+                    <div class="stat-label">Average Connection Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Coverage Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Real-Time Verification</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Workflow -->
+        <section class="content-section">
+            <h2 class="content-section-title">Borrower Experience Flow</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Borrower Action</th>
+                        <th>What They See</th>
+                        <th>Backend Process</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Click "Verify Employment"</td>
+                        <td>Button in Employment section of Smart App</td>
+                        <td>Initialize TRUV Bridge widget</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Select Employer</td>
+                        <td>Search bar to find their employer or payroll provider</td>
+                        <td>Display TRUV employer database (100K+ companies)</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Enter Payroll Credentials</td>
+                        <td>Login screen for their payroll system (ADP, Paychex, etc.)</td>
+                        <td>TRUV securely authenticates with payroll provider</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Complete MFA if Required</td>
+                        <td>Enter code from text/email if employer requires 2FA</td>
+                        <td>Handle multi-factor authentication flow</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Grant Consent</td>
+                        <td>Review what data will be shared and approve</td>
+                        <td>Record consent with timestamp and scope</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Data Retrieval</td>
+                        <td>Loading screen: "Verifying your employment..."</td>
+                        <td>TRUV pulls income, employment history, pay stubs</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Review & Confirm</td>
+                        <td>Summary of employer, position, income - confirm accuracy</td>
+                        <td>Parse and store employment data in application</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Done!</td>
+                        <td>Green checkmark: "Employment Verified ✓"</td>
+                        <td>Update application status, notify LO</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Data Retrieved -->
+        <section class="content-section">
+            <h2 class="content-section-title">Comprehensive Data Retrieved</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Employment Information</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Current employer name and address</div>
+                        <div class="priority-item">Start date of employment</div>
+                        <div class="priority-item">Job title / position</div>
+                        <div class="priority-item">Employment status (active, terminated, leave)</div>
+                        <div class="priority-item">Full-time vs Part-time designation</div>
+                        <div class="priority-item">Manager/supervisor name and contact</div>
+                        <div class="priority-item">HR department contact information</div>
+                        <div class="priority-item">Employment history (previous positions if same payroll)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Income Details</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Base salary or hourly rate</div>
+                        <div class="priority-item">Pay frequency (weekly, biweekly, monthly)</div>
+                        <div class="priority-item">Year-to-date (YTD) gross income</div>
+                        <div class="priority-item">YTD net income</div>
+                        <div class="priority-item">Last 12 months income (when available)</div>
+                        <div class="priority-item">Bonus and commission payments</div>
+                        <div class="priority-item">Overtime hours and pay</div>
+                        <div class="priority-item">Other compensation (tips, stipends, etc.)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Tax & Deduction Data</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Federal tax withholdings (YTD)</div>
+                        <div class="priority-item">State tax withholdings (YTD)</div>
+                        <div class="priority-item">FICA/Social Security withholdings</div>
+                        <div class="priority-item">Medicare withholdings</div>
+                        <div class="priority-item">Pre-tax deductions (401k, health insurance)</div>
+                        <div class="priority-item">Post-tax deductions</div>
+                        <div class="priority-item">Garnishments (if any)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Pay Stub History</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Last 30-60 days of pay stubs (configurable)</div>
+                        <div class="priority-item">Pay period start and end dates</div>
+                        <div class="priority-item">Pay date for each payment</div>
+                        <div class="priority-item">Hours worked per pay period</div>
+                        <div class="priority-item">Breakdown of earnings by type</div>
+                        <div class="priority-item">Deductions per pay period</div>
+                        <div class="priority-item">Net pay per period</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supported Payroll Providers -->
+        <section class="content-section">
+            <h2 class="content-section-title">Supported Payroll Providers (Top 20)</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Coverage</th>
+                        <th>Data Quality</th>
+                        <th>Success Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ADP</strong></td>
+                        <td>35 million employees</td>
+                        <td>Excellent - Full dataset</td>
+                        <td>98%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paychex</strong></td>
+                        <td>12 million employees</td>
+                        <td>Excellent - Full dataset</td>
+                        <td>97%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gusto</strong></td>
+                        <td>300K+ businesses</td>
+                        <td>Excellent - Full dataset</td>
+                        <td>96%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Workday</strong></td>
+                        <td>10K+ enterprises</td>
+                        <td>Excellent - Full dataset</td>
+                        <td>95%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UltiPro / UKG</strong></td>
+                        <td>4 million employees</td>
+                        <td>Very Good</td>
+                        <td>94%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paylocity</strong></td>
+                        <td>35K+ companies</td>
+                        <td>Very Good</td>
+                        <td>93%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>QuickBooks Payroll</strong></td>
+                        <td>1.4 million businesses</td>
+                        <td>Good</td>
+                        <td>91%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Square Payroll</strong></td>
+                        <td>Small business focus</td>
+                        <td>Good</td>
+                        <td>90%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color: var(--text-secondary); margin-top: 1rem; font-style: italic;">
+                *Plus 152 additional providers including Rippling, Namely, BambooHR, Zenefits, Justworks, TriNet, and more
+            </p>
+        </section>
+
+        <!-- Self-Employed Handling -->
+        <section class="content-section">
+            <h2 class="content-section-title">Self-Employed & Edge Cases</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Employment Type</th>
+                        <th>TRUV Support</th>
+                        <th>Alternative Verification</th>
+                        <th>Documentation Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>W-2 Employee (Supported Payroll)</td>
+                        <td><span class="status-badge status-complete">Full Support</span></td>
+                        <td>N/A</td>
+                        <td>None - automated via TRUV</td>
+                    </tr>
+                    <tr>
+                        <td>W-2 Employee (Unsupported Payroll)</td>
+                        <td><span class="status-badge status-pending">Limited</span></td>
+                        <td>Manual paystub upload</td>
+                        <td>Last 2 months paystubs + W-2</td>
+                    </tr>
+                    <tr>
+                        <td>Self-Employed (1099)</td>
+                        <td><span class="status-badge status-pending">Not Supported</span></td>
+                        <td>Tax return analysis</td>
+                        <td>Last 2 years 1040 + Schedule C</td>
+                    </tr>
+                    <tr>
+                        <td>Gig Worker (Uber, DoorDash, etc.)</td>
+                        <td><span class="status-badge status-in-progress">Partner Platform</span></td>
+                        <td>Platform-specific integrations</td>
+                        <td>TRUV partners with Uber, Lyft APIs</td>
+                    </tr>
+                    <tr>
+                        <td>Retired</td>
+                        <td><span class="status-badge status-pending">Not Supported</span></td>
+                        <td>SSA award letters, pension statements</td>
+                        <td>Social Security statements, 1099-R</td>
+                    </tr>
+                    <tr>
+                        <td>Military</td>
+                        <td><span class="status-badge status-complete">Supported</span></td>
+                        <td>DFAS myPay integration</td>
+                        <td>None if myPay available</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple Jobs</td>
+                        <td><span class="status-badge status-complete">Supported</span></td>
+                        <td>Connect each employer separately</td>
+                        <td>None - can link multiple employers</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Income Calculation -->
+        <section class="content-section">
+            <h2 class="content-section-title">Automated Income Calculations</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Monthly Income (Stable Employment)</h3>
+                    <p class="card-description">For salaried employees with consistent pay:</p>
+                    <div style="font-family: var(--font-mono); background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        Monthly Income = (YTD Gross / Months Employed) × 1.0<br>
+                        <br>
+                        Example:<br>
+                        YTD Gross (Jan 1 - Sep 30) = $67,500<br>
+                        Months = 9<br>
+                        Monthly Income = $67,500 / 9 = $7,500
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Variable Income (Bonus/Commission)</h3>
+                    <p class="card-description">For employees with variable compensation:</p>
+                    <div style="font-family: var(--font-mono); background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        Base Monthly = Regular Salary<br>
+                        Bonus/Comm = (Last 24mo Total / 24) × Continuity Factor<br>
+                        <br>
+                        Continuity Factor:<br>
+                        - 2+ years same employer: 1.0<br>
+                        - 1-2 years: 0.75<br>
+                        - &lt;1 year: 0.5
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Hourly Employees</h3>
+                    <p class="card-description">For hourly workers with variable hours:</p>
+                    <div style="font-family: var(--font-mono); background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        Monthly = (Total Hours Last 12mo / 12) × Hourly Rate<br>
+                        <br>
+                        Example:<br>
+                        Avg Hours/Month = 168<br>
+                        Hourly Rate = $22.50<br>
+                        Monthly Income = 168 × $22.50 = $3,780
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Overtime Calculation</h3>
+                    <p class="card-description">Overtime included if consistent for 2+ years:</p>
+                    <div style="font-family: var(--font-mono); background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        IF (Overtime hours &gt; 10% of total hours) AND<br>
+                        (2+ year history of OT) THEN<br>
+                        Include Average OT in monthly income<br>
+                        <br>
+                        Else: Exclude overtime from calculations
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO Review Interface -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Review & Override Capabilities</h2>
+
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                While TRUV automates verification, Loan Officers retain full control to review, adjust, and override automated calculations when necessary.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LO Action</th>
+                        <th>Capability</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>View Raw Data</td>
+                        <td>Access complete pay stub PDFs and data dump</td>
+                        <td>Verify unusual income patterns</td>
+                    </tr>
+                    <tr>
+                        <td>Adjust Income</td>
+                        <td>Manually override calculated monthly income</td>
+                        <td>Exclude one-time bonuses or include expected raise</td>
+                    </tr>
+                    <tr>
+                        <td>Exclude Pay Periods</td>
+                        <td>Remove specific pay stubs from calculation</td>
+                        <td>Remove anomalies (unpaid leave, one-time payments)</td>
+                    </tr>
+                    <tr>
+                        <td>Add Notes</td>
+                        <td>Document rationale for adjustments</td>
+                        <td>Explain to underwriter why override was necessary</td>
+                    </tr>
+                    <tr>
+                        <td>Request Re-verification</td>
+                        <td>Ask borrower to reconnect and pull fresh data</td>
+                        <td>Data is stale (>30 days old)</td>
+                    </tr>
+                    <tr>
+                        <td>Supplement with Docs</td>
+                        <td>Request additional paystubs or W-2s manually</td>
+                        <td>TRUV data incomplete or needs validation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Compliance & Audit Trail -->
+        <section class="content-section">
+            <h2 class="content-section-title">Compliance & Audit Trail</h2>
+
+            <div class="priority-list">
+                <div class="priority-item"><strong>FCRA Compliance:</strong> TRUV is a Consumer Reporting Agency (CRA) compliant with Fair Credit Reporting Act</div>
+                <div class="priority-item"><strong>ECOA Compliance:</strong> All borrowers given equal access to automated verification regardless of employer size</div>
+                <div class="priority-item"><strong>Consent Management:</strong> Explicit borrower consent recorded with timestamp before data retrieval</div>
+                <div class="priority-item"><strong>Data Retention:</strong> Income verification data retained for 25 months post-loan for QC/audits</div>
+                <div class="priority-item"><strong>Audit Logging:</strong> Complete audit trail: who accessed data, when, what changes were made</div>
+                <div class="priority-item"><strong>Adverse Action:</strong> If TRUV data causes denial, automated adverse action notice generation</div>
+                <div class="priority-item"><strong>Dispute Resolution:</strong> Borrowers can dispute TRUV data; revalidation process defined</div>
+            </div>
+        </section>
+
+        <!-- Success Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">Success Metrics & KPIs</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">87%</div>
+                    <div class="stat-label">VOIE Completion Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5.2 days</div>
+                    <div class="stat-label">Time Saved vs Manual</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">99.2%</div>
+                    <div class="stat-label">Data Accuracy Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$18</div>
+                    <div class="stat-label">Cost per Verification</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • TRUV VOIE Integration</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="prove.html">Next: Prove →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

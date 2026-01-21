@@ -11,6 +11,23 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-icon">📊</span>
+            <h2>Quick Jump</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#prototypes">🚀 Prototypes</a></li>
+            <li><a href="#requirements">📋 Requirements</a></li>
+            <li><a href="#research">🔬 Research</a></li>
+            <li><a href="#scoping">📅 Scoping</a></li>
+            <li><a href="#documents">📄 Documents</a></li>
+            <li><a href="#ai">🤖 AI Insights</a></li>
+            <li><a href="#metrics">📈 Metrics</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
@@ -40,17 +57,16 @@
         </header>
 
         <!-- Quick Links Section -->
-        <section class="section">
+        <section id="prototypes" class="section">
             <h2 class="section-title">🚀 PROTOTYPES & DEMOS</h2>
             <div class="tiles-grid">
                 <a href="https://streamlined-digital-a1nj.bolt.host/" class="tile" target="_blank">
                     <div class="tile-icon">🎯</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Live POC - Borrower Experience</h3>
-                        <p class="tile-description">Interactive prototype showcasing the complete borrower journey with Prove integration, multi-step forms, and team collaboration features</p>
+                        <p class="tile-description">Complete borrower journey with Prove integration and collaboration features</p>
                         <div class="tile-meta">
                             <span class="badge badge-success">Live Demo</span>
-                            <span class="badge">Bolt Platform</span>
                         </div>
                     </div>
                 </a>
@@ -59,7 +75,7 @@
                     <div class="tile-icon">🎨</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Refinance & Buying Flow</h3>
-                        <p class="tile-description">Complete user flow design in Figma showing refinance and home buying journeys</p>
+                        <p class="tile-description">User flow design for refinance and home buying journeys</p>
                         <div class="tile-meta">
                             <span class="badge badge-design">Figma Board</span>
                         </div>
@@ -70,7 +86,7 @@
                     <div class="tile-icon">🗺️</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Miro Collaboration Board</h3>
-                        <p class="tile-description">Strategic planning and workshop collaboration board with team insights</p>
+                        <p class="tile-description">Strategic planning and workshop collaboration</p>
                         <div class="tile-meta">
                             <span class="badge badge-info">Miro Board</span>
                         </div>
@@ -80,60 +96,16 @@
         </section>
 
         <!-- Requirements Framework Section -->
-        <section class="section">
+        <section id="requirements" class="section">
             <h2 class="section-title">📋 REQUIREMENTS FRAMEWORK</h2>
             <div class="tiles-grid">
                 <a href="requirements/" class="tile">
                     <div class="tile-icon">📊</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Complete Requirements Matrix</h3>
-                        <p class="tile-description">14 comprehensive requirement modules covering all aspects of Smart App 2.0 functionality</p>
+                        <p class="tile-description">14 comprehensive requirement modules</p>
                         <div class="tile-meta">
-                            <span class="badge badge-success">5 Pages Live</span>
-                            <span class="badge">14 Modules</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="tile tile-highlight">
-                    <div class="tile-icon">🔑</div>
-                    <div class="tile-content">
-                        <h3 class="tile-title">Core Features & Integrations</h3>
-                        <p class="tile-description">Essential third-party integrations and feature specifications</p>
-                        <div class="features-list">
-                            <div class="feature-item">✓ Prove Identity Verification</div>
-                            <div class="feature-item">✓ Plaid VOA (Verification of Assets)</div>
-                            <div class="feature-item">✓ TRUV VOIE (Verification of Income & Employment)</div>
-                            <div class="feature-item">✓ OTP Authentication</div>
-                            <div class="feature-item">✓ Soft Pull Credit</div>
-                            <div class="feature-item">✓ AI Assistant Implementation</div>
-                        </div>
-                        <div class="tile-meta">
-                            <span class="badge badge-success">6 Integrations</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="requirements/lo-config.html" class="tile">
-                    <div class="tile-icon">⚙️</div>
-                    <div class="tile-content">
-                        <h3 class="tile-title">LO Configuration System</h3>
-                        <p class="tile-description">Loan Officer level toggles and configuration options for customizing borrower experience</p>
-                        <div class="tile-meta">
-                            <span class="badge badge-success">Live</span>
-                            <span class="badge">Toggle System</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="requirements/scenarios.html" class="tile">
-                    <div class="tile-icon">🎭</div>
-                    <div class="tile-content">
-                        <h3 class="tile-title">Borrower Scenario Logic</h3>
-                        <p class="tile-description">Comprehensive UI scenarios matrix covering all borrower pathways and decision trees</p>
-                        <div class="tile-meta">
-                            <span class="badge badge-success">Live</span>
-                            <span class="badge">UI Scenarios</span>
+                            <span class="badge badge-success">14 Modules Complete</span>
                         </div>
                     </div>
                 </a>
@@ -142,10 +114,9 @@
                     <div class="tile-icon">📝</div>
                     <div class="tile-content">
                         <h3 class="tile-title">URLA Data Gap Analysis</h3>
-                        <p class="tile-description">Complete matrix of URLA 2020 fields with gap analysis and data mapping</p>
+                        <p class="tile-description">URLA 2020 fields with gap analysis and mapping</p>
                         <div class="tile-meta">
                             <span class="badge badge-success">Live</span>
-                            <span class="badge">Data Matrix</span>
                         </div>
                     </div>
                 </a>
@@ -154,10 +125,141 @@
                     <div class="tile-icon">✅</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Data Tasks Matrix</h3>
-                        <p class="tile-description">Structured task breakdown for all data collection and processing requirements</p>
+                        <p class="tile-description">Data collection and processing requirements</p>
                         <div class="tile-meta">
                             <span class="badge badge-success">Live</span>
-                            <span class="badge">Task Matrix</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/plaid-voa.html" class="tile">
+                    <div class="tile-icon">🏦</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Plaid VOA Integration</h3>
+                        <p class="tile-description">Asset verification through bank account linking</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/truv-voie.html" class="tile">
+                    <div class="tile-icon">💼</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">TRUV VOIE Integration</h3>
+                        <p class="tile-description">Income and employment verification</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/prove.html" class="tile">
+                    <div class="tile-icon">📱</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Prove Identity Verification</h3>
+                        <p class="tile-description">Phone-centric identity verification</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/otp.html" class="tile">
+                    <div class="tile-icon">🔐</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">OTP Authentication</h3>
+                        <p class="tile-description">One-time passcode authentication system</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/soft-credit.html" class="tile">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Soft Pull Credit</h3>
+                        <p class="tile-description">Early credit assessment without score impact</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/invite-borrower.html" class="tile">
+                    <div class="tile-icon">📧</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Invite Borrower</h3>
+                        <p class="tile-description">LO-initiated borrower invitation system</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/lo-config.html" class="tile">
+                    <div class="tile-icon">⚙️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">LO Configuration System</h3>
+                        <p class="tile-description">Settings and feature toggles for LOs</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/lo-config-ui.html" class="tile">
+                    <div class="tile-icon">🎨</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">LO Configuration UI</h3>
+                        <p class="tile-description">Interface for managing LO settings</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/lo-takeover.html" class="tile">
+                    <div class="tile-icon">🎯</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">LO Application Take Over</h3>
+                        <p class="tile-description">LO assistance for stalled applications</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/point-of-submit.html" class="tile">
+                    <div class="tile-icon">📤</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Point of Submit</h3>
+                        <p class="tile-description">Final validation and LOS integration</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/scenarios.html" class="tile">
+                    <div class="tile-icon">🎭</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Borrower Scenario Logic</h3>
+                        <p class="tile-description">UI scenarios and decision trees</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="requirements/ai-assistant.html" class="tile">
+                    <div class="tile-icon">🤖</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">AI Assistant</h3>
+                        <p class="tile-description">Claude-powered borrower assistance</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live</span>
                         </div>
                     </div>
                 </a>
@@ -188,26 +290,17 @@
         </section>
 
         <!-- Research Section -->
-        <section class="section">
+        <section id="research" class="section">
             <h2 class="section-title">🔬 RESEARCH & INSIGHTS</h2>
             <div class="tiles-grid">
-                <div class="tile tile-large">
+                <div class="tile">
                     <div class="tile-icon">👥</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">Initial Research - LO Interviews</h3>
-                        <p class="tile-description">7 in-depth interviews with Loan Officers capturing real-world insights and pain points</p>
-                        <div class="interview-list">
-                            <div class="interview-item">• Andrea Wine - Interview & Testing</div>
-                            <div class="interview-item">• CJ Nelson - Interview & Testing</div>
-                            <div class="interview-item">• Josh Campbell - Interview & Testing</div>
-                            <div class="interview-item">• Tim Loss - Interview & Testing</div>
-                            <div class="interview-item">• Christopher Minjarez & Elizabeth McClellan</div>
-                            <div class="interview-item">• Diedra Schaefer</div>
-                            <div class="interview-item">• Stephanie Pereira</div>
-                        </div>
+                        <h3 class="tile-title">LO Interviews</h3>
+                        <p class="tile-description">7 in-depth interviews with Loan Officers</p>
                         <div class="tile-meta">
-                            <span class="badge">7 LO Interviews</span>
-                            <span class="badge">With Recordings</span>
+                            <span class="badge">7 Interviews</span>
+                            <span class="badge">Recorded</span>
                         </div>
                     </div>
                 </div>
@@ -216,17 +309,9 @@
                     <div class="tile-icon">💻</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Product & Dev Interviews</h3>
-                        <p class="tile-description">Cross-functional discovery sessions with product and development stakeholders</p>
-                        <div class="interview-list">
-                            <div class="interview-item">• Ashwin (XD Download)</div>
-                            <div class="interview-item">• Brooke (XD Download)</div>
-                            <div class="interview-item">• Cathy (XD Download)</div>
-                            <div class="interview-item">• Cory (XD Download)</div>
-                            <div class="interview-item">• David (XD Download)</div>
-                            <div class="interview-item">• Phil (XD Download)</div>
-                        </div>
+                        <p class="tile-description">Cross-functional stakeholder discovery sessions</p>
                         <div class="tile-meta">
-                            <span class="badge">6 Stakeholder Sessions</span>
+                            <span class="badge">6 Sessions</span>
                         </div>
                     </div>
                 </div>
@@ -234,25 +319,19 @@
                 <div class="tile">
                     <div class="tile-icon">🧪</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">Concept Testing Results</h3>
-                        <p class="tile-description">4 comprehensive testing sessions with LOs validating design concepts and user flows</p>
+                        <h3 class="tile-title">Concept Testing</h3>
+                        <p class="tile-description">Testing sessions validating design concepts</p>
                         <div class="tile-meta">
                             <span class="badge badge-success">4 Test Sessions</span>
-                            <span class="badge">Results Documented</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="tile tile-highlight">
+                <div class="tile">
                     <div class="tile-icon">📊</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">Research Synthesis Presentations</h3>
-                        <p class="tile-description">High-level findings and insights synthesized into actionable presentations</p>
-                        <div class="presentation-list">
-                            <div class="presentation-item">📑 High Level Research Synthesis</div>
-                            <div class="presentation-item">📑 SmartApp 3.0 Workshop Results</div>
-                            <div class="presentation-item">📑 SmartApp Re-Imagined Paul Presentation</div>
-                        </div>
+                        <h3 class="tile-title">Research Synthesis</h3>
+                        <p class="tile-description">Findings synthesized into presentations</p>
                         <div class="tile-meta">
                             <span class="badge badge-info">3 Presentations</span>
                         </div>
@@ -262,14 +341,14 @@
         </section>
 
         <!-- Scoping & Timeline Section -->
-        <section class="section">
+        <section id="scoping" class="section">
             <h2 class="section-title">📅 SCOPING & TIMELINE</h2>
             <div class="tiles-grid">
                 <div class="tile">
                     <div class="tile-icon">🗓️</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">SmartApp Re-Imagined Gantt Chart</h3>
-                        <p class="tile-description">Complete project timeline with phases, milestones, and delivery dates</p>
+                        <h3 class="tile-title">Project Gantt Chart</h3>
+                        <p class="tile-description">Timeline with phases and milestones</p>
                         <div class="tile-meta">
                             <span class="badge badge-warning">Timeline</span>
                         </div>
@@ -279,10 +358,10 @@
                 <div class="tile">
                     <div class="tile-icon">🎯</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">SmartApp 2.0 Workshop Plan</h3>
-                        <p class="tile-description">Strategic workshop planning and execution details</p>
+                        <h3 class="tile-title">Workshop Plan</h3>
+                        <p class="tile-description">Strategic workshop planning and execution</p>
                         <div class="tile-meta">
-                            <span class="badge">Workshop Plan</span>
+                            <span class="badge">Workshop</span>
                         </div>
                     </div>
                 </div>
@@ -290,8 +369,8 @@
                 <div class="tile">
                     <div class="tile-icon">❓</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">Questions & Decisions Log</h3>
-                        <p class="tile-description">Comprehensive log of all project questions and key decisions made throughout development</p>
+                        <h3 class="tile-title">Questions & Decisions</h3>
+                        <p class="tile-description">Log of project questions and key decisions</p>
                         <div class="tile-meta">
                             <span class="badge badge-info">Decision Log</span>
                         </div>
@@ -301,8 +380,8 @@
                 <div class="tile">
                     <div class="tile-icon">🧭</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">Design Research Overview</h3>
-                        <p class="tile-description">SmartApp Redesign design research overview and methodology</p>
+                        <h3 class="tile-title">Research Overview</h3>
+                        <p class="tile-description">Design research overview and methodology</p>
                         <div class="tile-meta">
                             <span class="badge">Research Plan</span>
                         </div>
@@ -312,14 +391,14 @@
         </section>
 
         <!-- Key Documents Section -->
-        <section class="section">
+        <section id="documents" class="section">
             <h2 class="section-title">📄 KEY DOCUMENTS & FINDINGS</h2>
             <div class="tiles-grid">
                 <div class="tile">
                     <div class="tile-icon">🔍</div>
                     <div class="tile-content">
                         <h3 class="tile-title">FlueID Findings</h3>
-                        <p class="tile-description">Comprehensive findings and analysis from FlueID research</p>
+                        <p class="tile-description">Findings and analysis from FlueID research</p>
                         <div class="tile-meta">
                             <span class="badge">Research Doc</span>
                         </div>
@@ -330,9 +409,9 @@
                     <div class="tile-icon">💬</div>
                     <div class="tile-content">
                         <h3 class="tile-title">Bolt Feedback Synthesis</h3>
-                        <p class="tile-description">Synthesized feedback from Paul, Yaz, and Kelli on Bolt prototype demo</p>
+                        <p class="tile-description">Stakeholder feedback on Bolt prototype</p>
                         <div class="tile-meta">
-                            <span class="badge badge-success">Stakeholder Feedback</span>
+                            <span class="badge badge-success">Feedback</span>
                         </div>
                     </div>
                 </div>
@@ -340,8 +419,8 @@
                 <div class="tile">
                     <div class="tile-icon">🎤</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">CX Platform Intake Meeting</h3>
-                        <p class="tile-description">Recurring CX Platform Intake and Prioritization meeting notes from Bolt demo (Dec 17)</p>
+                        <h3 class="tile-title">CX Platform Intake</h3>
+                        <p class="tile-description">Meeting notes from Bolt demo (Dec 17)</p>
                         <div class="tile-meta">
                             <span class="badge">Meeting Notes</span>
                         </div>
@@ -351,8 +430,8 @@
                 <div class="tile">
                     <div class="tile-icon">📋</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">SmartApp Features List</h3>
-                        <p class="tile-description">Master feature list with priorities and specifications</p>
+                        <h3 class="tile-title">Features List</h3>
+                        <p class="tile-description">Master feature list with priorities</p>
                         <div class="tile-meta">
                             <span class="badge badge-info">Feature Matrix</span>
                         </div>
@@ -362,7 +441,7 @@
         </section>
 
         <!-- AI Suggestions Section -->
-        <section class="section">
+        <section id="ai" class="section">
             <h2 class="section-title">🤖 AI SUGGESTIONS & RECOMMENDATIONS</h2>
             <div class="tiles-grid">
                 <div class="tile tile-ai">
@@ -411,7 +490,7 @@
         </section>
 
         <!-- Data Visualization Section -->
-        <section class="section">
+        <section id="metrics" class="section">
             <h2 class="section-title">📈 PROJECT METRICS & VISUALIZATION</h2>
             <div class="tiles-grid">
                 <div class="tile tile-chart">

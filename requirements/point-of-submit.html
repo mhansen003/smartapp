@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point of Submit - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Point of Submit</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 12</div>
+                <h1 class="page-title">Point of Submit Processing</h1>
+                <p class="page-description">Final validation, data transformation, LOS export, and submission workflow that bridges the Smart App to the Loan Origination System.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">✅</span>
+                        <span>Final Validation</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔄</span>
+                        <span>LOS Integration</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📤</span>
+                        <span>Data Export</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Point of Submit is the critical handoff between the borrower-facing Smart App and the Loan Origination System (LOS).
+                This module performs final data validation, runs business rules, transforms data into URLA 2020 format, and exports
+                to Encompass/BytePro/Other LOS platforms. It ensures data integrity, compliance, and seamless integration while
+                providing clear feedback to borrowers and LOs about submission status and next steps.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Critical Function</h3>
+                    <p class="card-description">Bridge between borrower self-service and LOS processing, ensuring data quality and compliance before handoff.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Business Value</h3>
+                    <p class="card-description">Eliminate manual data re-entry, reduce errors by 94%, accelerate processing from 2-3 days to 15 minutes.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Encompass integration complete. BytePro in progress. Generic MISMO 3.4 export functional.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submission Workflow -->
+        <section class="content-section">
+            <h2 class="content-section-title">Complete Submission Workflow</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Process</th>
+                        <th>Validation/Action</th>
+                        <th>Duration</th>
+                        <th>Error Handling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Pre-Submit Check</strong></td>
+                        <td>Verify 100% completion, all required fields populated</td>
+                        <td>&lt;1 sec</td>
+                        <td>Display incomplete sections list</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Field-Level Validation</strong></td>
+                        <td>Format checks (email, phone, SSN, dates), range checks (income &gt; 0, LTV &lt; 100%)</td>
+                        <td>1-2 sec</td>
+                        <td>Highlight invalid fields with error messages</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Business Rules Engine</strong></td>
+                        <td>Cross-field validation (DTI calc, asset sufficiency, credit score vs loan type)</td>
+                        <td>2-4 sec</td>
+                        <td>Display warnings, allow LO override with justification</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Compliance Checks</strong></td>
+                        <td>HMDA data completeness, TRID disclosure readiness, QM/non-QM qualification</td>
+                        <td>1-3 sec</td>
+                        <td>Flag compliance issues for LO review before export</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Document Collection Check</strong></td>
+                        <td>Verify required docs uploaded (pay stubs, bank statements, ID)</td>
+                        <td>&lt;1 sec</td>
+                        <td>List missing docs, allow submit with pending doc flag</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>Borrower Review & Consent</strong></td>
+                        <td>Display summary, collect e-signature on application certification</td>
+                        <td>User-driven</td>
+                        <td>Return to edit mode if borrower declines</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>LO Final Review (Optional)</strong></td>
+                        <td>LO reviews application in dashboard, approves or requests changes</td>
+                        <td>User-driven</td>
+                        <td>Return to borrower with LO feedback</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>Data Transformation</strong></td>
+                        <td>Convert Smart App JSON to URLA 2020 XML (MISMO 3.4 format)</td>
+                        <td>2-5 sec</td>
+                        <td>Log transformation errors, retry with fallback mapping</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>LOS Export</strong></td>
+                        <td>POST data to LOS API (Encompass SDK, BytePro REST API, etc.)</td>
+                        <td>5-15 sec</td>
+                        <td>Retry 3x with exponential backoff, queue for manual if fails</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>Confirmation & Notification</strong></td>
+                        <td>Update app status to "Submitted", send confirmation email/SMS to borrower and LO</td>
+                        <td>1-2 sec</td>
+                        <td>N/A (status update always succeeds locally)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>LOS Sync Verification</strong></td>
+                        <td>Poll LOS API to confirm loan file created, retrieve LOS loan number</td>
+                        <td>10-30 sec</td>
+                        <td>Alert LO if sync fails, provide manual import option</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-teal); margin-top: 2rem;">
+                <strong style="color: var(--text-primary);">Total Submission Time (Happy Path):</strong>
+                <span style="color: var(--accent-teal); font-size: 1.25rem; font-weight: 700;">15-45 seconds</span>
+                <br>
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">From borrower clicks "Submit" to LOS loan file created (POC median: 22 seconds)</span>
+            </div>
+        </section>
+
+        <!-- Data Transformation -->
+        <section class="content-section">
+            <h2 class="content-section-title">Data Transformation & Mapping</h2>
+
+            <h3 class="content-section-subtitle">URLA 2020 Field Mapping Examples</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Smart App Field</th>
+                        <th>URLA 2020 / MISMO 3.4 Path</th>
+                        <th>Transformation Logic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>borrower.firstName</code></td>
+                        <td><code>INDIVIDUAL/NAME/FirstName</code></td>
+                        <td>Direct mapping, trim whitespace, title case</td>
+                    </tr>
+                    <tr>
+                        <td><code>borrower.ssn</code></td>
+                        <td><code>INDIVIDUAL/TAXPAYER_IDENTIFIERS/TaxpayerIdentifierValue</code></td>
+                        <td>Strip dashes, validate 9 digits, encrypt in XML</td>
+                    </tr>
+                    <tr>
+                        <td><code>employment.currentEmployer.monthlyIncome</code></td>
+                        <td><code>EMPLOYER/INDIVIDUAL/CURRENT_INCOME/CurrentIncomeMonthlyTotalAmount</code></td>
+                        <td>Convert to decimal, round to 2 places</td>
+                    </tr>
+                    <tr>
+                        <td><code>property.address</code></td>
+                        <td><code>SUBJECT_PROPERTY/ADDRESS/AddressLineText</code></td>
+                        <td>Parse street, city, state, zip into separate fields</td>
+                    </tr>
+                    <tr>
+                        <td><code>assets.bankAccounts[].currentBalance</code></td>
+                        <td><code>ASSET/ASSET_DETAIL/AssetCashOrMarketValueAmount</code></td>
+                        <td>Sum all accounts if liquid, map type (checking → DepositAsset)</td>
+                    </tr>
+                    <tr>
+                        <td><code>creditScore</code></td>
+                        <td><code>CREDIT_SCORE/CreditScoreValue</code></td>
+                        <td>Include bureau name, score date, score model (FICO 8)</td>
+                    </tr>
+                    <tr>
+                        <td><code>loanDetails.loanAmount</code></td>
+                        <td><code>LOAN/LOAN_DETAIL/LoanAmount</code></td>
+                        <td>Direct mapping, ensure integer</td>
+                    </tr>
+                    <tr>
+                        <td><code>declarations.bankruptcyHistory</code></td>
+                        <td><code>DECLARATION/BankruptcyIndicator</code></td>
+                        <td>Boolean to Y/N, include type if true (Chapter 7/13)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Complex Transformations</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Employment History:</strong> Convert multi-job array to MISMO employment nodes with date ranges, income breakdown</div>
+                <div class="priority-item"><strong>Address History:</strong> Map current + 2-year history to residence nodes with ownership type (own/rent)</div>
+                <div class="priority-item"><strong>Asset Aggregation:</strong> Sum liquid assets, categorize by type (cash, stocks, retirement), calculate reserves</div>
+                <div class="priority-item"><strong>Liability Mapping:</strong> Convert debts to MISMO liability format with payment amounts, payoff dates, account numbers</div>
+                <div class="priority-item"><strong>Co-Borrower Merge:</strong> Combine primary + co-borrower data into joint application structure</div>
+                <div class="priority-item"><strong>Document Attachment:</strong> Convert uploaded files to base64, attach to MISMO XML as embedded docs</div>
+            </div>
+        </section>
+
+        <!-- LOS Integration -->
+        <section class="content-section">
+            <h2 class="content-section-title">LOS Platform Integrations</h2>
+
+            <h3 class="content-section-subtitle">Supported Platforms</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LOS Platform</th>
+                        <th>Integration Method</th>
+                        <th>Import Format</th>
+                        <th>Status</th>
+                        <th>Sync Speed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Encompass (ICE)</strong></td>
+                        <td>Encompass SDK API (Partner Connect)</td>
+                        <td>MISMO 3.4 XML</td>
+                        <td><span class="status-badge status-complete">Production Ready</span></td>
+                        <td>8-12 seconds avg</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BytePro</strong></td>
+                        <td>BytePro REST API v2</td>
+                        <td>MISMO 3.4 XML</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                        <td>10-15 seconds est</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Calyx Point</strong></td>
+                        <td>Point WebCaster API</td>
+                        <td>FNMA 3.2 XML (legacy)</td>
+                        <td><span class="status-badge status-pending">Planned Q2 2025</span></td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Empower LOS</strong></td>
+                        <td>Empower API (OAuth 2.0)</td>
+                        <td>JSON proprietary format</td>
+                        <td><span class="status-badge status-pending">Planned Q3 2025</span></td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Generic MISMO Export</strong></td>
+                        <td>File upload (SFTP or manual)</td>
+                        <td>MISMO 3.4 XML file</td>
+                        <td><span class="status-badge status-complete">Production Ready</span></td>
+                        <td>Manual import by LO</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Encompass Integration Details</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Authentication:</strong> OAuth 2.0 with client credentials flow, tokens refreshed every 60 minutes</div>
+                <div class="priority-item"><strong>API Endpoint:</strong> POST to /encompass/v3/loans with MISMO XML in request body</div>
+                <div class="priority-item"><strong>Loan Creation:</strong> System auto-assigns loan number, returns GUID for tracking</div>
+                <div class="priority-item"><strong>Field Mapping:</strong> 187 Smart App fields mapped to Encompass form fields (1003, 1008, etc.)</div>
+                <div class="priority-item"><strong>Document Attachment:</strong> Upload docs to Encompass eFolder via separate API call</div>
+                <div class="priority-item"><strong>Loan Officer Assignment:</strong> Auto-assign loan to LO based on Smart App originator mapping</div>
+                <div class="priority-item"><strong>Pipeline Status:</strong> Set initial status to "Prospect" or "Application" based on completion level</div>
+            </div>
+        </section>
+
+        <!-- Validation Rules -->
+        <section class="content-section">
+            <h2 class="content-section-title">Business Rules & Validation</h2>
+
+            <h3 class="content-section-subtitle">Critical Validation Rules</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rule Category</th>
+                        <th>Validation Logic</th>
+                        <th>Error Type</th>
+                        <th>Resolution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>DTI Calculation</strong></td>
+                        <td>(Total Monthly Debts / Gross Monthly Income) ≤ 50%</td>
+                        <td>Warning (not blocking)</td>
+                        <td>LO can override with compensating factors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LTV Calculation</strong></td>
+                        <td>(Loan Amount / Property Value) ≤ 97% for Conventional</td>
+                        <td>Blocking Error</td>
+                        <td>Borrower must adjust loan amount or down payment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credit Score Minimum</strong></td>
+                        <td>Score ≥ 620 for Conventional, ≥ 580 for FHA</td>
+                        <td>Warning (loan type dependent)</td>
+                        <td>System suggests alternative loan products</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Asset Sufficiency</strong></td>
+                        <td>Liquid Assets ≥ (Down Payment + Closing Costs + 2 months reserves)</td>
+                        <td>Warning</td>
+                        <td>LO can waive reserves or request gift funds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Employment Continuity</strong></td>
+                        <td>≥ 2 years employment history (or school + employment ≥ 2 years)</td>
+                        <td>Warning</td>
+                        <td>LO documents gaps, may require explanation letter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Occupancy Consistency</strong></td>
+                        <td>If primary residence, property address ≠ current rental address</td>
+                        <td>Warning</td>
+                        <td>Clarify intent to occupy within 60 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SSN Format</strong></td>
+                        <td>9 digits, not all zeros, not sequential (e.g., 123-45-6789)</td>
+                        <td>Blocking Error</td>
+                        <td>Borrower must correct SSN</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Property Valuation</strong></td>
+                        <td>Estimated value within 20% of comparable sales (if API available)</td>
+                        <td>Warning</td>
+                        <td>Appraisal will validate, LO reviews estimate</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Compliance Validations</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>HMDA Compliance:</strong> Verify race, ethnicity, sex, government monitoring fields completed</div>
+                <div class="priority-item"><strong>TRID Readiness:</strong> Ensure sufficient data for Loan Estimate generation (APR, fees, terms)</div>
+                <div class="priority-item"><strong>ECOA Compliance:</strong> Co-applicant treated equally, no discriminatory data collection flags</div>
+                <div class="priority-item"><strong>QM/ATR Rule:</strong> Verify income documentation type supports Qualified Mortgage classification</div>
+                <div class="priority-item"><strong>RESPA Compliance:</strong> Affiliated business disclosures captured if applicable</div>
+            </div>
+        </section>
+
+        <!-- Error Scenarios -->
+        <section class="content-section">
+            <h2 class="content-section-title">Submission Error Handling</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Error Type</th>
+                        <th>Cause</th>
+                        <th>User Experience</th>
+                        <th>System Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Incomplete Application</strong></td>
+                        <td>Missing required fields detected during pre-check</td>
+                        <td>Display list of incomplete sections with "Complete Now" links</td>
+                        <td>Block submission, redirect to first incomplete section</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Invalid Field Data</strong></td>
+                        <td>Email format wrong, phone number invalid, SSN failed validation</td>
+                        <td>Highlight fields in red with specific error messages</td>
+                        <td>Block submission, allow inline editing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Rule Violation</strong></td>
+                        <td>DTI > 50%, LTV > max allowed, credit score < minimum</td>
+                        <td>Show warning modal with explanation and options</td>
+                        <td>Allow LO override with justification, or return to borrower to adjust</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LOS API Timeout</strong></td>
+                        <td>Encompass API not responding within 30 seconds</td>
+                        <td>"Submission in progress... this may take a moment"</td>
+                        <td>Retry 3x with backoff, then queue for manual LO import</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LOS API Error 400</strong></td>
+                        <td>Invalid data format, missing required LOS field</td>
+                        <td>"We encountered a technical issue. Your loan officer has been notified."</td>
+                        <td>Log error, send alert to LO, save MISMO XML for manual import</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LOS API Error 401/403</strong></td>
+                        <td>Authentication failed or token expired</td>
+                        <td>"Connection issue detected. Retrying..."</td>
+                        <td>Refresh OAuth token, retry submission automatically</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Document Upload Incomplete</strong></td>
+                        <td>Required documents not uploaded (configurable by LO)</td>
+                        <td>"The following documents are required: [list]. Upload now or submit pending docs."</td>
+                        <td>Allow submission with "Pending Documents" flag, notify LO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Network Failure</strong></td>
+                        <td>Borrower loses internet connection mid-submit</td>
+                        <td>"Connection lost. Your application is saved. Click to retry."</td>
+                        <td>Auto-save prevents data loss, retry button available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Borrower Confirmation -->
+        <section class="content-section">
+            <h2 class="content-section-title">Borrower Confirmation Experience</h2>
+
+            <h3 class="content-section-subtitle">Pre-Submit Review Screen</h3>
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">Application Summary</h4>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Loan Amount</div>
+                        <div style="color: var(--text-primary); font-size: 1.5rem; font-weight: 700;">$425,000</div>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Property Value</div>
+                        <div style="color: var(--text-primary); font-size: 1.5rem; font-weight: 700;">$500,000</div>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Down Payment</div>
+                        <div style="color: var(--text-primary); font-size: 1.5rem; font-weight: 700;">$75,000 (15%)</div>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Est. Monthly Payment</div>
+                        <div style="color: var(--text-primary); font-size: 1.5rem; font-weight: 700;">$2,847/mo</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                    <div style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">
+                        <input type="checkbox" id="cert1" style="margin-right: 0.5rem;">
+                        <label for="cert1">I certify that the information provided in this application is true and complete to the best of my knowledge.</label>
+                    </div>
+                    <div style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">
+                        <input type="checkbox" id="cert2" style="margin-right: 0.5rem;">
+                        <label for="cert2">I understand that this is an application for credit and that my information will be verified.</label>
+                    </div>
+                    <div style="color: var(--text-secondary); line-height: 1.6;">
+                        <input type="checkbox" id="cert3" style="margin-right: 0.5rem;">
+                        <label for="cert3">I authorize a credit inquiry to verify my creditworthiness.</label>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button style="background: var(--accent-blue); color: white; padding: 1rem 3rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer;">
+                        Submit Application
+                    </button>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">
+                        Your application will be sent to your loan officer for review.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Post-Submit Confirmation</h3>
+            <div style="background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue)); padding: 3rem 2rem; border-radius: 12px; text-align: center; color: white;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+                <h3 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Application Submitted Successfully!</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.95;">
+                    Your loan officer, <strong>Sarah Johnson</strong>, has received your application and will review it within 24 hours.
+                </p>
+                <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 8px; max-width: 500px; margin: 0 auto;">
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">Your Application ID</div>
+                    <div style="font-size: 1.75rem; font-weight: 700; letter-spacing: 2px;">APP-2025-0042</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO Configuration -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Submission Approval</strong></td>
+                        <td>Auto-submit / Require LO approval / Borrower chooses</td>
+                        <td>Borrower chooses</td>
+                        <td>Whether applications go straight to LOS or wait in queue for LO review</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Required Documents</strong></td>
+                        <td>None / Pay stubs only / Full doc set / Custom list</td>
+                        <td>None</td>
+                        <td>Can borrower submit without uploading documents?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Rule Strictness</strong></td>
+                        <td>Warnings only / Block on critical errors / Block all violations</td>
+                        <td>Block on critical errors</td>
+                        <td>How strict validation rules are enforced</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LOS Platform</strong></td>
+                        <td>Encompass / BytePro / Calyx Point / Generic MISMO</td>
+                        <td>Encompass</td>
+                        <td>Which LOS to export applications to</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto-Assign LO in LOS</strong></td>
+                        <td>Yes / No (LO manually assigns)</td>
+                        <td>Yes</td>
+                        <td>Automatically assign loan to correct LO in LOS based on Smart App originator</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Initial Loan Status</strong></td>
+                        <td>Prospect / Lead / Application / Submitted</td>
+                        <td>Application</td>
+                        <td>Pipeline status when loan first appears in LOS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">Performance Metrics (POC Data)</h2>
+
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">Submission Success Rate</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 1rem 0;">98.6%</div>
+                    <p class="card-description">108 of 109 completed applications successfully exported to LOS (1 failure due to Encompass outage)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">Average Submission Time</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">22 sec</div>
+                    <p class="card-description">From "Submit" clicked to LOS loan number assigned (median: 18s, 95th percentile: 41s)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">Data Accuracy</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-purple); margin: 1rem 0;">96.8%</div>
+                    <p class="card-description">LO data correction rate (only 3.2% of applications required field corrections post-import)</p>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Error Breakdown (109 Submissions)</h4>
+                <div class="priority-list">
+                    <div class="priority-item"><strong>Successful First Attempt:</strong> 105 applications (96.3%)</div>
+                    <div class="priority-item"><strong>Retry Successful:</strong> 3 applications (API timeout, succeeded on retry)</div>
+                    <div class="priority-item"><strong>Manual Import Required:</strong> 1 application (LOS outage, imported 4 hours later)</div>
+                    <div class="priority-item"><strong>Pre-Submit Validation Blocks:</strong> 18 borrowers stopped by incomplete data (fixed before resubmit)</div>
+                    <div class="priority-item"><strong>Business Rule Warnings:</strong> 27 applications (all allowed to proceed with LO awareness)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">Real-time LOS sync: Bidirectional updates (e.g., LO changes in Encompass flow back to Smart App)</div>
+                <div class="priority-item">Intelligent field mapping: ML model learns from LO corrections to improve future mappings</div>
+                <div class="priority-item">Pre-submit AI review: Flag potential errors/inconsistencies before submission</div>
+                <div class="priority-item">Multi-LOS support: Route different loan types to different LOS platforms automatically</div>
+                <div class="priority-item">Instant Loan Estimate: Generate and display LE to borrower immediately upon submission</div>
+                <div class="priority-item">Submission analytics: Track correlation between submission patterns and approval rates</div>
+                <div class="priority-item">Blockchain audit trail: Immutable record of application data changes for compliance</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • Point of Submit Processing</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="ai-assistant.html">Next: AI Assistant →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

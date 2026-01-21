@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Authentication - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">OTP Authentication</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 06</div>
+                <h1 class="page-title">One-Time Passcode Authentication</h1>
+                <p class="page-description">Secure, frictionless authentication using SMS and email one-time passcodes for borrower login, session management, and sensitive action verification.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🔐</span>
+                        <span>Passwordless Auth</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📧</span>
+                        <span>Multi-Channel</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⏱️</span>
+                        <span>Time-Limited</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The OTP Authentication system enables borrowers to securely access their application without creating or remembering
+                passwords. By sending time-limited codes via SMS or email, we reduce friction, improve security (no password reuse),
+                and create a seamless login experience. OTP is also used for co-borrower invitations, sensitive actions like rate locks,
+                and session re-authentication.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Primary Use Cases</h3>
+                    <p class="card-description">Initial login, returning user authentication, co-borrower invitation acceptance, and sensitive action verification.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Security Benefits</h3>
+                    <p class="card-description">No password storage, eliminates credential stuffing attacks, provides audit trail for every login attempt.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation Status</h3>
+                    <p class="card-description">Fully implemented in POC using Twilio (SMS) and SendGrid (email). 99.1% delivery success rate.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Authentication Flow -->
+        <section class="content-section">
+            <h2 class="content-section-title">Authentication Workflow</h2>
+
+            <h3 class="content-section-subtitle">Initial Login Flow</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>User Action</th>
+                        <th>System Process</th>
+                        <th>Success Criteria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Borrower enters email address on login screen</td>
+                        <td>Validate email format, check if associated with active application</td>
+                        <td>Email found in database, application status = In Progress</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Borrower selects delivery method (SMS or Email)</td>
+                        <td>Verify phone number on file if SMS selected</td>
+                        <td>Valid phone number exists for borrower record</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Click "Send Code" button</td>
+                        <td>Generate 6-digit OTP, store hash in database with 10-minute expiry, send via selected channel</td>
+                        <td>Message delivered (200 response from provider)</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Receive code via SMS or email (typically 2-10 seconds)</td>
+                        <td>Monitor delivery status via webhook callbacks</td>
+                        <td>Delivery confirmed within 30 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Enter 6-digit code in application</td>
+                        <td>Validate code against hash, check expiry time, verify attempt count</td>
+                        <td>Code matches, not expired, &lt;5 failed attempts</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Access granted - redirected to application dashboard</td>
+                        <td>Create session token (JWT), set secure cookies, log authentication event</td>
+                        <td>Session established, valid for 24 hours or until logout</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Co-Borrower Invitation Flow</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Actor</th>
+                        <th>Action</th>
+                        <th>Technical Implementation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Primary Borrower</td>
+                        <td>Enters co-borrower email and phone in application</td>
+                        <td>Store co-borrower contact info, create pending invitation record</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>System</td>
+                        <td>Send invitation email with magic link + OTP option</td>
+                        <td>Generate unique invitation token, send email via SendGrid with 72-hour expiry</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Co-Borrower</td>
+                        <td>Click link in email or manually navigate to invitation URL</td>
+                        <td>Validate invitation token is not expired or already accepted</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Co-Borrower</td>
+                        <td>Request OTP to verify identity</td>
+                        <td>Send OTP to co-borrower's phone (from invitation record)</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Co-Borrower</td>
+                        <td>Enter OTP code to confirm identity</td>
+                        <td>Validate OTP, mark invitation as accepted, create co-borrower session</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>System</td>
+                        <td>Grant co-borrower access to shared application</td>
+                        <td>Update application permissions, notify primary borrower of acceptance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- OTP Generation Specifications -->
+        <section class="content-section">
+            <h2 class="content-section-title">OTP Generation & Security Specifications</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Specification</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Code Length</strong></td>
+                        <td>6 digits (000000-999999)</td>
+                        <td>Balance between security (1M combinations) and usability (easy to type)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Character Set</strong></td>
+                        <td>Numeric only (0-9)</td>
+                        <td>Avoids confusion with alphanumeric (O vs 0, l vs 1), universal keyboard support</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Validity Period</strong></td>
+                        <td>10 minutes</td>
+                        <td>Sufficient time to receive and enter code, short enough to limit replay attacks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Generation Algorithm</strong></td>
+                        <td>Cryptographically secure random (CSPRNG)</td>
+                        <td>Use crypto.randomInt() or equivalent, not Math.random()</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Storage Method</strong></td>
+                        <td>Hashed with bcrypt (cost factor 10)</td>
+                        <td>Even if database compromised, OTPs cannot be reverse-engineered</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max Active Codes</strong></td>
+                        <td>1 per user per context</td>
+                        <td>Requesting new code invalidates previous code, prevents confusion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rate Limiting</strong></td>
+                        <td>5 codes per hour per email/phone</td>
+                        <td>Prevent abuse and SMS cost explosion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failed Attempt Limit</strong></td>
+                        <td>5 attempts per code</td>
+                        <td>After 5 failures, code invalidated, new code required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brute Force Protection</strong></td>
+                        <td>Exponential backoff after 3 failures</td>
+                        <td>1st retry: immediate, 2nd: 30s delay, 3rd: 60s delay, 4th: 120s delay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Delivery Channels -->
+        <section class="content-section">
+            <h2 class="content-section-title">Delivery Channels & Providers</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">SMS Delivery (Twilio)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item"><strong>Provider:</strong> Twilio Messaging API</div>
+                        <div class="priority-item"><strong>Delivery Speed:</strong> 2-8 seconds average (98th percentile: 15 seconds)</div>
+                        <div class="priority-item"><strong>Success Rate:</strong> 98.7% (POC data: 481/487 delivered)</div>
+                        <div class="priority-item"><strong>Cost:</strong> $0.0079 per SMS (US/Canada)</div>
+                        <div class="priority-item"><strong>Message Template:</strong> "Your Smart App verification code is: {CODE}. Valid for 10 minutes. Don't share this code."</div>
+                        <div class="priority-item"><strong>Fallback:</strong> Retry once after 30 seconds if delivery fails</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Email Delivery (SendGrid)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item"><strong>Provider:</strong> SendGrid Transactional Email API</div>
+                        <div class="priority-item"><strong>Delivery Speed:</strong> 1-5 seconds average (98th percentile: 12 seconds)</div>
+                        <div class="priority-item"><strong>Success Rate:</strong> 99.6% (POC data: 485/487 delivered)</div>
+                        <div class="priority-item"><strong>Cost:</strong> $0.0001 per email (100K/month free tier)</div>
+                        <div class="priority-item"><strong>Subject Line:</strong> "Your verification code for Smart App"</div>
+                        <div class="priority-item"><strong>Features:</strong> HTML template with branded design, plain text fallback, open/click tracking</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Future: Push Notifications</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item"><strong>Status:</strong> Planned for mobile app launch (Q3 2025)</div>
+                        <div class="priority-item"><strong>Provider:</strong> Firebase Cloud Messaging (FCM)</div>
+                        <div class="priority-item"><strong>Delivery Speed:</strong> &lt;2 seconds expected</div>
+                        <div class="priority-item"><strong>Advantage:</strong> No SMS costs, instant delivery, works offline (queued)</div>
+                        <div class="priority-item"><strong>Requirement:</strong> User must have mobile app installed and notifications enabled</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO Configuration -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Configuration Options</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Default OTP Channel</strong></td>
+                        <td>SMS / Email / Let Borrower Choose</td>
+                        <td>Let Borrower Choose</td>
+                        <td>Pre-select delivery method on login screen</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OTP Validity Period</strong></td>
+                        <td>5 / 10 / 15 / 30 minutes</td>
+                        <td>10 minutes</td>
+                        <td>How long code remains valid</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Session Duration</strong></td>
+                        <td>1 hour / 8 hours / 24 hours / 7 days</td>
+                        <td>24 hours</td>
+                        <td>How long user stays logged in without re-authentication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Require OTP for Sensitive Actions</strong></td>
+                        <td>Yes / No</td>
+                        <td>Yes</td>
+                        <td>Require re-authentication for rate lock, document upload, submission</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Allow "Remember This Device"</strong></td>
+                        <td>Yes (30 days) / Yes (90 days) / No</td>
+                        <td>Yes (30 days)</td>
+                        <td>Skip OTP on recognized devices (uses device fingerprint)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failed Attempt Threshold</strong></td>
+                        <td>3 / 5 / 10 attempts</td>
+                        <td>5 attempts</td>
+                        <td>Max wrong codes before lockout</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lockout Duration</strong></td>
+                        <td>15 min / 30 min / 1 hour / Manual unlock</td>
+                        <td>30 minutes</td>
+                        <td>How long borrower locked out after max failed attempts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Error Scenarios -->
+        <section class="content-section">
+            <h2 class="content-section-title">Error Scenarios & User Experience</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Error Type</th>
+                        <th>Trigger</th>
+                        <th>User Message</th>
+                        <th>UX Treatment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SMS Delivery Failure</strong></td>
+                        <td>Carrier rejects message or phone number invalid</td>
+                        <td>"We couldn't send a text to that number. Would you like to try email instead?"</td>
+                        <td>Auto-switch to email option, pre-fill email if on file</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Delivery Failure</strong></td>
+                        <td>Email bounces or spam filter blocks</td>
+                        <td>"Email delivery failed. Please check your email address or try SMS."</td>
+                        <td>Offer to update email or switch to SMS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Code Expired</strong></td>
+                        <td>User enters code after 10-minute window</td>
+                        <td>"This code has expired. Click below to get a new one."</td>
+                        <td>Show "Resend Code" button, auto-resend on click</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Invalid Code</strong></td>
+                        <td>Wrong digits entered</td>
+                        <td>"That code isn't correct. Please try again. (3 attempts remaining)"</td>
+                        <td>Show remaining attempts, highlight input field in red</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rate Limit Exceeded</strong></td>
+                        <td>More than 5 code requests in 1 hour</td>
+                        <td>"Too many code requests. Please wait 30 minutes or contact support."</td>
+                        <td>Show countdown timer, offer support chat link</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Account Locked</strong></td>
+                        <td>5 failed code entry attempts</td>
+                        <td>"Your account is temporarily locked for security. It will unlock in 30 minutes, or contact your loan officer."</td>
+                        <td>Show countdown timer, display LO contact info</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No Active Application</strong></td>
+                        <td>Email entered not associated with any application</td>
+                        <td>"We don't have an application for that email. Please check your email or contact your loan officer."</td>
+                        <td>Offer "Start New Application" link or LO lookup</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Code Already Used</strong></td>
+                        <td>User tries to reuse a previously valid code</td>
+                        <td>"This code has already been used. Please request a new code."</td>
+                        <td>Auto-show "Resend Code" button</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Security Best Practices -->
+        <section class="content-section">
+            <h2 class="content-section-title">Security Implementation Details</h2>
+
+            <h3 class="content-section-subtitle">Code Generation (Node.js Example)</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; overflow-x: auto; margin-bottom: 2rem;">
+<pre style="margin: 0; color: var(--text-secondary);">
+<span style="color: #8b949e;">// Generate cryptographically secure 6-digit OTP</span>
+<span style="color: #ff7b72;">const</span> crypto = <span style="color: #79c0ff;">require</span>(<span style="color: #a5d6ff;">'crypto'</span>);
+
+<span style="color: #ff7b72;">function</span> <span style="color: #d2a8ff;">generateOTP</span>() {
+  <span style="color: #8b949e;">// Generate random integer between 0 and 999999</span>
+  <span style="color: #ff7b72;">const</span> otp = crypto.<span style="color: #d2a8ff;">randomInt</span>(<span style="color: #79c0ff;">0</span>, <span style="color: #79c0ff;">1000000</span>);
+
+  <span style="color: #8b949e;">// Pad with leading zeros to ensure 6 digits</span>
+  <span style="color: #ff7b72;">return</span> otp.<span style="color: #d2a8ff;">toString</span>().<span style="color: #d2a8ff;">padStart</span>(<span style="color: #79c0ff;">6</span>, <span style="color: #a5d6ff;">'0'</span>);
+}
+
+<span style="color: #8b949e;">// Hash OTP before storing in database</span>
+<span style="color: #ff7b72;">const</span> bcrypt = <span style="color: #79c0ff;">require</span>(<span style="color: #a5d6ff;">'bcrypt'</span>);
+
+<span style="color: #ff7b72;">async function</span> <span style="color: #d2a8ff;">hashOTP</span>(otp) {
+  <span style="color: #ff7b72;">return</span> <span style="color: #ff7b72;">await</span> bcrypt.<span style="color: #d2a8ff;">hash</span>(otp, <span style="color: #79c0ff;">10</span>);
+}
+
+<span style="color: #8b949e;">// Validate user-entered OTP against hash</span>
+<span style="color: #ff7b72;">async function</span> <span style="color: #d2a8ff;">validateOTP</span>(userOTP, hashedOTP, expiryTime) {
+  <span style="color: #ff7b72;">if</span> (<span style="color: #79c0ff;">Date</span>.<span style="color: #d2a8ff;">now</span>() > expiryTime) {
+    <span style="color: #ff7b72;">return</span> { <span style="color: #79c0ff;">valid</span>: <span style="color: #79c0ff;">false</span>, <span style="color: #79c0ff;">reason</span>: <span style="color: #a5d6ff;">'expired'</span> };
+  }
+
+  <span style="color: #ff7b72;">const</span> match = <span style="color: #ff7b72;">await</span> bcrypt.<span style="color: #d2a8ff;">compare</span>(userOTP, hashedOTP);
+  <span style="color: #ff7b72;">return</span> { <span style="color: #79c0ff;">valid</span>: match, <span style="color: #79c0ff;">reason</span>: match ? <span style="color: #79c0ff;">null</span> : <span style="color: #a5d6ff;">'invalid'</span> };
+}
+</pre>
+            </div>
+
+            <h3 class="content-section-subtitle">Database Schema</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; overflow-x: auto; margin-bottom: 2rem;">
+<pre style="margin: 0; color: var(--text-secondary);">
+<span style="color: #ff7b72;">CREATE TABLE</span> otp_codes (
+  id <span style="color: #79c0ff;">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  user_id <span style="color: #79c0ff;">UUID NOT NULL REFERENCES</span> borrowers(id),
+  code_hash <span style="color: #79c0ff;">VARCHAR(60) NOT NULL</span>, <span style="color: #8b949e;">-- bcrypt hash</span>
+  delivery_method <span style="color: #79c0ff;">VARCHAR(10) NOT NULL</span>, <span style="color: #8b949e;">-- 'sms' or 'email'</span>
+  delivery_target <span style="color: #79c0ff;">VARCHAR(255) NOT NULL</span>, <span style="color: #8b949e;">-- phone or email</span>
+  purpose <span style="color: #79c0ff;">VARCHAR(50) NOT NULL</span>, <span style="color: #8b949e;">-- 'login', 'co-borrower-invite', 'rate-lock', etc.</span>
+  created_at <span style="color: #79c0ff;">TIMESTAMP NOT NULL DEFAULT NOW()</span>,
+  expires_at <span style="color: #79c0ff;">TIMESTAMP NOT NULL</span>,
+  validated_at <span style="color: #79c0ff;">TIMESTAMP</span>,
+  failed_attempts <span style="color: #79c0ff;">INTEGER DEFAULT 0</span>,
+  invalidated <span style="color: #79c0ff;">BOOLEAN DEFAULT FALSE</span>,
+  ip_address <span style="color: #79c0ff;">INET</span>,
+  user_agent <span style="color: #79c0ff;">TEXT</span>
+);
+
+<span style="color: #8b949e;">-- Index for fast lookups</span>
+<span style="color: #ff7b72;">CREATE INDEX</span> idx_otp_user_valid <span style="color: #ff7b72;">ON</span> otp_codes(user_id, expires_at)
+  <span style="color: #ff7b72;">WHERE</span> validated_at <span style="color: #ff7b72;">IS NULL AND</span> invalidated = <span style="color: #79c0ff;">FALSE</span>;
+</pre>
+            </div>
+
+            <h3 class="content-section-subtitle">Additional Security Measures</h3>
+            <div class="priority-list">
+                <div class="priority-item">All OTP-related requests logged with IP, user agent, timestamp for audit trail</div>
+                <div class="priority-item">Suspicious patterns detected (e.g., same IP requesting codes for multiple users) trigger fraud alerts</div>
+                <div class="priority-item">Device fingerprinting to detect emulators, bots, and automation tools</div>
+                <div class="priority-item">CAPTCHA challenge after 3 failed code requests to prevent automation</div>
+                <div class="priority-item">Geolocation check: warn user if login from unusual location (e.g., different state than application address)</div>
+                <div class="priority-item">Session tokens rotated every 4 hours to limit exposure window</div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">Performance Metrics (POC Data)</h2>
+
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">Overall Delivery Success</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 1rem 0;">99.1%</div>
+                    <p class="card-description">483 of 487 OTP codes successfully delivered across SMS and email</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">Average Entry Success Rate</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">96.3%</div>
+                    <p class="card-description">Borrowers entered correct code on first or second attempt</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">Median Time to Entry</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-purple); margin: 1rem 0;">38 sec</div>
+                    <p class="card-description">From code sent to code entered (25th percentile: 22s, 75th: 67s)</p>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Channel Breakdown</h4>
+                <div class="priority-list">
+                    <div class="priority-item"><strong>SMS Delivery:</strong> 481 sent, 475 delivered (98.7%), avg delivery time 5.2 seconds</div>
+                    <div class="priority-item"><strong>Email Delivery:</strong> 485 sent, 483 delivered (99.6%), avg delivery time 3.8 seconds</div>
+                    <div class="priority-item"><strong>User Preference:</strong> 52% chose SMS, 48% chose email for initial login</div>
+                    <div class="priority-item"><strong>Failed Attempts:</strong> 18 borrowers (3.7%) exceeded 3 failed attempts, all resolved on retry</div>
+                    <div class="priority-item"><strong>Abandonment:</strong> 6 borrowers (1.2%) requested code but never entered it (likely distraction)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">WebAuthn/FIDO2 support for biometric authentication (FaceID, TouchID, Windows Hello)</div>
+                <div class="priority-item">Adaptive authentication: skip OTP on trusted devices, require on new/risky devices</div>
+                <div class="priority-item">Magic links as alternative to OTP (click link in email to auto-login)</div>
+                <div class="priority-item">Push notification delivery channel for mobile app users</div>
+                <div class="priority-item">Time-based OTP (TOTP) for users who want to use authenticator apps</div>
+                <div class="priority-item">Integration with LO's own email/SMS for white-label experience</div>
+                <div class="priority-item">Multi-language OTP messages based on borrower language preference</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • OTP Authentication</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="soft-credit.html">Next: Soft Pull Credit →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
