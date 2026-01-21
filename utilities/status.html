@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Status Summary - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .status-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .status-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal), var(--accent-purple));
+        }
+
+        .status-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .status-timestamp {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--text-tertiary);
+            margin-top: 1rem;
+        }
+
+        /* Traffic Light Status Indicators */
+        .traffic-light-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .traffic-light-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .traffic-light-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .traffic-light {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .traffic-light.green {
+            background: linear-gradient(135deg, #10b981, #059669);
+            animation: pulse-green 2s infinite;
+        }
+
+        .traffic-light.yellow {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            animation: pulse-yellow 2s infinite;
+        }
+
+        .traffic-light.red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 4px 24px rgba(16, 185, 129, 0.6); }
+        }
+
+        @keyframes pulse-yellow {
+            0%, 100% { box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3); }
+            50% { box-shadow: 0 4px 24px rgba(245, 158, 11, 0.6); }
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 4px 24px rgba(239, 68, 68, 0.6); }
+        }
+
+        .traffic-light-label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .traffic-light-status {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Overall Status Banner */
+        .overall-status-banner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border: 2px solid #f59e0b;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .overall-status-banner.on-track {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            border-color: #10b981;
+        }
+
+        .overall-status-banner.at-risk {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border-color: #f59e0b;
+        }
+
+        .overall-status-banner.behind {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border-color: #ef4444;
+        }
+
+        .overall-status-icon {
+            font-size: 4rem;
+            line-height: 1;
+        }
+
+        .overall-status-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .overall-status-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Key Metrics Dashboard */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .metric-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .metric-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .metric-progress-bar.warning {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+
+        .metric-progress-bar.danger {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+
+        .metric-progress-bar.success {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin: 0;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            display: inline-block;
+        }
+
+        .status-badge.on-track {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-badge.at-risk {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-badge.behind {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-badge.complete {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        /* Work Stream Grid */
+        .workstream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .workstream-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .workstream-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .workstream-card.green {
+            border-left: 4px solid #10b981;
+        }
+
+        .workstream-card.yellow {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .workstream-card.red {
+            border-left: 4px solid #ef4444;
+        }
+
+        .workstream-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .workstream-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .workstream-status-icon {
+            font-size: 1.5rem;
+        }
+
+        .workstream-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Sprint Progress */
+        .sprint-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sprint-stat {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .sprint-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .sprint-stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        .velocity-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .velocity-arrow {
+            font-size: 1.25rem;
+        }
+
+        .velocity-arrow.down {
+            color: #ef4444;
+        }
+
+        /* Milestone Timeline */
+        .milestone-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .milestone-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .milestone-dot {
+            position: absolute;
+            left: -1rem;
+            top: 0.25rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+
+        .milestone-dot.completed {
+            background: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .milestone-dot.in-progress {
+            background: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .milestone-dot.upcoming {
+            background: #6b7280;
+            box-shadow: 0 0 0 3px rgba(107, 116, 128, 0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .milestone-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .milestone-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .milestone-date {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+
+        .milestone-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Risk Matrix */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .risk-card {
+            background: var(--bg-secondary);
+            border-left: 4px solid;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .risk-card.critical {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
+        }
+
+        .risk-card.high {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.02));
+        }
+
+        .risk-card.medium {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.02));
+        }
+
+        .risk-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .risk-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            flex: 1;
+        }
+
+        .risk-priority {
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .risk-priority.critical {
+            background: #ef4444;
+            color: white;
+        }
+
+        .risk-priority.high {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .risk-priority.medium {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .risk-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .risk-mitigation {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            padding: 0.75rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border-left: 2px solid var(--accent-teal);
+        }
+
+        .risk-mitigation strong {
+            color: var(--text-secondary);
+        }
+
+        /* Accomplishments List */
+        .accomplishments-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .accomplishment-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .accomplishment-item:hover {
+            transform: translateX(4px);
+            border-color: var(--accent-green);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
+        }
+
+        .accomplishment-icon {
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+
+        .accomplishment-content {
+            flex: 1;
+        }
+
+        .accomplishment-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .accomplishment-date {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            font-family: var(--font-mono);
+        }
+
+        /* Priorities List */
+        .priorities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .priority-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .priority-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .priority-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .priority-icon {
+            font-size: 1.5rem;
+        }
+
+        .priority-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .priority-timeline {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            font-family: var(--font-mono);
+        }
+
+        /* Team Updates */
+        .team-metric {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-metric-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .team-metric-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .team-metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        .rating-bar {
+            height: 12px;
+            background: var(--bg-card);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
+
+        /* Budget Breakdown */
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .budget-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .budget-category {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .budget-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+        }
+
+        .budget-bar {
+            height: 6px;
+            background: var(--bg-card);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .budget-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 3px;
+        }
+
+        /* Quality Metrics */
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .quality-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .quality-label {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .quality-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+        }
+
+        .quality-target {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+        }
+
+        .quality-status {
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .quality-status.on-target {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .quality-status.below-target {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* Deployment Status */
+        .deployment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .deployment-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .deployment-env {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .deployment-version {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+            margin-bottom: 0.75rem;
+        }
+
+        .deployment-time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Action Items */
+        .action-items-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .action-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .action-checkbox {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .action-checkbox.completed {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+
+        .action-checkbox.overdue {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: white;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .action-assignee {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-top: 0.25rem;
+        }
+
+        /* Export Button */
+        .export-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .export-btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        }
+
+        .export-btn.primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 2rem 0;
+        }
+
+        .chart-container.large {
+            height: 400px;
+        }
+
+        /* Stakeholder Section */
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stakeholder-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stakeholder-label {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stakeholder-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+        }
+
+        .stakeholder-count {
+            display: inline-block;
+            margin-left: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .status-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .traffic-light-grid,
+            .metrics-grid,
+            .workstream-grid,
+            .sprint-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-icon">📊</span>
+            <h2>Navigation</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="../index.html">🏠 Home</a></li>
+            <li><a href="#overview">📊 Overview</a></li>
+            <li><a href="#metrics">📈 Key Metrics</a></li>
+            <li><a href="#workstreams">🎯 Work Streams</a></li>
+            <li><a href="#sprints">⚡ Sprint Progress</a></li>
+            <li><a href="#milestones">🎯 Milestones</a></li>
+            <li><a href="#risks">⚠️ Risks & Issues</a></li>
+            <li><a href="#accomplishments">✅ Accomplishments</a></li>
+            <li><a href="#priorities">🔥 Priorities</a></li>
+            <li><a href="#team">👥 Team Updates</a></li>
+            <li><a href="#budget">💰 Budget</a></li>
+            <li><a href="#quality">🎯 Quality</a></li>
+            <li><a href="#deployment">🚀 Deployment</a></li>
+            <li><a href="#stakeholders">🤝 Stakeholders</a></li>
+            <li><a href="#actions">✓ Action Items</a></li>
+        </ul>
+    </nav>
+
+    <div class="status-container">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs">
+            <a href="../index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Status</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="status-hero">
+            <h1>Project Status Summary</h1>
+            <p class="status-subtitle">Comprehensive project health dashboard and executive status report for Smart App 2.0</p>
+            <div class="status-timestamp">
+                Last Updated: January 21, 2025 at 2:45 PM EST | Next Update: January 28, 2025
+            </div>
+        </header>
+
+        <!-- Overall Status Banner -->
+        <div id="overview" class="overall-status-banner at-risk">
+            <div class="overall-status-icon">⚠️</div>
+            <div class="overall-status-content">
+                <h2>Project Status: At Risk</h2>
+                <p>Project is 65% complete but facing QA resource constraints and integration delays. Immediate attention required to maintain April 15 beta launch target.</p>
+            </div>
+        </div>
+
+        <!-- Traffic Light Status Grid -->
+        <div class="traffic-light-grid">
+            <div class="traffic-light-card">
+                <div class="traffic-light green">🟢</div>
+                <div class="traffic-light-label">Schedule Health</div>
+                <div class="traffic-light-status">On Track</div>
+            </div>
+            <div class="traffic-light-card">
+                <div class="traffic-light yellow">🟡</div>
+                <div class="traffic-light-label">Budget Health</div>
+                <div class="traffic-light-status">At Risk</div>
+            </div>
+            <div class="traffic-light-card">
+                <div class="traffic-light red">🔴</div>
+                <div class="traffic-light-label">Resource Health</div>
+                <div class="traffic-light-status">Behind</div>
+            </div>
+            <div class="traffic-light-card">
+                <div class="traffic-light green">🟢</div>
+                <div class="traffic-light-label">Quality Health</div>
+                <div class="traffic-light-status">On Track</div>
+            </div>
+            <div class="traffic-light-card">
+                <div class="traffic-light yellow">🟡</div>
+                <div class="traffic-light-label">Scope Health</div>
+                <div class="traffic-light-status">At Risk</div>
+            </div>
+            <div class="traffic-light-card">
+                <div class="traffic-light green">🟢</div>
+                <div class="traffic-light-label">Stakeholder Health</div>
+                <div class="traffic-light-status">On Track</div>
+            </div>
+        </div>
+
+        <!-- Key Metrics Dashboard -->
+        <section id="metrics" class="section">
+            <div class="section-header">
+                <span class="section-icon">📈</span>
+                <h2 class="section-title">Key Metrics Dashboard</h2>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-icon">📊</span>
+                    <div class="metric-value">65%</div>
+                    <div class="metric-label">Overall Completion</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar success" style="width: 65%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">📅</span>
+                    <div class="metric-value">142</div>
+                    <div class="metric-label">Days Until Launch</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar warning" style="width: 48%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">💰</span>
+                    <div class="metric-value">$1.56M</div>
+                    <div class="metric-label">Budget Utilized (65% of $2.4M)</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar" style="width: 65%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">👥</span>
+                    <div class="metric-value">87%</div>
+                    <div class="metric-label">Team Capacity Utilized</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar warning" style="width: 87%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">⚠️</span>
+                    <div class="metric-value">10</div>
+                    <div class="metric-label">Open Blockers (3 Critical, 7 High)</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar danger" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">🎯</span>
+                    <div class="metric-value">Phase 2</div>
+                    <div class="metric-label">Beta Testing Phase</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Stream Status -->
+        <section id="workstreams" class="section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">Status by Work Stream</h2>
+            </div>
+
+            <div class="workstream-grid">
+                <div class="workstream-card green">
+                    <div class="workstream-header">
+                        <div class="workstream-name">Product</div>
+                        <div class="workstream-status-icon">🟢</div>
+                    </div>
+                    <div class="status-badge on-track">On Track</div>
+                    <div class="workstream-details">All features scoped, PRDs complete, roadmap aligned with timeline.</div>
+                </div>
+
+                <div class="workstream-card yellow">
+                    <div class="workstream-header">
+                        <div class="workstream-name">Engineering</div>
+                        <div class="workstream-status-icon">🟡</div>
+                    </div>
+                    <div class="status-badge at-risk">At Risk</div>
+                    <div class="workstream-details">TRUV payroll integration delayed 5 days. Error handling refactor in progress.</div>
+                </div>
+
+                <div class="workstream-card green">
+                    <div class="workstream-header">
+                        <div class="workstream-name">Design</div>
+                        <div class="workstream-status-icon">🟢</div>
+                    </div>
+                    <div class="status-badge on-track">On Track</div>
+                    <div class="workstream-details">All UI mockups delivered. Component library 95% complete.</div>
+                </div>
+
+                <div class="workstream-card red">
+                    <div class="workstream-header">
+                        <div class="workstream-name">QA</div>
+                        <div class="workstream-status-icon">🔴</div>
+                    </div>
+                    <div class="status-badge behind">Behind Schedule</div>
+                    <div class="workstream-details">Resource constraints impacting test coverage. Need 2 additional QA engineers.</div>
+                </div>
+
+                <div class="workstream-card green">
+                    <div class="workstream-header">
+                        <div class="workstream-name">DevOps</div>
+                        <div class="workstream-status-icon">🟢</div>
+                    </div>
+                    <div class="status-badge on-track">On Track</div>
+                    <div class="workstream-details">CI/CD pipeline optimized. Deployment frequency at 2.3x/week.</div>
+                </div>
+
+                <div class="workstream-card green">
+                    <div class="workstream-header">
+                        <div class="workstream-name">Compliance</div>
+                        <div class="workstream-status-icon">🟢</div>
+                    </div>
+                    <div class="status-badge on-track">On Track</div>
+                    <div class="workstream-details">Security audit passed. GLBA documentation 85% complete.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sprint Progress -->
+        <section id="sprints" class="section">
+            <div class="section-header">
+                <span class="section-icon">⚡</span>
+                <h2 class="section-title">Sprint Progress</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>🎯</span>
+                        Sprint 14 of 28 - Beta Launch Preparation
+                    </div>
+                    <div class="status-badge on-track">88% Complete</div>
+                </div>
+
+                <div class="sprint-stats">
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Sprint Goal</div>
+                        <div class="sprint-stat-value" style="font-size: 1.25rem; color: var(--text-primary);">Beta Launch Prep</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Story Points</div>
+                        <div class="sprint-stat-value">23/26</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">88% Complete</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Velocity Trend</div>
+                        <div class="velocity-trend">
+                            <span style="font-size: 1.25rem; color: var(--text-secondary);">26 → 24 → 23</span>
+                            <span class="velocity-arrow down">↓</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #ef4444; margin-top: 0.25rem;">Declining Velocity</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Blockers</div>
+                        <div class="sprint-stat-value" style="color: #ef4444;">2</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Items Blocked</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Sprint End</div>
+                        <div class="sprint-stat-value" style="font-size: 1.25rem; color: var(--text-primary);">Jan 25</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">4 Days Remaining</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Team Capacity</div>
+                        <div class="sprint-stat-value">87%</div>
+                        <div style="font-size: 0.85rem; color: #f59e0b; margin-top: 0.25rem;">Near Maximum</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="sprintBurndownChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Milestone Tracking -->
+        <section id="milestones" class="section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">Milestone Tracking</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>🗓️</span>
+                        12 Total Milestones
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="status-badge on-track">7 Completed</div>
+                        <div class="status-badge at-risk">3 In Progress</div>
+                        <div class="status-badge">2 Upcoming</div>
+                    </div>
+                </div>
+
+                <div class="milestone-timeline">
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Project Kickoff</div>
+                                <div class="milestone-date">Aug 1, 2024</div>
+                            </div>
+                            <div class="milestone-description">Team assembled, project charter approved, initial requirements gathered.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Requirements Finalization</div>
+                                <div class="milestone-date">Sep 15, 2024</div>
+                            </div>
+                            <div class="milestone-description">All 14 requirement modules completed and approved by stakeholders.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Design System Complete</div>
+                                <div class="milestone-date">Oct 10, 2024</div>
+                            </div>
+                            <div class="milestone-description">Component library, design tokens, and UI patterns established.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Architecture Review</div>
+                                <div class="milestone-date">Oct 28, 2024</div>
+                            </div>
+                            <div class="milestone-description">Technical architecture approved, security review passed.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Alpha Release</div>
+                                <div class="milestone-date">Nov 20, 2024</div>
+                            </div>
+                            <div class="milestone-description">Core features functional, internal team testing initiated.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Prove Integration Complete</div>
+                                <div class="milestone-date">Dec 12, 2024</div>
+                            </div>
+                            <div class="milestone-description">Identity verification fully integrated and tested.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">LO Dashboard v1</div>
+                                <div class="milestone-date">Jan 8, 2025</div>
+                            </div>
+                            <div class="milestone-description">Loan officer dashboard shipped with core functionality.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot in-progress"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">TRUV Payroll Integration</div>
+                                <div class="milestone-date">Jan 30, 2025 (Target)</div>
+                            </div>
+                            <div class="milestone-description">⚠️ Delayed 5 days - Income verification integration in progress.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot in-progress"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Performance Optimization</div>
+                                <div class="milestone-date">Feb 10, 2025 (Target)</div>
+                            </div>
+                            <div class="milestone-description">Achieve 200ms avg response time and 80% test coverage targets.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot in-progress"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Compliance Documentation</div>
+                                <div class="milestone-date">Mar 1, 2025 (Target)</div>
+                            </div>
+                            <div class="milestone-description">GLBA, security, and audit documentation finalized.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot upcoming"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">🎯 Internal Beta Launch</div>
+                                <div class="milestone-date">Apr 15, 2025 (Next Milestone)</div>
+                            </div>
+                            <div class="milestone-description">Limited release to 50 internal users for final validation.</div>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-dot upcoming"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-header">
+                                <div class="milestone-title">Production Launch</div>
+                                <div class="milestone-date">Jun 12, 2025 (Target)</div>
+                            </div>
+                            <div class="milestone-description">Full production release to all users.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk & Issues Dashboard -->
+        <section id="risks" class="section">
+            <div class="section-header">
+                <span class="section-icon">⚠️</span>
+                <h2 class="section-title">Risk & Issues Dashboard</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>🚨</span>
+                        Active Risks & Issues
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="status-badge behind">3 Critical</div>
+                        <div class="status-badge at-risk">7 High</div>
+                        <div class="status-badge">12 Medium</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Critical Risks</h3>
+                <div class="risk-grid">
+                    <div class="risk-card critical">
+                        <div class="risk-header">
+                            <div class="risk-title">QA Resource Shortage</div>
+                            <div class="risk-priority critical">Critical</div>
+                        </div>
+                        <div class="risk-description">
+                            Current QA team cannot meet testing demands for beta launch. Test coverage at 78%, below 80% target. Critical path impact.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Hiring 2 contract QA engineers (start date: Jan 28). Reprioritizing test cases to focus on critical user journeys.
+                        </div>
+                    </div>
+
+                    <div class="risk-card critical">
+                        <div class="risk-header">
+                            <div class="risk-title">TRUV Integration Delays</div>
+                            <div class="risk-priority critical">Critical</div>
+                        </div>
+                        <div class="risk-description">
+                            Payroll verification integration 5 days behind schedule due to API documentation gaps. Blocking dependent features.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Daily standups with TRUV support team. Engineering lead assigned full-time. Backup plan: manual verification workflow.
+                        </div>
+                    </div>
+
+                    <div class="risk-card critical">
+                        <div class="risk-header">
+                            <div class="risk-title">Performance Targets at Risk</div>
+                            <div class="risk-priority critical">Critical</div>
+                        </div>
+                        <div class="risk-description">
+                            Average response time at 240ms vs. 200ms target. Database query optimization needed. User experience impact.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Performance sprint scheduled (Feb 3-10). Database indexing review. CDN optimization. Load testing planned.
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">High Priority Issues</h3>
+                <div class="risk-grid">
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Error Handling Inconsistencies</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            User-facing error messages inconsistent across modules. Need standardized error handling framework.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Error handling refactor in progress. Completion target: Feb 1. Design system updated with error patterns.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Co-Borrower Flow Complexity</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            User testing revealed confusion in co-borrower invitation and collaboration workflow. 3 usability issues identified.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> UX redesign scheduled. Progressive disclosure approach. Additional user testing planned for Feb 12.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Third-Party API Rate Limits</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            Approaching rate limits on Plaid and TRUV APIs during peak testing. Production scaling concerns.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Negotiating higher tier plans with vendors. Implementing request queuing and caching strategies.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Mobile Responsiveness Gaps</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            12 screens not fully responsive on mobile devices. LO dashboard particularly affected.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Mobile-first sprint planned. CSS framework standardization. Target completion: Feb 15.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Data Migration Complexity</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            Legacy system data migration more complex than anticipated. 147 data transformation rules needed.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Data engineering team assigned. Automated migration scripts in development. Parallel run planned.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Stakeholder Alignment on Features</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            4 features awaiting final stakeholder approval. Scope creep risk if decisions delayed.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Emergency steering committee meeting scheduled Jan 23. Decision deadline: Jan 25.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Documentation Gaps</div>
+                            <div class="risk-priority high">High</div>
+                        </div>
+                        <div class="risk-description">
+                            Technical documentation incomplete for 8 integration points. Onboarding and support impacted.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Documentation sprint week of Jan 27. Technical writer assigned. Template standardization.
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Medium Priority Issues</h3>
+                <div class="risk-grid">
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Browser Compatibility Issues</div>
+                            <div class="risk-priority medium">Medium</div>
+                        </div>
+                        <div class="risk-description">
+                            Minor rendering issues in Safari and older Edge versions. 5% of user base affected.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Cross-browser testing scheduled. Polyfills being added. Target: Feb 20.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Accessibility Compliance</div>
+                            <div class="risk-priority medium">Medium</div>
+                        </div>
+                        <div class="risk-description">
+                            WCAG 2.1 AA audit identified 23 minor accessibility improvements needed.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Accessibility sprint planned for March. Focus on keyboard navigation and screen reader support.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Monitoring & Alerting</div>
+                            <div class="risk-priority medium">Medium</div>
+                        </div>
+                        <div class="risk-description">
+                            Production monitoring dashboard incomplete. Need better visibility into system health.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Mitigation:</strong> Datadog integration in progress. Custom alerts being configured. ETA: Jan 31.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Accomplishments -->
+        <section id="accomplishments" class="section">
+            <div class="section-header">
+                <span class="section-icon">✅</span>
+                <h2 class="section-title">Recent Accomplishments (Last 2 Weeks)</h2>
+            </div>
+
+            <div class="card">
+                <ul class="accomplishments-list">
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">🎉</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Completed Prove Identity Integration</div>
+                            <div class="accomplishment-date">January 15, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">🚀</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Shipped LO Dashboard v1.0</div>
+                            <div class="accomplishment-date">January 8, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">🔒</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Passed Security Audit with Zero Critical Findings</div>
+                            <div class="accomplishment-date">January 12, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">🐛</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Resolved 47 Bugs (12 Critical, 18 High, 17 Medium/Low)</div>
+                            <div class="accomplishment-date">January 9-20, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">👥</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Completed 3 User Testing Sessions with 24 Participants</div>
+                            <div class="accomplishment-date">January 10-17, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">📚</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Component Library Reached 95% Completion</div>
+                            <div class="accomplishment-date">January 14, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">⚡</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Optimized CI/CD Pipeline - 40% Faster Deployments</div>
+                            <div class="accomplishment-date">January 11, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">📊</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Achieved 78% Test Coverage (Target: 80%)</div>
+                            <div class="accomplishment-date">January 18, 2025</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Upcoming Priorities -->
+        <section id="priorities" class="section">
+            <div class="section-header">
+                <span class="section-icon">🔥</span>
+                <h2 class="section-title">Upcoming Priorities (Next 2 Weeks)</h2>
+            </div>
+
+            <div class="priorities-list">
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">🎯</span>
+                        <div>
+                            <div class="priority-title">Launch Internal Beta</div>
+                            <div class="priority-timeline">Due: Feb 1, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">🔌</span>
+                        <div>
+                            <div class="priority-title">Complete TRUV Payroll Integration</div>
+                            <div class="priority-timeline">Due: Jan 30, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">⚠️</span>
+                        <div>
+                            <div class="priority-title">Implement Error Handling Improvements</div>
+                            <div class="priority-timeline">Due: Feb 1, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">⚡</span>
+                        <div>
+                            <div class="priority-title">Conduct Performance Testing</div>
+                            <div class="priority-timeline">Due: Feb 10, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">📋</span>
+                        <div>
+                            <div class="priority-title">Finalize Compliance Documentation</div>
+                            <div class="priority-timeline">Due: Mar 1, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">👥</span>
+                        <div>
+                            <div class="priority-title">Onboard 2 Contract QA Engineers</div>
+                            <div class="priority-timeline">Due: Jan 28, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">🎨</span>
+                        <div>
+                            <div class="priority-title">Redesign Co-Borrower Flow UX</div>
+                            <div class="priority-timeline">Due: Feb 12, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item">
+                    <div class="priority-header">
+                        <span class="priority-icon">📱</span>
+                        <div>
+                            <div class="priority-title">Fix Mobile Responsiveness Issues</div>
+                            <div class="priority-timeline">Due: Feb 15, 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Updates -->
+        <section id="team" class="section">
+            <div class="section-header">
+                <span class="section-icon">👥</span>
+                <h2 class="section-title">Team Updates</h2>
+            </div>
+
+            <div class="card">
+                <div class="team-metric">
+                    <div class="team-metric-header">
+                        <div class="team-metric-label">Team Morale (from last retro)</div>
+                        <div class="team-metric-value">8.2/10</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-fill" style="width: 82%"></div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Capacity & Staffing</h3>
+                <div class="workstream-grid">
+                    <div class="workstream-card yellow">
+                        <div class="workstream-header">
+                            <div class="workstream-name">QA Team</div>
+                            <div class="workstream-status-icon">⚠️</div>
+                        </div>
+                        <div class="status-badge at-risk">Resource Gap</div>
+                        <div class="workstream-details">Current: 3 engineers. Need: 5 engineers. Hiring 2 contractors by Jan 28.</div>
+                    </div>
+
+                    <div class="workstream-card green">
+                        <div class="workstream-header">
+                            <div class="workstream-name">Engineering</div>
+                            <div class="workstream-status-icon">✅</div>
+                        </div>
+                        <div class="status-badge on-track">Fully Staffed</div>
+                        <div class="workstream-details">12 engineers at 87% capacity. Good balance across frontend, backend, and DevOps.</div>
+                    </div>
+
+                    <div class="workstream-card green">
+                        <div class="workstream-header">
+                            <div class="workstream-name">Design</div>
+                            <div class="workstream-status-icon">✅</div>
+                        </div>
+                        <div class="status-badge on-track">Fully Staffed</div>
+                        <div class="workstream-details">4 designers (2 UX, 2 UI). Component library work wrapping up.</div>
+                    </div>
+
+                    <div class="workstream-card green">
+                        <div class="workstream-header">
+                            <div class="workstream-name">Product</div>
+                            <div class="workstream-status-icon">✅</div>
+                        </div>
+                        <div class="status-badge on-track">Fully Staffed</div>
+                        <div class="workstream-details">2 PMs managing roadmap and stakeholder communications effectively.</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Recent Changes</h3>
+                <ul class="accomplishments-list">
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">👋</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Sarah Chen (Senior QA Engineer) departing for new opportunity</div>
+                            <div class="accomplishment-date">Last day: January 31, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">👋</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">2 Contract QA Engineers being onboarded</div>
+                            <div class="accomplishment-date">Start date: January 28, 2025</div>
+                        </div>
+                    </li>
+
+                    <li class="accomplishment-item">
+                        <div class="accomplishment-icon">📚</div>
+                        <div class="accomplishment-content">
+                            <div class="accomplishment-title">Technical Writer hired for documentation backlog</div>
+                            <div class="accomplishment-date">Started: January 20, 2025</div>
+                        </div>
+                    </li>
+                </ul>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Training Needs Identified</h3>
+                <div class="priorities-list">
+                    <div class="priority-item">
+                        <div class="priority-header">
+                            <span class="priority-icon">🎓</span>
+                            <div>
+                                <div class="priority-title">Advanced React Patterns Workshop</div>
+                                <div class="priority-timeline">Requested by 4 frontend engineers</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="priority-item">
+                        <div class="priority-header">
+                            <span class="priority-icon">🔒</span>
+                            <div>
+                                <div class="priority-title">GLBA & Financial Data Security Training</div>
+                                <div class="priority-timeline">Required for all team members by Mar 1</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="priority-item">
+                        <div class="priority-header">
+                            <span class="priority-icon">♿</span>
+                            <div>
+                                <div class="priority-title">Accessibility Best Practices</div>
+                                <div class="priority-timeline">Requested by design and frontend teams</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="priority-item">
+                        <div class="priority-header">
+                            <span class="priority-icon">📊</span>
+                            <div>
+                                <div class="priority-title">Performance Testing & Optimization</div>
+                                <div class="priority-timeline">Requested by QA and backend teams</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dependency Tracking -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🔗</span>
+                <h2 class="section-title">Dependency Tracking</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem;">External Dependencies</h3>
+                <div class="risk-grid">
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">TRUV API Documentation</div>
+                            <div class="risk-priority high">Blocked</div>
+                        </div>
+                        <div class="risk-description">
+                            Waiting on updated payroll API documentation from TRUV. Integration delayed 5 days.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Resolution:</strong> Daily syncs with TRUV support. Documentation expected Jan 24. Workaround in development.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Plaid Rate Limit Increase</div>
+                            <div class="risk-priority medium">In Progress</div>
+                        </div>
+                        <div class="risk-description">
+                            Requested higher API rate limits for production scaling. Approval pending from Plaid.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Resolution:</strong> Response expected by Feb 1. Caching strategy implemented as interim solution.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Compliance Audit Schedule</div>
+                            <div class="risk-priority medium">On Track</div>
+                        </div>
+                        <div class="risk-description">
+                            Awaiting final compliance audit from third-party firm. Scheduled for March.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Resolution:</strong> Audit scheduled for Mar 15-18. All documentation being prepared in advance.
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Internal Dependencies</h3>
+                <div class="risk-grid">
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Error Handling Framework</div>
+                            <div class="risk-priority high">Blocked</div>
+                        </div>
+                        <div class="risk-description">
+                            Multiple features waiting on standardized error handling framework completion.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Resolution:</strong> Framework completion target: Feb 1. Blocking 4 feature implementations.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Component Library Finalization</div>
+                            <div class="risk-priority medium">In Progress</div>
+                        </div>
+                        <div class="risk-description">
+                            Mobile screens waiting on final 5% of component library completion.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Resolution:</strong> Library completion by Jan 28. Mobile implementation can proceed immediately after.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Backend Performance Improvements</div>
+                            <div class="risk-priority medium">On Track</div>
+                        </div>
+                        <div class="risk-description">
+                            Frontend optimizations dependent on backend query performance improvements.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Resolution:</strong> Performance sprint Feb 3-10 will address. Coordinated front/back-end effort.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget & Resource Status -->
+        <section id="budget" class="section">
+            <div class="section-header">
+                <span class="section-icon">💰</span>
+                <h2 class="section-title">Budget & Resource Status</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>💵</span>
+                        Total Budget: $2.4M
+                    </div>
+                    <div class="status-badge at-risk">$1.56M Utilized (65%)</div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem;">Budget by Category</h3>
+                <div class="budget-grid">
+                    <div class="budget-item">
+                        <div class="budget-category">Personnel</div>
+                        <div class="budget-amount">$1.05M</div>
+                        <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 0.5rem;">of $1.6M (66%)</div>
+                        <div class="budget-bar">
+                            <div class="budget-bar-fill" style="width: 66%"></div>
+                        </div>
+                    </div>
+
+                    <div class="budget-item">
+                        <div class="budget-category">Third-Party Services</div>
+                        <div class="budget-amount">$280K</div>
+                        <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 0.5rem;">of $400K (70%)</div>
+                        <div class="budget-bar">
+                            <div class="budget-bar-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+
+                    <div class="budget-item">
+                        <div class="budget-category">Infrastructure</div>
+                        <div class="budget-amount">$120K</div>
+                        <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 0.5rem;">of $200K (60%)</div>
+                        <div class="budget-bar">
+                            <div class="budget-bar-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+
+                    <div class="budget-item">
+                        <div class="budget-category">Licenses & Tools</div>
+                        <div class="budget-amount">$65K</div>
+                        <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 0.5rem;">of $100K (65%)</div>
+                        <div class="budget-bar">
+                            <div class="budget-bar-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+
+                    <div class="budget-item">
+                        <div class="budget-category">Contingency</div>
+                        <div class="budget-amount">$40K</div>
+                        <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 0.5rem;">of $100K (40%)</div>
+                        <div class="budget-bar">
+                            <div class="budget-bar-fill" style="width: 40%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Burn Rate Analysis</h3>
+                <div class="sprint-stats">
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Monthly Burn Rate</div>
+                        <div class="sprint-stat-value">$260K</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">vs. $240K planned</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Projected Completion Cost</div>
+                        <div class="sprint-stat-value">$2.48M</div>
+                        <div style="font-size: 0.85rem; color: #f59e0b; margin-top: 0.25rem;">3.3% over budget</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Remaining Budget</div>
+                        <div class="sprint-stat-value">$840K</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">35% of total</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Budget Health</div>
+                        <div class="sprint-stat-value" style="color: #f59e0b;">At Risk</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Trending over</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Metrics -->
+        <section id="quality" class="section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">Quality Metrics</h2>
+            </div>
+
+            <div class="quality-grid">
+                <div class="quality-card">
+                    <div class="quality-label">Bug Count</div>
+                    <div class="quality-value">47</div>
+                    <div class="quality-target">12 Critical, 18 High, 17 Medium/Low</div>
+                    <div class="quality-status below-target">Above Target (30)</div>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-label">Test Coverage</div>
+                    <div class="quality-value">78%</div>
+                    <div class="quality-target">Target: 80%</div>
+                    <div class="quality-status below-target">Below Target</div>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-label">Avg Response Time</div>
+                    <div class="quality-value">240ms</div>
+                    <div class="quality-target">Target: 200ms</div>
+                    <div class="quality-status below-target">Above Target</div>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-label">Uptime</div>
+                    <div class="quality-value">99.8%</div>
+                    <div class="quality-target">Target: 99.9%</div>
+                    <div class="quality-status below-target">Below Target</div>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-label">Code Quality Score</div>
+                    <div class="quality-value">8.4/10</div>
+                    <div class="quality-target">SonarQube analysis</div>
+                    <div class="quality-status on-target">On Target</div>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-label">Security Audit</div>
+                    <div class="quality-value">Passed</div>
+                    <div class="quality-target">0 Critical Issues</div>
+                    <div class="quality-status on-target">On Target</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>📊</span>
+                        Quality Trends
+                    </div>
+                </div>
+
+                <div class="chart-container large">
+                    <canvas id="qualityTrendChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deployment Status -->
+        <section id="deployment" class="section">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <h2 class="section-title">Deployment Status</h2>
+            </div>
+
+            <div class="deployment-grid">
+                <div class="deployment-card">
+                    <div class="deployment-env">Production</div>
+                    <div class="deployment-version">v1.4.2</div>
+                    <div class="deployment-time">Last deploy: 3 days ago (Jan 18, 2025)</div>
+                </div>
+
+                <div class="deployment-card">
+                    <div class="deployment-env">Staging</div>
+                    <div class="deployment-version">v1.5.0-beta</div>
+                    <div class="deployment-time">Last deploy: 1 day ago (Jan 20, 2025)</div>
+                </div>
+
+                <div class="deployment-card">
+                    <div class="deployment-env">Development</div>
+                    <div class="deployment-version">v1.6.0-dev</div>
+                    <div class="deployment-time">Continuous deployment (today)</div>
+                </div>
+
+                <div class="deployment-card">
+                    <div class="deployment-env">Deployment Frequency</div>
+                    <div class="deployment-version">2.3x</div>
+                    <div class="deployment-time">Per week (above 2.0x target)</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>📈</span>
+                        Deployment Metrics
+                    </div>
+                </div>
+
+                <div class="sprint-stats">
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Lead Time</div>
+                        <div class="sprint-stat-value">4.2 days</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Code to production</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Deployment Success Rate</div>
+                        <div class="sprint-stat-value">96%</div>
+                        <div style="font-size: 0.85rem; color: #10b981; margin-top: 0.25rem;">High reliability</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">Rollback Rate</div>
+                        <div class="sprint-stat-value">4%</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">2 of 50 deploys</div>
+                    </div>
+
+                    <div class="sprint-stat">
+                        <div class="sprint-stat-label">MTTR</div>
+                        <div class="sprint-stat-value">45 min</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Mean time to recovery</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="deploymentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stakeholder Communication -->
+        <section id="stakeholders" class="section">
+            <div class="section-header">
+                <span class="section-icon">🤝</span>
+                <h2 class="section-title">Stakeholder Communication</h2>
+            </div>
+
+            <div class="stakeholder-grid">
+                <div class="stakeholder-card">
+                    <div class="stakeholder-label">Last Steering Committee</div>
+                    <div class="stakeholder-value">Jan 15, 2025</div>
+                </div>
+
+                <div class="stakeholder-card">
+                    <div class="stakeholder-label">Next Executive Update</div>
+                    <div class="stakeholder-value">Jan 28, 2025</div>
+                </div>
+
+                <div class="stakeholder-card">
+                    <div class="stakeholder-label">Open Questions</div>
+                    <div class="stakeholder-value">4 <span class="stakeholder-count">Pending</span></div>
+                </div>
+
+                <div class="stakeholder-card">
+                    <div class="stakeholder-label">Decisions Awaiting Approval</div>
+                    <div class="stakeholder-value">2 <span class="stakeholder-count">Urgent</span></div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem;">Pending Stakeholder Decisions</h3>
+                <div class="risk-grid">
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">Mobile App Scope for v2.0</div>
+                            <div class="risk-priority high">Urgent</div>
+                        </div>
+                        <div class="risk-description">
+                            Decision needed: Include native mobile app in v2.0 or defer to v2.1? Impacts timeline and budget.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Action:</strong> Emergency steering meeting Jan 23. Recommendation: defer to v2.1 to protect beta launch.
+                        </div>
+                    </div>
+
+                    <div class="risk-card high">
+                        <div class="risk-header">
+                            <div class="risk-title">AI Assistant Feature Scope</div>
+                            <div class="risk-priority high">Urgent</div>
+                        </div>
+                        <div class="risk-description">
+                            Clarification needed on AI assistant capabilities for beta launch. Full NLP or basic FAQ?
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Action:</strong> Product demo scheduled Jan 24 with exec team. Decision deadline: Jan 25.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Marketing Beta Launch Strategy</div>
+                            <div class="risk-priority medium">Open</div>
+                        </div>
+                        <div class="risk-description">
+                            Marketing team requests clarity on beta launch messaging and user selection criteria.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Action:</strong> Joint product-marketing workshop scheduled Feb 2.
+                        </div>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <div class="risk-header">
+                            <div class="risk-title">Training Materials Scope</div>
+                            <div class="risk-priority medium">Open</div>
+                        </div>
+                        <div class="risk-description">
+                            Stakeholders need to approve training materials format and delivery method for LO onboarding.
+                        </div>
+                        <div class="risk-mitigation">
+                            <strong>Action:</strong> Sample materials being prepared for review by Feb 5.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Items from Last Week -->
+        <section id="actions" class="section">
+            <div class="section-header">
+                <span class="section-icon">✓</span>
+                <h2 class="section-title">Action Items from Last Week</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>📋</span>
+                        Weekly Action Items
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="status-badge on-track">12 Completed</div>
+                        <div class="status-badge behind">3 Overdue</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem;">Completed (12/15 = 80%)</h3>
+                <div class="action-items-grid">
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Complete Prove integration testing</div>
+                            <div class="action-assignee">Assigned to: Dev Team Lead | Due: Jan 15</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Ship LO Dashboard v1.0 to staging</div>
+                            <div class="action-assignee">Assigned to: Frontend Team | Due: Jan 17</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Conduct user testing session #3</div>
+                            <div class="action-assignee">Assigned to: UX Research | Due: Jan 17</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Complete security audit</div>
+                            <div class="action-assignee">Assigned to: Security Team | Due: Jan 12</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Resolve critical bugs in authentication flow</div>
+                            <div class="action-assignee">Assigned to: Backend Team | Due: Jan 14</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Update component library documentation</div>
+                            <div class="action-assignee">Assigned to: Design System Team | Due: Jan 18</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Optimize CI/CD pipeline</div>
+                            <div class="action-assignee">Assigned to: DevOps | Due: Jan 11</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Review GLBA compliance checklist</div>
+                            <div class="action-assignee">Assigned to: Compliance Team | Due: Jan 16</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Schedule Q1 product roadmap review</div>
+                            <div class="action-assignee">Assigned to: Product Manager | Due: Jan 13</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Prepare sprint 14 retrospective</div>
+                            <div class="action-assignee">Assigned to: Scrum Master | Due: Jan 19</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Update project status dashboard</div>
+                            <div class="action-assignee">Assigned to: PM | Due: Jan 20</div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox completed">✓</div>
+                        <div class="action-content">
+                            <div class="action-title">Recruit 2 contract QA engineers</div>
+                            <div class="action-assignee">Assigned to: Talent Acquisition | Due: Jan 20</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #ef4444; margin: 2rem 0 1rem;">Overdue (3)</h3>
+                <div class="action-items-grid">
+                    <div class="action-item">
+                        <div class="action-checkbox overdue">!</div>
+                        <div class="action-content">
+                            <div class="action-title">Complete TRUV payroll integration</div>
+                            <div class="action-assignee">Assigned to: Integration Team | Due: Jan 18 | <strong>2 days overdue</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox overdue">!</div>
+                        <div class="action-content">
+                            <div class="action-title">Finalize error handling framework</div>
+                            <div class="action-assignee">Assigned to: Architecture Team | Due: Jan 19 | <strong>1 day overdue</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="action-item">
+                        <div class="action-checkbox overdue">!</div>
+                        <div class="action-content">
+                            <div class="action-title">Achieve 80% test coverage target</div>
+                            <div class="action-assignee">Assigned to: QA Team | Due: Jan 20 | <strong>In progress - 78% current</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 1rem;">Carrying Over to This Week</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">All 3 overdue items have been reprioritized and assigned to this week's sprint with additional resources.</p>
+            </div>
+        </section>
+
+        <!-- Weekly Highlights Email Preview -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📧</span>
+                <h2 class="section-title">Weekly Highlights Email Preview</h2>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(20, 184, 166, 0.05));">
+                <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                    <strong>To:</strong> Executive Team, Stakeholders<br>
+                    <strong>Subject:</strong> Smart App 2.0 - Weekly Status Update (Week of Jan 15-21, 2025)
+                </div>
+
+                <div style="padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px; border-left: 4px solid var(--accent-blue);">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">Executive Summary</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>Status: At Risk</strong> - Project is 65% complete with 142 days until launch. While we achieved significant milestones this week (Prove integration complete, LO Dashboard shipped, security audit passed), we're facing QA resource constraints and TRUV integration delays that require immediate attention.
+                    </p>
+
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 1.5rem 0 1rem;">Key Wins This Week:</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8;">
+                        <li>Completed Prove identity integration and testing</li>
+                        <li>Shipped LO Dashboard v1.0 to production</li>
+                        <li>Passed security audit with zero critical findings</li>
+                        <li>Resolved 47 bugs (12 critical, 18 high priority)</li>
+                        <li>Achieved 78% test coverage (target: 80%)</li>
+                    </ul>
+
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #ef4444; margin: 1.5rem 0 1rem;">Critical Issues Requiring Attention:</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>QA Resource Gap:</strong> Hiring 2 contract engineers to start Jan 28</li>
+                        <li><strong>TRUV Integration Delay:</strong> 5 days behind, daily syncs with vendor in place</li>
+                        <li><strong>Performance Targets:</strong> Response time at 240ms vs. 200ms target - performance sprint scheduled Feb 3-10</li>
+                    </ul>
+
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 1.5rem 0 1rem;">Next Week Priorities:</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8;">
+                        <li>Complete TRUV payroll integration (target: Jan 30)</li>
+                        <li>Launch internal beta (target: Feb 1)</li>
+                        <li>Onboard contract QA engineers (Jan 28)</li>
+                        <li>Finalize error handling framework (Feb 1)</li>
+                    </ul>
+
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 1.5rem 0 1rem;">Decisions Needed:</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>Urgent:</strong> Mobile app scope for v2.0 (defer to v2.1?)</li>
+                        <li><strong>Urgent:</strong> AI assistant feature scope for beta launch</li>
+                    </ul>
+
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1.5rem;">
+                        <strong>Next Milestone:</strong> Internal Beta Launch - April 15, 2025 (142 days away)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Export & Actions -->
+        <section class="export-section">
+            <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">
+                Export Status Report
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Download this status summary in various formats for sharing with stakeholders
+            </p>
+
+            <div class="export-buttons">
+                <button class="export-btn primary" onclick="window.print()">
+                    <span>🖨️</span>
+                    Print Report
+                </button>
+                <button class="export-btn" onclick="alert('PDF export functionality would be implemented via backend service')">
+                    <span>📄</span>
+                    Export to PDF
+                </button>
+                <button class="export-btn" onclick="alert('Excel export functionality would be implemented via backend service')">
+                    <span>📊</span>
+                    Export to Excel
+                </button>
+                <button class="export-btn" onclick="alert('Email functionality would be integrated with email service')">
+                    <span>📧</span>
+                    Email to Stakeholders
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sprint Burndown Chart
+        const sprintBurndownCtx = document.getElementById('sprintBurndownChart').getContext('2d');
+        new Chart(sprintBurndownCtx, {
+            type: 'line',
+            data: {
+                labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10'],
+                datasets: [{
+                    label: 'Ideal Burndown',
+                    data: [26, 23.4, 20.8, 18.2, 15.6, 13, 10.4, 7.8, 5.2, 2.6],
+                    borderColor: 'rgba(107, 114, 128, 0.5)',
+                    backgroundColor: 'rgba(107, 114, 128, 0.1)',
+                    borderDash: [5, 5],
+                    tension: 0.4
+                }, {
+                    label: 'Actual Burndown',
+                    data: [26, 24, 21, 19, 17, 14, 11, 8, 5, 3],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#e5e7eb',
+                            font: { family: 'Plus Jakarta Sans' }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Sprint 14 Burndown Chart',
+                        color: '#e5e7eb',
+                        font: { family: 'Plus Jakarta Sans', size: 16, weight: '700' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Story Points Remaining',
+                            color: '#9ca3af',
+                            font: { family: 'Plus Jakarta Sans' }
+                        },
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Sprint Days',
+                            color: '#9ca3af',
+                            font: { family: 'Plus Jakarta Sans' }
+                        },
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    }
+                }
+            }
+        });
+
+        // Budget Chart
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Personnel ($1.05M)', 'Third-Party ($280K)', 'Infrastructure ($120K)', 'Licenses ($65K)', 'Contingency ($40K)'],
+                datasets: [{
+                    data: [1050000, 280000, 120000, 65000, 40000],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#14b8a6',
+                        '#8b5cf6',
+                        '#f59e0b',
+                        '#10b981'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            color: '#e5e7eb',
+                            font: { family: 'Plus Jakarta Sans' },
+                            padding: 15
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Budget Allocation by Category',
+                        color: '#e5e7eb',
+                        font: { family: 'Plus Jakarta Sans', size: 16, weight: '700' }
+                    }
+                }
+            }
+        });
+
+        // Quality Trend Chart
+        const qualityTrendCtx = document.getElementById('qualityTrendChart').getContext('2d');
+        new Chart(qualityTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                datasets: [{
+                    label: 'Bug Count',
+                    data: [82, 71, 65, 58, 52, 49, 51, 47],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    yAxisID: 'y',
+                    tension: 0.4
+                }, {
+                    label: 'Test Coverage (%)',
+                    data: [62, 65, 68, 71, 73, 75, 76, 78],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    yAxisID: 'y1',
+                    tension: 0.4
+                }, {
+                    label: 'Response Time (ms)',
+                    data: [285, 275, 268, 260, 255, 248, 243, 240],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    yAxisID: 'y2',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#e5e7eb',
+                            font: { family: 'Plus Jakarta Sans' }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Quality Metrics Over Time',
+                        color: '#e5e7eb',
+                        font: { family: 'Plus Jakarta Sans', size: 16, weight: '700' }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Bug Count',
+                            color: '#ef4444',
+                            font: { family: 'Plus Jakarta Sans' }
+                        },
+                        ticks: { color: '#ef4444' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Test Coverage (%)',
+                            color: '#10b981',
+                            font: { family: 'Plus Jakarta Sans' }
+                        },
+                        ticks: { color: '#10b981' },
+                        grid: { drawOnChartArea: false }
+                    },
+                    y2: {
+                        type: 'linear',
+                        display: false,
+                        position: 'right'
+                    },
+                    x: {
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    }
+                }
+            }
+        });
+
+        // Deployment Chart
+        const deploymentCtx = document.getElementById('deploymentChart').getContext('2d');
+        new Chart(deploymentCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                datasets: [{
+                    label: 'Successful Deployments',
+                    data: [8, 10, 9, 11, 12, 10, 11, 12],
+                    backgroundColor: '#10b981'
+                }, {
+                    label: 'Rollbacks',
+                    data: [0, 1, 0, 0, 1, 0, 0, 1],
+                    backgroundColor: '#ef4444'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#e5e7eb',
+                            font: { family: 'Plus Jakarta Sans' }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Deployment History',
+                        color: '#e5e7eb',
+                        font: { family: 'Plus Jakarta Sans', size: 16, weight: '700' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Deployments',
+                            color: '#9ca3af',
+                            font: { family: 'Plus Jakarta Sans' }
+                        },
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    },
+                    x: {
+                        stacked: true,
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
