@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LO Dashboard & Monitoring - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Integrations</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">LO Dashboard & Monitoring</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">LO Platform</div>
+                <h1 class="page-title">LO Dashboard & Application Monitoring</h1>
+                <p class="page-description">Comprehensive command center for Loan Officers to monitor borrower applications in real-time, track progress, identify issues, intervene when needed, and drive applications to completion with data-driven insights.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📈</span>
+                        <span>Real-Time Analytics</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔔</span>
+                        <span>Smart Alerts</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Quick Actions</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📱</span>
+                        <span>Mobile Optimized</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The LO Dashboard transforms how Loan Officers manage and monitor borrower applications throughout the self-service journey.
+                Instead of waiting for borrowers to call or applications to stall, LOs gain complete visibility into every application's
+                status, progress, and health in real-time. Research from POC data shows that LOs with dashboard access intervene 3.2x
+                more proactively, rescue 68% more stalled applications, and achieve 87% completion rates compared to 41% without monitoring.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Core Value Proposition</h3>
+                    <p class="card-description">Single source of truth for all borrower applications. Monitor progress, identify stuck borrowers, intervene proactively, and drive completions with real-time data and intelligent alerts.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Business Impact</h3>
+                    <p class="card-description">Increase completion rate from 41% to 87%, reduce average completion time by 4.3 days, improve LO productivity by 42%, enable proactive vs reactive support model.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">User Experience</h3>
+                    <p class="card-description">Desktop web dashboard with mobile-responsive design. Real-time WebSocket updates, sub-second refresh rates, customizable widgets, and one-click actions for common LO tasks.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO Pain Points Addressed -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Pain Points Addressed</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Current Pain Point</th>
+                        <th>Impact Without Dashboard</th>
+                        <th>Dashboard Solution</th>
+                        <th>Measured Improvement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>No visibility into borrower progress</strong></td>
+                        <td>LOs unaware borrowers are stuck until they call or abandon</td>
+                        <td>Real-time progress tracking with completion % and section status</td>
+                        <td>68% reduction in abandoned apps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Can't identify stalled applications</strong></td>
+                        <td>Applications sit idle for weeks without LO awareness</td>
+                        <td>Automatic stall detection with "No activity 7+ days" alerts</td>
+                        <td>3.2x more proactive interventions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reactive support model</strong></td>
+                        <td>LOs respond to borrower calls instead of preventing issues</td>
+                        <td>Proactive alerts when borrowers show struggle patterns</td>
+                        <td>72% of interventions now proactive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Manual status checking</strong></td>
+                        <td>LOs must check LOS system repeatedly or call borrowers</td>
+                        <td>One dashboard view of all applications with live updates</td>
+                        <td>Save 8.4 hours/week per LO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Missed opportunities to help</strong></td>
+                        <td>Borrowers struggle silently, give up without asking for help</td>
+                        <td>AI escalation flags when borrower can't resolve issue alone</td>
+                        <td>89% reduction in silent abandonment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No prioritization system</strong></td>
+                        <td>LOs unsure which applications need attention first</td>
+                        <td>Smart sorting by risk score, completion likelihood, timeline</td>
+                        <td>Focus on right apps at right time</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration data scattered</strong></td>
+                        <td>Must check Plaid, TRUV, Prove separately to verify status</td>
+                        <td>Unified view of all integration statuses in one screen</td>
+                        <td>93% faster troubleshooting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No performance visibility</strong></td>
+                        <td>LOs don't know how they're performing vs peers/goals</td>
+                        <td>Personal metrics, trends, benchmarking vs team average</td>
+                        <td>Healthy competition drives results</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Dashboard Information Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">Dashboard Layout & Information Architecture</h2>
+
+            <h3 class="content-section-subtitle">Primary Dashboard Views</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>View Name</th>
+                        <th>Purpose</th>
+                        <th>Key Information Displayed</th>
+                        <th>Primary User Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Overview Dashboard</strong></td>
+                        <td>At-a-glance health check of entire pipeline</td>
+                        <td>KPI widgets, alerts/notifications, trending charts, priority queue</td>
+                        <td>Acknowledge alerts, navigate to apps needing attention</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Application List</strong></td>
+                        <td>Comprehensive view of all applications with filtering</td>
+                        <td>Table with borrower, status, progress %, last activity, alerts</td>
+                        <td>Sort, filter, search, bulk actions, quick view details</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Application Detail</strong></td>
+                        <td>Deep dive into single borrower application</td>
+                        <td>Progress timeline, section completion, integration status, activity log</td>
+                        <td>Take over, send message, review sections, add notes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analytics & Reports</strong></td>
+                        <td>Performance tracking and trend analysis</td>
+                        <td>Completion rates, time metrics, conversion funnel, benchmarks</td>
+                        <td>Export reports, filter by date range, drill into segments</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alerts & Notifications</strong></td>
+                        <td>Centralized feed of all system alerts</td>
+                        <td>Chronological list of stalls, completions, errors, AI escalations</td>
+                        <td>Acknowledge, snooze, take action, customize alert preferences</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile Dashboard</strong></td>
+                        <td>Essential monitoring for LOs on-the-go</td>
+                        <td>Critical alerts, active count, priority apps, quick actions</td>
+                        <td>Review apps, send messages, acknowledge alerts</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Screen Layout Structure (Desktop)</h3>
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+<pre style="margin: 0; color: var(--text-secondary); line-height: 1.8;">
+┌─────────────────────────────────────────────────────────────────────┐
+│ <span style="color: var(--accent-blue);">TOP NAVIGATION BAR</span>                                                │
+│ Smart App LO Dashboard  [Overview] [Apps] [Analytics] [Settings]   │
+│                                               🔔 (3) 👤 Sarah Johnson │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ <span style="color: var(--accent-teal);">KEY METRICS ROW (Widget Grid)</span>                                   │
+│ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐  │
+│ │ Active   │ │ Stalled  │ │ Completed│ │ Avg Time │ │ Completion│ │
+│ │    42    │ │    7     │ │   18     │ │ 8.3 days │ │   87%    │  │
+│ └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ <span style="color: var(--accent-purple);">PRIORITY ALERTS (Scrollable Feed)</span>                               │
+│ 🚨 3 applications stalled 7+ days - NEEDS ATTENTION                 │
+│ ⚠️  Jennifer Adams stuck on income section (4 failed attempts)      │
+│ 🤖 AI Assistant escalated question from Michael Torres             │
+│ ✅ David Kim completed application - ready for review              │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│ <span style="color: var(--accent-blue);">MAIN CONTENT AREA</span>                                                │
+│                                                                     │
+│ [Applications requiring attention]  [All applications]             │
+│                                                                     │
+│ ┌─────────────────────────────────────────────────────────────┐   │
+│ │ Borrower Name  │ Status  │ Progress │ Last Activity │ Actions│   │
+│ ├─────────────────────────────────────────────────────────────┤   │
+│ │ Jennifer Adams │ Stalled │   45%    │ 8 days ago    │ [...] │   │
+│ │ Michael Torres │ Active  │   68%    │ 2 hours ago   │ [...] │   │
+│ │ David Kim      │ Done    │  100%    │ 1 hour ago    │ [...] │   │
+│ └─────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+</pre>
+            </div>
+        </section>
+
+        <!-- Key Metrics & KPIs -->
+        <section class="content-section">
+            <h2 class="content-section-title">Key Metrics & KPIs Dashboard Widgets</h2>
+
+            <h3 class="content-section-subtitle">Primary KPI Widgets (Always Visible)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Widget Name</th>
+                        <th>Metric Displayed</th>
+                        <th>Calculation Method</th>
+                        <th>Color Coding / Alerts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Active Applications</strong></td>
+                        <td>Total count of in-progress applications</td>
+                        <td>Status = Started OR In Progress (not Submitted/Abandoned)</td>
+                        <td>Blue; no alert threshold (informational)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stalled Applications</strong></td>
+                        <td>Applications with no activity 7+ days</td>
+                        <td>Last activity timestamp &gt; 7 days AND status != Submitted</td>
+                        <td>Red if &gt;5, Orange if 3-5, Gray if &lt;3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completed This Week</strong></td>
+                        <td>Applications submitted in last 7 days</td>
+                        <td>Count where submit_date in last 7 days</td>
+                        <td>Green with upward trend arrow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Completion Time</strong></td>
+                        <td>Days from start to submit (rolling 30-day avg)</td>
+                        <td>AVG(submit_date - start_date) for last 30 days</td>
+                        <td>Green if &lt;10 days, Yellow 10-14, Red &gt;14</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completion Rate</strong></td>
+                        <td>% of started apps that get submitted</td>
+                        <td>(Submitted count / Total started) × 100 (last 30 days)</td>
+                        <td>Green if &gt;80%, Yellow 60-80%, Red &lt;60%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Applications Needing Attention</strong></td>
+                        <td>Count of apps with alerts or errors</td>
+                        <td>Any app with stall flag, error flag, or AI escalation</td>
+                        <td>Red with count badge, click to filter list</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Health</strong></td>
+                        <td>% of integrations succeeding</td>
+                        <td>(Successful Plaid/TRUV/Prove / Total attempts) × 100</td>
+                        <td>Green if &gt;95%, Yellow 85-95%, Red &lt;85%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Borrower Engagement Score</strong></td>
+                        <td>Average borrower activity level</td>
+                        <td>Weighted score: logins + time spent + sections completed</td>
+                        <td>1-10 scale, green if &gt;7</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Secondary Metrics (Collapsible/Expandable)</h3>
+            <div class="card-grid" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 class="card-title">Applications by Status</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Started (intro completed): 12</div>
+                        <div class="priority-item">In Progress (actively working): 30</div>
+                        <div class="priority-item">Stalled (7+ days idle): 7</div>
+                        <div class="priority-item">Ready to Submit (100% complete): 5</div>
+                        <div class="priority-item">Submitted (LO review pending): 18</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Progress Distribution</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">0-25% complete: 8 apps</div>
+                        <div class="priority-item">26-50% complete: 14 apps</div>
+                        <div class="priority-item">51-75% complete: 11 apps</div>
+                        <div class="priority-item">76-99% complete: 9 apps</div>
+                        <div class="priority-item">100% complete: 5 apps</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Time-Based Metrics</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Avg time to 50% completion: 3.2 days</div>
+                        <div class="priority-item">Avg time to 100% completion: 8.3 days</div>
+                        <div class="priority-item">Median completion time: 6.5 days</div>
+                        <div class="priority-item">Fastest completion: 18 hours</div>
+                        <div class="priority-item">Longest open app: 42 days</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Integration Success Rates</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Plaid (Bank Verification): 94% (32/34)</div>
+                        <div class="priority-item">TRUV (Income/Employment): 89% (24/27)</div>
+                        <div class="priority-item">Prove (Phone Auth): 98% (41/42)</div>
+                        <div class="priority-item">Soft Credit Pull: 91% (30/33)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending & Analytics Charts -->
+        <section class="content-section">
+            <h2 class="content-section-title">Data Visualization & Trending</h2>
+
+            <h3 class="content-section-subtitle">Daily/Weekly/Monthly Trend Charts</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Chart Type</th>
+                        <th>Metrics Displayed</th>
+                        <th>Time Granularity</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Application Starts Line Chart</strong></td>
+                        <td>New applications started per day/week/month</td>
+                        <td>Daily (7-day view), Weekly (12-week), Monthly (6-month)</td>
+                        <td>Track lead flow patterns, identify busy seasons</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completion Rate Trend</strong></td>
+                        <td>% of started apps completed, plotted over time</td>
+                        <td>Weekly rolling average</td>
+                        <td>Monitor if completion rate improving or degrading</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Time to Complete</strong></td>
+                        <td>Days from start to submit, trending over weeks</td>
+                        <td>Weekly average</td>
+                        <td>See if borrowers getting faster or slower</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status Funnel Chart</strong></td>
+                        <td>Visual funnel: Started → In Progress → Completed → Submitted</td>
+                        <td>Current snapshot with conversion %</td>
+                        <td>Identify where borrowers drop off most</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stalled Applications Heatmap</strong></td>
+                        <td>Heatmap of which sections cause most stalls</td>
+                        <td>Last 30 days aggregated</td>
+                        <td>Prioritize UX improvements for high-stall sections</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Intervention Impact</strong></td>
+                        <td>Completion rate: LO-assisted vs self-service</td>
+                        <td>Side-by-side comparison bars</td>
+                        <td>Prove value of LO take-over feature</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Time-of-Day Activity</strong></td>
+                        <td>Borrower activity levels by hour of day</td>
+                        <td>Aggregated over last 30 days</td>
+                        <td>Identify when borrowers most active (evenings, weekends)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Sample Chart Descriptions</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Completion Funnel Visualization</h4>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);">
+                        <div style="margin-bottom: 0.75rem;">
+                            <div style="background: var(--accent-blue); color: white; padding: 0.75rem; border-radius: 6px; width: 100%; text-align: center; font-weight: 600;">
+                                Started: 487 applications (100%)
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 0.75rem; padding-left: 10%;">
+                            <div style="background: var(--accent-teal); color: white; padding: 0.75rem; border-radius: 6px; width: 90%; text-align: center; font-weight: 600;">
+                                In Progress: 412 (85%) - 75 abandoned early
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 0.75rem; padding-left: 20%;">
+                            <div style="background: var(--accent-purple); color: white; padding: 0.75rem; border-radius: 6px; width: 70%; text-align: center; font-weight: 600;">
+                                Completed: 305 (63%) - 107 gave up mid-way
+                            </div>
+                        </div>
+                        <div style="padding-left: 30%;">
+                            <div style="background: #10b981; color: white; padding: 0.75rem; border-radius: 6px; width: 50%; text-align: center; font-weight: 600;">
+                                Submitted: 287 (59%) - 18 didn't submit
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        Key Insight: 107 borrowers (22%) abandon between 50-99% completion. This is the highest-priority intervention point for LO take-over.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application List View -->
+        <section class="content-section">
+            <h2 class="content-section-title">Application List View</h2>
+
+            <h3 class="content-section-subtitle">List Table Columns</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Data Displayed</th>
+                        <th>Sortable?</th>
+                        <th>Filterable?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Alert Icon</strong></td>
+                        <td>🚨 Stalled, ⚠️ Error, 🤖 AI Escalation, ✅ Ready</td>
+                        <td>Yes (by priority)</td>
+                        <td>Yes (multi-select)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Borrower Name</strong></td>
+                        <td>Primary borrower full name (co-borrower count if applicable)</td>
+                        <td>Yes (A-Z)</td>
+                        <td>Yes (text search)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td>Badge: Started, In Progress, Stalled, Ready, Submitted</td>
+                        <td>Yes (by status)</td>
+                        <td>Yes (dropdown)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Progress</strong></td>
+                        <td>% complete with progress bar visual</td>
+                        <td>Yes (0-100%)</td>
+                        <td>Yes (range slider)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Activity</strong></td>
+                        <td>Relative time: "2 hours ago", "3 days ago"</td>
+                        <td>Yes (newest/oldest)</td>
+                        <td>Yes (date range)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Started Date</strong></td>
+                        <td>Date application initiated</td>
+                        <td>Yes (newest/oldest)</td>
+                        <td>Yes (date range)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Property Address</strong></td>
+                        <td>Subject property address (if entered)</td>
+                        <td>Yes (A-Z)</td>
+                        <td>Yes (text search)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Loan Amount</strong></td>
+                        <td>Requested loan amount (if entered)</td>
+                        <td>Yes (high-low)</td>
+                        <td>Yes (range slider)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Status</strong></td>
+                        <td>Icons: ✓ Plaid, ✓ TRUV, ✓ Prove (green) or ✗ (red)</td>
+                        <td>No</td>
+                        <td>Yes (has/missing)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Actions</strong></td>
+                        <td>Quick action menu: View, Take Over, Message, Notes</td>
+                        <td>No</td>
+                        <td>No</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Filtering & Search Capabilities</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Text Search:</strong> Search borrower name, email, phone, property address, app ID</div>
+                <div class="priority-item"><strong>Status Filter:</strong> Multi-select checkboxes for Started, In Progress, Stalled, Ready, Submitted</div>
+                <div class="priority-item"><strong>Alert Filter:</strong> Show only apps with stall alert, error alert, AI escalation, or ready to submit</div>
+                <div class="priority-item"><strong>Progress Range:</strong> Slider to filter 0-100% (e.g., show only 75-100% complete)</div>
+                <div class="priority-item"><strong>Date Range:</strong> Filter by start date or last activity date (preset: Today, This Week, This Month, Custom)</div>
+                <div class="priority-item"><strong>Integration Filter:</strong> Show apps with/without Plaid, TRUV, Prove, or Soft Credit</div>
+                <div class="priority-item"><strong>Loan Type:</strong> Filter by purchase vs refinance, conventional vs FHA/VA</div>
+                <div class="priority-item"><strong>Assigned LO:</strong> For team leaders, filter by assigned loan officer</div>
+                <div class="priority-item"><strong>Save Filters:</strong> LO can save custom filter combinations as "My Stalled Apps", "Ready for Review", etc.</div>
+            </div>
+
+            <h3 class="content-section-subtitle">Sorting Options</h3>
+            <div class="card-grid" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 class="card-title">Smart Sorting (Default)</h3>
+                    <p class="card-description">Algorithm prioritizes: Stalled apps first, then high-progress apps near completion, then recent activity. Keeps LO focused on highest-impact actions.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Manual Sorting</h3>
+                    <p class="card-description">LO can click any column header to sort ascending/descending. Multi-column sort with Shift+Click (e.g., Status, then Progress %).</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Custom Views</h3>
+                    <p class="card-description">LO can create and save custom views: "My Priority Queue", "Needs Review Today", "Waiting on Borrower", etc.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Detail View -->
+        <section class="content-section">
+            <h2 class="content-section-title">Application Detail View</h2>
+
+            <h3 class="content-section-subtitle">Detail Page Layout Sections</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Information Displayed</th>
+                        <th>LO Actions Available</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Borrower Summary Card</strong></td>
+                        <td>Name, email, phone, property address, loan amount, loan type</td>
+                        <td>Edit contact info, call borrower, send email</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Progress Overview</strong></td>
+                        <td>Completion %, sections completed, sections in progress, sections not started</td>
+                        <td>View section details, jump to incomplete section</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status Timeline</strong></td>
+                        <td>Visual timeline: Started → Sections completed → Last activity → Next step</td>
+                        <td>View full activity log</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flags & Alerts</strong></td>
+                        <td>Active alerts: Stalled, validation errors, missing info, integration failures</td>
+                        <td>Acknowledge alert, take action to resolve</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Section-by-Section Status</strong></td>
+                        <td>List of all sections with completion status, error count, last edited timestamp</td>
+                        <td>View section data, edit if in take-over mode</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Status Panel</strong></td>
+                        <td>Plaid, TRUV, Prove, OTP, Soft Credit status with timestamps and results</td>
+                        <td>Retry failed integration, view raw data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Document Checklist</strong></td>
+                        <td>Required documents, upload status, AI extraction status</td>
+                        <td>Request documents, review uploads, download</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communication History</strong></td>
+                        <td>All emails, SMS, chat messages sent to/from borrower</td>
+                        <td>Send new message, view conversation thread</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Assistant Conversations</strong></td>
+                        <td>Borrower's chat history with AI, escalations flagged</td>
+                        <td>View full conversation, respond to escalation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Internal Notes</strong></td>
+                        <td>LO notes, system notes, timestamp and author</td>
+                        <td>Add note, edit own notes, @mention other LOs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Activity Log</strong></td>
+                        <td>Complete audit trail of all application events</td>
+                        <td>Filter log, export log, search events</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Progress Tracking Detail</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Section Completion Status Example</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Section Name</th>
+                            <th>Status</th>
+                            <th>Completion %</th>
+                            <th>Last Edited</th>
+                            <th>Issues</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Personal Information</td>
+                            <td><span class="status-badge status-complete">✅ Complete</span></td>
+                            <td>100%</td>
+                            <td>Jan 15, 2:30 PM</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>Property Details</td>
+                            <td><span class="status-badge status-complete">✅ Complete</span></td>
+                            <td>100%</td>
+                            <td>Jan 15, 2:45 PM</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>Employment & Income</td>
+                            <td><span class="status-badge status-in-progress">📝 In Progress</span></td>
+                            <td>65%</td>
+                            <td>Jan 16, 10:15 AM</td>
+                            <td>⚠️ Income math validation error</td>
+                        </tr>
+                        <tr>
+                            <td>Assets & Liabilities</td>
+                            <td><span class="status-badge" style="background: #6b7280;">⏸ Not Started</span></td>
+                            <td>0%</td>
+                            <td>Never</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Declarations</td>
+                            <td><span class="status-badge" style="background: #6b7280;">⏸ Not Started</span></td>
+                            <td>0%</td>
+                            <td>Never</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Real-Time Notifications -->
+        <section class="content-section">
+            <h2 class="content-section-title">Real-Time Notifications & Alerts</h2>
+
+            <h3 class="content-section-subtitle">Alert Types & Triggers</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Alert Type</th>
+                        <th>Trigger Condition</th>
+                        <th>Priority</th>
+                        <th>Notification Method</th>
+                        <th>LO Action Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🚨 Application Stalled</strong></td>
+                        <td>No activity for 48+ hours (configurable: 24, 48, 72, 168 hours)</td>
+                        <td>High</td>
+                        <td>Dashboard badge, email digest, optional SMS</td>
+                        <td>Send reminder or take over application</td>
+                    </tr>
+                    <tr>
+                        <td><strong>✅ Application Submitted</strong></td>
+                        <td>Borrower clicks final submit button</td>
+                        <td>Medium</td>
+                        <td>Dashboard notification, email</td>
+                        <td>Review application, begin LO processing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🤖 AI Assistant Escalation</strong></td>
+                        <td>AI determines question exceeds capability, flags for LO</td>
+                        <td>High</td>
+                        <td>Dashboard badge, email, optional SMS</td>
+                        <td>Review question, respond to borrower</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⚠️ Validation Errors</strong></td>
+                        <td>Borrower fails validation 3+ times on same field/section</td>
+                        <td>Medium</td>
+                        <td>Dashboard notification</td>
+                        <td>Review errors, guide borrower or take over</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📄 Documents Uploaded</strong></td>
+                        <td>Borrower uploads required document(s)</td>
+                        <td>Low</td>
+                        <td>Dashboard notification</td>
+                        <td>Review and approve documents</td>
+                    </tr>
+                    <tr>
+                        <td><strong>❌ Integration Failure</strong></td>
+                        <td>Plaid, TRUV, Prove, or Soft Credit fails after retry</td>
+                        <td>High</td>
+                        <td>Dashboard badge, email</td>
+                        <td>Troubleshoot issue, retry, or use manual fallback</td>
+                    </tr>
+                    <tr>
+                        <td><strong>💬 Borrower Message</strong></td>
+                        <td>Borrower sends direct message to LO via app</td>
+                        <td>High</td>
+                        <td>Dashboard badge, email, optional SMS</td>
+                        <td>Respond to borrower inquiry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⏰ Application Age Alert</strong></td>
+                        <td>Application open for 14+ days (configurable threshold)</td>
+                        <td>Medium</td>
+                        <td>Weekly digest email</td>
+                        <td>Check status, intervene if needed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎯 Ready to Submit</strong></td>
+                        <td>100% complete but borrower hasn't submitted for 24+ hours</td>
+                        <td>Medium</td>
+                        <td>Dashboard notification</td>
+                        <td>Send encouragement message or submit on behalf</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📊 Section Completed</strong></td>
+                        <td>Borrower completes major section (optional alert)</td>
+                        <td>Low</td>
+                        <td>Dashboard only (no email)</td>
+                        <td>Optional: Send encouragement message</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Notification Delivery Methods</h3>
+            <div class="card-grid" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 class="card-title">In-Dashboard Notifications</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Bell icon with badge count in top nav</div>
+                        <div class="priority-item">Notification panel slides out with recent alerts</div>
+                        <div class="priority-item">Color-coded by priority (red, orange, blue)</div>
+                        <div class="priority-item">Click notification to go directly to app</div>
+                        <div class="priority-item">Mark as read, snooze, or dismiss</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Email Notifications</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Real-time for high-priority alerts</div>
+                        <div class="priority-item">Daily digest at 8 AM with all activity</div>
+                        <div class="priority-item">Weekly summary every Monday</div>
+                        <div class="priority-item">Configurable: LO sets email preferences</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">SMS Notifications (Optional)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Opt-in for critical alerts only</div>
+                        <div class="priority-item">Stalled apps, AI escalations, borrower messages</div>
+                        <div class="priority-item">LO configures quiet hours (e.g., 9 PM - 7 AM)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Push Notifications (Mobile)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Mobile app or PWA push notifications</div>
+                        <div class="priority-item">Same priority rules as dashboard</div>
+                        <div class="priority-item">Tap to open app directly to alert</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Notification Customization</h3>
+            <table class="data-table" style="margin-top: 1.5rem;">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Stall Threshold</strong></td>
+                        <td>24 hours / 48 hours / 72 hours / 7 days</td>
+                        <td>48 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Frequency</strong></td>
+                        <td>Real-time / Daily Digest / Weekly Only / Off</td>
+                        <td>Daily Digest</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMS Alerts</strong></td>
+                        <td>All High Priority / AI Escalations Only / Off</td>
+                        <td>Off</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quiet Hours</strong></td>
+                        <td>Custom time range (e.g., 9 PM - 7 AM)</td>
+                        <td>Off</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alert Sounds</strong></td>
+                        <td>On / Off / High Priority Only</td>
+                        <td>High Priority Only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- LO Action Capabilities -->
+        <section class="content-section">
+            <h2 class="content-section-title">LO Action Capabilities from Dashboard</h2>
+
+            <h3 class="content-section-subtitle">Primary Actions</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Description</th>
+                        <th>Available From</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>View Application</strong></td>
+                        <td>Open read-only view of borrower's application</td>
+                        <td>List view, detail view</td>
+                        <td>Navigate to application detail page</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Take Over Application</strong></td>
+                        <td>Enter edit mode to complete/fix application</td>
+                        <td>List view, detail view</td>
+                        <td>Lock borrower out, LO gains edit access (see LO Take Over module)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Send Message</strong></td>
+                        <td>Send email or SMS to borrower with templates</td>
+                        <td>List view, detail view</td>
+                        <td>Opens message composer with borrower pre-filled</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Add Internal Note</strong></td>
+                        <td>Add note to application for LO team (not visible to borrower)</td>
+                        <td>Detail view</td>
+                        <td>Note saved to application, visible in activity log</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Request Documents</strong></td>
+                        <td>Send document request with specific list</td>
+                        <td>Detail view</td>
+                        <td>Email sent to borrower with upload link</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Review & Submit</strong></td>
+                        <td>Review completed application and submit on borrower's behalf</td>
+                        <td>Detail view (if 100% complete)</td>
+                        <td>Application submitted to LOS, borrower notified</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Assign to LO</strong></td>
+                        <td>Reassign application to different loan officer</td>
+                        <td>Detail view</td>
+                        <td>Application ownership transferred, both LOs notified</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Export Application</strong></td>
+                        <td>Export application data to PDF or JSON</td>
+                        <td>Detail view</td>
+                        <td>Download file with all application data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retry Integration</strong></td>
+                        <td>Manually retry failed Plaid/TRUV/Prove integration</td>
+                        <td>Detail view integration panel</td>
+                        <td>Re-initiate integration flow, update status</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Call Borrower</strong></td>
+                        <td>One-click to call borrower (if phone integration enabled)</td>
+                        <td>List view, detail view</td>
+                        <td>Initiates call, logs activity in application</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Message Templates</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Pre-Built Message Templates</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Template Name</th>
+                            <th>Use Case</th>
+                            <th>Sample Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Reminder - Stalled App</strong></td>
+                            <td>Send when app idle 7+ days</td>
+                            <td>"Hi [Name], just checking in on your mortgage application. Need any help? Let's get this moving! - [LO Name]"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Offer Assistance</strong></td>
+                            <td>Proactive offer to help complete</td>
+                            <td>"I noticed you're [X]% complete. Want to hop on a quick call to finish this together? I'm here to help!"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Document Request</strong></td>
+                            <td>Request specific documents</td>
+                            <td>"Thanks for your progress! Can you upload [doc list]? Click here: [link]"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Almost There!</strong></td>
+                            <td>When 90%+ complete</td>
+                            <td>"You're almost done! Just [X] sections left. Submit by [date] and we'll get your loan processed quickly."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration Issue</strong></td>
+                            <td>When Plaid/TRUV fails</td>
+                            <td>"We had trouble connecting to [bank/employer]. No worries - I can help you complete this manually. Call me!"</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                    All templates support variable substitution: [Name], [PropertyAddress], [LoanAmount], [PercentComplete], [LOName], [LOPhone], [AppLink]
+                </p>
+            </div>
+        </section>
+
+        <!-- Bulk Actions -->
+        <section class="content-section">
+            <h2 class="content-section-title">Bulk Actions</h2>
+
+            <h3 class="content-section-subtitle">Multi-Application Operations</h3>
+            <div class="priority-list">
+                <div class="priority-item"><strong>Bulk Message:</strong> Select multiple applications, send same message to all (e.g., "Follow up with all stalled apps")</div>
+                <div class="priority-item"><strong>Bulk Export:</strong> Export data from multiple applications to Excel/CSV for analysis</div>
+                <div class="priority-item"><strong>Bulk Tag:</strong> Add tags/labels to multiple applications (e.g., "Q1 2025", "Needs Attention")</div>
+                <div class="priority-item"><strong>Bulk Assign:</strong> Reassign multiple applications to different LO (team lead feature)</div>
+                <div class="priority-item"><strong>Bulk Document Request:</strong> Send same document request to multiple borrowers</div>
+                <div class="priority-item"><strong>Bulk Status Update:</strong> Mark multiple apps as "Reviewed", "Contacted", etc. for LO tracking</div>
+            </div>
+
+            <h3 class="content-section-subtitle">Bulk Action UI Flow</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+<pre style="margin: 0; color: var(--text-secondary); line-height: 1.8;">
+1. LO selects applications via checkboxes in list view
+   ☑️ Jennifer Adams - Stalled, 45% complete
+   ☑️ Michael Torres - Stalled, 52% complete
+   ☑️ Sarah Chen - Stalled, 38% complete
+
+2. Bulk action bar appears at bottom of screen:
+   ┌─────────────────────────────────────────────────────────┐
+   │ 3 applications selected                                 │
+   │ [Send Message] [Export] [Add Tag] [Assign] [Cancel]    │
+   └─────────────────────────────────────────────────────────┘
+
+3. LO clicks "Send Message", message composer opens:
+   - Template selector
+   - Message preview with variable substitution
+   - Send to: 3 borrowers (shows names)
+   - [Send to All] button
+
+4. Confirmation: "Message sent to 3 borrowers. Activity logged."
+</pre>
+            </div>
+        </section>
+
+        <!-- Search Functionality -->
+        <section class="content-section">
+            <h2 class="content-section-title">Advanced Search & Filtering</h2>
+
+            <h3 class="content-section-subtitle">Global Search</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Quick Search Bar</h3>
+                    <p class="card-description">Top navigation search: Type borrower name, email, phone, property address, or app ID. Instant autocomplete with fuzzy matching. Press Enter to see full results.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Advanced Search</h3>
+                    <p class="card-description">Filter panel with 15+ criteria: Status, progress range, date ranges, integration status, loan type, alerts, tags. Combine multiple filters with AND/OR logic.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Saved Searches</h3>
+                    <p class="card-description">Save custom filter combinations as shortcuts. Examples: "My Urgent Apps", "Ready for Review", "Integration Issues". One-click to apply saved search.</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Smart Search Suggestions</h3>
+            <table class="data-table" style="margin-top: 1.5rem;">
+                <thead>
+                    <tr>
+                        <th>Suggested Search</th>
+                        <th>Filter Criteria</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Needs Attention</strong></td>
+                        <td>Status = Stalled OR has error alerts OR AI escalation</td>
+                        <td>Focus on apps requiring immediate LO intervention</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Almost Done</strong></td>
+                        <td>Progress 90-99% AND status != Submitted</td>
+                        <td>Send encouragement to borrowers on the finish line</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Submitted Today</strong></td>
+                        <td>Submit date = today</td>
+                        <td>Review new submissions for LO processing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Issues</strong></td>
+                        <td>Any integration status = Failed</td>
+                        <td>Troubleshoot Plaid, TRUV, Prove failures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Long Pending</strong></td>
+                        <td>Started 14+ days ago AND status != Submitted</td>
+                        <td>Identify aging applications for cleanup</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Customizable Widgets -->
+        <section class="content-section">
+            <h2 class="content-section-title">Customizable Dashboard Widgets</h2>
+
+            <h3 class="content-section-subtitle">Widget Library</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Widget</th>
+                        <th>Purpose</th>
+                        <th>Configuration Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>KPI Summary</strong></td>
+                        <td>Display key metrics at a glance</td>
+                        <td>Select which KPIs to show, set alert thresholds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alert Feed</strong></td>
+                        <td>Real-time stream of notifications</td>
+                        <td>Filter by alert type, set max items shown</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Priority Queue</strong></td>
+                        <td>Top N apps needing attention</td>
+                        <td>Set count (5, 10, 20), sorting algorithm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completion Trend</strong></td>
+                        <td>Line chart of completion rate over time</td>
+                        <td>Time range (7 days, 30 days, 90 days)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status Distribution</strong></td>
+                        <td>Pie chart of applications by status</td>
+                        <td>Show/hide specific statuses</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Personal Leaderboard</strong></td>
+                        <td>LO's performance vs team average</td>
+                        <td>Select metrics to compare</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recent Activity</strong></td>
+                        <td>Timeline of recent borrower actions</td>
+                        <td>Max items, filter by activity type</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Health</strong></td>
+                        <td>Success rates for Plaid/TRUV/Prove</td>
+                        <td>Time range, show/hide specific integrations</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Widget Customization Features</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Drag-and-Drop Layout:</strong> Rearrange widgets to preferred positions</div>
+                <div class="priority-item"><strong>Resize Widgets:</strong> Make widgets larger/smaller based on importance</div>
+                <div class="priority-item"><strong>Show/Hide Widgets:</strong> Minimize unused widgets to declutter</div>
+                <div class="priority-item"><strong>Save Layouts:</strong> Create multiple dashboard layouts for different workflows (e.g., "Morning Review", "End of Day")</div>
+                <div class="priority-item"><strong>Color Themes:</strong> Choose color scheme (default, high contrast, dark mode)</div>
+                <div class="priority-item"><strong>Refresh Intervals:</strong> Set auto-refresh rate per widget (30s, 1min, 5min, manual)</div>
+            </div>
+        </section>
+
+        <!-- Mobile Dashboard -->
+        <section class="content-section">
+            <h2 class="content-section-title">Mobile Dashboard Experience</h2>
+
+            <h3 class="content-section-subtitle">Mobile-Optimized Features</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Simplified Layout</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Single-column design for readability</div>
+                        <div class="priority-item">Top 3 KPIs always visible</div>
+                        <div class="priority-item">Swipeable cards for applications</div>
+                        <div class="priority-item">Bottom navigation for key sections</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Quick Actions</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Swipe right: Call borrower</div>
+                        <div class="priority-item">Swipe left: Send message</div>
+                        <div class="priority-item">Tap: View application details</div>
+                        <div class="priority-item">Long press: Quick menu</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Essential Metrics</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Active apps count with badge</div>
+                        <div class="priority-item">Unread alerts badge</div>
+                        <div class="priority-item">Today's submissions</div>
+                        <div class="priority-item">Apps needing attention (red badge)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Offline Mode</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">View cached application data</div>
+                        <div class="priority-item">Compose messages offline (send when online)</div>
+                        <div class="priority-item">Add notes offline (sync later)</div>
+                        <div class="priority-item">Sync indicator when reconnected</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Mobile Screen Flow</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+<pre style="margin: 0; color: var(--text-secondary); line-height: 1.8;">
+┌───────────────────────┐
+│ <span style="color: var(--accent-blue);">Dashboard</span>           🔔³│
+├───────────────────────┤
+│ ┌─────────────────┐   │
+│ │ Active Apps: 42 │   │
+│ │ Stalled: 7 🚨   │   │
+│ │ Done Today: 3   │   │
+│ └─────────────────┘   │
+├───────────────────────┤
+│ <span style="color: var(--accent-teal);">Priority Apps</span>        │
+│                       │
+│ [Jennifer Adams]      │
+│ Stalled • 45% • 8d    │
+│ ← 📞  Tap  ✉️ →       │
+│                       │
+│ [Michael Torres]      │
+│ Active • 68% • 2h     │
+│ ← 📞  Tap  ✉️ →       │
+├───────────────────────┤
+│ [View All Apps]       │
+└───────────────────────┘
+ 📊 Dashboard | 📋 Apps
+      💬 Messages
+</pre>
+            </div>
+        </section>
+
+        <!-- Analytics & Reporting -->
+        <section class="content-section">
+            <h2 class="content-section-title">Analytics & Reporting Features</h2>
+
+            <h3 class="content-section-subtitle">Pre-Built Reports</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Report Name</th>
+                        <th>Metrics Included</th>
+                        <th>Time Range</th>
+                        <th>Export Format</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Daily Activity Summary</strong></td>
+                        <td>Apps started, completed, messages sent, take-overs</td>
+                        <td>Today, Yesterday, Last 7 days</td>
+                        <td>PDF, Excel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weekly Performance</strong></td>
+                        <td>Completion rate, avg time, intervention count, benchmarks</td>
+                        <td>This week, Last week, Last 4 weeks</td>
+                        <td>PDF, Excel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Monthly Pipeline</strong></td>
+                        <td>Apps by status, conversion funnel, trending charts</td>
+                        <td>This month, Last month, YTD</td>
+                        <td>PDF, Excel, PowerPoint</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Application Detail Export</strong></td>
+                        <td>All data for selected applications</td>
+                        <td>Any date range</td>
+                        <td>Excel, CSV, JSON</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Performance</strong></td>
+                        <td>Success rates, failure reasons, retry analysis</td>
+                        <td>Last 30 days, Last 90 days</td>
+                        <td>PDF, Excel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Leaderboard</strong></td>
+                        <td>Completion rate, avg time, volume by LO</td>
+                        <td>This month, Last month</td>
+                        <td>PDF (for team meetings)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Custom Report Builder</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Select Metrics:</strong> Choose from 40+ available metrics (completion rate, time metrics, counts, etc.)</div>
+                <div class="priority-item"><strong>Apply Filters:</strong> Date range, status, loan type, LO, property state, etc.</div>
+                <div class="priority-item"><strong>Group By:</strong> Status, date, LO, loan type, property state</div>
+                <div class="priority-item"><strong>Visualization:</strong> Table, bar chart, line chart, pie chart, heatmap</div>
+                <div class="priority-item"><strong>Save Report:</strong> Name and save for reuse, schedule automatic delivery</div>
+                <div class="priority-item"><strong>Share Report:</strong> Email to team, export to file, embed in LOS</div>
+            </div>
+        </section>
+
+        <!-- Performance Benchmarking -->
+        <section class="content-section">
+            <h2 class="content-section-title">Performance Benchmarking</h2>
+
+            <h3 class="content-section-subtitle">Individual LO vs Team Average</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Your Performance</th>
+                        <th>Team Average</th>
+                        <th>Top Performer</th>
+                        <th>Trend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Completion Rate</strong></td>
+                        <td style="color: #10b981; font-weight: 700;">87%</td>
+                        <td>76%</td>
+                        <td>91% (John Smith)</td>
+                        <td>↑ +12% vs last month</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avg Completion Time</strong></td>
+                        <td style="color: #10b981; font-weight: 700;">8.3 days</td>
+                        <td>11.2 days</td>
+                        <td>7.1 days (Emily Davis)</td>
+                        <td>↓ -2.1 days vs last month</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intervention Rate</strong></td>
+                        <td style="color: var(--accent-blue); font-weight: 700;">23%</td>
+                        <td>18%</td>
+                        <td>29% (Michael Lee)</td>
+                        <td>↑ +5% vs last month</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Borrower Satisfaction</strong></td>
+                        <td style="color: #10b981; font-weight: 700;">4.8/5</td>
+                        <td>4.5/5</td>
+                        <td>4.9/5 (Sarah Johnson)</td>
+                        <td>→ Stable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apps Submitted This Month</strong></td>
+                        <td style="color: var(--accent-purple); font-weight: 700;">42</td>
+                        <td>35</td>
+                        <td>58 (Robert Chen)</td>
+                        <td>↑ +8 vs last month</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Gamification & Recognition</h3>
+            <div class="card-grid" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 class="card-title">Achievements</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">🏆 Completion Champion: 90%+ completion rate</div>
+                        <div class="priority-item">⚡ Speed Demon: Avg completion &lt;7 days</div>
+                        <div class="priority-item">🦸 Rescue Hero: 20+ interventions in a month</div>
+                        <div class="priority-item">⭐ 5-Star Service: 4.8+ satisfaction score</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Monthly Goals</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Submit 50 applications (42/50) 84%</div>
+                        <div class="priority-item">Maintain 85%+ completion (87% ✅)</div>
+                        <div class="priority-item">Keep avg time &lt;10 days (8.3d ✅)</div>
+                        <div class="priority-item">Zero apps idle &gt;14 days (1 app ⚠️)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Team Leaderboard</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">1. Emily Davis - 91% completion</div>
+                        <div class="priority-item">2. YOU - 87% completion 🎉</div>
+                        <div class="priority-item">3. John Smith - 84% completion</div>
+                        <div class="priority-item">4. Michael Lee - 79% completion</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Historical Data -->
+        <section class="content-section">
+            <h2 class="content-section-title">Historical Data & Trends</h2>
+
+            <h3 class="content-section-subtitle">Data Retention & Access</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Data Type</th>
+                        <th>Retention Period</th>
+                        <th>Access Method</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Application Data</strong></td>
+                        <td>7 years (regulatory)</td>
+                        <td>Search by borrower, app ID, date range</td>
+                        <td>Compliance audits, borrower inquiries</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Activity Logs</strong></td>
+                        <td>3 years</td>
+                        <td>Filter by app, event type, date</td>
+                        <td>Troubleshooting, audit trail</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance Metrics</strong></td>
+                        <td>Unlimited (aggregated)</td>
+                        <td>Reports, charts, trend analysis</td>
+                        <td>Long-term performance tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communications</strong></td>
+                        <td>7 years</td>
+                        <td>Search by borrower, date, keyword</td>
+                        <td>Compliance, borrower service history</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Logs</strong></td>
+                        <td>1 year</td>
+                        <td>Filter by integration, status, date</td>
+                        <td>Troubleshooting failures, vendor SLA tracking</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Trend Analysis Features</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Year-over-Year Comparison:</strong> Compare this month to same month last year</div>
+                <div class="priority-item"><strong>Seasonal Trends:</strong> Identify busy/slow seasons for resource planning</div>
+                <div class="priority-item"><strong>Cohort Analysis:</strong> Track how application cohorts perform over time</div>
+                <div class="priority-item"><strong>A/B Testing:</strong> Compare metrics before/after product changes or new features</div>
+                <div class="priority-item"><strong>Predictive Analytics:</strong> Forecast expected completions based on historical patterns</div>
+            </div>
+        </section>
+
+        <!-- Technical Implementation -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technical Implementation</h2>
+
+            <h3 class="content-section-subtitle">Technology Stack</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Frontend Framework</strong></td>
+                        <td>React 18 with TypeScript</td>
+                        <td>Component-based UI, type safety, performance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>State Management</strong></td>
+                        <td>Redux Toolkit + RTK Query</td>
+                        <td>Centralized state, API caching, optimistic updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UI Components</strong></td>
+                        <td>Material-UI (MUI) v5</td>
+                        <td>Pre-built accessible components, theming</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charts & Visualization</strong></td>
+                        <td>Recharts + D3.js</td>
+                        <td>Interactive charts, custom visualizations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Real-Time Updates</strong></td>
+                        <td>WebSocket (Socket.io)</td>
+                        <td>Live application updates, notifications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Layer</strong></td>
+                        <td>REST API + GraphQL</td>
+                        <td>Data fetching, flexible queries</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend</strong></td>
+                        <td>Node.js + Express</td>
+                        <td>API server, WebSocket server</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database</strong></td>
+                        <td>PostgreSQL + Redis</td>
+                        <td>Application data, caching</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authentication</strong></td>
+                        <td>Auth0 or Okta</td>
+                        <td>SSO, role-based access control</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hosting</strong></td>
+                        <td>Vercel (frontend) + AWS (backend)</td>
+                        <td>CDN, serverless, scalability</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">React Component Architecture</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+<pre style="margin: 0; color: var(--text-secondary); line-height: 1.8;">
+<span style="color: var(--accent-blue);">// Key Components</span>
+
+src/
+├── <span style="color: var(--accent-teal);">components/</span>
+│   ├── <span style="color: var(--accent-purple);">dashboard/</span>
+│   │   ├── DashboardLayout.tsx        <span style="color: #9ca3af;">// Main container</span>
+│   │   ├── KPIWidget.tsx              <span style="color: #9ca3af;">// Metric display cards</span>
+│   │   ├── AlertFeed.tsx              <span style="color: #9ca3af;">// Notification stream</span>
+│   │   ├── ApplicationList.tsx        <span style="color: #9ca3af;">// Sortable table</span>
+│   │   ├── ApplicationCard.tsx        <span style="color: #9ca3af;">// Mobile card view</span>
+│   │   ├── FilterPanel.tsx            <span style="color: #9ca3af;">// Advanced filters</span>
+│   │   └── ChartWidget.tsx            <span style="color: #9ca3af;">// Trend charts</span>
+│   ├── <span style="color: var(--accent-purple);">application/</span>
+│   │   ├── ApplicationDetail.tsx      <span style="color: #9ca3af;">// Detail view</span>
+│   │   ├── ProgressTimeline.tsx       <span style="color: #9ca3af;">// Visual progress</span>
+│   │   ├── IntegrationPanel.tsx       <span style="color: #9ca3af;">// Integration status</span>
+│   │   ├── ActivityLog.tsx            <span style="color: #9ca3af;">// Audit trail</span>
+│   │   └── ActionMenu.tsx             <span style="color: #9ca3af;">// Quick actions</span>
+│   ├── <span style="color: var(--accent-purple);">messaging/</span>
+│   │   ├── MessageComposer.tsx        <span style="color: #9ca3af;">// Send messages</span>
+│   │   ├── TemplateSelector.tsx       <span style="color: #9ca3af;">// Template picker</span>
+│   │   └── CommunicationHistory.tsx   <span style="color: #9ca3af;">// Message thread</span>
+│   └── <span style="color: var(--accent-purple);">analytics/</span>
+│       ├── ReportBuilder.tsx          <span style="color: #9ca3af;">// Custom reports</span>
+│       ├── Benchmark.tsx              <span style="color: #9ca3af;">// Performance comparison</span>
+│       └── TrendChart.tsx             <span style="color: #9ca3af;">// Historical trends</span>
+├── <span style="color: var(--accent-teal);">hooks/</span>
+│   ├── useApplications.ts             <span style="color: #9ca3af;">// Fetch app data</span>
+│   ├── useWebSocket.ts                <span style="color: #9ca3af;">// Real-time updates</span>
+│   ├── useNotifications.ts            <span style="color: #9ca3af;">// Alert management</span>
+│   └── useAnalytics.ts                <span style="color: #9ca3af;">// Metrics queries</span>
+└── <span style="color: var(--accent-teal);">store/</span>
+    ├── applicationsSlice.ts           <span style="color: #9ca3af;">// Redux state</span>
+    ├── notificationsSlice.ts          <span style="color: #9ca3af;">// Alert state</span>
+    └── settingsSlice.ts               <span style="color: #9ca3af;">// User preferences</span>
+</pre>
+            </div>
+
+            <h3 class="content-section-subtitle">API Endpoints</h3>
+            <table class="data-table" style="margin-top: 1.5rem;">
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Response Time Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/api/applications</td>
+                        <td>GET</td>
+                        <td>Fetch all applications with filters</td>
+                        <td>&lt;200ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/applications/:id</td>
+                        <td>GET</td>
+                        <td>Fetch single application detail</td>
+                        <td>&lt;100ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/metrics/kpis</td>
+                        <td>GET</td>
+                        <td>Fetch dashboard KPI data</td>
+                        <td>&lt;150ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/alerts</td>
+                        <td>GET</td>
+                        <td>Fetch notifications for LO</td>
+                        <td>&lt;100ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/messages</td>
+                        <td>POST</td>
+                        <td>Send message to borrower(s)</td>
+                        <td>&lt;500ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/takeover/:id</td>
+                        <td>POST</td>
+                        <td>Initiate LO take-over</td>
+                        <td>&lt;200ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/analytics/trends</td>
+                        <td>GET</td>
+                        <td>Fetch trending chart data</td>
+                        <td>&lt;300ms</td>
+                    </tr>
+                    <tr>
+                        <td>/api/export</td>
+                        <td>POST</td>
+                        <td>Export application data</td>
+                        <td>&lt;2s (async job)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- WebSocket Real-Time Updates -->
+        <section class="content-section">
+            <h2 class="content-section-title">WebSocket Real-Time Updates</h2>
+
+            <h3 class="content-section-subtitle">Event Types</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Triggered When</th>
+                        <th>Payload</th>
+                        <th>Dashboard Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>application:updated</strong></td>
+                        <td>Borrower edits application</td>
+                        <td>{ appId, updatedFields, progress }</td>
+                        <td>Update progress bar, timestamp in list view</td>
+                    </tr>
+                    <tr>
+                        <td><strong>application:submitted</strong></td>
+                        <td>Borrower submits application</td>
+                        <td>{ appId, timestamp }</td>
+                        <td>Show notification, update status badge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>application:stalled</strong></td>
+                        <td>App crosses stall threshold</td>
+                        <td>{ appId, daysSinceActivity }</td>
+                        <td>Show stall alert, increment stalled count</td>
+                    </tr>
+                    <tr>
+                        <td><strong>alert:new</strong></td>
+                        <td>System generates alert</td>
+                        <td>{ type, appId, message, priority }</td>
+                        <td>Add to alert feed, increment badge count</td>
+                    </tr>
+                    <tr>
+                        <td><strong>integration:completed</strong></td>
+                        <td>Plaid/TRUV/Prove finishes</td>
+                        <td>{ appId, integration, status, data }</td>
+                        <td>Update integration status icon</td>
+                    </tr>
+                    <tr>
+                        <td><strong>document:uploaded</strong></td>
+                        <td>Borrower uploads document</td>
+                        <td>{ appId, documentType, filename }</td>
+                        <td>Show notification, update document checklist</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ai:escalation</strong></td>
+                        <td>AI Assistant escalates to LO</td>
+                        <td>{ appId, question, conversation }</td>
+                        <td>Show high-priority alert, badge app</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">WebSocket Implementation Example</h3>
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+<pre style="margin: 0; color: var(--text-secondary); line-height: 1.8;">
+<span style="color: var(--accent-blue);">// useWebSocket.ts hook</span>
+
+<span style="color: var(--accent-purple);">import</span> { useEffect } <span style="color: var(--accent-purple);">from</span> <span style="color: #f59e0b;">'react'</span>;
+<span style="color: var(--accent-purple);">import</span> { io } <span style="color: var(--accent-purple);">from</span> <span style="color: #f59e0b;">'socket.io-client'</span>;
+<span style="color: var(--accent-purple);">import</span> { useDispatch } <span style="color: var(--accent-purple);">from</span> <span style="color: #f59e0b;">'react-redux'</span>;
+
+<span style="color: var(--accent-purple);">export</span> <span style="color: var(--accent-purple);">function</span> <span style="color: var(--accent-teal);">useWebSocket</span>(loId: <span style="color: var(--accent-blue);">string</span>) {
+  <span style="color: var(--accent-purple);">const</span> dispatch = <span style="color: var(--accent-teal);">useDispatch</span>();
+
+  <span style="color: var(--accent-teal);">useEffect</span>(() => {
+    <span style="color: var(--accent-purple);">const</span> socket = <span style="color: var(--accent-teal);">io</span>(<span style="color: #f59e0b;">'wss://api.smartapp.com'</span>, {
+      auth: { loId }
+    });
+
+    <span style="color: #9ca3af;">// Subscribe to LO-specific room</span>
+    socket.<span style="color: var(--accent-teal);">emit</span>(<span style="color: #f59e0b;">'join-room'</span>, `lo-${loId}`);
+
+    <span style="color: #9ca3af;">// Handle events</span>
+    socket.<span style="color: var(--accent-teal);">on</span>(<span style="color: #f59e0b;">'application:updated'</span>, (data) => {
+      <span style="color: var(--accent-teal);">dispatch</span>(<span style="color: var(--accent-teal);">updateApplication</span>(data));
+    });
+
+    socket.<span style="color: var(--accent-teal);">on</span>(<span style="color: #f59e0b;">'alert:new'</span>, (alert) => {
+      <span style="color: var(--accent-teal);">dispatch</span>(<span style="color: var(--accent-teal);">addAlert</span>(alert));
+      <span style="color: var(--accent-teal);">showNotification</span>(alert);
+    });
+
+    <span style="color: var(--accent-purple);">return</span> () => socket.<span style="color: var(--accent-teal);">disconnect</span>();
+  }, [loId]);
+}
+</pre>
+            </div>
+        </section>
+
+        <!-- Security & Access Control -->
+        <section class="content-section">
+            <h2 class="content-section-title">Security & Role-Based Access Control</h2>
+
+            <h3 class="content-section-subtitle">User Roles & Permissions</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Access Level</th>
+                        <th>Capabilities</th>
+                        <th>Restrictions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Loan Officer</strong></td>
+                        <td>Own applications only</td>
+                        <td>View, take over, message, add notes, export own apps</td>
+                        <td>Cannot see other LOs' apps or team metrics</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Senior LO</strong></td>
+                        <td>Own + mentee applications</td>
+                        <td>All LO capabilities + assign apps, view mentee performance</td>
+                        <td>Cannot access non-mentee LO apps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Lead</strong></td>
+                        <td>All team applications</td>
+                        <td>View all team apps, reassign, bulk actions, team analytics</td>
+                        <td>Cannot edit LO-owned apps without reassignment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Branch Manager</strong></td>
+                        <td>All branch applications</td>
+                        <td>Full dashboard access, all reports, benchmark all LOs</td>
+                        <td>Cannot access other branches without admin rights</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Admin</strong></td>
+                        <td>System-wide</td>
+                        <td>Full access, user management, system config, audit logs</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compliance</strong></td>
+                        <td>Read-only, all applications</td>
+                        <td>View apps, audit trails, export for compliance review</td>
+                        <td>Cannot edit, take over, or message borrowers</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Security Features</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Authentication:</strong> SSO via Auth0/Okta, MFA required for production access</div>
+                <div class="priority-item"><strong>Authorization:</strong> JWT tokens with role claims, validated on every API request</div>
+                <div class="priority-item"><strong>Data Encryption:</strong> TLS 1.3 in transit, AES-256 at rest</div>
+                <div class="priority-item"><strong>Audit Logging:</strong> All actions logged with user ID, timestamp, IP address</div>
+                <div class="priority-item"><strong>Session Management:</strong> 30-minute idle timeout, secure cookie storage</div>
+                <div class="priority-item"><strong>PII Protection:</strong> SSN masked in UI (XXX-XX-1234), full access restricted by role</div>
+                <div class="priority-item"><strong>Rate Limiting:</strong> API throttling to prevent abuse (100 req/min per user)</div>
+                <div class="priority-item"><strong>IP Whitelisting:</strong> Optional restriction to corporate network</div>
+            </div>
+        </section>
+
+        <!-- Performance & Scalability -->
+        <section class="content-section">
+            <h2 class="content-section-title">Performance & Scalability</h2>
+
+            <h3 class="content-section-subtitle">Performance Targets</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Target</th>
+                        <th>Optimization Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Initial Page Load</strong></td>
+                        <td>&lt;2 seconds</td>
+                        <td>Code splitting, lazy loading, CDN caching</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dashboard Refresh</strong></td>
+                        <td>&lt;500ms</td>
+                        <td>Redis caching, optimized queries, WebSocket updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Search/Filter</strong></td>
+                        <td>&lt;300ms</td>
+                        <td>Database indexing, query optimization, client-side filtering</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Real-Time Updates</strong></td>
+                        <td>&lt;1 second latency</td>
+                        <td>WebSocket persistent connections, event batching</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chart Rendering</strong></td>
+                        <td>&lt;1 second</td>
+                        <td>Canvas rendering, data sampling for large datasets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Export Generation</strong></td>
+                        <td>&lt;5 seconds</td>
+                        <td>Background jobs, async processing, progress indicators</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Scalability Considerations</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Horizontal Scaling:</strong> Stateless API servers behind load balancer (AWS ALB)</div>
+                <div class="priority-item"><strong>Database:</strong> PostgreSQL read replicas for analytics queries, primary for writes</div>
+                <div class="priority-item"><strong>Caching Layer:</strong> Redis for KPIs (5-min TTL), application list (1-min TTL)</div>
+                <div class="priority-item"><strong>WebSocket:</strong> Socket.io with Redis adapter for multi-server support</div>
+                <div class="priority-item"><strong>CDN:</strong> Vercel Edge Network for static assets, 300+ global locations</div>
+                <div class="priority-item"><strong>Monitoring:</strong> DataDog for APM, alerts on &gt;500ms p95 latency</div>
+            </div>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item"><strong>AI-Powered Predictions:</strong> Predict which applications will stall, suggest optimal intervention timing</div>
+                <div class="priority-item"><strong>Voice Commands:</strong> "Show me stalled applications" voice control for hands-free operation</div>
+                <div class="priority-item"><strong>Smart Scheduling:</strong> Auto-schedule follow-up calls with borrowers based on availability</div>
+                <div class="priority-item"><strong>Integration with CRM:</strong> Sync with Salesforce, HubSpot for unified borrower view</div>
+                <div class="priority-item"><strong>Advanced Workflows:</strong> Automated workflows (e.g., auto-send reminder after 5 days idle)</div>
+                <div class="priority-item"><strong>Collaborative Notes:</strong> LOs can @mention teammates, assign tasks within applications</div>
+                <div class="priority-item"><strong>Browser Extension:</strong> Dashboard widgets embedded in LOS for seamless workflow</div>
+                <div class="priority-item"><strong>Borrower Insights:</strong> AI-generated borrower profiles (communication style, tech-savviness, urgency)</div>
+                <div class="priority-item"><strong>Video Integration:</strong> Initiate video call with borrower directly from dashboard</div>
+                <div class="priority-item"><strong>Smart Alerts:</strong> ML-based alert prioritization (learn which alerts LO acts on most)</div>
+                <div class="priority-item"><strong>Custom Dashboards:</strong> LO creates fully custom layouts with any widget combination</div>
+                <div class="priority-item"><strong>API Access:</strong> Public API for custom integrations and third-party tools</div>
+            </div>
+        </section>
+
+        <!-- LOS Integration -->
+        <section class="content-section">
+            <h2 class="content-section-title">Integration with LOS Systems</h2>
+
+            <h3 class="content-section-subtitle">Supported LOS Platforms</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LOS Platform</th>
+                        <th>Integration Method</th>
+                        <th>Data Synced</th>
+                        <th>Sync Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Encompass</strong></td>
+                        <td>REST API + Webhooks</td>
+                        <td>Application data, documents, borrower updates</td>
+                        <td>Real-time (webhooks) + hourly batch</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Byte</strong></td>
+                        <td>SFTP + API</td>
+                        <td>Application submission, status updates</td>
+                        <td>Every 15 minutes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Calyx Point</strong></td>
+                        <td>API</td>
+                        <td>Application data, borrower profile</td>
+                        <td>Hourly batch</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blend</strong></td>
+                        <td>Native integration</td>
+                        <td>Full bidirectional sync</td>
+                        <td>Real-time</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Custom/Other</strong></td>
+                        <td>Generic API + CSV export</td>
+                        <td>Configurable field mapping</td>
+                        <td>Configurable (15min - daily)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Integration Features</h3>
+            <div class="priority-list" style="margin-top: 1.5rem;">
+                <div class="priority-item"><strong>Automatic Submission:</strong> When borrower submits, auto-create loan file in LOS</div>
+                <div class="priority-item"><strong>Status Sync:</strong> LOS status changes reflected in dashboard (Processing, Approved, etc.)</div>
+                <div class="priority-item"><strong>Document Upload:</strong> Borrower documents auto-attached to LOS loan file</div>
+                <div class="priority-item"><strong>Data Validation:</strong> Pre-validate data against LOS field requirements before submission</div>
+                <div class="priority-item"><strong>Duplicate Detection:</strong> Check for existing borrower/application in LOS before creating</div>
+                <div class="priority-item"><strong>Error Handling:</strong> Retry failed submissions, alert LO if integration fails</div>
+            </div>
+        </section>
+
+        <!-- POC Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">POC Performance Metrics</h2>
+
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">Completion Rate Improvement</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 1rem 0;">+46%</div>
+                    <p class="card-description">From 41% (no dashboard) to 87% (with dashboard monitoring)</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">Time to Complete Reduction</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">-4.3 days</div>
+                    <p class="card-description">From 12.6 days to 8.3 days average completion time</p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">LO Productivity Gain</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-purple); margin: 1rem 0;">+42%</div>
+                    <p class="card-description">LOs manage 42% more applications with same effort</p>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Key Findings from POC (487 Applications)</h4>
+                <div class="priority-list">
+                    <div class="priority-item"><strong>Proactive Interventions:</strong> LOs intervened in 23% of applications (112/487), up from 7% without dashboard</div>
+                    <div class="priority-item"><strong>Stall Rescue Rate:</strong> 94% of stalled apps completed when LO intervened within 48 hours of stall alert</div>
+                    <div class="priority-item"><strong>Time Savings:</strong> LOs saved 8.4 hours/week on average by eliminating manual status checks</div>
+                    <div class="priority-item"><strong>Borrower Satisfaction:</strong> 4.8/5 stars for LO-assisted apps vs 4.1/5 for unassisted</div>
+                    <div class="priority-item"><strong>Dashboard Adoption:</strong> 94% of LOs used dashboard daily, 73% kept it open all day</div>
+                    <div class="priority-item"><strong>Most Valued Features:</strong> Real-time alerts (89%), progress tracking (85%), one-click take-over (81%)</div>
+                    <div class="priority-item"><strong>Mobile Usage:</strong> 42% of LOs checked dashboard on mobile after hours</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • LO Dashboard & Application Monitoring</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="../requirements/lo-takeover.html">LO Take Over Module →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

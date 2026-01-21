@@ -1,0 +1,3282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Architecture - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .architecture-diagram {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .architecture-layer {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .architecture-layer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+            border-radius: 8px 0 0 8px;
+        }
+
+        .layer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .layer-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .component-box {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .component-box:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--text-primary);
+        }
+
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .tech-stack-table th {
+            background: var(--bg-card);
+            color: var(--accent-teal);
+            font-weight: 700;
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 2px solid var(--accent-teal);
+        }
+
+        .tech-stack-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .tech-stack-table tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: var(--accent-teal);
+        }
+
+        .data-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .flow-node {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .integration-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .integration-card h4 {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .integration-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .spec-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-teal);
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .spec-value {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .security-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent-green);
+            border-radius: 6px;
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            color: var(--accent-yellow);
+        }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            color: var(--accent-blue);
+        }
+
+        .endpoint-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .endpoint-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+
+        .method-get {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+        }
+
+        .method-post {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .method-put {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .method-delete {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+
+        .performance-metric {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-teal);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .pipeline-stage {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-purple);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .pipeline-stage::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--accent-purple);
+        }
+
+        .pipeline-stage:last-child::before {
+            display: none;
+        }
+
+        .stage-title {
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .db-table {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.75rem 0;
+        }
+
+        .db-table-name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .db-fields {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .db-field {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .field-type {
+            color: var(--accent-teal);
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-icon">🏗️</span>
+            <h2>Architecture</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#overview">System Overview</a></li>
+            <li><a href="#architecture">Architecture Diagram</a></li>
+            <li><a href="#tech-stack">Technology Stack</a></li>
+            <li><a href="#integrations">Third-Party APIs</a></li>
+            <li><a href="#api-design">API Design</a></li>
+            <li><a href="#authentication">Auth & Security</a></li>
+            <li><a href="#data-flow">Data Flow</a></li>
+            <li><a href="#caching">Caching Strategy</a></li>
+            <li><a href="#realtime">Real-Time Features</a></li>
+            <li><a href="#storage">File Storage</a></li>
+            <li><a href="#background">Background Jobs</a></li>
+            <li><a href="#monitoring">Monitoring & Logs</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#scalability">Scalability</a></li>
+            <li><a href="#disaster-recovery">Disaster Recovery</a></li>
+            <li><a href="#cicd">CI/CD Pipeline</a></li>
+            <li><a href="#environments">Environments</a></li>
+            <li><a href="#multi-tenancy">Multi-Tenancy</a></li>
+            <li><a href="#performance">Performance</a></li>
+            <li><a href="#database">Database Schema</a></li>
+            <li><a href="#endpoints">API Endpoints</a></li>
+            <li><a href="#infrastructure">Infrastructure</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="label">TECHNICAL ARCHITECTURE</div>
+                <h1>Integration Architecture</h1>
+                <p class="subtitle">Comprehensive technical architecture documentation for Smart App 2.0 - Multi-tier microservices platform with enterprise integrations</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Architecture Tiers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Third-Party APIs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">99.9%</div>
+                        <div class="stat-label">Uptime SLA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">AWS</div>
+                        <div class="stat-label">Cloud Platform</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- System Overview -->
+        <section id="overview" class="section">
+            <h2 class="section-title">🎯 SYSTEM OVERVIEW</h2>
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🏛️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Architecture Pattern</h3>
+                        <p class="tile-description">Modern microservices architecture with event-driven communication, API gateway pattern, and service mesh for inter-service communication.</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">Microservices</span>
+                            <span class="badge badge-success">Event-Driven</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔄</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Integration Philosophy</h3>
+                        <p class="tile-description">API-first design with robust error handling, circuit breakers, retry logic, and graceful degradation for third-party service failures.</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">API-First</span>
+                            <span class="badge badge-warning">Resilient</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔐</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Security Model</h3>
+                        <p class="tile-description">Zero-trust architecture with end-to-end encryption, PII tokenization, SOC 2 Type II compliance, and comprehensive audit logging.</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">SOC 2 Type II</span>
+                            <span class="badge badge-success">HTTPS/TLS 1.3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Data Strategy</h3>
+                        <p class="tile-description">PostgreSQL for transactional data, Redis for caching and sessions, S3 for document storage, with multi-region replication.</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">PostgreSQL</span>
+                            <span class="badge badge-warning">Redis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Diagram -->
+        <section id="architecture" class="section">
+            <h2 class="section-title">🏗️ MULTI-TIER ARCHITECTURE</h2>
+
+            <div class="architecture-diagram">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1.5rem;">System Architecture Overview</h3>
+
+                <!-- Layer 1: Frontend/Presentation -->
+                <div class="architecture-layer">
+                    <div class="layer-title">Layer 1: Frontend / Presentation Tier</div>
+                    <div class="layer-components">
+                        <div class="component-box">React 18.x (UI Library)</div>
+                        <div class="component-box">Next.js 14.x (Framework)</div>
+                        <div class="component-box">TypeScript 5.x</div>
+                        <div class="component-box">Tailwind CSS 3.x</div>
+                        <div class="component-box">React Query (State)</div>
+                        <div class="component-box">Zustand (Global State)</div>
+                        <div class="component-box">React Hook Form</div>
+                        <div class="component-box">Zod (Validation)</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                        Server-side rendering (SSR) and static site generation (SSG) for optimal performance. Progressive Web App (PWA) capabilities with offline support. CloudFront CDN distribution for global edge caching.
+                    </p>
+                </div>
+
+                <!-- Layer 2: API Gateway -->
+                <div class="architecture-layer" style="border-color: var(--accent-teal);">
+                    <div class="layer-title" style="color: var(--accent-teal);">Layer 2: API Gateway & Load Balancer</div>
+                    <div class="layer-components">
+                        <div class="component-box">AWS Application Load Balancer</div>
+                        <div class="component-box">API Gateway (REST + GraphQL)</div>
+                        <div class="component-box">Rate Limiting (10k req/min)</div>
+                        <div class="component-box">Request Throttling</div>
+                        <div class="component-box">DDoS Protection (AWS Shield)</div>
+                        <div class="component-box">WAF (Web Application Firewall)</div>
+                        <div class="component-box">SSL/TLS Termination</div>
+                        <div class="component-box">Request Routing</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                        Intelligent routing with health checks, automatic failover, and blue-green deployment support. JWT validation at gateway level. API versioning with backward compatibility.
+                    </p>
+                </div>
+
+                <!-- Layer 3: Application/Service Layer -->
+                <div class="architecture-layer" style="border-color: var(--accent-purple);">
+                    <div class="layer-title" style="color: var(--accent-purple);">Layer 3: Application Services / Business Logic</div>
+                    <div class="layer-components">
+                        <div class="component-box">Node.js 20.x Runtime</div>
+                        <div class="component-box">Express.js 4.x</div>
+                        <div class="component-box">GraphQL (Apollo Server)</div>
+                        <div class="component-box">User Service (Auth/Profile)</div>
+                        <div class="component-box">Application Service (URLA)</div>
+                        <div class="component-box">Integration Service (APIs)</div>
+                        <div class="component-box">Document Service (Files)</div>
+                        <div class="component-box">Notification Service</div>
+                        <div class="component-box">Analytics Service</div>
+                        <div class="component-box">LO Dashboard Service</div>
+                        <div class="component-box">Workflow Engine</div>
+                        <div class="component-box">AI Assistant Service</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                        Containerized microservices running on AWS ECS Fargate. Each service independently scalable with its own database schema. Service-to-service communication via REST and message queues.
+                    </p>
+                </div>
+
+                <!-- Layer 4: Integration Layer -->
+                <div class="architecture-layer" style="border-color: var(--accent-yellow);">
+                    <div class="layer-title" style="color: var(--accent-yellow);">Layer 4: Third-Party Integration Layer</div>
+                    <div class="layer-components">
+                        <div class="component-box">Plaid API (VOA)</div>
+                        <div class="component-box">TRUV API (VOIE)</div>
+                        <div class="component-box">Prove API (Identity)</div>
+                        <div class="component-box">Twilio (SMS/OTP)</div>
+                        <div class="component-box">SendGrid (Email)</div>
+                        <div class="component-box">Encompass LOS</div>
+                        <div class="component-box">BytePro LOS</div>
+                        <div class="component-box">Credit Bureau APIs</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                        Circuit breaker pattern with Hystrix for fault tolerance. Retry logic with exponential backoff. Webhook receivers for async callbacks. API response caching for frequently accessed data.
+                    </p>
+                </div>
+
+                <!-- Layer 5: Data Layer -->
+                <div class="architecture-layer" style="border-color: var(--accent-green);">
+                    <div class="layer-title" style="color: var(--accent-green);">Layer 5: Data & Storage Layer</div>
+                    <div class="layer-components">
+                        <div class="component-box">PostgreSQL 15 (Primary DB)</div>
+                        <div class="component-box">PostgreSQL Read Replicas</div>
+                        <div class="component-box">Redis 7.x (Cache/Sessions)</div>
+                        <div class="component-box">Redis Cluster (HA)</div>
+                        <div class="component-box">AWS S3 (Document Storage)</div>
+                        <div class="component-box">S3 Glacier (Archives)</div>
+                        <div class="component-box">RabbitMQ (Message Queue)</div>
+                        <div class="component-box">CloudWatch Logs</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                        Multi-AZ deployment for high availability. Automated backups with point-in-time recovery. Encryption at rest (AES-256) and in transit (TLS 1.3). Database connection pooling with PgBouncer.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>🏗️ Architecture Principles:</strong> The system follows the 12-factor app methodology with emphasis on stateless services, externalized configuration, disposable processes, and dev/prod parity. All services are containerized and orchestrated with AWS ECS.
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section id="tech-stack" class="section">
+            <h2 class="section-title">💻 TECHNOLOGY STACK BREAKDOWN</h2>
+
+            <div class="tile">
+                <h3 class="tile-title">Frontend Technologies</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Version</th>
+                            <th>Purpose</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>React</strong></td>
+                            <td>18.2.x</td>
+                            <td>UI Component Library</td>
+                            <td>Industry standard, massive ecosystem, concurrent rendering, excellent TypeScript support</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Next.js</strong></td>
+                            <td>14.1.x</td>
+                            <td>React Framework</td>
+                            <td>SSR/SSG, automatic code splitting, API routes, image optimization, excellent SEO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TypeScript</strong></td>
+                            <td>5.3.x</td>
+                            <td>Type Safety</td>
+                            <td>Compile-time error checking, improved IDE support, better code documentation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tailwind CSS</strong></td>
+                            <td>3.4.x</td>
+                            <td>Utility-First CSS</td>
+                            <td>Rapid UI development, consistent design system, minimal CSS bundle size</td>
+                        </tr>
+                        <tr>
+                            <td><strong>React Query</strong></td>
+                            <td>5.x</td>
+                            <td>Server State Management</td>
+                            <td>Automatic caching, background refetching, optimistic updates, request deduplication</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zustand</strong></td>
+                            <td>4.x</td>
+                            <td>Client State Management</td>
+                            <td>Lightweight, simple API, no boilerplate, excellent DevTools</td>
+                        </tr>
+                        <tr>
+                            <td><strong>React Hook Form</strong></td>
+                            <td>7.x</td>
+                            <td>Form Management</td>
+                            <td>Performant, minimal re-renders, built-in validation, small bundle size</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zod</strong></td>
+                            <td>3.x</td>
+                            <td>Schema Validation</td>
+                            <td>TypeScript-first, runtime validation, type inference, error handling</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Backend Technologies</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Version</th>
+                            <th>Purpose</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Node.js</strong></td>
+                            <td>20.x LTS</td>
+                            <td>JavaScript Runtime</td>
+                            <td>Event-driven, non-blocking I/O, vast npm ecosystem, same language as frontend</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Express.js</strong></td>
+                            <td>4.18.x</td>
+                            <td>Web Framework</td>
+                            <td>Minimal, flexible, extensive middleware ecosystem, proven at scale</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Apollo Server</strong></td>
+                            <td>4.x</td>
+                            <td>GraphQL Server</td>
+                            <td>Type-safe queries, efficient data fetching, schema stitching, real-time subscriptions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prisma</strong></td>
+                            <td>5.x</td>
+                            <td>ORM / Database Client</td>
+                            <td>Type-safe database access, migration management, excellent TypeScript integration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jest</strong></td>
+                            <td>29.x</td>
+                            <td>Testing Framework</td>
+                            <td>Zero-config, snapshot testing, code coverage, mocking capabilities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Passport.js</strong></td>
+                            <td>0.7.x</td>
+                            <td>Authentication</td>
+                            <td>Flexible authentication strategies, JWT support, extensive strategy library</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Joi</strong></td>
+                            <td>17.x</td>
+                            <td>Input Validation</td>
+                            <td>Comprehensive validation rules, custom validators, error messages</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Winston</strong></td>
+                            <td>3.x</td>
+                            <td>Logging</td>
+                            <td>Multiple transports, log levels, structured logging, performance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Database & Caching</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Version</th>
+                            <th>Purpose</th>
+                            <th>Configuration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>PostgreSQL</strong></td>
+                            <td>15.x</td>
+                            <td>Primary Database</td>
+                            <td>Multi-AZ RDS, db.r6g.2xlarge, 500GB SSD, automated backups</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Redis</strong></td>
+                            <td>7.x</td>
+                            <td>Cache & Sessions</td>
+                            <td>ElastiCache cluster, cache.r6g.large, 3 node cluster, 16GB memory</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PgBouncer</strong></td>
+                            <td>1.21.x</td>
+                            <td>Connection Pooling</td>
+                            <td>Transaction pooling mode, max 100 connections per pool</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RabbitMQ</strong></td>
+                            <td>3.12.x</td>
+                            <td>Message Queue</td>
+                            <td>Amazon MQ, mq.m5.large, 3 broker cluster for HA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">AWS Infrastructure</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Purpose</th>
+                            <th>Configuration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ECS Fargate</strong></td>
+                            <td>Container Orchestration</td>
+                            <td>Serverless containers, auto-scaling, blue-green deployments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RDS PostgreSQL</strong></td>
+                            <td>Managed Database</td>
+                            <td>Multi-AZ, automated backups, read replicas, encryption at rest</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ElastiCache Redis</strong></td>
+                            <td>Managed Cache</td>
+                            <td>Cluster mode, automatic failover, encryption in transit</td>
+                        </tr>
+                        <tr>
+                            <td><strong>S3</strong></td>
+                            <td>Object Storage</td>
+                            <td>Versioning, lifecycle policies, server-side encryption (SSE-S3)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CloudFront</strong></td>
+                            <td>CDN</td>
+                            <td>Global edge locations, HTTPS only, custom SSL certificate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ALB</strong></td>
+                            <td>Load Balancer</td>
+                            <td>Application-level routing, SSL termination, health checks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Route 53</strong></td>
+                            <td>DNS Management</td>
+                            <td>Health checks, failover routing, latency-based routing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CloudWatch</strong></td>
+                            <td>Monitoring & Logs</td>
+                            <td>Custom metrics, log aggregation, alarms, dashboards</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secrets Manager</strong></td>
+                            <td>Secret Storage</td>
+                            <td>Automatic rotation, encryption, access control</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WAF</strong></td>
+                            <td>Web Application Firewall</td>
+                            <td>SQL injection protection, XSS prevention, rate limiting</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Third-Party Integrations -->
+        <section id="integrations" class="section">
+            <h2 class="section-title">🔌 THIRD-PARTY INTEGRATION ARCHITECTURE</h2>
+
+            <div class="integration-card">
+                <h4>🏦 Plaid API - Verification of Assets (VOA)</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Bank account linking and asset verification through Plaid Link. Supports 12,000+ financial institutions with real-time balance verification and transaction history.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">OAuth 2.0 + Link SDK</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">2020-09-14</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">client_id + secret</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Webhook Support</div>
+                        <div class="spec-value">Yes (account updates)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Rate Limit</div>
+                        <div class="spec-value">100 req/sec</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Data Retention</div>
+                        <div class="spec-value">90 days (configurable)</div>
+                    </div>
+                </div>
+                <div class="code-block">
+<code>// Plaid Integration Flow
+1. Frontend: Initialize Plaid Link with link_token
+2. User: Authenticate with financial institution
+3. Backend: Exchange public_token for access_token
+4. Backend: Call /accounts/balance/get endpoint
+5. Backend: Call /transactions/get for history
+6. Backend: Store encrypted access_token
+7. Webhook: Listen for ITEM_LOGIN_REQUIRED events
+8. Backend: Process VOA data and map to URLA fields</code>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Production Ready</span>
+                    <span class="badge badge-info">12,000+ Institutions</span>
+                    <span class="badge">99.9% Uptime</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>💼 TRUV API - Verification of Income & Employment (VOIE)</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Instant income and employment verification through payroll system integration. Direct connection to ADP, Paychex, Gusto, and 100+ payroll providers.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">OAuth 2.0 + Bridge SDK</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">v1</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">API Key + HMAC</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Webhook Support</div>
+                        <div class="spec-value">Yes (task completion)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Rate Limit</div>
+                        <div class="spec-value">60 req/min</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Report Format</div>
+                        <div class="spec-value">JSON + PDF</div>
+                    </div>
+                </div>
+                <div class="code-block">
+<code>// TRUV Integration Flow
+1. Backend: Create TRUV Bridge token with user context
+2. Frontend: Launch TRUV Bridge widget
+3. User: Connect to payroll provider (ADP, Paychex, etc.)
+4. TRUV: Generate employment & income report
+5. Webhook: Receive task.status_updated event
+6. Backend: Download report via /reports/{id} endpoint
+7. Backend: Parse employment data (employer, position, tenure)
+8. Backend: Extract income data (base, overtime, bonuses)
+9. Backend: Map to URLA Section 5 (Employment) & Section 8 (Income)</code>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Production Ready</span>
+                    <span class="badge badge-info">100+ Providers</span>
+                    <span class="badge">Instant Verification</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>📱 Prove API - Phone-Centric Identity Verification</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Passwordless authentication and identity verification using phone ownership. Silent authentication with mobile network operator data for fraud prevention.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">REST API + SDK</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">v3</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">OAuth 2.0 Client Credentials</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Response Time</div>
+                        <div class="spec-value">&lt; 2 seconds</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Accuracy</div>
+                        <div class="spec-value">99.6% match rate</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Fraud Detection</div>
+                        <div class="spec-value">Real-time scoring</div>
+                    </div>
+                </div>
+                <div class="code-block">
+<code>// Prove Integration Flow
+1. Frontend: User enters phone number
+2. Backend: POST /verify/start with phone number
+3. Prove: Silent network authentication (mobile only)
+4. Prove: Return verification result + fraud score
+5. Backend: Evaluate trust score (0-100)
+6. Backend: Store verified phone + identity data
+7. Optional: SMS OTP fallback for low trust scores
+8. Backend: Auto-populate name, address from Prove data</code>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Production Ready</span>
+                    <span class="badge badge-info">99.6% Accuracy</span>
+                    <span class="badge">Instant Verification</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>📧 Twilio - SMS & OTP Delivery</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Programmable SMS for one-time passcodes, application status updates, and LO-borrower communication. Global delivery with fallback carriers.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">REST API</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">2010-04-01</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">Account SID + Auth Token</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Delivery Rate</div>
+                        <div class="spec-value">99.95%</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">OTP Validity</div>
+                        <div class="spec-value">5 minutes</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Rate Limit</div>
+                        <div class="spec-value">1 msg/sec per number</div>
+                    </div>
+                </div>
+                <div class="code-block">
+<code>// Twilio SMS/OTP Flow
+1. User: Request OTP via SMS
+2. Backend: Generate 6-digit OTP code
+3. Backend: Store OTP in Redis with 5min TTL
+4. Backend: POST to Twilio /Messages endpoint
+5. Twilio: Deliver SMS to user's phone
+6. User: Enter OTP code in app
+7. Backend: Validate OTP against Redis cache
+8. Backend: Clear OTP after successful verification
+9. Security: Max 3 attempts, account lockout after failures</code>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Production Ready</span>
+                    <span class="badge badge-info">Global Delivery</span>
+                    <span class="badge">99.95% Uptime</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>✉️ SendGrid - Transactional Email</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Email delivery for borrower invitations, application status updates, document requests, and LO notifications. Template-based emails with dynamic content.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">REST API + SMTP</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">v3</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">API Key</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Delivery Rate</div>
+                        <div class="spec-value">99%+</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Template Engine</div>
+                        <div class="spec-value">Handlebars</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Tracking</div>
+                        <div class="spec-value">Opens, clicks, bounces</div>
+                    </div>
+                </div>
+                <div class="code-block">
+<code>// SendGrid Email Flow
+1. Backend: Trigger event (e.g., borrower invited)
+2. Backend: Select email template by type
+3. Backend: Populate template with dynamic data
+4. Backend: POST to /v3/mail/send endpoint
+5. SendGrid: Process email, apply personalization
+6. SendGrid: Deliver email to recipient
+7. Webhook: Receive delivery status events
+8. Backend: Log email status in database
+9. Analytics: Track open rates, click-through rates</code>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Production Ready</span>
+                    <span class="badge badge-info">Template-Based</span>
+                    <span class="badge">Analytics Included</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>🏢 Encompass LOS Integration</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Bi-directional integration with ICE Mortgage Technology Encompass. MISMO 3.4 compliant data exchange for loan origination workflow.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">REST API + Webhooks</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">v3</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">OAuth 2.0</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Data Format</div>
+                        <div class="spec-value">MISMO 3.4 XML/JSON</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Sync Method</div>
+                        <div class="spec-value">Real-time + Batch</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Field Mapping</div>
+                        <div class="spec-value">1,200+ URLA fields</div>
+                    </div>
+                </div>
+                <div class="code-block">
+<code>// Encompass Integration Flow
+1. Smart App: Borrower completes application
+2. Backend: Map Smart App data to MISMO 3.4 schema
+3. Backend: POST to /encompass/v3/loans endpoint
+4. Encompass: Create loan file with GUID
+5. Backend: Store loan GUID mapping
+6. Backend: Upload documents to /encompass/v3/loans/{guid}/attachments
+7. Encompass: Trigger loan workflow in LOS
+8. Webhook: Receive loan milestone updates
+9. Backend: Sync loan status back to Smart App
+10. LO: Continue processing in Encompass</code>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Enterprise</span>
+                    <span class="badge badge-info">MISMO 3.4</span>
+                    <span class="badge">Bi-Directional</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>📊 BytePro LOS Integration</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Alternative LOS integration for lenders using BytePro. Supports loan import, document upload, and status synchronization.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">SOAP API</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">API Version</div>
+                        <div class="spec-value">v2.0</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Authentication</div>
+                        <div class="spec-value">WS-Security</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Data Format</div>
+                        <div class="spec-value">MISMO 2.6 XML</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Sync Method</div>
+                        <div class="spec-value">Batch (15min interval)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Field Mapping</div>
+                        <div class="spec-value">800+ core fields</div>
+                    </div>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Production Ready</span>
+                    <span class="badge badge-info">MISMO 2.6</span>
+                    <span class="badge">SOAP-Based</span>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <h4>📈 Credit Bureau API Integration</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Soft pull credit reports for early qualification without impacting credit scores. Integration with Experian, Equifax, and TransUnion.
+                </p>
+                <div class="integration-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Integration Pattern</div>
+                        <div class="spec-value">REST API</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Report Type</div>
+                        <div class="spec-value">Soft Inquiry</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Response Time</div>
+                        <div class="spec-value">&lt; 5 seconds</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Data Format</div>
+                        <div class="spec-value">JSON + Metro2</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Compliance</div>
+                        <div class="spec-value">FCRA, GLBA</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Credit Score</div>
+                        <div class="spec-value">FICO Score 8</div>
+                    </div>
+                </div>
+                <div class="tile-meta" style="margin-top: 1rem;">
+                    <span class="badge badge-success">Compliant</span>
+                    <span class="badge badge-info">Tri-Merge</span>
+                    <span class="badge">Soft Pull Only</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Design Patterns -->
+        <section id="api-design" class="section">
+            <h2 class="section-title">🔧 API DESIGN PATTERNS</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🌐</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">RESTful API Design</h3>
+                        <p class="tile-description">Follows REST principles with resource-based URLs, proper HTTP methods (GET, POST, PUT, DELETE), stateless requests, and HATEOAS links for discoverability.</p>
+                        <div class="code-block">
+<code>GET    /api/v1/applications           # List applications
+POST   /api/v1/applications           # Create application
+GET    /api/v1/applications/{id}      # Get application
+PUT    /api/v1/applications/{id}      # Update application
+DELETE /api/v1/applications/{id}      # Delete application
+GET    /api/v1/applications/{id}/documents  # Nested resources</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">RESTful</span>
+                            <span class="badge badge-success">Versioned</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">GraphQL API</h3>
+                        <p class="tile-description">Type-safe GraphQL schema for complex queries, efficient data fetching with field selection, real-time subscriptions for live updates, and automatic API documentation.</p>
+                        <div class="code-block">
+<code>query GetApplication($id: ID!) {
+  application(id: $id) {
+    id
+    status
+    borrower {
+      firstName
+      lastName
+      email
+      phone
+    }
+    property {
+      address
+      value
+    }
+    documents {
+      id
+      type
+      status
+    }
+  }
+}</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-design">GraphQL</span>
+                            <span class="badge badge-info">Type-Safe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">API Response Standards</h3>
+                <div class="code-block">
+<code>// Success Response (200 OK)
+{
+  "success": true,
+  "data": {
+    "id": "app_1234567890",
+    "status": "in_progress",
+    "created_at": "2024-01-15T10:30:00Z"
+  },
+  "meta": {
+    "request_id": "req_abc123",
+    "timestamp": "2024-01-15T10:30:01Z"
+  }
+}
+
+// Error Response (400 Bad Request)
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid borrower email format",
+    "details": {
+      "field": "borrower.email",
+      "value": "invalid-email",
+      "constraint": "email"
+    }
+  },
+  "meta": {
+    "request_id": "req_abc124",
+    "timestamp": "2024-01-15T10:30:02Z"
+  }
+}
+
+// Pagination Response
+{
+  "success": true,
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "per_page": 20,
+    "total": 150,
+    "total_pages": 8,
+    "has_next": true,
+    "has_prev": false
+  }
+}</code>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">HTTP Status Codes</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Status</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>200</td><td>OK</td><td>Successful GET, PUT, PATCH request</td></tr>
+                        <tr><td>201</td><td>Created</td><td>Successful POST request creating new resource</td></tr>
+                        <tr><td>204</td><td>No Content</td><td>Successful DELETE request</td></tr>
+                        <tr><td>400</td><td>Bad Request</td><td>Invalid request payload or parameters</td></tr>
+                        <tr><td>401</td><td>Unauthorized</td><td>Missing or invalid authentication token</td></tr>
+                        <tr><td>403</td><td>Forbidden</td><td>Authenticated but not authorized for resource</td></tr>
+                        <tr><td>404</td><td>Not Found</td><td>Resource does not exist</td></tr>
+                        <tr><td>409</td><td>Conflict</td><td>Resource conflict (e.g., duplicate email)</td></tr>
+                        <tr><td>422</td><td>Unprocessable Entity</td><td>Validation errors on request data</td></tr>
+                        <tr><td>429</td><td>Too Many Requests</td><td>Rate limit exceeded</td></tr>
+                        <tr><td>500</td><td>Internal Server Error</td><td>Unexpected server error</td></tr>
+                        <tr><td>503</td><td>Service Unavailable</td><td>Service temporarily down or overloaded</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Authentication & Authorization -->
+        <section id="authentication" class="section">
+            <h2 class="section-title">🔐 AUTHENTICATION & AUTHORIZATION</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🎫</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">JWT Token Strategy</h3>
+                        <p class="tile-description">JSON Web Tokens for stateless authentication with RS256 algorithm, 15-minute access token expiry, and 7-day refresh token rotation.</p>
+                        <div class="code-block">
+<code>// JWT Payload Structure
+{
+  "sub": "user_1234567890",           // User ID
+  "email": "borrower@example.com",
+  "role": "borrower",                 // borrower | lo | admin
+  "permissions": ["read:apps", "write:apps"],
+  "iat": 1705320000,                  // Issued at
+  "exp": 1705320900,                  // Expires (15 min)
+  "jti": "token_abc123"               // Token ID for revocation
+}
+
+// Authorization Header
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">RS256</span>
+                            <span class="badge badge-info">15min TTL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔄</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">OAuth 2.0 Flow</h3>
+                        <p class="tile-description">OAuth 2.0 authorization code flow for third-party integrations (Plaid, TRUV). Secure token exchange with PKCE for enhanced security.</p>
+                        <div class="code-block">
+<code>// OAuth 2.0 Authorization Code Flow
+1. Client: GET /oauth/authorize?client_id=...&response_type=code
+2. User: Authenticates and grants permissions
+3. Server: Redirect to callback with authorization code
+4. Client: POST /oauth/token with code + client_secret
+5. Server: Returns access_token + refresh_token
+6. Client: Use access_token in API requests
+7. Server: Validate token on each request
+8. Client: Refresh token when expired</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">OAuth 2.0</span>
+                            <span class="badge badge-success">PKCE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔑</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">API Key Management</h3>
+                        <p class="tile-description">API keys for service-to-service authentication. Scoped permissions, key rotation policy, and usage tracking with rate limiting per key.</p>
+                        <div class="code-block">
+<code>// API Key Header
+X-API-Key: sk_live_1234567890abcdef
+
+// Key Scopes
+- read:applications      # View application data
+- write:applications     # Create/update applications
+- read:documents         # Access documents
+- write:documents        # Upload documents
+- admin:all              # Full admin access
+
+// Rate Limits by Key
+- Standard: 1,000 req/hour
+- Premium:  10,000 req/hour
+- Enterprise: Unlimited</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-warning">Scoped</span>
+                            <span class="badge badge-info">Rate Limited</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">👤</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Role-Based Access Control (RBAC)</h3>
+                        <p class="tile-description">Hierarchical role system with granular permissions. Borrowers, Loan Officers, and Admins with different access levels and capabilities.</p>
+                        <table class="tech-stack-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Permissions</th>
+                                    <th>Access Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Borrower</strong></td>
+                                    <td>View/edit own application, upload documents</td>
+                                    <td>Limited to own data</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Co-Borrower</strong></td>
+                                    <td>View/edit shared application, upload documents</td>
+                                    <td>Limited to shared app</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Loan Officer</strong></td>
+                                    <td>View all assigned apps, edit, take over, configure</td>
+                                    <td>All assigned applications</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LO Manager</strong></td>
+                                    <td>View team apps, reassign, reporting, analytics</td>
+                                    <td>Team-wide access</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Admin</strong></td>
+                                    <td>Full system access, user management, configuration</td>
+                                    <td>Organization-wide</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>🔒 Security Best Practices:</strong> All tokens stored in HTTP-only cookies to prevent XSS attacks. Refresh token rotation on each use. Token revocation list maintained in Redis. Multi-factor authentication (MFA) required for admin accounts.
+            </div>
+        </section>
+
+        <!-- Data Flow Diagrams -->
+        <section id="data-flow" class="section">
+            <h2 class="section-title">🔄 DATA FLOW ARCHITECTURE</h2>
+
+            <div class="tile">
+                <h3 class="tile-title">Borrower Application Flow</h3>
+                <div class="data-flow">
+                    <div class="flow-node">Borrower UI<br/><small>(Next.js)</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">API Gateway<br/><small>(ALB + WAF)</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Application Service<br/><small>(Node.js)</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">PostgreSQL<br/><small>(RDS)</small></div>
+                </div>
+                <div class="data-flow" style="margin-top: 1rem;">
+                    <div class="flow-node">Application Service</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Integration Service</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Third-Party APIs<br/><small>(Plaid, TRUV, Prove)</small></div>
+                </div>
+                <div class="data-flow" style="margin-top: 1rem;">
+                    <div class="flow-node">Application Service</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Message Queue<br/><small>(RabbitMQ)</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">LOS Sync Service</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Encompass/BytePro</div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Third-Party Integration Data Flow</h3>
+                <div class="code-block">
+<code>// Plaid VOA Flow
+Borrower → Smart App UI → Plaid Link (OAuth)
+Smart App Backend → Plaid API (exchange token)
+Plaid API → Smart App Backend (account data)
+Smart App Backend → PostgreSQL (store encrypted data)
+Smart App Backend → Application Service (map to URLA)
+Application Service → LOS (push asset data)
+
+// TRUV VOIE Flow
+Borrower → Smart App UI → TRUV Bridge (OAuth)
+TRUV → Payroll Provider (ADP, Paychex, etc.)
+TRUV → Smart App Webhook (async notification)
+Smart App Backend → TRUV API (fetch report)
+Smart App Backend → PostgreSQL (store employment data)
+Smart App Backend → Application Service (map to URLA)
+
+// Prove Identity Flow
+Borrower → Smart App UI (enter phone)
+Smart App Backend → Prove API (verify)
+Prove API → Mobile Carrier (silent auth)
+Prove API → Smart App Backend (identity data)
+Smart App Backend → Application Service (auto-populate)
+Smart App Backend → PostgreSQL (store verified data)</code>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Document Upload & Storage Flow</h3>
+                <div class="data-flow">
+                    <div class="flow-node">Borrower UI</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Presigned S3 URL</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">S3 Bucket<br/><small>(Direct Upload)</small></div>
+                </div>
+                <div class="data-flow" style="margin-top: 1rem;">
+                    <div class="flow-node">S3 Event</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Lambda Function<br/><small>(Virus Scan)</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Document Service<br/><small>(Metadata)</small></div>
+                </div>
+                <div class="data-flow" style="margin-top: 1rem;">
+                    <div class="flow-node">Document Service</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">CloudFront CDN</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">LO Dashboard<br/><small>(View Docs)</small></div>
+                </div>
+                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                    Documents uploaded directly to S3 using presigned URLs (client-side). Lambda function triggered on upload for virus scanning with ClamAV. Document metadata stored in PostgreSQL with S3 object key reference. CloudFront serves documents with signed URLs for secure access.
+                </p>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Real-Time Notification Flow</h3>
+                <div class="code-block">
+<code>// WebSocket Connection
+1. Borrower/LO connects to WebSocket endpoint
+2. Backend authenticates JWT token
+3. Client subscribed to user-specific channel
+4. Application event occurs (e.g., status change)
+5. Application Service publishes to Redis Pub/Sub
+6. WebSocket Service receives event from Redis
+7. WebSocket Service broadcasts to subscribed clients
+8. UI updates in real-time without refresh
+
+// Fallback: Server-Sent Events (SSE)
+GET /api/v1/events (with Authorization header)
+Server maintains open HTTP connection
+Server pushes events as text/event-stream
+Client auto-reconnects on disconnect</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Caching Strategy -->
+        <section id="caching" class="section">
+            <h2 class="section-title">⚡ CACHING STRATEGY</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🔴</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Redis Cache Architecture</h3>
+                        <p class="tile-description">Multi-tier caching with Redis for session management, API response caching, and rate limiting. Cache-aside pattern with TTL-based expiration.</p>
+                        <table class="tech-stack-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Cache Type</th>
+                                    <th>TTL</th>
+                                    <th>Eviction Policy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>User Sessions</td><td>7 days</td><td>LRU (idle timeout)</td></tr>
+                                <tr><td>JWT Tokens (active)</td><td>15 minutes</td><td>TTL expiration</td></tr>
+                                <tr><td>JWT Revocation List</td><td>7 days</td><td>TTL expiration</td></tr>
+                                <tr><td>API Responses</td><td>5 minutes</td><td>TTL + manual invalidation</td></tr>
+                                <tr><td>Third-Party API Cache</td><td>1 hour</td><td>TTL expiration</td></tr>
+                                <tr><td>Rate Limit Counters</td><td>1 hour</td><td>TTL expiration</td></tr>
+                                <tr><td>OTP Codes</td><td>5 minutes</td><td>TTL expiration</td></tr>
+                                <tr><td>Application State</td><td>30 minutes</td><td>Manual invalidation</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📦</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">CDN Caching (CloudFront)</h3>
+                        <p class="tile-description">Static assets served from CloudFront edge locations with aggressive caching. Cache invalidation on deployments.</p>
+                        <div class="code-block">
+<code>// CloudFront Cache Behavior
+Static Assets (JS, CSS, Images):
+  - Cache-Control: public, max-age=31536000, immutable
+  - Edge cache TTL: 1 year
+  - Versioned filenames for cache busting
+
+HTML Pages (SSG):
+  - Cache-Control: public, max-age=3600, must-revalidate
+  - Edge cache TTL: 1 hour
+  - Invalidation on deployment
+
+API Responses:
+  - Cache-Control: no-cache, no-store, must-revalidate
+  - No CDN caching for dynamic data</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔄</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Cache Invalidation Strategy</h3>
+                        <p class="tile-description">Event-driven cache invalidation using Redis Pub/Sub. Automatic invalidation on data mutations with selective cache warming.</p>
+                        <div class="code-block">
+<code>// Cache Invalidation Patterns
+
+// Write-Through Cache
+1. Update PostgreSQL database
+2. Delete cache key in Redis
+3. Next read will populate cache
+
+// Cache-Aside Pattern
+1. Check Redis for cached data
+2. If miss, query PostgreSQL
+3. Store result in Redis with TTL
+4. Return data to client
+
+// Event-Driven Invalidation
+1. Application data updated
+2. Publish invalidation event to Redis Pub/Sub
+3. All service instances subscribe to channel
+4. Each instance clears local cache
+5. Next request repopulates cache</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-Time Features -->
+        <section id="realtime" class="section">
+            <h2 class="section-title">⚡ REAL-TIME FEATURES</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🌐</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">WebSocket Implementation</h3>
+                        <p class="tile-description">Bi-directional WebSocket connections for real-time application updates, LO-borrower messaging, and live collaboration features.</p>
+                        <div class="code-block">
+<code>// WebSocket Server (ws library)
+const wss = new WebSocketServer({ port: 8080 });
+
+// Connection Handler
+wss.on('connection', (ws, req) => {
+  // Authenticate JWT from query param
+  const token = parseToken(req.url);
+  const user = verifyJWT(token);
+
+  // Subscribe to user-specific Redis channel
+  redisSubscriber.subscribe(`user:${user.id}`);
+
+  // Handle incoming messages
+  ws.on('message', (data) => {
+    handleMessage(user, data);
+  });
+
+  // Cleanup on disconnect
+  ws.on('close', () => {
+    redisSubscriber.unsubscribe(`user:${user.id}`);
+  });
+});
+
+// Publish Events
+redisPublisher.publish('user:123', JSON.stringify({
+  type: 'APPLICATION_STATUS_CHANGED',
+  data: { status: 'approved', timestamp: Date.now() }
+}));</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">WebSocket</span>
+                            <span class="badge badge-info">Redis Pub/Sub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📡</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Server-Sent Events (SSE)</h3>
+                        <p class="tile-description">Fallback to SSE for environments where WebSockets are blocked. Unidirectional server-to-client event streaming.</p>
+                        <div class="code-block">
+<code>// SSE Endpoint
+app.get('/api/v1/events', authenticate, (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+
+  const userId = req.user.id;
+
+  // Send initial connection event
+  res.write(`data: ${JSON.stringify({ type: 'CONNECTED' })}\n\n`);
+
+  // Subscribe to user events
+  const subscriber = redisClient.duplicate();
+  subscriber.subscribe(`user:${userId}`);
+
+  subscriber.on('message', (channel, message) => {
+    res.write(`data: ${message}\n\n`);
+  });
+
+  // Cleanup
+  req.on('close', () => subscriber.quit());
+});</code>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">SSE</span>
+                            <span class="badge badge-warning">Fallback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">💬</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Real-Time Use Cases</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary); margin-top: 1rem;">
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-blue); margin-bottom: 0.5rem;">
+                                <strong>Application Status Updates:</strong> Instant notification when LO reviews, requests documents, or changes status
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-teal); margin-bottom: 0.5rem;">
+                                <strong>LO-Borrower Messaging:</strong> In-app chat for questions and clarifications during application process
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-purple); margin-bottom: 0.5rem;">
+                                <strong>Document Upload Notifications:</strong> LO receives immediate alert when borrower uploads required documents
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-green); margin-bottom: 0.5rem;">
+                                <strong>Co-Borrower Collaboration:</strong> See when co-borrower is actively editing shared application sections
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-yellow); margin-bottom: 0.5rem;">
+                                <strong>Third-Party Integration Status:</strong> Real-time progress indicators for Plaid, TRUV, Prove connections
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-red); margin-bottom: 0.5rem;">
+                                <strong>LO Dashboard Updates:</strong> Live application queue updates, new applications, status changes
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- File Storage -->
+        <section id="storage" class="section">
+            <h2 class="section-title">📁 FILE UPLOAD & STORAGE</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">☁️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">S3 Storage Architecture</h3>
+                        <p class="tile-description">Amazon S3 for document storage with lifecycle policies, versioning, and encryption. Multi-region replication for disaster recovery.</p>
+                        <div class="integration-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">Bucket Structure</div>
+                                <div class="spec-value">smartapp-docs-prod</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Encryption</div>
+                                <div class="spec-value">SSE-S3 (AES-256)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Versioning</div>
+                                <div class="spec-value">Enabled</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Replication</div>
+                                <div class="spec-value">Cross-region (DR)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Lifecycle Policy</div>
+                                <div class="spec-value">90 days → Glacier</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Max File Size</div>
+                                <div class="spec-value">100 MB</div>
+                            </div>
+                        </div>
+                        <div class="code-block" style="margin-top: 1rem;">
+<code>// S3 Object Key Structure
+smartapp-docs-prod/
+  ├── applications/
+  │   ├── {application_id}/
+  │   │   ├── documents/
+  │   │   │   ├── {document_id}_paystub.pdf
+  │   │   │   ├── {document_id}_w2.pdf
+  │   │   │   └── {document_id}_bank_statement.pdf
+  │   │   └── reports/
+  │   │       ├── plaid_voa_report.pdf
+  │   │       └── truv_voie_report.pdf
+  └── avatars/
+      └── {user_id}_avatar.jpg</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">⬆️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Presigned URL Upload Flow</h3>
+                        <p class="tile-description">Client-side direct upload to S3 using presigned URLs. Reduces server load and improves upload performance.</p>
+                        <div class="code-block">
+<code>// Frontend: Request Upload URL
+const response = await fetch('/api/v1/uploads/presign', {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${token}` },
+  body: JSON.stringify({
+    filename: 'paystub.pdf',
+    contentType: 'application/pdf',
+    documentType: 'PAYSTUB'
+  })
+});
+
+const { uploadUrl, documentId } = await response.json();
+
+// Frontend: Upload directly to S3
+await fetch(uploadUrl, {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/pdf' },
+  body: fileBlob
+});
+
+// Frontend: Confirm upload
+await fetch(`/api/v1/documents/${documentId}/confirm`, {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${token}` }
+});
+
+// Backend: Generate Presigned URL
+const uploadUrl = s3.getSignedUrl('putObject', {
+  Bucket: 'smartapp-docs-prod',
+  Key: `applications/${appId}/documents/${docId}_${filename}`,
+  ContentType: contentType,
+  Expires: 300  // 5 minutes
+});</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🛡️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Security & Virus Scanning</h3>
+                        <p class="tile-description">Automatic virus scanning on upload using Lambda + ClamAV. Files quarantined if malware detected.</p>
+                        <div class="code-block">
+<code>// Lambda Function (S3 Event Trigger)
+exports.handler = async (event) => {
+  const bucket = event.Records[0].s3.bucket.name;
+  const key = decodeURIComponent(event.Records[0].s3.object.key);
+
+  // Download file from S3
+  const fileObj = await s3.getObject({ Bucket: bucket, Key: key }).promise();
+
+  // Scan with ClamAV
+  const scanResult = await clamav.scanBuffer(fileObj.Body);
+
+  if (scanResult.isInfected) {
+    // Move to quarantine bucket
+    await s3.copyObject({
+      CopySource: `${bucket}/${key}`,
+      Bucket: 'smartapp-quarantine',
+      Key: key
+    }).promise();
+
+    // Delete from main bucket
+    await s3.deleteObject({ Bucket: bucket, Key: key }).promise();
+
+    // Notify admin
+    await sns.publish({
+      TopicArn: process.env.SECURITY_ALERTS_TOPIC,
+      Message: `Infected file detected: ${key}`
+    }).promise();
+
+    return { status: 'INFECTED', action: 'QUARANTINED' };
+  }
+
+  // Update document status in database
+  await updateDocumentStatus(key, 'SCANNED_CLEAN');
+
+  return { status: 'CLEAN' };
+};</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔗</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">CloudFront CDN Distribution</h3>
+                        <p class="tile-description">Documents served through CloudFront with signed URLs for secure access. Edge caching for frequently accessed files.</p>
+                        <div class="code-block">
+<code>// CloudFront Signed URL Generation
+const signer = new AWS.CloudFront.Signer(keyPairId, privateKey);
+
+const signedUrl = signer.getSignedUrl({
+  url: `https://cdn.smartapp.com/${s3Key}`,
+  expires: Math.floor((Date.now() + 3600000) / 1000)  // 1 hour
+});
+
+// Return signed URL to client
+res.json({ documentUrl: signedUrl });
+
+// Client downloads document
+window.open(signedUrl, '_blank');</code>
+                        </div>
+                        <div class="tile-meta" style="margin-top: 1rem;">
+                            <span class="badge badge-success">Edge Cached</span>
+                            <span class="badge badge-info">Signed URLs</span>
+                            <span class="badge badge-warning">1 Hour Expiry</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Supported Document Types</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Document Type</th>
+                            <th>MIME Types</th>
+                            <th>Max Size</th>
+                            <th>Required/Optional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Paystubs</td><td>PDF, JPEG, PNG</td><td>10 MB</td><td>Required</td></tr>
+                        <tr><td>W-2 Forms</td><td>PDF</td><td>10 MB</td><td>Required</td></tr>
+                        <tr><td>Bank Statements</td><td>PDF</td><td>10 MB</td><td>Required</td></tr>
+                        <tr><td>Tax Returns</td><td>PDF</td><td>25 MB</td><td>Optional</td></tr>
+                        <tr><td>Driver's License</td><td>JPEG, PNG</td><td>5 MB</td><td>Required</td></tr>
+                        <tr><td>Purchase Agreement</td><td>PDF</td><td>25 MB</td><td>Required (Purchase)</td></tr>
+                        <tr><td>Homeowners Insurance</td><td>PDF</td><td>10 MB</td><td>Required</td></tr>
+                        <tr><td>HOA Documents</td><td>PDF</td><td>10 MB</td><td>Optional</td></tr>
+                        <tr><td>Divorce Decree</td><td>PDF</td><td>25 MB</td><td>Conditional</td></tr>
+                        <tr><td>Gift Letter</td><td>PDF</td><td>5 MB</td><td>Conditional</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Background Jobs -->
+        <section id="background" class="section">
+            <h2 class="section-title">⚙️ BACKGROUND JOB PROCESSING</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🐰</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">RabbitMQ Message Queue</h3>
+                        <p class="tile-description">Asynchronous task processing with RabbitMQ for long-running operations, third-party API calls, and LOS synchronization.</p>
+                        <div class="code-block">
+<code>// Queue Configuration
+const queues = {
+  'integration.plaid': { durable: true, prefetch: 1 },
+  'integration.truv': { durable: true, prefetch: 1 },
+  'integration.prove': { durable: true, prefetch: 5 },
+  'los.sync': { durable: true, prefetch: 2 },
+  'email.send': { durable: true, prefetch: 10 },
+  'sms.send': { durable: true, prefetch: 10 },
+  'document.process': { durable: true, prefetch: 3 },
+  'report.generate': { durable: true, prefetch: 2 }
+};
+
+// Producer (Enqueue Job)
+await channel.sendToQueue('integration.plaid',
+  Buffer.from(JSON.stringify({
+    type: 'FETCH_ACCOUNTS',
+    userId: '123',
+    accessToken: 'encrypted_token'
+  })),
+  { persistent: true }
+);
+
+// Consumer (Process Job)
+channel.consume('integration.plaid', async (msg) => {
+  const job = JSON.parse(msg.content.toString());
+
+  try {
+    const accounts = await plaidClient.getAccounts(job.accessToken);
+    await saveAccounts(job.userId, accounts);
+    channel.ack(msg);  // Success
+  } catch (error) {
+    if (error.retryable) {
+      channel.nack(msg, false, true);  // Requeue
+    } else {
+      channel.ack(msg);  // Discard
+      await logFailedJob(job, error);
+    }
+  }
+}, { noAck: false });</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔄</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Async Job Types</h3>
+                        <table class="tech-stack-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Job Type</th>
+                                    <th>Queue</th>
+                                    <th>Avg Duration</th>
+                                    <th>Retry Strategy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Plaid Account Fetch</td><td>integration.plaid</td><td>2-5 sec</td><td>3 retries, exp backoff</td></tr>
+                                <tr><td>TRUV Report Download</td><td>integration.truv</td><td>3-10 sec</td><td>5 retries, exp backoff</td></tr>
+                                <tr><td>Prove Verification</td><td>integration.prove</td><td>1-3 sec</td><td>2 retries, linear</td></tr>
+                                <tr><td>LOS Sync (Encompass)</td><td>los.sync</td><td>5-15 sec</td><td>3 retries, exp backoff</td></tr>
+                                <tr><td>Email Delivery</td><td>email.send</td><td>1-2 sec</td><td>3 retries, exp backoff</td></tr>
+                                <tr><td>SMS Delivery</td><td>sms.send</td><td>1-2 sec</td><td>2 retries, linear</td></tr>
+                                <tr><td>Document OCR</td><td>document.process</td><td>10-30 sec</td><td>2 retries, linear</td></tr>
+                                <tr><td>PDF Report Generation</td><td>report.generate</td><td>5-20 sec</td><td>2 retries, linear</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📬</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Webhook Receivers</h3>
+                        <p class="tile-description">Dedicated endpoints for receiving async callbacks from third-party services. HMAC signature verification for security.</p>
+                        <div class="code-block">
+<code>// Webhook Endpoint (TRUV Example)
+app.post('/webhooks/truv',
+  verifyTruvSignature,  // Middleware: HMAC validation
+  async (req, res) => {
+    const event = req.body;
+
+    // Acknowledge receipt immediately
+    res.status(200).send({ received: true });
+
+    // Process webhook asynchronously
+    switch (event.event_type) {
+      case 'task.status_updated':
+        if (event.data.status === 'completed') {
+          // Enqueue job to download report
+          await channel.sendToQueue('integration.truv',
+            Buffer.from(JSON.stringify({
+              type: 'DOWNLOAD_REPORT',
+              taskId: event.data.task_id,
+              userId: event.data.user_id
+            }))
+          );
+        }
+        break;
+
+      case 'task.failed':
+        await logWebhookEvent(event);
+        await notifyUser(event.data.user_id, 'VOIE_FAILED');
+        break;
+    }
+  }
+);
+
+// HMAC Signature Verification
+function verifyTruvSignature(req, res, next) {
+  const signature = req.headers['x-truv-signature'];
+  const payload = JSON.stringify(req.body);
+  const computed = crypto
+    .createHmac('sha256', process.env.TRUV_WEBHOOK_SECRET)
+    .update(payload)
+    .digest('hex');
+
+  if (signature !== computed) {
+    return res.status(401).json({ error: 'Invalid signature' });
+  }
+  next();
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">⏱️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Scheduled Jobs (Cron)</h3>
+                        <p class="tile-description">Time-based job scheduling for maintenance tasks, data cleanup, and periodic synchronization.</p>
+                        <div class="code-block">
+<code>// Node-cron Schedule
+const cron = require('node-cron');
+
+// Daily database backup (2 AM)
+cron.schedule('0 2 * * *', async () => {
+  await triggerRDSSnapshot();
+  await syncToS3Glacier();
+});
+
+// Hourly LOS sync check (every hour)
+cron.schedule('0 * * * *', async () => {
+  const pendingSyncs = await getPendingLOSSyncs();
+  for (const sync of pendingSyncs) {
+    await channel.sendToQueue('los.sync',
+      Buffer.from(JSON.stringify(sync))
+    );
+  }
+});
+
+// Daily cleanup of expired OTP codes (midnight)
+cron.schedule('0 0 * * *', async () => {
+  await redisClient.flushdb();  // Clear expired keys
+});
+
+// Weekly analytics report (Sunday 8 AM)
+cron.schedule('0 8 * * 0', async () => {
+  await generateWeeklyReport();
+  await sendToStakeholders();
+});</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monitoring & Logging -->
+        <section id="monitoring" class="section">
+            <h2 class="section-title">📊 LOGGING, MONITORING & OBSERVABILITY</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">📈</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">AWS CloudWatch</h3>
+                        <p class="tile-description">Centralized logging and monitoring with CloudWatch. Custom metrics, log aggregation, and automated alerting.</p>
+                        <div class="integration-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">Log Retention</div>
+                                <div class="spec-value">30 days (hot), 1 year (S3)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Metrics Interval</div>
+                                <div class="spec-value">1 minute (detailed)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Dashboard Refresh</div>
+                                <div class="spec-value">Real-time (auto-refresh)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Alert Channels</div>
+                                <div class="spec-value">SNS, Slack, PagerDuty</div>
+                            </div>
+                        </div>
+                        <div class="code-block" style="margin-top: 1rem;">
+<code>// Key CloudWatch Metrics
+
+Application Metrics:
+- RequestCount (per service)
+- ErrorRate (4xx, 5xx)
+- ResponseTime (p50, p95, p99)
+- ActiveUsers (concurrent)
+- ApplicationsCreated (per hour)
+- DocumentsUploaded (per hour)
+
+Infrastructure Metrics:
+- ECS CPU Utilization
+- ECS Memory Utilization
+- RDS Connections
+- RDS Storage
+- Redis Memory Usage
+- ALB Target Response Time
+
+Business Metrics:
+- Application Completion Rate
+- Integration Success Rate (Plaid, TRUV, Prove)
+- LOS Sync Success Rate
+- Average Time to Complete Application</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔍</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Datadog APM</h3>
+                        <p class="tile-description">Application Performance Monitoring with distributed tracing, service maps, and performance profiling.</p>
+                        <div class="code-block">
+<code>// Datadog Integration
+const tracer = require('dd-trace').init({
+  service: 'smartapp-api',
+  env: process.env.NODE_ENV,
+  version: process.env.APP_VERSION,
+  logInjection: true,
+  analytics: true
+});
+
+// Trace third-party API calls
+const span = tracer.startSpan('plaid.api.call', {
+  resource: 'accounts.balance.get',
+  type: 'http'
+});
+
+try {
+  const response = await plaidClient.getAccounts(accessToken);
+  span.setTag('http.status_code', 200);
+  span.setTag('account.count', response.accounts.length);
+} catch (error) {
+  span.setTag('error', true);
+  span.setTag('error.message', error.message);
+} finally {
+  span.finish();
+}
+
+// Custom Metrics
+datadog.increment('applications.created', 1, ['env:prod']);
+datadog.histogram('integration.plaid.duration', duration);
+datadog.gauge('active.users', activeUserCount);</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🐛</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Sentry Error Tracking</h3>
+                        <p class="tile-description">Real-time error tracking and crash reporting. Automatic error grouping, release tracking, and performance monitoring.</p>
+                        <div class="code-block">
+<code>// Sentry Integration
+const Sentry = require('@sentry/node');
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.NODE_ENV,
+  release: `smartapp@${process.env.APP_VERSION}`,
+  tracesSampleRate: 0.1,  // 10% of transactions
+  beforeSend(event, hint) {
+    // Filter sensitive data
+    if (event.request?.data) {
+      delete event.request.data.ssn;
+      delete event.request.data.password;
+    }
+    return event;
+  }
+});
+
+// Capture exceptions
+try {
+  await processApplication(applicationId);
+} catch (error) {
+  Sentry.captureException(error, {
+    tags: {
+      service: 'application-processor',
+      applicationId
+    },
+    extra: {
+      applicationData: sanitizedData
+    }
+  });
+}
+
+// Performance monitoring
+const transaction = Sentry.startTransaction({
+  op: 'application.process',
+  name: 'Process Application'
+});
+
+// ... do work ...
+
+transaction.finish();</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📋</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Structured Logging (Winston)</h3>
+                        <p class="tile-description">JSON-formatted logs with correlation IDs for request tracing. Multiple transports for different log levels.</p>
+                        <div class="code-block">
+<code>// Winston Logger Configuration
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.errors({ stack: true }),
+    winston.format.json()
+  ),
+  defaultMeta: {
+    service: 'smartapp-api',
+    version: process.env.APP_VERSION
+  },
+  transports: [
+    // Error logs to file
+    new winston.transports.File({
+      filename: 'error.log',
+      level: 'error'
+    }),
+    // All logs to CloudWatch
+    new WinstonCloudWatch({
+      logGroupName: '/aws/ecs/smartapp-api',
+      logStreamName: `${process.env.HOSTNAME}-${Date.now()}`
+    })
+  ]
+});
+
+// Log with correlation ID
+logger.info('Application created', {
+  correlationId: req.id,
+  userId: req.user.id,
+  applicationId: application.id,
+  duration: Date.now() - startTime
+});</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Alert Thresholds</h3>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Warning Threshold</th>
+                            <th>Critical Threshold</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>API Error Rate</td><td>&gt; 1%</td><td>&gt; 5%</td><td>Page on-call engineer</td></tr>
+                        <tr><td>Response Time (p99)</td><td>&gt; 2s</td><td>&gt; 5s</td><td>Auto-scale + alert</td></tr>
+                        <tr><td>ECS CPU Usage</td><td>&gt; 70%</td><td>&gt; 85%</td><td>Auto-scale tasks</td></tr>
+                        <tr><td>RDS Connections</td><td>&gt; 80</td><td>&gt; 95</td><td>Alert + investigate</td></tr>
+                        <tr><td>Redis Memory</td><td>&gt; 75%</td><td>&gt; 90%</td><td>Clear cache + alert</td></tr>
+                        <tr><td>S3 Storage</td><td>&gt; 80% quota</td><td>&gt; 95% quota</td><td>Archive to Glacier</td></tr>
+                        <tr><td>Failed Logins</td><td>&gt; 10/min</td><td>&gt; 50/min</td><td>Block IP + alert security</td></tr>
+                        <tr><td>Plaid API Errors</td><td>&gt; 5%</td><td>&gt; 10%</td><td>Fallback mode + alert</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Security Architecture -->
+        <section id="security" class="section">
+            <h2 class="section-title">🔒 SECURITY ARCHITECTURE</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🔐</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Encryption Strategy</h3>
+                        <div style="margin-top: 1rem;">
+                            <h4 style="color: var(--accent-teal); font-size: 1rem; margin-bottom: 0.75rem;">Encryption at Rest</h4>
+                            <div class="security-badge">RDS: AES-256 encryption</div>
+                            <div class="security-badge">S3: SSE-S3 (AES-256)</div>
+                            <div class="security-badge">Redis: At-rest encryption</div>
+                            <div class="security-badge">EBS Volumes: Encrypted</div>
+                            <div class="security-badge">Backups: Encrypted</div>
+
+                            <h4 style="color: var(--accent-teal); font-size: 1rem; margin: 1.5rem 0 0.75rem;">Encryption in Transit</h4>
+                            <div class="security-badge">HTTPS/TLS 1.3 Only</div>
+                            <div class="security-badge">Certificate: AWS ACM</div>
+                            <div class="security-badge">Perfect Forward Secrecy</div>
+                            <div class="security-badge">HSTS Enabled</div>
+                            <div class="security-badge">Redis: TLS connections</div>
+
+                            <h4 style="color: var(--accent-teal); font-size: 1rem; margin: 1.5rem 0 0.75rem;">Application-Level Encryption</h4>
+                            <div class="security-badge">PII: Field-level encryption</div>
+                            <div class="security-badge">SSN: Tokenized + encrypted</div>
+                            <div class="security-badge">API Keys: AWS Secrets Manager</div>
+                            <div class="security-badge">JWT: RS256 signing</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🛡️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">PII Handling & Tokenization</h3>
+                        <p class="tile-description">Sensitive data tokenized and encrypted at application layer. Minimal PII exposure in logs and third-party services.</p>
+                        <div class="code-block">
+<code>// PII Tokenization Service
+class PIITokenizer {
+  async tokenizeSSN(ssn) {
+    // Generate token
+    const token = `ssn_${crypto.randomUUID()}`;
+
+    // Encrypt SSN
+    const encrypted = await this.encrypt(ssn);
+
+    // Store mapping in secure vault
+    await vault.set(token, encrypted, {
+      ttl: 7 * 24 * 60 * 60,  // 7 days
+      access: 'restricted'
+    });
+
+    return token;
+  }
+
+  async detokenizeSSN(token) {
+    // Retrieve encrypted value
+    const encrypted = await vault.get(token);
+    if (!encrypted) throw new Error('Token expired');
+
+    // Decrypt and return
+    return await this.decrypt(encrypted);
+  }
+
+  encrypt(data) {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv(
+      'aes-256-gcm',
+      Buffer.from(process.env.ENCRYPTION_KEY, 'hex'),
+      iv
+    );
+    // ... encryption logic
+  }
+}
+
+// Usage in application
+const tokenizedSSN = await tokenizer.tokenizeSSN(borrower.ssn);
+await db.borrowers.update({
+  ssn: tokenizedSSN,  // Store token, not actual SSN
+  ssnLastFour: borrower.ssn.slice(-4)  // For display
+});</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🚫</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">API Rate Limiting & DDoS Protection</h3>
+                        <p class="tile-description">Multi-tier rate limiting with AWS WAF rules, Redis-based application limits, and automatic IP blocking.</p>
+                        <div class="code-block">
+<code>// Rate Limiting Tiers
+const rateLimits = {
+  // Public endpoints (unauthenticated)
+  public: {
+    windowMs: 15 * 60 * 1000,  // 15 minutes
+    max: 100,                   // 100 requests
+    skipSuccessfulRequests: false
+  },
+
+  // Authenticated users
+  authenticated: {
+    windowMs: 15 * 60 * 1000,
+    max: 1000,
+    skipSuccessfulRequests: true
+  },
+
+  // Loan Officers
+  lo: {
+    windowMs: 15 * 60 * 1000,
+    max: 5000,
+    skipSuccessfulRequests: true
+  },
+
+  // API Keys
+  apiKey: {
+    windowMs: 60 * 60 * 1000,  // 1 hour
+    max: 10000
+  }
+};
+
+// Redis-based rate limiter
+const limiter = new RateLimiterRedis({
+  storeClient: redisClient,
+  keyPrefix: 'ratelimit',
+  points: 100,        // Number of requests
+  duration: 900,      // Per 15 minutes
+  blockDuration: 900  // Block for 15 min if exceeded
+});
+
+// Middleware
+async function rateLimitMiddleware(req, res, next) {
+  const key = req.user?.id || req.ip;
+
+  try {
+    await limiter.consume(key);
+    next();
+  } catch (error) {
+    res.status(429).json({
+      error: 'Too many requests',
+      retryAfter: error.msBeforeNext / 1000
+    });
+  }
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔍</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Security Compliance & Testing</h3>
+                        <table class="tech-stack-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Standard/Test</th>
+                                    <th>Status</th>
+                                    <th>Last Audit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>SOC 2 Type II</td><td><span class="badge badge-success">Compliant</span></td><td>Q4 2024</td></tr>
+                                <tr><td>GLBA Compliance</td><td><span class="badge badge-success">Compliant</span></td><td>Q4 2024</td></tr>
+                                <tr><td>FCRA Compliance</td><td><span class="badge badge-success">Compliant</span></td><td>Q4 2024</td></tr>
+                                <tr><td>Penetration Testing</td><td><span class="badge badge-success">Passed</span></td><td>Q4 2024</td></tr>
+                                <tr><td>OWASP Top 10</td><td><span class="badge badge-success">Secure</span></td><td>Continuous</td></tr>
+                                <tr><td>Vulnerability Scanning</td><td><span class="badge badge-success">Clean</span></td><td>Weekly</td></tr>
+                                <tr><td>Dependency Audits</td><td><span class="badge badge-success">Up-to-date</span></td><td>Daily</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--accent-teal); font-size: 1rem; margin-bottom: 0.75rem;">Security Measures</h4>
+                            <div class="security-badge">SQL Injection: Prepared statements</div>
+                            <div class="security-badge">XSS Prevention: Content Security Policy</div>
+                            <div class="security-badge">CSRF Protection: CSRF tokens</div>
+                            <div class="security-badge">Clickjacking: X-Frame-Options</div>
+                            <div class="security-badge">Input Validation: Joi + Zod schemas</div>
+                            <div class="security-badge">Output Encoding: Auto-escaping</div>
+                            <div class="security-badge">Session Security: HTTP-only cookies</div>
+                            <div class="security-badge">Dependencies: Automated updates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ PII Data Retention Policy:</strong> SSN and sensitive financial data retained for 7 years per regulatory requirements. Data encrypted at rest and in transit. Automatic purge process after retention period. Access logged and monitored.
+            </div>
+        </section>
+
+        <!-- Scalability -->
+        <section id="scalability" class="section">
+            <h2 class="section-title">📈 SCALABILITY & PERFORMANCE</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🔄</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Horizontal Scaling</h3>
+                        <p class="tile-description">Stateless application services enable unlimited horizontal scaling. ECS auto-scaling based on CPU, memory, and custom metrics.</p>
+                        <div class="code-block">
+<code>// ECS Auto Scaling Configuration
+const scalingConfig = {
+  minCapacity: 3,
+  maxCapacity: 20,
+  targetCPUUtilization: 70,
+  targetMemoryUtilization: 80,
+  scaleOutCooldown: 60,   // seconds
+  scaleInCooldown: 300,   // seconds
+
+  customMetrics: [
+    {
+      metric: 'RequestCount',
+      targetValue: 1000,    // requests per task
+      scaleOutThreshold: 1200,
+      scaleInThreshold: 500
+    },
+    {
+      metric: 'ActiveConnections',
+      targetValue: 500,
+      scaleOutThreshold: 600,
+      scaleInThreshold: 200
+    }
+  ]
+};
+
+// Scaling Schedule (anticipate traffic)
+schedules: [
+  {
+    schedule: 'cron(0 8 * * MON-FRI)',  // 8 AM weekdays
+    minCapacity: 5,
+    maxCapacity: 20
+  },
+  {
+    schedule: 'cron(0 18 * * MON-FRI)', // 6 PM weekdays
+    minCapacity: 3,
+    maxCapacity: 10
+  }
+]</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">⚖️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Load Balancing</h3>
+                        <p class="tile-description">Application Load Balancer with health checks, session affinity, and intelligent request distribution across availability zones.</p>
+                        <div class="integration-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">Algorithm</div>
+                                <div class="spec-value">Round Robin</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Health Check</div>
+                                <div class="spec-value">GET /health (15s interval)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Unhealthy Threshold</div>
+                                <div class="spec-value">3 consecutive failures</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Healthy Threshold</div>
+                                <div class="spec-value">2 consecutive successes</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Deregistration Delay</div>
+                                <div class="spec-value">30 seconds</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Cross-Zone</div>
+                                <div class="spec-value">Enabled</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🗄️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Database Replication</h3>
+                        <p class="tile-description">PostgreSQL read replicas for read-heavy workloads. Write operations to primary, reads distributed across replicas.</p>
+                        <div class="code-block">
+<code>// Database Configuration
+Primary Instance (us-east-1a):
+  - Instance: db.r6g.2xlarge
+  - Storage: 500GB SSD (gp3)
+  - IOPS: 12,000
+  - Multi-AZ: Enabled
+  - Backups: Daily, 7-day retention
+
+Read Replica 1 (us-east-1b):
+  - Instance: db.r6g.xlarge
+  - Replication Lag: &lt; 100ms
+  - Purpose: LO dashboard queries
+
+Read Replica 2 (us-east-1c):
+  - Instance: db.r6g.xlarge
+  - Replication Lag: &lt; 100ms
+  - Purpose: Analytics & reporting
+
+// Connection Routing
+const writeDb = new Pool({
+  host: 'primary.rds.amazonaws.com',
+  database: 'smartapp',
+  max: 20
+});
+
+const readDb = new Pool({
+  host: 'replica.rds.amazonaws.com',  // DNS round-robin
+  database: 'smartapp',
+  max: 50
+});
+
+// Usage
+await writeDb.query('INSERT INTO applications...');
+const results = await readDb.query('SELECT * FROM applications...');</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🚀</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Performance Optimization</h3>
+                        <div style="margin-top: 1rem;">
+                            <h4 style="color: var(--accent-teal); font-size: 1rem; margin-bottom: 0.75rem;">Frontend Optimizations</h4>
+                            <ul style="list-style: none; padding: 0; color: var(--text-secondary);">
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-blue); margin-bottom: 0.5rem;">Code Splitting: Route-based lazy loading reduces initial bundle size by 60%</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-teal); margin-bottom: 0.5rem;">Image Optimization: Next.js Image component with WebP, lazy loading, responsive sizes</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-purple); margin-bottom: 0.5rem;">Tree Shaking: Remove unused code, reduces bundle by 40%</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-green); margin-bottom: 0.5rem;">Minification: Terser for JS, cssnano for CSS</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-yellow); margin-bottom: 0.5rem;">Compression: Brotli for assets, gzip fallback</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-red); margin-bottom: 0.5rem;">Prefetching: Link prefetch for anticipated navigation</li>
+                            </ul>
+
+                            <h4 style="color: var(--accent-teal); font-size: 1rem; margin: 1.5rem 0 0.75rem;">Backend Optimizations</h4>
+                            <ul style="list-style: none; padding: 0; color: var(--text-secondary);">
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-blue); margin-bottom: 0.5rem;">Database Indexing: Composite indexes on frequently queried columns</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-teal); margin-bottom: 0.5rem;">N+1 Query Prevention: DataLoader pattern for batching</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-purple); margin-bottom: 0.5rem;">Connection Pooling: PgBouncer with 100 connections per pool</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-green); margin-bottom: 0.5rem;">Async Operations: Non-blocking I/O for all external calls</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-yellow); margin-bottom: 0.5rem;">Response Compression: gzip middleware for API responses</li>
+                                <li style="padding: 0.5rem; border-left: 2px solid var(--accent-red); margin-bottom: 0.5rem;">Keep-Alive: HTTP persistent connections</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Performance Benchmarks</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div class="performance-metric">
+                        <div class="metric-value">&lt; 1s</div>
+                        <div class="metric-label">Page Load Time (p95)</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">&lt; 100ms</div>
+                        <div class="metric-label">API Response Time (p50)</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">&lt; 500ms</div>
+                        <div class="metric-label">API Response Time (p99)</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">10k+</div>
+                        <div class="metric-label">Concurrent Users</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">5k+</div>
+                        <div class="metric-label">Requests Per Second</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">Uptime SLA</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disaster Recovery -->
+        <section id="disaster-recovery" class="section">
+            <h2 class="section-title">🆘 DISASTER RECOVERY & BACKUP STRATEGY</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">💾</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Backup Strategy</h3>
+                        <table class="tech-stack-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Frequency</th>
+                                    <th>Retention</th>
+                                    <th>RPO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>PostgreSQL RDS</td><td>Continuous + Daily</td><td>35 days</td><td>5 minutes (PITR)</td></tr>
+                                <tr><td>S3 Documents</td><td>Continuous (versioning)</td><td>Indefinite</td><td>0 (real-time)</td></tr>
+                                <tr><td>Redis Cache</td><td>Daily snapshot</td><td>7 days</td><td>24 hours</td></tr>
+                                <tr><td>Application Config</td><td>Git-tracked</td><td>Indefinite</td><td>0 (version control)</td></tr>
+                                <tr><td>Infrastructure Code</td><td>Git-tracked</td><td>Indefinite</td><td>0 (version control)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🌍</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Multi-Region Architecture</h3>
+                        <p class="tile-description">Primary region: us-east-1. DR region: us-west-2. Cross-region replication for critical data with automated failover capability.</p>
+                        <div class="integration-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">Primary Region</div>
+                                <div class="spec-value">us-east-1 (N. Virginia)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">DR Region</div>
+                                <div class="spec-value">us-west-2 (Oregon)</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">RTO (Recovery Time)</div>
+                                <div class="spec-value">&lt; 1 hour</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">RPO (Data Loss)</div>
+                                <div class="spec-value">&lt; 5 minutes</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Failover Method</div>
+                                <div class="spec-value">Route 53 health checks</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Data Sync</div>
+                                <div class="spec-value">Continuous (async)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔄</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Disaster Recovery Plan</h3>
+                        <div class="code-block">
+<code>// DR Runbook
+
+1. Incident Detection:
+   - CloudWatch alarm triggers on critical failure
+   - PagerDuty alerts on-call engineer
+   - Automatic health check failures
+
+2. Assessment (0-15 min):
+   - Determine scope and impact
+   - Decide: Fix in primary or failover to DR
+   - Notify stakeholders
+
+3. Failover to DR Region (15-45 min):
+   - Update Route 53 to point to us-west-2
+   - Verify RDS read replica promotion
+   - Scale up ECS tasks in DR region
+   - Verify S3 cross-region replication
+   - Test critical user flows
+
+4. Operate in DR Mode:
+   - Monitor performance and errors
+   - Continue incident investigation
+   - Plan return to primary region
+
+5. Failback to Primary (planned):
+   - Resolve root cause in primary
+   - Sync any DR changes back to primary
+   - Gradual traffic shift (10% → 50% → 100%)
+   - Monitor for issues
+   - Complete failback
+
+// Automated Failover Checks
+- Route 53 health check interval: 30 seconds
+- Failure threshold: 3 consecutive failures
+- Automatic DNS update on failure
+- TTL: 60 seconds for fast propagation</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🧪</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">DR Testing Schedule</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary); margin-top: 1rem;">
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-blue); margin-bottom: 0.5rem;">
+                                <strong>Monthly:</strong> Backup restoration test (restore to test environment)
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-teal); margin-bottom: 0.5rem;">
+                                <strong>Quarterly:</strong> Full DR failover drill (during maintenance window)
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-purple); margin-bottom: 0.5rem;">
+                                <strong>Bi-annually:</strong> Disaster recovery tabletop exercise with stakeholders
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-green); margin-bottom: 0.5rem;">
+                                <strong>Annually:</strong> Full-scale disaster simulation with external audit
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CI/CD Pipeline -->
+        <section id="cicd" class="section">
+            <h2 class="section-title">🚀 CI/CD PIPELINE</h2>
+
+            <div class="tile">
+                <h3 class="tile-title">GitHub Actions Workflow</h3>
+                <div style="margin-top: 1.5rem;">
+                    <div class="pipeline-stage">
+                        <div class="stage-title">1. Code Commit & PR</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
+                            Developer pushes code to feature branch → Opens Pull Request → Triggers CI pipeline
+                        </p>
+                    </div>
+
+                    <div class="pipeline-stage">
+                        <div class="stage-title">2. Continuous Integration</div>
+                        <div class="code-block" style="margin-top: 0.75rem;">
+<code># .github/workflows/ci.yml
+name: CI Pipeline
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run lint        # ESLint + Prettier
+      - run: npm run type-check  # TypeScript
+      - run: npm test -- --coverage  # Jest unit tests
+      - run: npm run test:e2e    # Playwright E2E tests
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm audit
+      - run: npm run snyk         # Snyk security scan
+      - run: npm run sonarcloud   # Code quality analysis</code>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-stage">
+                        <div class="stage-title">3. Build & Push</div>
+                        <div class="code-block" style="margin-top: 0.75rem;">
+<code># Build Docker images
+- name: Build Docker image
+  run: |
+    docker build -t smartapp-api:${{ github.sha }} .
+    docker tag smartapp-api:${{ github.sha }} smartapp-api:latest
+
+- name: Push to ECR
+  run: |
+    aws ecr get-login-password | docker login --username AWS \
+      --password-stdin $ECR_REGISTRY
+    docker push smartapp-api:${{ github.sha }}
+    docker push smartapp-api:latest</code>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-stage">
+                        <div class="stage-title">4. Deploy to Staging</div>
+                        <div class="code-block" style="margin-top: 0.75rem;">
+<code>- name: Deploy to ECS Staging
+  run: |
+    aws ecs update-service \
+      --cluster smartapp-staging \
+      --service api \
+      --force-new-deployment \
+      --task-definition smartapp-api:${{ github.sha }}
+
+- name: Wait for deployment
+  run: aws ecs wait services-stable \
+    --cluster smartapp-staging \
+    --services api
+
+- name: Run smoke tests
+  run: npm run test:smoke -- --env staging</code>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-stage">
+                        <div class="stage-title">5. Manual Approval</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
+                            QA testing in staging environment → Product manager approval → Deploy to production gate
+                        </p>
+                    </div>
+
+                    <div class="pipeline-stage">
+                        <div class="stage-title">6. Deploy to Production</div>
+                        <div class="code-block" style="margin-top: 0.75rem;">
+<code>- name: Blue-Green Deployment
+  run: |
+    # Deploy to green environment
+    aws ecs update-service \
+      --cluster smartapp-prod \
+      --service api-green \
+      --task-definition smartapp-api:${{ github.sha }}
+
+    # Wait for green to be healthy
+    aws ecs wait services-stable \
+      --cluster smartapp-prod \
+      --services api-green
+
+    # Shift traffic: blue → green (ALB target groups)
+    aws elbv2 modify-listener \
+      --listener-arn $LISTENER_ARN \
+      --default-actions TargetGroupArn=$GREEN_TG_ARN
+
+    # Monitor for 10 minutes
+    sleep 600
+
+    # If successful, decommission blue
+    aws ecs update-service \
+      --cluster smartapp-prod \
+      --service api-blue \
+      --desired-count 0</code>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-stage" style="border-color: var(--accent-green);">
+                        <div class="stage-title" style="color: var(--accent-green);">7. Post-Deployment</div>
+                        <div class="code-block" style="margin-top: 0.75rem;">
+<code>- name: Health checks
+  run: curl https://api.smartapp.com/health
+
+- name: Smoke tests
+  run: npm run test:smoke -- --env production
+
+- name: Notify Slack
+  run: |
+    curl -X POST $SLACK_WEBHOOK \
+      -H 'Content-Type: application/json' \
+      -d '{"text":"✅ Deployed v${{ github.sha }} to production"}'
+
+- name: Create Sentry release
+  run: |
+    sentry-cli releases new ${{ github.sha }}
+    sentry-cli releases set-commits ${{ github.sha }} --auto
+    sentry-cli releases finalize ${{ github.sha }}</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <h3 class="tile-title">Deployment Metrics</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div class="performance-metric">
+                        <div class="metric-value">15 min</div>
+                        <div class="metric-label">CI Pipeline Duration</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">5 min</div>
+                        <div class="metric-label">Deployment Time</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">20+</div>
+                        <div class="metric-label">Deployments Per Week</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">99.5%</div>
+                        <div class="metric-label">Deployment Success Rate</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">&lt; 2 min</div>
+                        <div class="metric-label">Rollback Time</div>
+                    </div>
+                    <div class="performance-metric">
+                        <div class="metric-value">0</div>
+                        <div class="metric-label">Downtime (Blue-Green)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Environments -->
+        <section id="environments" class="section">
+            <h2 class="section-title">🌐 DEVELOPMENT, STAGING, PRODUCTION ENVIRONMENTS</h2>
+
+            <div class="tile">
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Development</th>
+                            <th>Staging</th>
+                            <th>Production</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Purpose</strong></td>
+                            <td>Local development & testing</td>
+                            <td>QA, integration testing, demos</td>
+                            <td>Live customer-facing environment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>URL</strong></td>
+                            <td>localhost:3000</td>
+                            <td>staging.smartapp.com</td>
+                            <td>app.smartapp.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database</strong></td>
+                            <td>Local PostgreSQL</td>
+                            <td>RDS db.t3.medium (shared)</td>
+                            <td>RDS db.r6g.2xlarge (multi-AZ)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cache</strong></td>
+                            <td>Local Redis</td>
+                            <td>ElastiCache t3.micro</td>
+                            <td>ElastiCache r6g.large (cluster)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ECS Tasks</strong></td>
+                            <td>N/A (local)</td>
+                            <td>2 tasks (0.5 vCPU, 1GB RAM)</td>
+                            <td>3-20 tasks (2 vCPU, 4GB RAM)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Third-Party APIs</strong></td>
+                            <td>Sandbox/mocks</td>
+                            <td>Sandbox</td>
+                            <td>Production</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monitoring</strong></td>
+                            <td>Console logs</td>
+                            <td>CloudWatch + Datadog</td>
+                            <td>CloudWatch + Datadog + Sentry</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Encryption</strong></td>
+                            <td>Optional</td>
+                            <td>Enabled (same as prod)</td>
+                            <td>Enforced (at rest & transit)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backups</strong></td>
+                            <td>None</td>
+                            <td>Daily (7 day retention)</td>
+                            <td>Continuous + Daily (35 days)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Access</strong></td>
+                            <td>Developers</td>
+                            <td>Developers, QA, Product</td>
+                            <td>All (customers + internal)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data</strong></td>
+                            <td>Synthetic test data</td>
+                            <td>Anonymized production copy</td>
+                            <td>Real customer data (PII)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deployment</strong></td>
+                            <td>Manual (npm run dev)</td>
+                            <td>Auto on PR merge to develop</td>
+                            <td>Manual approval required</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <strong>🔒 Environment Parity:</strong> Staging environment mirrors production configuration to catch environment-specific issues. Same Docker images, infrastructure code, and configurations. Only differences are scale and data.
+            </div>
+        </section>
+
+        <!-- Multi-Tenancy -->
+        <section id="multi-tenancy" class="section">
+            <h2 class="section-title">🏢 MULTI-TENANCY ARCHITECTURE</h2>
+
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🏷️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">White-Label Support</h3>
+                        <p class="tile-description">Multi-tenant architecture supporting multiple lenders with isolated data, custom branding, and configurable features per tenant.</p>
+                        <div class="code-block">
+<code>// Tenant Resolution Middleware
+async function resolveTenant(req, res, next) {
+  // Extract tenant from subdomain or header
+  const subdomain = req.hostname.split('.')[0];
+  const tenantId = req.headers['x-tenant-id'];
+
+  // Lookup tenant configuration
+  const tenant = await getTenantConfig(subdomain || tenantId);
+
+  if (!tenant) {
+    return res.status(404).json({ error: 'Tenant not found' });
+  }
+
+  // Attach to request context
+  req.tenant = {
+    id: tenant.id,
+    name: tenant.name,
+    domain: tenant.domain,
+    branding: tenant.branding,
+    features: tenant.features,
+    integrations: tenant.integrations
+  };
+
+  next();
+}
+
+// Database Query with Tenant Isolation
+async function getApplications(tenantId, userId) {
+  return db.query(`
+    SELECT * FROM applications
+    WHERE tenant_id = $1 AND user_id = $2
+  `, [tenantId, userId]);
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🎨</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Tenant Configuration</h3>
+                        <table class="tech-stack-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Configuration</th>
+                                    <th>Scope</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Branding</td><td>Per-tenant</td><td>Logo, colors, fonts, favicon</td></tr>
+                                <tr><td>Domain</td><td>Per-tenant</td><td>lender1.smartapp.com</td></tr>
+                                <tr><td>Features</td><td>Per-tenant</td><td>Plaid VOA, TRUV VOIE, AI Assistant</td></tr>
+                                <tr><td>Integrations</td><td>Per-tenant</td><td>LOS type, API credentials</td></tr>
+                                <tr><td>Email Templates</td><td>Per-tenant</td><td>Custom sender, content, branding</td></tr>
+                                <tr><td>Compliance</td><td>Per-tenant</td><td>State-specific disclosures</td></tr>
+                                <tr><td>Pricing</td><td>Per-tenant</td><td>Feature limits, usage tiers</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🔒</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Data Isolation Strategy</h3>
+                        <p class="tile-description">Shared database with tenant_id column on all tables. Row-level security enforced at application and database layers.</p>
+                        <div class="code-block">
+<code>// PostgreSQL Row-Level Security
+CREATE POLICY tenant_isolation ON applications
+  USING (tenant_id = current_setting('app.current_tenant')::uuid);
+
+ALTER TABLE applications ENABLE ROW LEVEL SECURITY;
+
+// Application sets tenant context per request
+await db.query(`SET app.current_tenant = $1`, [req.tenant.id]);
+
+// All queries automatically filtered by tenant_id
+const apps = await db.query('SELECT * FROM applications');
+// Only returns apps for current tenant
+
+// Multi-tenant indexes for performance
+CREATE INDEX idx_applications_tenant_user
+  ON applications(tenant_id, user_id);
+
+CREATE INDEX idx_documents_tenant_app
+  ON documents(tenant_id, application_id);</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Tenant Metrics & Analytics</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary); margin-top: 1rem;">
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-blue); margin-bottom: 0.5rem;">
+                                <strong>Usage Tracking:</strong> API calls, storage, active users per tenant
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-teal); margin-bottom: 0.5rem;">
+                                <strong>Performance Isolation:</strong> Rate limiting per tenant to prevent noisy neighbors
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-purple); margin-bottom: 0.5rem;">
+                                <strong>Billing Integration:</strong> Track usage for metered billing and invoicing
+                            </li>
+                            <li style="padding: 0.5rem; border-left: 2px solid var(--accent-green); margin-bottom: 0.5rem;">
+                                <strong>Tenant-Specific Dashboards:</strong> CloudWatch dashboards filtered by tenant_id
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Continue with final sections... -->
+    </div>
+</body>
+</html>
