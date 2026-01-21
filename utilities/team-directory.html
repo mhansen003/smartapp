@@ -98,13 +98,13 @@
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
             color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
             flex-shrink: 0;
         }
 
@@ -120,9 +120,9 @@
         }
 
         .member-title {
-            font-size: 0.875rem;
+            font-size: 0.95rem;
             color: var(--accent-blue);
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 0.25rem;
         }
 
@@ -132,35 +132,34 @@
         }
 
         .member-details {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
+            margin-bottom: 1rem;
         }
 
         .detail-row {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
             font-size: 0.875rem;
         }
 
-        .detail-icon {
-            color: var(--accent-teal);
-            font-size: 1rem;
+        .detail-row:last-child {
+            border-bottom: none;
         }
 
-        .detail-label {
-            color: var(--text-secondary);
-            min-width: 80px;
+        .detail-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
         }
 
         .detail-value {
-            color: var(--text-primary);
+            color: var(--text-secondary);
         }
 
         .skills-section {
-            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
 
         .skills-label {
@@ -179,6 +178,7 @@
         }
 
         .skill-tag {
+            display: inline-block;
             padding: 0.25rem 0.75rem;
             background: rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.3);
@@ -189,24 +189,17 @@
         }
 
         .focus-area {
-            margin-top: 1rem;
             padding: 0.75rem;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        .fun-fact {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background: rgba(139, 92, 246, 0.1);
-            border-left: 3px solid var(--accent-purple);
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--accent-green);
             border-radius: 4px;
             font-size: 0.875rem;
             color: var(--text-secondary);
-            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .focus-area strong {
+            color: var(--accent-green);
         }
 
         .contact-methods {
@@ -245,199 +238,6 @@
             font-size: 0.875rem;
             line-height: 1.6;
         }
-
-        .schedule-table {
-            width: 100%;
-            margin-top: 1rem;
-            border-collapse: collapse;
-        }
-
-        .schedule-table th,
-        .schedule-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.875rem;
-        }
-
-        .schedule-table th {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-        }
-
-        .schedule-table td {
-            color: var(--text-primary);
-        }
-
-        .on-call-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid var(--accent-red);
-            border-radius: 12px;
-            font-size: 0.75rem;
-            color: var(--accent-red);
-            font-weight: 600;
-        }
-
-        .available-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--accent-green);
-            border-radius: 12px;
-            font-size: 0.75rem;
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .skills-matrix {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-        }
-
-        .matrix-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-        }
-
-        .matrix-table th {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            font-weight: 600;
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 2px solid var(--border-color);
-            position: sticky;
-            top: 0;
-        }
-
-        .matrix-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .skill-level {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .skill-expert {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--accent-green);
-        }
-
-        .skill-advanced {
-            background: rgba(59, 130, 246, 0.2);
-            color: var(--accent-blue);
-        }
-
-        .skill-intermediate {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--accent-yellow);
-        }
-
-        .escalation-paths {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .escalation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .escalation-card {
-            background: var(--bg-secondary);
-            border-left: 4px solid var(--accent-red);
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-
-        .escalation-type {
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        .escalation-steps {
-            list-style: none;
-            padding: 0;
-        }
-
-        .escalation-steps li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .escalation-steps li:last-child {
-            border-bottom: none;
-        }
-
-        .rituals-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .rituals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .ritual-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.25rem;
-        }
-
-        .ritual-name {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .ritual-details {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            line-height: 1.6;
-        }
-
-        .ritual-time {
-            display: inline-block;
-            margin-top: 0.5rem;
-            padding: 0.25rem 0.75rem;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 12px;
-            font-size: 0.75rem;
-            color: var(--accent-blue);
-        }
     </style>
 </head>
 <body>
@@ -451,16 +251,12 @@
             <li><a href="../index.html">🏠 Home</a></li>
             <li><a href="#overview">👥 Overview</a></li>
             <li><a href="#org-chart">🏢 Org Chart</a></li>
-            <li><a href="#leadership">⭐ Leadership</a></li>
-            <li><a href="#product">📦 Product</a></li>
+            <li><a href="#leadership">⭐ Leadership & Product</a></li>
+            <li><a href="#design">🎨 Design & UX</a></li>
+            <li><a href="#consultants">🤝 Consultants</a></li>
             <li><a href="#engineering">💻 Engineering</a></li>
-            <li><a href="#design">🎨 Design</a></li>
-            <li><a href="#data">📊 Data & Analytics</a></li>
-            <li><a href="#project-mgmt">📋 Project Mgmt</a></li>
+            <li><a href="#loan-officers">🏦 Loan Officers</a></li>
             <li><a href="#contacts">📞 Contact Methods</a></li>
-            <li><a href="#skills-matrix">🔧 Skills Matrix</a></li>
-            <li><a href="#rituals">🔄 Team Rituals</a></li>
-            <li><a href="#escalation">🚨 Escalation Paths</a></li>
         </ul>
     </nav>
 
@@ -470,23 +266,23 @@
             <div class="hero-content">
                 <div class="label">SMART APP 2.0 TEAM</div>
                 <h1>Team Directory & Organizational Guide</h1>
-                <p class="subtitle">Comprehensive directory of team members, organizational structure, contact methods, and collaboration protocols</p>
+                <p class="subtitle">Comprehensive directory of team members, organizational structure, and contact methods</p>
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-value">24</div>
                         <div class="stat-label">Team Members</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">7</div>
+                        <div class="stat-value">5</div>
                         <div class="stat-label">Departments</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">5</div>
-                        <div class="stat-label">Cross-Functional Squads</div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Loan Officers</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">Time Zones</div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Engineers</div>
                     </div>
                 </div>
             </div>
@@ -498,14 +294,13 @@
             <div class="team-overview">
                 <p style="margin-bottom: 1rem; line-height: 1.8; color: var(--text-secondary);">
                     The Smart App 2.0 team is a cross-functional organization of 24 professionals spanning product management,
-                    engineering, design, QA, DevOps, data analytics, and project management. Our team operates across multiple
-                    time zones with members in Seattle, New York, Austin, Chicago, and distributed remote locations. We follow
-                    agile methodologies with two-week sprints, daily standups, and bi-weekly retrospectives.
+                    engineering, design, UX research, consulting, and field operations (loan officers). We work together to
+                    transform the digital mortgage application experience through innovative technology and customer-centric solutions.
                 </p>
                 <p style="line-height: 1.8; color: var(--text-secondary);">
                     <strong style="color: var(--text-primary);">Mission:</strong> Transform the digital mortgage application experience
                     through innovative technology, thoughtful design, and customer-centric solutions that reduce friction and increase
-                    completion rates by 3x.
+                    completion rates.
                 </p>
             </div>
         </section>
@@ -515,320 +310,114 @@
             <h2 class="section-title">🏢 ORGANIZATIONAL CHART</h2>
             <div class="org-chart">
                 <div class="org-level">
-                    <div class="org-level-title">Executive Leadership</div>
+                    <div class="org-level-title">Leadership</div>
                     <div class="org-boxes">
                         <div class="org-box">
-                            <div class="org-box-name">Sarah Chen</div>
-                            <div class="org-box-role">VP of Product</div>
+                            <div class="org-box-name">Paul Akinmade</div>
+                            <div class="org-box-role">VP of Product/Leadership</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="org-level">
-                    <div class="org-level-title">Department Heads</div>
+                    <div class="org-level-title">Product & Design Leads</div>
                     <div class="org-boxes">
                         <div class="org-box">
-                            <div class="org-box-name">Michael Rodriguez</div>
-                            <div class="org-box-role">Director of Engineering</div>
+                            <div class="org-box-name">Dave Perras</div>
+                            <div class="org-box-role">Product Lead</div>
                         </div>
                         <div class="org-box">
-                            <div class="org-box-name">Emily Thompson</div>
-                            <div class="org-box-role">Head of Product</div>
-                        </div>
-                        <div class="org-box">
-                            <div class="org-box-name">David Kim</div>
-                            <div class="org-box-role">Lead Designer</div>
+                            <div class="org-box-name">Jon Hyzy</div>
+                            <div class="org-box-role">Head of Experience Design</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="org-level">
-                    <div class="org-level-title">Product & Engineering Teams</div>
+                    <div class="org-level-title">Core Teams</div>
                     <div class="org-boxes">
                         <div class="org-box">
                             <div class="org-box-name">Product Team</div>
-                            <div class="org-box-role">3 Product Managers</div>
+                            <div class="org-box-role">3 Members</div>
                         </div>
                         <div class="org-box">
-                            <div class="org-box-name">Frontend Team</div>
-                            <div class="org-box-role">4 Engineers</div>
+                            <div class="org-box-name">Design & UX</div>
+                            <div class="org-box-role">4 Members</div>
                         </div>
                         <div class="org-box">
-                            <div class="org-box-name">Backend Team</div>
-                            <div class="org-box-role">4 Engineers</div>
+                            <div class="org-box-name">Engineering</div>
+                            <div class="org-box-role">8 Developers</div>
                         </div>
                         <div class="org-box">
-                            <div class="org-box-name">QA Team</div>
-                            <div class="org-box-role">2 Engineers</div>
+                            <div class="org-box-name">Consultants</div>
+                            <div class="org-box-role">2 Members</div>
                         </div>
                         <div class="org-box">
-                            <div class="org-box-name">Design Team</div>
-                            <div class="org-box-role">3 Designers</div>
-                        </div>
-                        <div class="org-box">
-                            <div class="org-box-name">Data Team</div>
-                            <div class="org-box-role">2 Analysts</div>
+                            <div class="org-box-name">Loan Officers</div>
+                            <div class="org-box-role">8 Officers</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Leadership Team -->
+        <!-- Leadership & Product Team -->
         <section id="leadership" class="section">
-            <h2 class="section-title">⭐ LEADERSHIP TEAM</h2>
+            <h2 class="section-title">⭐ LEADERSHIP & PRODUCT TEAM</h2>
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">SC</div>
+                        <div class="member-avatar">PA</div>
                         <div class="member-info">
-                            <div class="member-name">Sarah Chen</div>
-                            <div class="member-title">VP of Product</div>
+                            <div class="member-name">Paul Akinmade</div>
+                            <div class="member-title">VP of Product/Leadership</div>
                             <div class="member-department">Executive Leadership</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">sarah.chen@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (206) 555-0101</span>
+                            <span class="detail-value">paul.akinmade@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@sarah.chen (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Seattle, WA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jan 2019</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Product Strategy</span>
-                            <span class="skill-tag">Leadership</span>
-                            <span class="skill-tag">FinTech</span>
-                            <span class="skill-tag">Digital Lending</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Strategic vision for Smart App 2.0, stakeholder alignment, executive presentations, ROI optimization
-                    </div>
-                    <div class="fun-fact">
-                        Former CPO at mortgage tech startup. Marathon runner with 12 marathons completed. Stanford MBA.
+                        <strong>Role:</strong> Executive leadership and product strategy for Smart App 2.0
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">MR</div>
+                        <div class="member-avatar">DP</div>
                         <div class="member-info">
-                            <div class="member-name">Michael Rodriguez</div>
-                            <div class="member-title">Director of Engineering</div>
-                            <div class="member-department">Engineering Leadership</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">michael.rodriguez@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (512) 555-0102</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@m.rodriguez (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Austin, TX | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Mar 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">System Architecture</span>
-                            <span class="skill-tag">AWS</span>
-                            <span class="skill-tag">Microservices</span>
-                            <span class="skill-tag">Team Leadership</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> Technical architecture decisions, engineering team scaling, API integration strategy, performance optimization
-                    </div>
-                    <div class="fun-fact">
-                        Former Principal Engineer at Amazon. Contributes to open source React libraries. Coffee enthusiast with home espresso setup.
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">ET</div>
-                        <div class="member-info">
-                            <div class="member-name">Emily Thompson</div>
-                            <div class="member-title">Head of Product</div>
-                            <div class="member-department">Product Leadership</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">emily.thompson@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (212) 555-0103</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@emily.t (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">New York, NY | EST (UTC-5)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jul 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Product Management</span>
-                            <span class="skill-tag">User Research</span>
-                            <span class="skill-tag">Roadmap Planning</span>
-                            <span class="skill-tag">Agile</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> Product roadmap execution, feature prioritization, stakeholder management, user feedback integration
-                    </div>
-                    <div class="fun-fact">
-                        Previously at Google Pay. Certified Scrum Master. Amateur photographer specializing in urban architecture.
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">DK</div>
-                        <div class="member-info">
-                            <div class="member-name">David Kim</div>
-                            <div class="member-title">Lead Designer</div>
-                            <div class="member-department">Design Leadership</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">david.kim@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (312) 555-0104</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@david.kim (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Chicago, IL | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Sep 2019</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">UX Design</span>
-                            <span class="skill-tag">UI Design</span>
-                            <span class="skill-tag">Design Systems</span>
-                            <span class="skill-tag">Figma</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> Design system development, progressive disclosure patterns, mobile-first design, accessibility standards
-                    </div>
-                    <div class="fun-fact">
-                        Design lead for award-winning mobile banking app. Speaks Korean, English, and Spanish. Rock climber on weekends.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Product Management Team -->
-        <section id="product" class="section">
-            <h2 class="section-title">📦 PRODUCT MANAGEMENT TEAM</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">JP</div>
-                        <div class="member-info">
-                            <div class="member-name">Jessica Park</div>
-                            <div class="member-title">Senior Product Manager</div>
+                            <div class="member-name">Dave Perras</div>
+                            <div class="member-title">Product Lead</div>
                             <div class="member-department">Product Management</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">jessica.park@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (206) 555-0105</span>
+                            <span class="detail-value">david.perras@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@jessica.park (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Seattle, WA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jan 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">API Integrations</span>
-                            <span class="skill-tag">Data Strategy</span>
-                            <span class="skill-tag">Requirements</span>
-                            <span class="skill-tag">SQL</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Plaid, TRUV, Prove integration requirements, URLA data gap analysis, third-party vendor management
-                    </div>
-                    <div class="fun-fact">
-                        Previously PM at Plaid. Built integration platform used by 500+ financial institutions. Yoga instructor on the side.
+                        <strong>Role:</strong> Product leadership and strategy, roadmap planning, stakeholder management
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">RN</div>
+                        <div class="member-avatar">NO</div>
                         <div class="member-info">
-                            <div class="member-name">Raj Nair</div>
+                            <div class="member-name">Nina O'Neil</div>
                             <div class="member-title">Product Manager</div>
                             <div class="member-department">Product Management</div>
                         </div>
@@ -836,87 +425,231 @@
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">raj.nair@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (512) 555-0106</span>
+                            <span class="detail-value">nina.oneil@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@raj.nair (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Austin, TX | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jun 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">User Flows</span>
-                            <span class="skill-tag">A/B Testing</span>
-                            <span class="skill-tag">Analytics</span>
-                            <span class="skill-tag">Compliance</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Borrower experience optimization, co-borrower collaboration flows, LO dashboard features, point-of-submit logic
-                    </div>
-                    <div class="fun-fact">
-                        MBA from UT Austin. Former consultant at McKinsey. Passionate about cricket and organizing team watch parties.
+                        <strong>Role:</strong> Product management, feature specification, user story development
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">AS</div>
+                        <div class="member-avatar">CF</div>
                         <div class="member-info">
-                            <div class="member-name">Amanda Silva</div>
-                            <div class="member-title">Product Manager - AI/ML</div>
+                            <div class="member-name">Crystal Finch</div>
+                            <div class="member-title">Product Team</div>
                             <div class="member-department">Product Management</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">amanda.silva@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (415) 555-0107</span>
+                            <span class="detail-value">crystal.finch@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@amanda.silva (Slack)</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Role:</strong> Product team member supporting Smart App 2.0 initiatives
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design & UX Team -->
+        <section id="design" class="section">
+            <h2 class="section-title">🎨 DESIGN & UX TEAM</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">JH</div>
+                        <div class="member-info">
+                            <div class="member-name">Jon Hyzy</div>
+                            <div class="member-title">Head of Experience Design</div>
+                            <div class="member-department">Design Leadership</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">jon.hyzy@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">San Francisco, CA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Nov 2022</span>
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="skills-section">
                         <div class="skills-label">Expertise</div>
                         <div class="skills-tags">
-                            <span class="skill-tag">AI/ML</span>
-                            <span class="skill-tag">Claude API</span>
-                            <span class="skill-tag">NLP</span>
-                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">UX Design</span>
+                            <span class="skill-tag">Design Leadership</span>
+                            <span class="skill-tag">User Experience</span>
+                            <span class="skill-tag">Design Systems</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> AI Assistant implementation, Claude integration, smart form field suggestions, predictive data validation
+                        <strong>Current Focus:</strong> Experience design leadership, UX strategy, design system development
                     </div>
-                    <div class="fun-fact">
-                        PhD in Computer Science from Stanford. Published AI researcher. Volunteers teaching coding to underrepresented youth.
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">BR</div>
+                        <div class="member-info">
+                            <div class="member-name">Bianca Ruiz Longato</div>
+                            <div class="member-title">UX Researcher</div>
+                            <div class="member-department">Design & UX</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">bianca.ruizlongato@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="skills-section">
+                        <div class="skills-label">Expertise</div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">User Research</span>
+                            <span class="skill-tag">Usability Testing</span>
+                            <span class="skill-tag">User Interviews</span>
+                            <span class="skill-tag">Data Analysis</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Current Focus:</strong> User research, usability testing, customer insights, data-driven design decisions
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">Y</div>
+                        <div class="member-info">
+                            <div class="member-name">Yaz</div>
+                            <div class="member-title">Senior Designer/Product</div>
+                            <div class="member-department">Design & UX</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">yaz@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="skills-section">
+                        <div class="skills-label">Expertise</div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">UI Design</span>
+                            <span class="skill-tag">UX Design</span>
+                            <span class="skill-tag">Product Design</span>
+                            <span class="skill-tag">Figma</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Current Focus:</strong> Senior design work, product design, UI/UX implementation
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">K</div>
+                        <div class="member-info">
+                            <div class="member-name">Kelli</div>
+                            <div class="member-title">UX Designer/Product</div>
+                            <div class="member-department">Design & UX</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">kelli@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="skills-section">
+                        <div class="skills-label">Expertise</div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">UX Design</span>
+                            <span class="skill-tag">Product Design</span>
+                            <span class="skill-tag">Wireframing</span>
+                            <span class="skill-tag">Prototyping</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Current Focus:</strong> UX design, product design, user flow optimization
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consultants -->
+        <section id="consultants" class="section">
+            <h2 class="section-title">🤝 CONSULTANTS</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">W</div>
+                        <div class="member-info">
+                            <div class="member-name">Warun</div>
+                            <div class="member-title">Consultant</div>
+                            <div class="member-department">Consulting</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">warun@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Role:</strong> Consulting support for Smart App 2.0 project
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">LS</div>
+                        <div class="member-info">
+                            <div class="member-name">Logan Skillman</div>
+                            <div class="member-title">Consultant</div>
+                            <div class="member-department">Consulting</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">logan.skillman@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Role:</strong> Consulting support for Smart App 2.0 project
                     </div>
                 </div>
             </div>
@@ -925,297 +658,154 @@
         <!-- Engineering Team -->
         <section id="engineering" class="section">
             <h2 class="section-title">💻 ENGINEERING TEAM</h2>
-
-            <h3 style="color: var(--accent-blue); font-size: 1.25rem; margin: 2rem 0 1rem; font-weight: 600;">Frontend Engineers</h3>
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">AW</div>
+                        <div class="member-avatar">CC</div>
                         <div class="member-info">
-                            <div class="member-name">Alex Wu</div>
-                            <div class="member-title">Senior Frontend Engineer</div>
-                            <div class="member-department">Engineering - Frontend</div>
+                            <div class="member-name">Cory Chandler</div>
+                            <div class="member-title">Lead Frontend Developer</div>
+                            <div class="member-department">Engineering</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">alex.wu@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (206) 555-0108</span>
+                            <span class="detail-value">cory.chandler@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@alex.wu (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Seattle, WA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Feb 2020</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="skills-section">
                         <div class="skills-label">Expertise</div>
                         <div class="skills-tags">
+                            <span class="skill-tag">Frontend Development</span>
                             <span class="skill-tag">React</span>
-                            <span class="skill-tag">TypeScript</span>
-                            <span class="skill-tag">Next.js</span>
-                            <span class="skill-tag">Tailwind CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Team Leadership</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Progressive disclosure UI components, form validation framework, responsive design implementation
-                    </div>
-                    <div class="fun-fact">
-                        Contributor to React ecosystem. Built custom hooks library used internally. Competitive e-sports player (League of Legends).
+                        <strong>Current Focus:</strong> Lead frontend development for Smart App and Home Portal
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">LP</div>
+                        <div class="member-avatar">BT</div>
                         <div class="member-info">
-                            <div class="member-name">Lisa Patel</div>
-                            <div class="member-title">Frontend Engineer</div>
-                            <div class="member-department">Engineering - Frontend</div>
+                            <div class="member-name">Brooke Terry</div>
+                            <div class="member-title">Frontend Developer</div>
+                            <div class="member-department">Engineering</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">lisa.patel@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (312) 555-0109</span>
+                            <span class="detail-value">brooke.terry@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@lisa.patel (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Chicago, IL | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Aug 2021</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="skills-section">
                         <div class="skills-label">Expertise</div>
                         <div class="skills-tags">
+                            <span class="skill-tag">Frontend Development</span>
                             <span class="skill-tag">React</span>
-                            <span class="skill-tag">Redux</span>
-                            <span class="skill-tag">CSS-in-JS</span>
-                            <span class="skill-tag">Accessibility</span>
+                            <span class="skill-tag">UI Development</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> LO dashboard frontend, real-time WebSocket connections, accessibility (WCAG 2.1 AA compliance)
-                    </div>
-                    <div class="fun-fact">
-                        Certified accessibility specialist. Previously built UI for healthcare apps. Plays violin in community orchestra.
+                        <strong>Current Focus:</strong> Co-borrower flows, review screens, frontend implementation
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">CM</div>
+                        <div class="member-avatar">AR</div>
                         <div class="member-info">
-                            <div class="member-name">Carlos Martinez</div>
-                            <div class="member-title">Frontend Engineer</div>
-                            <div class="member-department">Engineering - Frontend</div>
+                            <div class="member-name">Ashwin Ramathirtham</div>
+                            <div class="member-title">Backend Developer</div>
+                            <div class="member-department">Engineering</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">carlos.martinez@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (512) 555-0110</span>
+                            <span class="detail-value">ashwin.ramathirtham@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@carlos.m (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Austin, TX | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Apr 2022</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="skills-section">
                         <div class="skills-label">Expertise</div>
                         <div class="skills-tags">
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Mobile Development</span>
-                            <span class="skill-tag">PWA</span>
-                            <span class="skill-tag">Performance</span>
+                            <span class="skill-tag">Backend Development</span>
+                            <span class="skill-tag">API Integration</span>
+                            <span class="skill-tag">Truv</span>
+                            <span class="skill-tag">VOA/VOE</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Mobile-responsive design, PWA implementation, performance optimization, lazy loading strategies
-                    </div>
-                    <div class="fun-fact">
-                        Specialized in mobile-first development. Previously at Spotify. Avid cyclist who bikes to work daily.
+                        <strong>Current Focus:</strong> Truv integration, VOA/VOE (Verification of Assets/Employment)
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">NK</div>
+                        <div class="member-avatar">CH</div>
                         <div class="member-info">
-                            <div class="member-name">Nina Kowalski</div>
-                            <div class="member-title">Frontend Engineer</div>
-                            <div class="member-department">Engineering - Frontend</div>
+                            <div class="member-name">Cathy Hodgson</div>
+                            <div class="member-title">Developer</div>
+                            <div class="member-department">Engineering</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">nina.kowalski@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (617) 555-0111</span>
+                            <span class="detail-value">cathy.hodgson@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@nina.k (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Boston, MA | EST (UTC-5)</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Sep 2022</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Animation</span>
-                            <span class="skill-tag">Framer Motion</span>
-                            <span class="skill-tag">Design Systems</span>
+                            <span class="detail-value">Joined: September 2025</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Component library development, micro-interactions, animation framework, Storybook documentation
-                    </div>
-                    <div class="fun-fact">
-                        Animation specialist. Previously at Airbnb. MIT grad. Collects vintage video game consoles.
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--accent-teal); font-size: 1.25rem; margin: 2rem 0 1rem; font-weight: 600;">Backend Engineers</h3>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">JS</div>
-                        <div class="member-info">
-                            <div class="member-name">James Sullivan</div>
-                            <div class="member-title">Senior Backend Engineer</div>
-                            <div class="member-department">Engineering - Backend</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">james.sullivan@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (512) 555-0112</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@james.s (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Austin, TX | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jan 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">PostgreSQL</span>
-                            <span class="skill-tag">AWS</span>
-                            <span class="skill-tag">Microservices</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> API architecture, database schema design (42 tables), third-party integration layer, performance tuning
-                    </div>
-                    <div class="fun-fact">
-                        <span class="on-call-badge">ON-CALL THIS WEEK</span><br>Former backend lead at Uber. Homebrews craft beer. Built smart home automation system.
+                        <strong>Current Focus:</strong> Home Portal development, full-stack development
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">PG</div>
+                        <div class="member-avatar">PM</div>
                         <div class="member-info">
-                            <div class="member-name">Priya Gupta</div>
-                            <div class="member-title">Backend Engineer</div>
-                            <div class="member-department">Engineering - Backend</div>
+                            <div class="member-name">Phil Miatech</div>
+                            <div class="member-title">Developer</div>
+                            <div class="member-department">Engineering</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">priya.gupta@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (408) 555-0113</span>
+                            <span class="detail-value">phil.miatech@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@priya.gupta (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">San Jose, CA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: May 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Django</span>
-                            <span class="skill-tag">Redis</span>
-                            <span class="skill-tag">Celery</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Plaid VOA integration, TRUV VOIE API, async job processing, webhook handling
-                    </div>
-                    <div class="fun-fact">
-                        Specialist in third-party integrations. Previously at Stripe. Master chess player. Mentors bootcamp students.
+                        <strong>Role:</strong> Software development for Smart App 2.0
                     </div>
                 </div>
 
@@ -1223,548 +813,221 @@
                     <div class="member-header">
                         <div class="member-avatar">TB</div>
                         <div class="member-info">
-                            <div class="member-name">Tom Bradley</div>
-                            <div class="member-title">Backend Engineer</div>
-                            <div class="member-department">Engineering - Backend</div>
+                            <div class="member-name">Tim Borquez</div>
+                            <div class="member-title">Engineer</div>
+                            <div class="member-department">Engineering</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">tom.bradley@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (206) 555-0114</span>
+                            <span class="detail-value">tim.borquez@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@tom.bradley (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Seattle, WA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Oct 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">GraphQL</span>
-                            <span class="skill-tag">MongoDB</span>
-                            <span class="skill-tag">Docker</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> GraphQL API development, real-time updates via WebSocket, data caching strategies
-                    </div>
-                    <div class="fun-fact">
-                        GraphQL enthusiast. Previously at GitHub. Woodworking hobbyist building custom furniture.
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">MJ</div>
-                        <div class="member-info">
-                            <div class="member-name">Maya Jackson</div>
-                            <div class="member-title">DevOps Engineer</div>
-                            <div class="member-department">Engineering - DevOps</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">maya.jackson@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (971) 555-0115</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@maya.jackson (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Portland, OR | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Mar 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">AWS</span>
-                            <span class="skill-tag">Kubernetes</span>
-                            <span class="skill-tag">Terraform</span>
-                            <span class="skill-tag">CI/CD</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> AWS infrastructure (ECS, RDS, Lambda), deployment pipelines, monitoring with DataDog, security hardening
-                    </div>
-                    <div class="fun-fact">
-                        AWS Certified Solutions Architect. Previously at Netflix. Trail runner completing ultramarathons.
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--accent-purple); font-size: 1.25rem; margin: 2rem 0 1rem; font-weight: 600;">QA Engineers</h3>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">SO</div>
-                        <div class="member-info">
-                            <div class="member-name">Sophie O'Connor</div>
-                            <div class="member-title">Senior QA Engineer</div>
-                            <div class="member-department">Engineering - QA</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">sophie.oconnor@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (512) 555-0116</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@sophie.o (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Austin, TX | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jul 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Test Automation</span>
-                            <span class="skill-tag">Cypress</span>
-                            <span class="skill-tag">Jest</span>
-                            <span class="skill-tag">Playwright</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> E2E test framework, automated regression testing, CI/CD test integration, test coverage improvement
-                    </div>
-                    <div class="fun-fact">
-                        Test automation expert. Built testing framework used by 30+ teams. Competitive CrossFit athlete.
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">DL</div>
-                        <div class="member-info">
-                            <div class="member-name">Daniel Lee</div>
-                            <div class="member-title">QA Engineer</div>
-                            <div class="member-department">Engineering - QA</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">daniel.lee@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (212) 555-0117</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@daniel.lee (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">New York, NY | EST (UTC-5)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Feb 2022</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Manual Testing</span>
-                            <span class="skill-tag">API Testing</span>
-                            <span class="skill-tag">Postman</span>
-                            <span class="skill-tag">Load Testing</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> API integration testing (Plaid, TRUV, Prove), exploratory testing, performance testing, test case documentation
-                    </div>
-                    <div class="fun-fact">
-                        Bug hunter extraordinaire. Previously QA at Robinhood. Stand-up comedy performer on weekends.
+                        <strong>Role:</strong> Software engineering for Smart App 2.0
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Design Team -->
-        <section id="design" class="section">
-            <h2 class="section-title">🎨 DESIGN TEAM</h2>
+        <!-- Loan Officers Team -->
+        <section id="loan-officers" class="section">
+            <h2 class="section-title">🏦 LOAN OFFICERS (FIELD/TESTING)</h2>
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">RA</div>
+                        <div class="member-avatar">AW</div>
                         <div class="member-info">
-                            <div class="member-name">Rachel Adams</div>
-                            <div class="member-title">Senior UX Designer</div>
-                            <div class="member-department">Design</div>
+                            <div class="member-name">Andrea Wine</div>
+                            <div class="member-title">Loan Officer</div>
+                            <div class="member-department">Field Operations</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">rachel.adams@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (312) 555-0118</span>
+                            <span class="detail-value">andrea.wine@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@rachel.adams (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Chicago, IL | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Apr 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">UX Research</span>
-                            <span class="skill-tag">User Testing</span>
-                            <span class="skill-tag">Figma</span>
-                            <span class="skill-tag">Journey Mapping</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Progressive disclosure patterns, user research synthesis, LO interview analysis, usability testing
-                    </div>
-                    <div class="fun-fact">
-                        Led UX research at Capital One. Published articles on FinTech UX. Pottery enthusiast with Etsy shop.
+                        <strong>Role:</strong> Field loan officer providing testing and feedback on Smart App
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">KM</div>
+                        <div class="member-avatar">CN</div>
                         <div class="member-info">
-                            <div class="member-name">Kevin Murphy</div>
-                            <div class="member-title">UI Designer</div>
-                            <div class="member-department">Design</div>
+                            <div class="member-name">CJ Nelson</div>
+                            <div class="member-title">Loan Officer (EPIQ)</div>
+                            <div class="member-department">Field Operations</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">kevin.murphy@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (206) 555-0119</span>
+                            <span class="detail-value">cj.nelson@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@kevin.murphy (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Seattle, WA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jun 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Visual Design</span>
-                            <span class="skill-tag">Design Systems</span>
-                            <span class="skill-tag">Figma</span>
-                            <span class="skill-tag">Illustration</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Component library design, visual language, iconography, dark mode implementation
-                    </div>
-                    <div class="fun-fact">
-                        Award-winning visual designer. Previously at Apple. Freelance illustrator for tech publications.
+                        <strong>Role:</strong> EPIQ loan officer providing testing and feedback on Smart App
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">TN</div>
+                        <div class="member-avatar">CM</div>
                         <div class="member-info">
-                            <div class="member-name">Tanya Nguyen</div>
-                            <div class="member-title">UX Researcher</div>
-                            <div class="member-department">Design</div>
+                            <div class="member-name">Christopher Minjarez</div>
+                            <div class="member-title">Loan Officer</div>
+                            <div class="member-department">Field Operations</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">tanya.nguyen@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (650) 555-0120</span>
+                            <span class="detail-value">christopher.minjarez@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@tanya.nguyen (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Palo Alto, CA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Nov 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">User Research</span>
-                            <span class="skill-tag">A/B Testing</span>
-                            <span class="skill-tag">Analytics</span>
-                            <span class="skill-tag">Surveys</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Concept testing (42 participants), stakeholder interviews, research synthesis, data-driven recommendations
-                    </div>
-                    <div class="fun-fact">
-                        PhD in HCI from Carnegie Mellon. Previously researcher at Microsoft Research. Competitive ballroom dancer.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Data & Analytics Team -->
-        <section id="data" class="section">
-            <h2 class="section-title">📊 DATA & ANALYTICS TEAM</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">HW</div>
-                        <div class="member-info">
-                            <div class="member-name">Henry Wang</div>
-                            <div class="member-title">Senior Data Analyst</div>
-                            <div class="member-department">Data & Analytics</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">henry.wang@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (415) 555-0121</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@henry.wang (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">San Francisco, CA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Mar 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Tableau</span>
-                            <span class="skill-tag">Statistics</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> Product analytics, funnel analysis, completion rate tracking, A/B test analysis, ROI calculations
-                    </div>
-                    <div class="fun-fact">
-                        Data science background. Previously at LinkedIn. Built predictive models for completion rates. Tennis player.
+                        <strong>Role:</strong> Field loan officer providing testing and feedback on Smart App
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">OA</div>
+                        <div class="member-avatar">EM</div>
                         <div class="member-info">
-                            <div class="member-name">Olivia Anderson</div>
-                            <div class="member-title">Data Engineer</div>
-                            <div class="member-department">Data & Analytics</div>
+                            <div class="member-name">Elizabeth McClellan</div>
+                            <div class="member-title">Loan Officer</div>
+                            <div class="member-department">Field Operations</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">olivia.anderson@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (206) 555-0122</span>
+                            <span class="detail-value">elizabeth.mcclellan@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@olivia.a (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Seattle, WA | PST (UTC-8)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Sep 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">ETL Pipelines</span>
-                            <span class="skill-tag">Airflow</span>
-                            <span class="skill-tag">Redshift</span>
-                            <span class="skill-tag">Spark</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Data warehouse architecture, event tracking implementation, ETL pipelines, Segment integration
-                    </div>
-                    <div class="fun-fact">
-                        Data engineering specialist. Previously at Snowflake. Built data pipelines processing 1B+ events/day. Scuba diver.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Project Management Team -->
-        <section id="project-mgmt" class="section">
-            <h2 class="section-title">📋 PROJECT MANAGEMENT TEAM</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-header">
-                        <div class="member-avatar">CB</div>
-                        <div class="member-info">
-                            <div class="member-name">Christina Brown</div>
-                            <div class="member-title">Senior Project Manager</div>
-                            <div class="member-department">Project Management</div>
-                        </div>
-                    </div>
-                    <div class="member-details">
-                        <div class="detail-row">
-                            <span class="detail-icon">📧</span>
-                            <span class="detail-value">christina.brown@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (312) 555-0123</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">💬</span>
-                            <span class="detail-value">@christina.brown (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Chicago, IL | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Jan 2020</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Agile</span>
-                            <span class="skill-tag">Scrum</span>
-                            <span class="skill-tag">Jira</span>
-                            <span class="skill-tag">Risk Management</span>
-                        </div>
-                    </div>
-                    <div class="focus-area">
-                        <strong>Current Focus:</strong> Sprint planning, backlog grooming, timeline management, stakeholder communication, dependency tracking
-                    </div>
-                    <div class="fun-fact">
-                        PMP certified. Managed 50+ product launches. Previously at Salesforce. Organizing team escape room events.
+                        <strong>Role:</strong> Field loan officer providing testing and feedback on Smart App
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="member-header">
-                        <div class="member-avatar">BC</div>
+                        <div class="member-avatar">DS</div>
                         <div class="member-info">
-                            <div class="member-name">Brandon Clark</div>
-                            <div class="member-title">Technical Program Manager</div>
-                            <div class="member-department">Project Management</div>
+                            <div class="member-name">Diedra Schaefer</div>
+                            <div class="member-title">Loan Officer</div>
+                            <div class="member-department">Field Operations</div>
                         </div>
                     </div>
                     <div class="member-details">
                         <div class="detail-row">
                             <span class="detail-icon">📧</span>
-                            <span class="detail-value">brandon.clark@company.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📱</span>
-                            <span class="detail-value">+1 (512) 555-0124</span>
+                            <span class="detail-value">diedra.schaefer@cmgfi.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-icon">💬</span>
-                            <span class="detail-value">@brandon.clark (Slack)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📍</span>
-                            <span class="detail-value">Austin, TX | CST (UTC-6)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-icon">📅</span>
-                            <span class="detail-value">Start Date: Aug 2021</span>
-                        </div>
-                    </div>
-                    <div class="skills-section">
-                        <div class="skills-label">Expertise</div>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Technical PM</span>
-                            <span class="skill-tag">Integration Mgmt</span>
-                            <span class="skill-tag">Vendor Relations</span>
-                            <span class="skill-tag">API Strategy</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
                         </div>
                     </div>
                     <div class="focus-area">
-                        <strong>Current Focus:</strong> Third-party vendor coordination (Plaid, TRUV, Prove), integration timeline management, technical documentation
+                        <strong>Role:</strong> Field loan officer providing testing and feedback on Smart App
                     </div>
-                    <div class="fun-fact">
-                        Engineering background. Previously TPM at Meta. Coordinates vendor relationships. Plays bass guitar in local band.
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">JC</div>
+                        <div class="member-info">
+                            <div class="member-name">Josh Campbell</div>
+                            <div class="member-title">Loan Officer</div>
+                            <div class="member-department">Field Operations</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">josh.campbell@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Role:</strong> Field loan officer providing testing and feedback on Smart App
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">SP</div>
+                        <div class="member-info">
+                            <div class="member-name">Stephanie Pereira</div>
+                            <div class="member-title">Loan Officer (Team Lead)</div>
+                            <div class="member-department">Field Operations</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">stephanie.pereira@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Role:</strong> Loan officer team lead providing testing, feedback, and coordination
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">TL</div>
+                        <div class="member-info">
+                            <div class="member-name">Tim Loss</div>
+                            <div class="member-title">Loan Officer</div>
+                            <div class="member-department">Field Operations</div>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row">
+                            <span class="detail-icon">📧</span>
+                            <span class="detail-value">tim.loss@cmgfi.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-icon">💬</span>
+                            <span class="detail-value">Contact via Slack/Email</span>
+                        </div>
+                    </div>
+                    <div class="focus-area">
+                        <strong>Role:</strong> Field loan officer providing testing and feedback on Smart App
                     </div>
                 </div>
             </div>
@@ -1772,656 +1035,50 @@
 
         <!-- Contact Methods -->
         <section id="contacts" class="section">
-            <h2 class="section-title">📞 CONTACT METHODS & CHANNELS</h2>
-            <div class="contact-methods">
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <div class="contact-card-title">📧 Email Distribution Lists</div>
-                        <div class="contact-card-content">
-                            <strong>smartapp-team@company.com</strong><br>
-                            All team members (24 people)<br><br>
-                            <strong>smartapp-engineering@company.com</strong><br>
-                            All engineers (10 people)<br><br>
-                            <strong>smartapp-leadership@company.com</strong><br>
-                            Leadership team (4 people)<br><br>
-                            <strong>smartapp-oncall@company.com</strong><br>
-                            Current on-call rotation
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">💬 Slack Channels</div>
-                        <div class="contact-card-content">
-                            <strong>#smartapp-general</strong><br>
-                            Main team channel for announcements<br><br>
-                            <strong>#smartapp-engineering</strong><br>
-                            Technical discussions and architecture<br><br>
-                            <strong>#smartapp-product</strong><br>
-                            Product requirements and planning<br><br>
-                            <strong>#smartapp-design</strong><br>
-                            Design reviews and feedback<br><br>
-                            <strong>#smartapp-incidents</strong><br>
-                            P0/P1 incidents and on-call coordination<br><br>
-                            <strong>#smartapp-wins</strong><br>
-                            Team celebrations and milestones
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">📅 Team Calendar</div>
-                        <div class="contact-card-content">
-                            <strong>SmartApp Team Calendar</strong><br>
-                            Shared team events, ceremonies, demos<br><br>
-                            <strong>SmartApp On-Call</strong><br>
-                            On-call rotation and coverage<br><br>
-                            <strong>SmartApp OOO</strong><br>
-                            Team PTO and out-of-office tracking<br><br>
-                            <strong>SmartApp Sprints</strong><br>
-                            Sprint planning, retros, reviews
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">🆘 Emergency Contacts</div>
-                        <div class="contact-card-content">
-                            <strong>On-Call Engineering:</strong><br>
-                            +1 (800) 555-ONCL (6625)<br><br>
-                            <strong>Director of Engineering:</strong><br>
-                            Michael Rodriguez: +1 (512) 555-0102<br><br>
-                            <strong>VP of Product:</strong><br>
-                            Sarah Chen: +1 (206) 555-0101<br><br>
-                            <strong>PagerDuty:</strong><br>
-                            smartapp-oncall@company.pagerduty.com
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">🤝 External Vendors</div>
-                        <div class="contact-card-content">
-                            <strong>Plaid Support:</strong><br>
-                            support@plaid.com<br>
-                            Account Manager: plaid-am@company.com<br><br>
-                            <strong>TRUV Support:</strong><br>
-                            support@truv.com<br>
-                            Integration Engineer: truv-eng@company.com<br><br>
-                            <strong>Prove Support:</strong><br>
-                            support@prove.com<br>
-                            TAM: prove-tam@company.com
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">🎯 Key Stakeholders</div>
-                        <div class="contact-card-content">
-                            <strong>Compliance Team:</strong><br>
-                            compliance@company.com<br><br>
-                            <strong>Legal Team:</strong><br>
-                            legal@company.com<br><br>
-                            <strong>InfoSec Team:</strong><br>
-                            security@company.com<br><br>
-                            <strong>Customer Success:</strong><br>
-                            cs-smartapp@company.com
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Matrix -->
-        <section id="skills-matrix" class="section">
-            <h2 class="section-title">🔧 SKILLS MATRIX & EXPERTISE</h2>
-            <div class="skills-matrix">
-                <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                    Comprehensive view of team expertise across technologies and domains.
-                    <span class="skill-expert">Expert</span> = 3+ years experience,
-                    <span class="skill-advanced">Advanced</span> = 1-3 years,
-                    <span class="skill-intermediate">Intermediate</span> = <1 year
-                </p>
-                <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th>Technology/Domain</th>
-                            <th>Team Members</th>
-                            <th>Expert Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>React / TypeScript</strong></td>
-                            <td>Alex Wu, Lisa Patel, Carlos Martinez, Nina Kowalski</td>
-                            <td><span class="skill-expert">4 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Node.js / Backend</strong></td>
-                            <td>James Sullivan, Tom Bradley, Priya Gupta</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AWS Infrastructure</strong></td>
-                            <td>Michael Rodriguez, James Sullivan, Maya Jackson</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>PostgreSQL / SQL</strong></td>
-                            <td>James Sullivan, Priya Gupta, Henry Wang, Olivia Anderson</td>
-                            <td><span class="skill-expert">4 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>API Integrations</strong></td>
-                            <td>Jessica Park, Priya Gupta, Brandon Clark, Daniel Lee</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>UX Research</strong></td>
-                            <td>Emily Thompson, David Kim, Rachel Adams, Tanya Nguyen</td>
-                            <td><span class="skill-expert">4 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Figma / Design Tools</strong></td>
-                            <td>David Kim, Rachel Adams, Kevin Murphy</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Test Automation</strong></td>
-                            <td>Sophie O'Connor, Daniel Lee</td>
-                            <td><span class="skill-expert">2 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>DevOps / CI/CD</strong></td>
-                            <td>Maya Jackson, James Sullivan</td>
-                            <td><span class="skill-expert">2 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Data Analytics</strong></td>
-                            <td>Henry Wang, Olivia Anderson, Raj Nair</td>
-                            <td><span class="skill-expert">2 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Python</strong></td>
-                            <td>Priya Gupta, Amanda Silva, Henry Wang, Olivia Anderson</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mobile / Responsive Design</strong></td>
-                            <td>Carlos Martinez, David Kim, Rachel Adams</td>
-                            <td><span class="skill-expert">2 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AI/ML Integration</strong></td>
-                            <td>Amanda Silva, Henry Wang</td>
-                            <td><span class="skill-expert">1 Expert</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Accessibility (WCAG)</strong></td>
-                            <td>Lisa Patel, Rachel Adams, Sophie O'Connor</td>
-                            <td><span class="skill-expert">2 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Product Strategy</strong></td>
-                            <td>Sarah Chen, Emily Thompson, Jessica Park</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Agile / Scrum</strong></td>
-                            <td>Emily Thompson, Christina Brown, Brandon Clark</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mortgage / FinTech Domain</strong></td>
-                            <td>Sarah Chen, Jessica Park, Raj Nair</td>
-                            <td><span class="skill-expert">3 Experts</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Team Rituals -->
-        <section id="rituals" class="section">
-            <h2 class="section-title">🔄 TEAM RITUALS & CEREMONIES</h2>
-            <div class="rituals-section">
-                <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                    Our team follows agile methodologies with regular ceremonies and rituals to maintain alignment,
-                    foster collaboration, and celebrate wins.
-                </p>
-                <div class="rituals-grid">
-                    <div class="ritual-card">
-                        <div class="ritual-name">Daily Standup</div>
-                        <div class="ritual-details">
-                            Quick sync on progress, blockers, and plans<br>
-                            <strong>Attendees:</strong> Engineering, Product, Design<br>
-                            <strong>Duration:</strong> 15 minutes
-                        </div>
-                        <span class="ritual-time">Mon-Fri @ 10:00 AM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Sprint Planning</div>
-                        <div class="ritual-details">
-                            Plan next sprint, estimate stories, commit to work<br>
-                            <strong>Attendees:</strong> Full team<br>
-                            <strong>Duration:</strong> 2 hours
-                        </div>
-                        <span class="ritual-time">Every other Monday @ 1:00 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Sprint Review / Demo</div>
-                        <div class="ritual-details">
-                            Showcase completed work to stakeholders<br>
-                            <strong>Attendees:</strong> Full team + stakeholders<br>
-                            <strong>Duration:</strong> 1 hour
-                        </div>
-                        <span class="ritual-time">Every other Friday @ 2:00 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Sprint Retrospective</div>
-                        <div class="ritual-details">
-                            Reflect on what went well, what to improve<br>
-                            <strong>Attendees:</strong> Core team<br>
-                            <strong>Duration:</strong> 1 hour
-                        </div>
-                        <span class="ritual-time">Every other Friday @ 3:30 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Backlog Grooming</div>
-                        <div class="ritual-details">
-                            Refine upcoming stories, clarify requirements<br>
-                            <strong>Attendees:</strong> Product, Eng leads, Design<br>
-                            <strong>Duration:</strong> 1 hour
-                        </div>
-                        <span class="ritual-time">Wednesdays @ 2:00 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Design Reviews</div>
-                        <div class="ritual-details">
-                            Critique and feedback on design work<br>
-                            <strong>Attendees:</strong> Design team + Product<br>
-                            <strong>Duration:</strong> 1 hour
-                        </div>
-                        <span class="ritual-time">Thursdays @ 11:00 AM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Architecture Review</div>
-                        <div class="ritual-details">
-                            Technical design reviews and decisions<br>
-                            <strong>Attendees:</strong> Engineering team<br>
-                            <strong>Duration:</strong> 1 hour
-                        </div>
-                        <span class="ritual-time">Tuesdays @ 3:00 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">All-Hands Team Meeting</div>
-                        <div class="ritual-details">
-                            Company updates, strategic initiatives, Q&A<br>
-                            <strong>Attendees:</strong> Entire team<br>
-                            <strong>Duration:</strong> 30 minutes
-                        </div>
-                        <span class="ritual-time">First Monday of month @ 9:00 AM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">1-on-1s</div>
-                        <div class="ritual-details">
-                            Individual meetings with direct managers<br>
-                            <strong>Attendees:</strong> Manager + Direct report<br>
-                            <strong>Duration:</strong> 30 minutes
-                        </div>
-                        <span class="ritual-time">Weekly or bi-weekly (varies)</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Friday Team Social</div>
-                        <div class="ritual-details">
-                            Casual team bonding, show & tell, games<br>
-                            <strong>Attendees:</strong> Anyone interested<br>
-                            <strong>Duration:</strong> 30-45 minutes
-                        </div>
-                        <span class="ritual-time">Fridays @ 4:00 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Lunch & Learn</div>
-                        <div class="ritual-details">
-                            Knowledge sharing, tech talks, presentations<br>
-                            <strong>Attendees:</strong> Full team<br>
-                            <strong>Duration:</strong> 45 minutes
-                        </div>
-                        <span class="ritual-time">Monthly - 3rd Thursday @ 12:00 PM PST</span>
-                    </div>
-
-                    <div class="ritual-card">
-                        <div class="ritual-name">Release Planning</div>
-                        <div class="ritual-details">
-                            Quarterly roadmap review and planning<br>
-                            <strong>Attendees:</strong> Leadership + PM + Eng leads<br>
-                            <strong>Duration:</strong> 2-3 hours
-                        </div>
-                        <span class="ritual-time">Quarterly (Q1, Q2, Q3, Q4)</span>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 8px;">
-                    <h3 style="color: var(--accent-teal); margin-bottom: 1rem;">Onboarding Buddy Program</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        New team members are paired with an experienced buddy for their first 90 days. Buddies provide guidance,
-                        answer questions, facilitate introductions, and help new hires navigate team culture and processes.
-                    </p>
-                    <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 1rem;">
-                        <strong style="color: var(--text-primary);">Current Buddies:</strong> Alex Wu, Lisa Patel, James Sullivan,
-                        Rachel Adams, Henry Wang, Christina Brown
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- On-Call Schedule -->
-        <section class="section">
-            <h2 class="section-title">⏰ ON-CALL ROTATION SCHEDULE</h2>
+            <h2 class="section-title">📞 CONTACT METHODS</h2>
             <div class="contact-methods">
                 <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                    Engineering on-call rotation operates 24/7 with weekly shifts. On-call engineer is responsible for
-                    responding to P0/P1 incidents, monitoring alerts, and coordinating with team for resolution.
-                </p>
-                <table class="schedule-table">
-                    <thead>
-                        <tr>
-                            <th>Week</th>
-                            <th>Primary On-Call</th>
-                            <th>Secondary On-Call</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Jan 20-26, 2026</td>
-                            <td>James Sullivan</td>
-                            <td>Alex Wu</td>
-                            <td><span class="on-call-badge">CURRENT</span></td>
-                        </tr>
-                        <tr>
-                            <td>Jan 27 - Feb 2, 2026</td>
-                            <td>Priya Gupta</td>
-                            <td>Tom Bradley</td>
-                            <td><span class="available-badge">UPCOMING</span></td>
-                        </tr>
-                        <tr>
-                            <td>Feb 3-9, 2026</td>
-                            <td>Alex Wu</td>
-                            <td>Maya Jackson</td>
-                            <td><span class="available-badge">UPCOMING</span></td>
-                        </tr>
-                        <tr>
-                            <td>Feb 10-16, 2026</td>
-                            <td>Tom Bradley</td>
-                            <td>James Sullivan</td>
-                            <td><span class="available-badge">UPCOMING</span></td>
-                        </tr>
-                        <tr>
-                            <td>Feb 17-23, 2026</td>
-                            <td>Maya Jackson</td>
-                            <td>Priya Gupta</td>
-                            <td><span class="available-badge">UPCOMING</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 8px;">
-                    <h3 style="color: var(--accent-red); margin-bottom: 1rem;">On-Call Procedures</h3>
-                    <ul style="color: var(--text-secondary); line-height: 2; list-style-position: inside;">
-                        <li>Acknowledge incidents within 5 minutes (P0), 15 minutes (P1)</li>
-                        <li>Post status updates in #smartapp-incidents every 30 minutes</li>
-                        <li>Escalate to Director of Engineering if unresolved after 2 hours</li>
-                        <li>Create post-mortem document for all P0/P1 incidents</li>
-                        <li>Hand off any ongoing issues during weekly transition call</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Escalation Paths -->
-        <section id="escalation" class="section">
-            <h2 class="section-title">🚨 ESCALATION PATHS</h2>
-            <div class="escalation-paths">
-                <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                    Clear escalation paths for different types of issues ensure rapid resolution and proper stakeholder involvement.
-                </p>
-                <div class="escalation-grid">
-                    <div class="escalation-card">
-                        <div class="escalation-type">P0 Production Incident</div>
-                        <ul class="escalation-steps">
-                            <li>1. Page on-call engineer via PagerDuty</li>
-                            <li>2. Post in #smartapp-incidents</li>
-                            <li>3. Notify Director of Engineering (immediately)</li>
-                            <li>4. Escalate to VP of Product if customer-impacting</li>
-                            <li>5. Create war room if needed (>1 hour outage)</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Technical Architecture Decision</div>
-                        <ul class="escalation-steps">
-                            <li>1. Discuss in Architecture Review meeting</li>
-                            <li>2. Create RFC document with pros/cons</li>
-                            <li>3. Review with Senior Engineers</li>
-                            <li>4. Get approval from Director of Engineering</li>
-                            <li>5. Document decision in team wiki</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Product / Scope Changes</div>
-                        <ul class="escalation-steps">
-                            <li>1. Raise with Product Manager</li>
-                            <li>2. Assess impact on timeline and resources</li>
-                            <li>3. Review with Head of Product</li>
-                            <li>4. Get stakeholder approval if scope increase</li>
-                            <li>5. Update roadmap and communicate to team</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Third-Party Integration Issues</div>
-                        <ul class="escalation-steps">
-                            <li>1. Check vendor status page</li>
-                            <li>2. Contact vendor support (Plaid/TRUV/Prove)</li>
-                            <li>3. Loop in Technical PM (Brandon Clark)</li>
-                            <li>4. Escalate to vendor Account Manager if >4 hours</li>
-                            <li>5. Implement fallback/workaround if critical</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Security / Compliance Concerns</div>
-                        <ul class="escalation-steps">
-                            <li>1. Email security@company.com immediately</li>
-                            <li>2. Do NOT share details in public channels</li>
-                            <li>3. Notify Director of Engineering</li>
-                            <li>4. Follow incident response playbook</li>
-                            <li>5. Coordinate with Legal/Compliance teams</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Team Conflicts / HR Issues</div>
-                        <ul class="escalation-steps">
-                            <li>1. Attempt to resolve directly if comfortable</li>
-                            <li>2. Discuss with your direct manager</li>
-                            <li>3. Involve Director/Head of Department</li>
-                            <li>4. Contact HR Business Partner if needed</li>
-                            <li>5. Anonymous reporting via ethics hotline available</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Timeline / Resource Constraints</div>
-                        <ul class="escalation-steps">
-                            <li>1. Discuss with Technical PM / Scrum Master</li>
-                            <li>2. Raise in sprint planning or retro</li>
-                            <li>3. Escalate to Director of Engineering</li>
-                            <li>4. Review scope/timeline with Product</li>
-                            <li>5. Stakeholder communication on revised plan</li>
-                        </ul>
-                    </div>
-
-                    <div class="escalation-card">
-                        <div class="escalation-type">Design / UX Disagreements</div>
-                        <ul class="escalation-steps">
-                            <li>1. Bring to Design Review meeting</li>
-                            <li>2. Share user research data/rationale</li>
-                            <li>3. Involve Lead Designer (David Kim)</li>
-                            <li>4. Consider A/B test if unable to align</li>
-                            <li>5. Head of Product makes final call</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Working Hours & Availability -->
-        <section class="section">
-            <h2 class="section-title">🌍 TEAM WORKING HOURS & TIME ZONES</h2>
-            <div class="contact-methods">
-                <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                    Our distributed team spans multiple time zones. Core collaboration hours are 11 AM - 3 PM PST
-                    (2 PM - 6 PM EST) when all team members overlap for meetings and synchronous work.
-                </p>
-                <table class="schedule-table">
-                    <thead>
-                        <tr>
-                            <th>Team Member</th>
-                            <th>Location & Time Zone</th>
-                            <th>Typical Working Hours</th>
-                            <th>Availability Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Sarah Chen</td>
-                            <td>Seattle, WA | PST (UTC-8)</td>
-                            <td>8:00 AM - 5:00 PM PST</td>
-                            <td><span class="available-badge">AVAILABLE</span></td>
-                        </tr>
-                        <tr>
-                            <td>Michael Rodriguez</td>
-                            <td>Austin, TX | CST (UTC-6)</td>
-                            <td>8:00 AM - 5:00 PM CST</td>
-                            <td><span class="available-badge">AVAILABLE</span></td>
-                        </tr>
-                        <tr>
-                            <td>Emily Thompson</td>
-                            <td>New York, NY | EST (UTC-5)</td>
-                            <td>9:00 AM - 6:00 PM EST</td>
-                            <td><span class="available-badge">AVAILABLE</span></td>
-                        </tr>
-                        <tr>
-                            <td>Alex Wu</td>
-                            <td>Seattle, WA | PST (UTC-8)</td>
-                            <td>9:00 AM - 6:00 PM PST</td>
-                            <td><span class="available-badge">AVAILABLE</span></td>
-                        </tr>
-                        <tr>
-                            <td>James Sullivan</td>
-                            <td>Austin, TX | CST (UTC-6)</td>
-                            <td>7:00 AM - 4:00 PM CST</td>
-                            <td><span class="on-call-badge">ON-CALL</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 8px;">
-                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Meeting Etiquette</h3>
-                    <ul style="color: var(--text-secondary); line-height: 2; list-style-position: inside;">
-                        <li>Schedule meetings during core hours (11 AM - 3 PM PST) when possible</li>
-                        <li>Record meetings for async viewing by those who can't attend</li>
-                        <li>Keep meetings to 50 minutes max (allow 10 min transition time)</li>
-                        <li>Send agendas 24 hours in advance</li>
-                        <li>Mark yourself as "Busy" in calendar for focus time blocks</li>
-                        <li>Respect "No Meeting Thursdays" for deep work</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cross-Functional Squads -->
-        <section class="section">
-            <h2 class="section-title">🎯 CROSS-FUNCTIONAL SQUAD ASSIGNMENTS</h2>
-            <div class="contact-methods">
-                <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                    The team is organized into 5 cross-functional squads, each focused on specific product areas.
-                    Squads include product, engineering, design, and QA members working closely together.
+                    Best practices for reaching team members and communicating effectively across the organization.
                 </p>
 
                 <div class="contact-grid">
                     <div class="contact-card">
-                        <div class="contact-card-title">🔐 Identity & Verification Squad</div>
+                        <div class="contact-card-title">📧 Email</div>
                         <div class="contact-card-content">
-                            <strong>PM:</strong> Jessica Park<br>
-                            <strong>Engineers:</strong> Priya Gupta, Tom Bradley<br>
-                            <strong>Designer:</strong> Rachel Adams<br>
-                            <strong>QA:</strong> Daniel Lee<br><br>
-                            <strong>Focus:</strong> Prove integration, OTP authentication, identity verification flows
+                            All team members use the format: <strong>firstname.lastname@cmgfi.com</strong>
+                            <br><br>
+                            Email is best for formal communications, documentation, and non-urgent matters.
                         </div>
                     </div>
 
                     <div class="contact-card">
-                        <div class="contact-card-title">💰 Financial Data Squad</div>
+                        <div class="contact-card-title">💬 Slack</div>
                         <div class="contact-card-content">
-                            <strong>PM:</strong> Jessica Park<br>
-                            <strong>Engineers:</strong> James Sullivan, Priya Gupta<br>
-                            <strong>Designer:</strong> Kevin Murphy<br>
-                            <strong>QA:</strong> Daniel Lee<br><br>
-                            <strong>Focus:</strong> Plaid VOA, TRUV VOIE, asset/income verification
+                            Primary communication channel for day-to-day collaboration.
+                            <br><br>
+                            <strong>Main Channels:</strong><br>
+                            • #smartapp-general<br>
+                            • #smartapp-dev<br>
+                            • #smartapp-design<br>
+                            • #smartapp-support
                         </div>
                     </div>
 
                     <div class="contact-card">
-                        <div class="contact-card-title">👥 Borrower Experience Squad</div>
+                        <div class="contact-card-title">📞 Phone</div>
                         <div class="contact-card-content">
-                            <strong>PM:</strong> Raj Nair<br>
-                            <strong>Engineers:</strong> Alex Wu, Carlos Martinez, Nina Kowalski<br>
-                            <strong>Designer:</strong> Rachel Adams, Kevin Murphy<br>
-                            <strong>QA:</strong> Sophie O'Connor<br><br>
-                            <strong>Focus:</strong> Progressive disclosure, form UX, co-borrower flows
+                            For urgent matters, contact team members via Slack or email first to arrange a call.
+                            <br><br>
+                            Phone contact information is available upon request through internal channels.
                         </div>
                     </div>
 
                     <div class="contact-card">
-                        <div class="contact-card-title">📊 LO Dashboard Squad</div>
+                        <div class="contact-card-title">🎥 Video Meetings</div>
                         <div class="contact-card-content">
-                            <strong>PM:</strong> Raj Nair<br>
-                            <strong>Engineers:</strong> Lisa Patel, Tom Bradley<br>
-                            <strong>Designer:</strong> David Kim<br>
-                            <strong>QA:</strong> Sophie O'Connor<br>
-                            <strong>Data:</strong> Henry Wang<br><br>
-                            <strong>Focus:</strong> LO dashboard, monitoring, takeover flows, analytics
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">🤖 AI & Intelligence Squad</div>
-                        <div class="contact-card-content">
-                            <strong>PM:</strong> Amanda Silva<br>
-                            <strong>Engineers:</strong> James Sullivan, Alex Wu<br>
-                            <strong>Designer:</strong> Tanya Nguyen<br>
-                            <strong>QA:</strong> Sophie O'Connor<br>
-                            <strong>Data:</strong> Henry Wang<br><br>
-                            <strong>Focus:</strong> AI Assistant, Claude integration, smart suggestions
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <div class="contact-card-title">🏗️ Platform & Infrastructure</div>
-                        <div class="contact-card-content">
-                            <strong>Tech Lead:</strong> Michael Rodriguez<br>
-                            <strong>Engineers:</strong> Maya Jackson, James Sullivan<br>
-                            <strong>Data Eng:</strong> Olivia Anderson<br><br>
-                            <strong>Focus:</strong> Core architecture, AWS infrastructure, data pipelines, DevOps
+                            Scheduled via calendar invites for team meetings, sprint ceremonies, and one-on-ones.
+                            <br><br>
+                            Use Zoom or Microsoft Teams per company standards.
                         </div>
                     </div>
                 </div>
@@ -2434,7 +1091,7 @@
                 <p>Smart App 2.0 Team Directory • Last Updated: January 21, 2026 • 24 Team Members</p>
                 <div class="footer-links">
                     <a href="../index.html">Back to Home</a>
-                    <a href="mailto:smartapp-team@company.com">Contact Team</a>
+                    <a href="mailto:smartapp-team@cmgfi.com">Contact Team</a>
                     <a href="#smartapp-general">#smartapp-general</a>
                 </div>
             </div>

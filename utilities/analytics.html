@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Dashboard - Smart App 2.0</title>
+    <title>Analytics Dashboard (SIMULATED DATA) - Smart App 2.0</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -417,6 +417,44 @@
             flex-wrap: wrap;
         }
 
+        /* Simulation Banner */
+        .simulation-banner {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border: 2px solid #b45309;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .simulation-banner h2 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .simulation-banner p {
+            color: #1e293b;
+            font-size: 1rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .simulation-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .charts-grid {
@@ -471,9 +509,15 @@
             <span class="breadcrumb-current">Analytics</span>
         </nav>
 
+        <!-- Simulation Notice Banner -->
+        <div class="simulation-banner">
+            <h2>⚠️ SIMULATED DATA FOR DEMONSTRATION PURPOSES ONLY</h2>
+            <p>This dashboard shows example/simulated data for planning and visualization purposes. All metrics, charts, and analytics will be populated from real usage data once the application launches and actual user interactions occur.</p>
+        </div>
+
         <!-- Page Header -->
         <div class="page-header" id="overview">
-            <h1>Analytics Dashboard</h1>
+            <h1>Analytics Dashboard <span class="simulation-badge">Simulated Data</span></h1>
             <p class="subtitle">Real-time metrics and comprehensive performance insights for Smart App 2.0</p>
             <div class="last-updated">
                 <span class="pulse-dot"></span>
@@ -484,7 +528,7 @@
         <!-- Executive KPI Cards -->
         <section id="kpis" class="section">
             <div class="section-header">
-                <h2 class="section-title">Key Performance Indicators</h2>
+                <h2 class="section-title">Key Performance Indicators <span class="simulation-badge">Simulated</span></h2>
                 <div class="section-controls">
                     <select class="btn" id="kpiTimeRange">
                         <option>Last 30 Days</option>
@@ -603,7 +647,7 @@
         <!-- Chart Visualizations -->
         <section id="trends" class="section">
             <div class="section-header">
-                <h2 class="section-title">Trend Analysis</h2>
+                <h2 class="section-title">Trend Analysis <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="charts-grid">
@@ -642,7 +686,7 @@
         <!-- Performance Metrics -->
         <section id="performance" class="section">
             <div class="section-header">
-                <h2 class="section-title">Performance Metrics</h2>
+                <h2 class="section-title">Performance Metrics <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="charts-grid">
@@ -681,7 +725,7 @@
         <!-- Integration Performance -->
         <section id="integrations" class="section">
             <div class="section-header">
-                <h2 class="section-title">Integration Performance</h2>
+                <h2 class="section-title">Integration Performance <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="charts-grid">
@@ -768,7 +812,7 @@
         <!-- User Analytics -->
         <section id="users" class="section">
             <div class="section-header">
-                <h2 class="section-title">User Segment Performance</h2>
+                <h2 class="section-title">User Segment Performance <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <!-- User Segments Table -->
@@ -904,7 +948,7 @@
         <!-- Geographic Distribution -->
         <section id="geography" class="section">
             <div class="section-header">
-                <h2 class="section-title">Geographic Distribution</h2>
+                <h2 class="section-title">Geographic Distribution <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="data-table">
@@ -1008,7 +1052,7 @@
         <!-- Conversion Funnel -->
         <section id="funnel" class="section">
             <div class="section-header">
-                <h2 class="section-title">Conversion Funnel Analysis</h2>
+                <h2 class="section-title">Conversion Funnel Analysis <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="charts-grid">
@@ -1101,7 +1145,7 @@
         <!-- ROI & Cost Metrics -->
         <section id="roi" class="section">
             <div class="section-header">
-                <h2 class="section-title">ROI & Financial Metrics</h2>
+                <h2 class="section-title">ROI & Financial Metrics <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="comparison-grid">
@@ -1183,7 +1227,7 @@
         <!-- Cohort Analysis -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Cohort Analysis</h2>
+                <h2 class="section-title">Cohort Analysis <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="data-table">
@@ -1253,7 +1297,7 @@
         <!-- A/B Test Results -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">A/B Test Results Summary</h2>
+                <h2 class="section-title">A/B Test Results Summary <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="data-table">
@@ -1323,7 +1367,7 @@
         <!-- Comparative Analysis -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Comparative Analysis</h2>
+                <h2 class="section-title">Comparative Analysis <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="comparison-grid">
@@ -1404,7 +1448,7 @@
         <!-- Error Tracking -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Error Rate Tracking</h2>
+                <h2 class="section-title">Error Rate Tracking <span class="simulation-badge">Simulated</span></h2>
             </div>
 
             <div class="charts-grid">
