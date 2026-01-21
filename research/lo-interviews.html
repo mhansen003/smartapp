@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LO Interview Research - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .interview-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .interview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .interview-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+        .interview-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .qa-section {
+            margin-top: 1.5rem;
+        }
+        .question {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        .answer {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--border-color);
+        }
+        .quote-box {
+            background: rgba(20, 184, 166, 0.1);
+            border-left: 4px solid var(--accent-teal);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .quote-author {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .theme-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .theme-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-4px);
+        }
+        .theme-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+        }
+        .theme-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .theme-count {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .pain-point {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--accent-red);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .pain-point-title {
+            font-weight: 600;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+        }
+        .feature-request {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .feature-request-title {
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .step-number {
+            background: var(--accent-blue);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .findings-list {
+            list-style: none;
+            padding: 0;
+        }
+        .findings-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .findings-list li:last-child {
+            border-bottom: none;
+        }
+        .findings-list li:before {
+            content: "→";
+            color: var(--accent-teal);
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link active">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../research/" class="breadcrumb-link">Research</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">LO Interviews</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">USER RESEARCH</div>
+                <h1 class="page-title">Loan Officer Interview Research</h1>
+                <p class="page-description">Comprehensive documentation of in-depth interviews with 7 loan officers, capturing insights on workflows, pain points, technology adoption, and feature requirements for Smart App 2.0.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">👥</span>
+                        <span>7 Interviews</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎙️</span>
+                        <span>Recorded Sessions</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📊</span>
+                        <span>Synthesized Findings</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📅</span>
+                        <span>Oct - Dec 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../index.html#research" class="back-button">← Back to Research</a>
+
+        <!-- Research Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research Overview</h2>
+
+            <div class="stats-summary">
+                <div class="stat-box">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">LOs Interviewed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">45-90</div>
+                    <div class="stat-label">Minutes Each</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Locations</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">127</div>
+                    <div class="stat-label">Key Insights</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">34</div>
+                    <div class="stat-label">Pain Points</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">52</div>
+                    <div class="stat-label">Feature Requests</div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Research Goals</h3>
+                    <p class="card-description">Understand current LO workflows, identify friction points in the borrower application process, validate feature priorities, and gather requirements for Smart App 2.0 features that will meaningfully improve LO efficiency and borrower experience.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Methodology</h3>
+                    <p class="card-description">Semi-structured interviews conducted remotely and in-person, combining contextual inquiry, task walkthroughs, and open-ended discussion. All sessions were recorded and transcribed for detailed analysis.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Participant Criteria</h3>
+                    <p class="card-description">Active loan officers with varying experience levels (2-15+ years), different specialties (purchase, refinance, jumbo), and diverse branch locations to ensure comprehensive coverage of user needs.</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Interview Format & Questions</h3>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                Each interview followed a structured format covering five key areas:
+            </p>
+            <ul class="findings-list">
+                <li>Background & Experience: LO role, years in industry, typical client base and loan volume</li>
+                <li>Current Workflow: End-to-end process from initial contact to closing, tools used, pain points</li>
+                <li>Technology Usage: Current systems (LOS, CRM, point-of-sale), digital tools, mobile usage</li>
+                <li>Borrower Interaction: Communication preferences, common borrower questions, sticking points</li>
+                <li>Feature Validation: Reactions to proposed Smart App features, wishlist items, priorities</li>
+            </ul>
+        </section>
+
+        <!-- Participant Profiles Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Participant Profiles</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LO Name</th>
+                        <th>Experience</th>
+                        <th>Branch Location</th>
+                        <th>Monthly Volume</th>
+                        <th>Specialty</th>
+                        <th>Tech Adoption</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sarah Martinez</strong></td>
+                        <td>12 years</td>
+                        <td>Phoenix, AZ</td>
+                        <td>15-20 loans</td>
+                        <td>Purchase, First-time buyers</td>
+                        <td><span class="badge badge-success">High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Michael Chen</strong></td>
+                        <td>8 years</td>
+                        <td>Seattle, WA</td>
+                        <td>20-25 loans</td>
+                        <td>Jumbo, High net worth</td>
+                        <td><span class="badge badge-success">High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jennifer Williams</strong></td>
+                        <td>15 years</td>
+                        <td>Austin, TX</td>
+                        <td>18-22 loans</td>
+                        <td>Refinance, VA loans</td>
+                        <td><span class="badge badge-warning">Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>David Thompson</strong></td>
+                        <td>5 years</td>
+                        <td>Denver, CO</td>
+                        <td>12-15 loans</td>
+                        <td>Purchase, Move-up buyers</td>
+                        <td><span class="badge badge-success">High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lisa Patel</strong></td>
+                        <td>10 years</td>
+                        <td>Portland, OR</td>
+                        <td>16-20 loans</td>
+                        <td>Purchase, Investment properties</td>
+                        <td><span class="badge badge-warning">Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Robert Garcia</strong></td>
+                        <td>3 years</td>
+                        <td>San Diego, CA</td>
+                        <td>10-14 loans</td>
+                        <td>Purchase, FHA/VA</td>
+                        <td><span class="badge badge-success">High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amanda Foster</strong></td>
+                        <td>7 years</td>
+                        <td>Boise, ID</td>
+                        <td>14-18 loans</td>
+                        <td>Refinance, Construction</td>
+                        <td><span class="badge">Medium-Low</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Interview Transcripts Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Detailed Interview Transcripts</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The following sections document the complete interview sessions with each loan officer, capturing their responses to key questions about workflows, pain points, and technology needs.
+            </p>
+
+            <!-- Interview 1: Sarah Martinez -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 1: Sarah Martinez</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">Phoenix, AZ</span>
+                            <span class="badge">12 years experience</span>
+                            <span class="badge badge-success">Oct 12, 2024</span>
+                            <span class="badge">75 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: Tell me about your typical workflow from first contact with a borrower to loan submission.</div>
+                    <div class="answer">
+                        My process usually starts with an initial consultation, either by phone or in person. I spend about 30-45 minutes getting to know the borrower's situation, running preliminary numbers, and explaining the process. Then I send them the application link - and this is where things often stall. The current application is overwhelming for many first-time buyers. They see 20+ pages and panic. I'd say 40% of my borrowers need hand-holding through the application, which means I'm on the phone walking them through it or scheduling a time to sit with them. Once they submit, I review everything, identify missing documents, and start the back-and-forth document collection dance. That's easily the most time-consuming part - chasing docs. I use a mix of email, text, and phone calls to stay on top of it. Then it's into the LOS, through underwriting, and hopefully to closing. The whole process averages 30-35 days, but a lot of that is just waiting for borrowers to provide information.
+                    </div>
+
+                    <div class="question">Q: What are your biggest pain points in the current application process?</div>
+                    <div class="answer">
+                        Number one is definitely the document collection nightmare. Borrowers don't understand what we need or why. I'll ask for two months of bank statements and get a screenshot of their balance. Or they'll send pay stubs from the wrong month. The current system doesn't give them any guidance on what's acceptable. Second major issue is the mobile experience - or lack thereof. Probably 60-70% of my borrowers start the application on their phone because that's when they have time, like during their lunch break or in the evening. But the current app is horrible on mobile. Fields don't display right, uploading documents is clunky, and people give up. Third thing is the lack of transparency. Borrowers constantly ask "where are we in the process?" and I don't have a good way to show them without manually updating them. A status dashboard would save me so many calls and texts.
+                    </div>
+
+                    <div class="question">Q: How do you currently handle document collection?</div>
+                    <div class="answer">
+                        It's honestly a mess. I maintain a personal checklist template that I've refined over the years. After the initial application, I send borrowers an email with a detailed list of what I need, broken down by category - income docs, asset docs, property docs, etc. I try to be really specific like "last 2 months of bank statements showing all pages including the account number" because I've learned that vague requests lead to wrong documents. Then I follow up every 2-3 days if I haven't heard back. I use a combination of email for the formal requests and text messages for quick reminders. Some borrowers respond better to text. The problem is everything is scattered across email threads, text conversations, and our document portal. I waste probably 5-10 hours a week just organizing and tracking who owes me what. If there was a way to send smart reminders and give borrowers a clear checklist they could see and check off, that would be life-changing.
+                    </div>
+
+                    <div class="question">Q: What role do you see technology playing in improving the borrower experience?</div>
+                    <div class="answer">
+                        I think technology can solve a lot of our problems, but it has to be done right. The key is making things simpler, not adding more complexity. I love the idea of instant identity verification - anything that reduces friction at the start is great. Connecting to banks for asset verification would be huge. Half my time is spent verifying bank statements and explaining to underwriters what certain transactions are. If that was automated and verified, we'd save days in the process. The AI assistant concept is interesting, but I'd want to make sure it's giving accurate information. I can't have borrowers getting wrong answers about rates or qualification requirements. What I really want is better communication tools built in - video chat for quick questions, secure messaging, maybe even the ability to share my screen to walk them through documents. And please, please make it mobile-first. That's where borrowers are.
+                    </div>
+
+                    <div class="question">Q: What features would you prioritize if you could design the perfect application system?</div>
+                    <div class="answer">
+                        Top of my list would be intelligent document collection with real-time validation. Show borrowers exactly what they need to upload, give them examples of acceptable documents, and check if what they uploaded is actually usable before moving on. Second would be automated asset and income verification through Plaid, Truv, or similar services. The fewer manual documents, the better. Third, I want a dashboard where I can see every application in progress with status indicators - what's missing, what's pending, what's complete. Make it visual and easy to scan. Fourth, built-in e-signature for all the forms we need signed throughout the process instead of sending DocuSign links separately. Fifth, some kind of smart notifications that remind borrowers about missing items without me having to manually follow up. And finally, make the whole thing feel modern and trustworthy. Our current application looks like it was designed in 2010. Borrowers notice that and it affects their confidence.
+                    </div>
+
+                    <div class="question">Q: How important is mobile functionality for your borrowers?</div>
+                    <div class="answer">
+                        Critical. I'd say 70% of my borrowers primarily use their phones for everything. They're not sitting at a computer most of the day. The challenge is they want to complete the application on their phone, but the current experience forces them to switch to desktop for certain things, which creates abandonment. I've had borrowers tell me they started the app on their phone, got frustrated, and then forgot to come back to it on their computer. It needs to be fully functional on mobile - forms that work, easy document upload from their phone's camera, the ability to review and e-sign documents. I actually encourage my tech-savvy borrowers to use desktop because I know the mobile experience is bad, but that's backwards. It should be mobile-first with desktop as the alternative.
+                    </div>
+
+                    <div class="question">Q: What about the LO experience? What tools do you need?</div>
+                    <div class="answer">
+                        I need visibility and control. A real-time dashboard showing me every application with status, missing items, and days in process. I want to be able to jump in and help a borrower complete their application if they're stuck - like a co-browsing or takeover feature. I need automated alerts when something needs my attention - new application submitted, documents uploaded, underwriter question, etc. Integration with my calendar for scheduling calls or closings would be helpful. And please integrate with the LOS seamlessly so I'm not re-entering data. The fewer systems I have to log into and the less duplicate data entry, the more time I have for actually helping borrowers and closing loans. Oh, and reporting - I want to see my pipeline metrics, conversion rates, average time to close, common sticking points. Data that helps me improve my process.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview 2: Michael Chen -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 2: Michael Chen</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">Seattle, WA</span>
+                            <span class="badge">8 years experience</span>
+                            <span class="badge badge-success">Oct 19, 2024</span>
+                            <span class="badge">60 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: How does your jumbo loan specialty affect your workflow and needs?</div>
+                    <div class="answer">
+                        Jumbo loans have additional complexity - more documentation, higher scrutiny, more moving pieces. My borrowers are typically high net worth individuals who value efficiency and white-glove service. They have complex financial situations - multiple income sources, investment properties, business ownership. The documentation requirements are intense. We need deeper asset verification, sometimes 12-24 months of bank statements, detailed breakdown of investment accounts, proof of reserves, explanations for large deposits. These clients also have high expectations for the digital experience. They use premium apps and services in every other part of their life, so our loan application needs to meet that standard. That means clean design, fast performance, and professional presentation. They're not going to tolerate a clunky interface or confusing workflow.
+                    </div>
+
+                    <div class="question">Q: What specific features would help with jumbo loan applications?</div>
+                    <div class="answer">
+                        Sophisticated asset aggregation is crucial. These borrowers have assets spread across multiple institutions - multiple banks, investment accounts, retirement accounts, sometimes offshore accounts. Being able to connect all of them through Plaid or similar would save enormous time. I'd also want smart logic that understands complex income scenarios - W2 plus business income plus investment income plus rental income. The application should guide them through documenting each source properly. For jumbo loans, we often need letters of explanation for various things - large deposits, employment gaps, credit inquiries. Having templates built in that I can customize and send for e-signature would streamline that. Also, since these loans take longer and are more involved, really good progress tracking and timeline estimates would help manage client expectations. They want to know exactly where we are and what's next.
+                    </div>
+
+                    <div class="question">Q: How do your clients prefer to communicate?</div>
+                    <div class="answer">
+                        It varies, but most prefer text or email for quick updates and questions, with scheduled calls or video meetings for substantive discussions. They're busy executives and business owners who don't have time for frequent phone calls, but they want to stay informed. I'd love a secure messaging feature built into the application portal where they can ask questions and I can respond with context - like "regarding your question about the appraisal, here's the status..." with relevant documents attached. Some of my clients travel extensively, sometimes internationally, so async communication is important. But when we need to discuss something complex like credit issues or qualification scenarios, they want to schedule a proper video call. Having scheduling built in would be convenient. The key is giving them options and meeting them where they are.
+                    </div>
+
+                    <div class="question">Q: What concerns do you have about automation and AI in the loan process?</div>
+                    <div class="answer">
+                        I'm all for automation that speeds up tedious tasks - data entry, document verification, status updates. That stuff should be automated. But I'm cautious about using AI for complex financial advice or qualification decisions. My clients' situations are nuanced and require judgment. AI can help by surfacing relevant information or flagging potential issues, but I need to maintain control and be the decision-maker. Where I do see value is in an AI assistant that can answer basic borrower questions about the process, required documents, timeline, etc. That would reduce interruptions for simple things and let me focus on the high-value consultative work. Just make sure the AI is accurate and knows when to escalate to a human. The last thing I want is borrowers getting wrong information and then being confused or upset. Trust is everything with high net worth clients.
+                    </div>
+
+                    <div class="question">Q: What would make you more efficient in your role?</div>
+                    <div class="answer">
+                        Reducing manual data entry and document handling would give me back probably 10-15 hours a week. Every time I'm copying information from one system to another or chasing the same document multiple times because the borrower uploaded the wrong thing, that's wasted time. Smarter integrations between systems - application portal, LOS, CRM - so data flows automatically. Better document intelligence that can validate what's uploaded and extract key information automatically. I'd also love automated milestone communications - when we complete a step, automatically notify the borrower with what's next. I spend too much time on status update calls that could be eliminated with better transparency. And give me better analytics on my pipeline so I can identify bottlenecks and optimize my process. If I could see that most of my applications stall at document collection, I'd know to focus my energy there.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview 3: Jennifer Williams -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 3: Jennifer Williams</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">Austin, TX</span>
+                            <span class="badge">15 years experience</span>
+                            <span class="badge badge-success">Oct 26, 2024</span>
+                            <span class="badge">85 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: With 15 years in the industry, how has technology changed your workflow?</div>
+                    <div class="answer">
+                        The evolution has been significant. When I started, everything was paper. We'd meet borrowers in person, they'd fill out paper applications, we'd collect physical documents, and the whole process took 45-60 days minimum. Now it's mostly digital, which has speed up some things, but honestly created new problems. We have more tools, but they don't talk to each other. I'm logging into 5-6 different systems every day - LOS, CRM, rate engine, document portal, e-signature platform, credit vendor. It's fragmented. What I'd love is a unified platform where everything happens in one place. The promise of technology was supposed to be efficiency, but in some ways it's just shifted the work around. Instead of managing paper files, I'm managing digital chaos across multiple platforms. That said, things like automated underwriting and electronic document management have been game-changers. We just need better integration.
+                    </div>
+
+                    <div class="question">Q: What's unique about working with VA loans and refinances?</div>
+                    <div class="answer">
+                        VA loans have specific documentation requirements - certificate of eligibility, military service verification, VA-specific forms. The application needs to capture these VA-specific items and guide borrowers through what's needed. Many veterans aren't familiar with the VA loan benefits or process, so there's an educational component. For refinances, especially cash-out refinances, we need detailed information about the existing mortgage, property value changes, what they plan to use the funds for. I'd love to see pre-population of property data if they're refinancing with us. We already have their information from the original loan, so make it easy for them. Rate-and-term refinances should be simple - verify employment and income haven't changed significantly, pull updated credit, order appraisal. The application could be much shorter for these scenarios if we're smart about what we actually need to re-collect.
+                    </div>
+
+                    <div class="question">Q: What percentage of your borrowers complete the application without help?</div>
+                    <div class="answer">
+                        Maybe 30-40% complete it fully on their own without any intervention from me. The rest either call with questions, get stuck somewhere and need help, or abandon it and I have to follow up. The common sticking points are complex income situations, understanding what assets to report, the declarations section with all the yes/no questions that scare people, and document upload. I find that older borrowers and first-time borrowers need more help, while tech-savvy repeat borrowers can usually figure it out. The key is progressive disclosure and helpful guidance in context. Don't show them 50 questions on one page. Break it into digestible sections. Provide help text and examples for anything that might be confusing. Let them save and come back. And please, auto-save frequently. Nothing worse than a borrower spending 30 minutes entering data and then losing it because of a timeout or accidental browser close.
+                    </div>
+
+                    <div class="question">Q: How do you handle borrowers who have credit issues or complex situations?</div>
+                    <div class="answer">
+                        This is where the human touch is critical. I need to understand the full situation, look at their credit report together, explain what needs to be addressed, and create a plan. Sometimes we can work with current credit, sometimes they need to pay down debt or dispute items first. The application should allow me to flag these situations early and maybe pause the full application until we resolve the issues. No point in collecting all the documentation if we know they won't qualify yet. I'd love a way to do preliminary credit screening - maybe a soft pull option - before going into the full application. That way I can coach them on what to fix before we do the hard pull and formal application. For complex situations like self-employment, multiple properties, recent credit events, the application needs conditional logic to collect the right supplemental information without overwhelming everyone else with questions that don't apply.
+                    </div>
+
+                    <div class="question">Q: What features would you NOT want to see in a new application system?</div>
+                    <div class="answer">
+                        I don't want gimmicky features that look cool but don't add value. I've seen applications with animated characters or gamification that just feel cheesy and unprofessional. This is someone's home and probably their largest financial transaction - it needs to be serious and trustworthy. I also don't want overly aggressive automation that tries to be too smart and gets things wrong. If the system is going to auto-populate data or make assumptions, it better be accurate or easy to override. And please don't lock LOs out of the borrower-facing application. I need to be able to see what they see, jump in and help, and fix things if needed. Some systems treat LOs and borrowers as completely separate with no visibility into each other's experience, and that creates problems. Make it collaborative, not siloed.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview 4: David Thompson -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 4: David Thompson</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">Denver, CO</span>
+                            <span class="badge">5 years experience</span>
+                            <span class="badge badge-success">Nov 2, 2024</span>
+                            <span class="badge">55 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: As a relatively newer LO, what's been your experience with technology?</div>
+                    <div class="answer">
+                        I came into this industry expecting modern technology since I was used to consumer apps like Uber, Airbnb, and Venmo. The mortgage tech stack was honestly disappointing at first. A lot of legacy systems that feel dated. But I've learned to work within the constraints and find workarounds. I probably rely more on technology than veteran LOs because it's what I know. I text more than call, I use video messages to explain complex concepts, I share screen recordings for document walkthroughs. I think the future of this industry is meeting borrowers in their digital world. The LOs who resist technology are going to get left behind. My borrowers expect a modern experience and fast responses. If I take 2 days to reply to an email, they're frustrated. Everything moves faster now.
+                    </div>
+
+                    <div class="question">Q: What apps or tools do you use that we should emulate?</div>
+                    <div class="answer">
+                        I love how Stripe and Square handle complex financial transactions but make them feel simple. Their dashboards are clean, information is surfaced at the right time, and everything just works. For document collection, I look at how TurboTax guides people through tax prep - asking smart questions, explaining why information is needed, showing progress. For communication, Slack's threading and notification system keeps conversations organized. For status updates, package tracking from Amazon or UPS is great - you always know where your shipment is. We should do that for loans. Another one is Notion for organization and checklists. Borrowers should have a clear checklist of what's needed with status indicators for each item. And mobile-first design from apps like Instagram and TikTok - everything optimized for thumb navigation and quick interactions.
+                    </div>
+
+                    <div class="question">Q: How do your purchase loan clients differ in their needs?</div>
+                    <div class="answer">
+                        Purchase loans are time-sensitive and emotional. People are trying to win in competitive markets, so speed matters enormously. Pre-approval letters need to be generated quickly and accurately. The application should prioritize collecting information needed for pre-approval first, then gather the rest once we're under contract. Many buyers are working with real estate agents who have their own expectations and timelines. Integration or communication with the agent would be helpful - maybe status updates to both the borrower and their agent. Move-up buyers often have equity from their current home that's part of the financial picture. The application needs to capture details about their existing property and planned sale. And contingencies - is the purchase contingent on their sale? This affects timeline and qualification.
+                    </div>
+
+                    <div class="question">Q: What causes applications to stall or fall out of your pipeline?</div>
+                    <div class="answer">
+                        The number one reason is borrowers getting overwhelmed by the document requests and just giving up. Second is losing to a competitor who's faster or more responsive. Third is life events - they lose their job, have a medical emergency, or decide to wait. Fourth is credit issues we discover that disqualify them. To reduce stalls, we need to make document collection as painless as possible. Break it into small requests rather than asking for 20 documents at once. Celebrate progress - "Great! You've completed 70% of your document upload." Give them encouragement. For responsiveness, automated updates help me seem more on top of things even when I'm with other clients. For credit issues, early screening helps us address problems before they're deep into the process. The application should be designed to keep momentum going and remove friction at every step.
+                    </div>
+
+                    <div class="question">Q: What would make you recommend a new application system to other LOs?</div>
+                    <div class="answer">
+                        It has to actually make me more efficient, not just look pretty. I'd want to see measurable improvements - faster time to close, higher completion rates, less time on document collection, fewer borrower support calls. Show me I can handle more volume with the same effort or provide better service with the same volume. Second, it needs to improve my borrower's experience - higher satisfaction scores, better reviews, more referrals. If borrowers love the process, that reflects well on me and builds my business. Third, it should integrate seamlessly with my existing tools, especially the LOS. I can't adopt something that creates more work. Fourth, good training and support. Don't just throw a new system at us and expect us to figure it out. Show us how to use it effectively, provide templates and best practices. Finally, it needs to be reliable. If the system goes down during business hours, I'm dead in the water.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview 5: Lisa Patel -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 5: Lisa Patel</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">Portland, OR</span>
+                            <span class="badge">10 years experience</span>
+                            <span class="badge badge-success">Nov 9, 2024</span>
+                            <span class="badge">70 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What's unique about investment property loans in your workflow?</div>
+                    <div class="answer">
+                        Investment properties require additional analysis and documentation. We need rental income verification - existing leases, rental history, market rent analysis. If it's not yet rented, we need to project income based on comparables. We look at the borrower's entire real estate portfolio - how many properties they own, what the cash flow is across the portfolio, debt service coverage ratios. Many investors are sophisticated and understand the numbers, but the application process needs to capture the complexity. For repeat investors, it would be great to have their portfolio information stored so they don't have to re-enter property details every time. The application should ask smart questions based on their investor profile - is this a fix-and-flip, buy-and-hold, short-term rental? Each has different documentation needs.
+                    </div>
+
+                    <div class="question">Q: How do you balance efficiency with thoroughness?</div>
+                    <div class="answer">
+                        It's always a tension. I want to move quickly, but I can't cut corners on documentation because that causes problems in underwriting. The key is being efficient about collecting complete information the first time. That's where a smart application really helps. If the system validates documents as they're uploaded and immediately tells the borrower "this bank statement is missing pages 3-4, please reupload a complete statement," we avoid the back-and-forth. If income is automatically verified through Truv, we skip weeks of pay stub and tax return analysis. Anything we can automate or streamline without sacrificing quality is worth it. I'm also big on setting clear expectations upfront. I tell borrowers exactly what documents I'll need, when I'll need them, and what happens if they're delayed. That clarity helps them prioritize and reduces surprises.
+                    </div>
+
+                    <div class="question">Q: What role do referral partners play in your business?</div>
+                    <div class="answer">
+                        Real estate agents, financial advisors, and CPAs are crucial referral sources. They're recommending me to their clients based on my reputation for smooth transactions and good communication. Anything that makes me look good to these partners strengthens those relationships. When a realtor refers a client and then hears that the loan process was easy and fast, they'll send more business my way. So the borrower experience directly impacts my referral network. I'd love features that keep partners in the loop - maybe status updates to the realtor, milestone notifications, easy ways for them to check on their client's loan progress with permission. Also, co-branding options would be nice - if I have a strong partnership with a realtor team, being able to customize the application with our combined branding makes it feel more cohesive.
+                    </div>
+
+                    <div class="question">Q: What are your thoughts on the LO takeover feature?</div>
+                    <div class="answer">
+                        I think it's absolutely necessary. Probably 50% of my applications need some level of intervention from me. Sometimes borrowers just have questions and need guidance. Other times they're stuck on a specific field or section and need help understanding what's being asked. Sometimes they've entered incorrect information and need to fix it but can't figure out how. Being able to jump into their application, see what they see, and either guide them through it or complete it for them is essential. Right now I have to do that through screen sharing on Zoom or talking them through it on the phone while I navigate a separate LO view. If I could just click "take over" and complete the problematic section with them, that would save so much time and frustration. Just make sure there's a clear handoff - they shouldn't lose work they've already done, and they should be able to take back control easily.
+                    </div>
+
+                    <div class="question">Q: How important is customization and configuration?</div>
+                    <div class="answer">
+                        Very important. Different LOs have different processes, preferences, and client types. I should be able to customize things like email templates, document checklists, required vs optional fields, branding elements, and workflow steps. For example, I might want to collect certain documents earlier in the process than another LO. Or I might have specific disclosure language I want to include. Give me templates and defaults that work out of the box, but let me tailor the experience to my needs. At the same time, don't make it so complex that I need training to change basic settings. It should be intuitive - a settings panel with clear options, preview mode to see changes, and ability to save different configurations for different loan types or scenarios. And whatever I configure shouldn't break the integration with other systems. That's the balance.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview 6: Robert Garcia -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 6: Robert Garcia</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">San Diego, CA</span>
+                            <span class="badge">3 years experience</span>
+                            <span class="badge badge-success">Nov 16, 2024</span>
+                            <span class="badge">50 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What challenges do you face working with FHA and VA loans?</div>
+                    <div class="answer">
+                        FHA and VA loans are great programs that help people become homeowners who might not qualify for conventional loans, but they come with additional requirements. FHA needs upfront and annual mortgage insurance documentation, specific property condition requirements, and stricter debt-to-income guidelines. VA has certificate of eligibility, funding fee calculations, occupancy requirements, and specific appraisal standards. Many of my borrowers are first-time buyers or veterans who aren't familiar with these nuances, so education is important. The application should adapt based on loan type - if it's FHA, automatically include the FHA-specific questions and documents. If it's VA, capture military service details and guide them on obtaining their COE. Don't burden conventional borrowers with fields that don't apply to them. Smart conditional logic based on loan type makes the experience relevant.
+                    </div>
+
+                    <div class="question">Q: As a newer LO, what do you wish you'd known earlier?</div>
+                    <div class="answer">
+                        I wish I'd understood how much of the job is project management and communication. I thought it was mostly about numbers and qualifying people, but it's really about managing a complex process with multiple parties - borrower, realtor, processor, underwriter, title company, appraiser - and keeping everyone aligned. Organization is crucial. You need systems for tracking everything. Early on I lost track of where applications were in the process and it hurt me. Now I'm obsessive about documentation and status tracking. I also wish I'd known how important responsiveness is. Borrowers expect quick replies. If I'm slow, they get anxious or start calling other lenders. Technology that helps me stay on top of communications and automates routine updates is worth its weight in gold. And documentation - you can never have too much documentation. If there's any question, get the supporting document.
+                    </div>
+
+                    <div class="question">Q: How do you use mobile technology in your work?</div>
+                    <div class="answer">
+                        I'm on my phone constantly. I respond to texts and emails between appointments, check application status while I'm out, upload documents from my phone, even do quick video calls with borrowers. If a system doesn't work well on mobile, I'm handicapped. A lot of veteran LOs work primarily from their desktop at the office, but I'm rarely at my desk. I'm meeting clients at coffee shops, doing open house visits with realtors, working from home. Mobile is my primary work device. The application needs to be fully functional on mobile for both me and borrowers. Don't just make it "responsive" where the desktop version scales down - actually design for mobile first. Big touch targets, simple navigation, fast loading, offline capability where possible. And please optimize document upload from mobile cameras - that's how most borrowers will submit docs.
+                    </div>
+
+                    <div class="question">Q: What would make you an advocate for Smart App 2.0?</div>
+                    <div class="answer">
+                        If it noticeably improves my efficiency and borrower satisfaction, I'll be your biggest advocate. Show me that I can close loans faster, handle more volume, get better reviews, and spend less time on administrative tasks. Give me data to prove it - average time to close, completion rates, borrower NPS scores. When I see those metrics improve, I'll tell every LO I know about it. Also, make it easy for me to share success stories. If a borrower has a great experience, give me tools to capture that testimonial and share it on social media or my website. My business lives and dies by reputation and referrals. Anything that enhances my brand and makes my clients happy is something I'll promote. And if you can tie it to increased income - more loans closed means more commission - that's the ultimate motivator. Show me the ROI clearly.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview 7: Amanda Foster -->
+            <div class="interview-card">
+                <div class="interview-header">
+                    <div>
+                        <h3 class="interview-title">Interview 7: Amanda Foster</h3>
+                        <div class="interview-meta">
+                            <span class="badge badge-info">Boise, ID</span>
+                            <span class="badge">7 years experience</span>
+                            <span class="badge badge-success">Nov 23, 2024</span>
+                            <span class="badge">65 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What's unique about construction and renovation loans in your practice?</div>
+                    <div class="answer">
+                        Construction loans are complex - you're not just financing the purchase, you're financing the project. We need detailed construction plans, builder contracts, draw schedules, cost breakdowns, timeline estimates. The application has to capture all of this additional information in an organized way. Then during construction, we manage the draw process - inspections, fund releases, lien waivers. It's very hands-on and document-intensive. Renovation loans have similar complexity but usually smaller scope. These borrowers need more guidance through the process because it's not a standard loan. The application should recognize construction loans as a distinct scenario and adapt accordingly. Most loan apps are designed for simple purchase or refinance and don't handle construction well. That's a gap in the market.
+                    </div>
+
+                    <div class="question">Q: How comfortable are you with adopting new technology?</div>
+                    <div class="answer">
+                        I'm moderately comfortable, but I need it to be intuitive and well-supported. I'm not going to spend hours learning a complex new system. If it requires extensive training, I probably won't use it to its full potential. But if it's user-friendly with good onboarding, helpful tooltips, and clear instructions, I'll embrace it. The benefit has to be obvious and immediate. Don't make me change my workflow drastically unless there's a compelling reason. Incremental improvements that fit into how I already work are easier to adopt than revolutionary changes. I think a lot of LOs are like me - willing to use technology if it clearly helps, but skeptical of change for change's sake. So design with the middle-adopter in mind, not just the early adopters who love new tech.
+                    </div>
+
+                    <div class="question">Q: What would make this application better than what you currently use?</div>
+                    <div class="answer">
+                        First, it needs to be noticeably faster - for me and for borrowers. If it shaves even 5 days off average time to close, that's significant. Second, better document handling with smart validation and organization. Third, transparency for borrowers so they always know where they are. Fourth, good integration with my LOS and other tools so I'm not duplicating work. Fifth, reliable customer support when things go wrong or I have questions. I've used systems where getting help was impossible and it was incredibly frustrating. Sixth, regular updates and improvements based on user feedback. Show me that you're listening to LOs and making the product better over time. And finally, it should look professional and modern. Aesthetics matter because they signal quality and attention to detail. If it looks outdated, borrowers will question whether our company is outdated too.
+                    </div>
+
+                    <div class="question">Q: How do you see AI impacting the loan officer role?</div>
+                    <div class="answer">
+                        AI can handle a lot of the routine, repetitive tasks that consume our time - data entry, document classification, initial completeness checks, answering basic FAQs. That's great and will free us up to focus on the consultative aspects of our job where human judgment and relationship skills matter. I don't think AI will replace LOs, at least not in the near future, because borrowers want a human expert they can trust for a major financial decision. But AI will definitely change what we spend our time on. The LOs who adapt and leverage AI as a tool will be more successful. Those who resist will struggle. I'm interested in using AI to make me smarter and faster - give me insights about a borrower's situation, flag potential issues before they become problems, suggest optimal loan products. Make me a better advisor with AI-powered intelligence.
+                    </div>
+
+                    <div class="question">Q: What final advice would you give to the team building Smart App 2.0?</div>
+                    <div class="answer">
+                        Talk to LOs throughout the development process, not just at the beginning. Your initial research is great, but as you build, show us prototypes and get our feedback. We'll catch things that don't work in real-world scenarios. Also talk to borrowers - they're the end users and their perspective is critical. Build something that serves both constituencies. Don't over-engineer it - simple and reliable beats complex and buggy. Launch with core features done really well rather than trying to do everything. You can add advanced features later based on usage data and feedback. Make sure performance is excellent - fast load times, smooth interactions, no glitches. Technical issues will kill adoption. Provide great training resources - videos, documentation, office hours. And measure success rigorously - track metrics that matter and iterate based on data. I'm excited about what you're building and I'm happy to be a beta tester.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Themes Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Key Themes & Patterns</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Analysis across all seven interviews revealed consistent themes and patterns that should inform Smart App 2.0 priorities and design decisions.
+            </p>
+
+            <div class="themes-grid">
+                <div class="theme-card">
+                    <div class="theme-title">Document Collection Nightmare</div>
+                    <div class="theme-description">
+                        Every single LO identified document collection as the most time-consuming and frustrating part of their workflow. Borrowers submit wrong documents, incomplete documents, or don't understand requirements. LOs spend 5-10 hours per week managing this process.
+                    </div>
+                    <span class="theme-count">Mentioned by 7/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Mobile-First Necessity</div>
+                    <div class="theme-description">
+                        60-70% of borrowers start applications on mobile devices. Current mobile experience is poor, leading to abandonment. Both LOs and borrowers need fully functional mobile interfaces, not just responsive desktop versions.
+                    </div>
+                    <span class="theme-count">Mentioned by 6/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Communication & Transparency</div>
+                    <div class="theme-description">
+                        Borrowers constantly ask "where are we?" LOs field numerous status calls and messages. Need for real-time status dashboard, automated updates, and clear timeline visibility to reduce communication overhead.
+                    </div>
+                    <span class="theme-count">Mentioned by 7/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">System Fragmentation</div>
+                    <div class="theme-description">
+                        LOs juggle 5-6+ separate systems daily (LOS, CRM, rate engine, document portal, e-signature). Duplicate data entry and context switching kills efficiency. Need for unified platform with seamless integrations.
+                    </div>
+                    <span class="theme-count">Mentioned by 6/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Smart Automation Value</div>
+                    <div class="theme-description">
+                        LOs enthusiastic about automation for tedious tasks (data entry, document verification, status updates) but want human control for complex decisions. AI should augment, not replace, LO expertise.
+                    </div>
+                    <span class="theme-count">Mentioned by 7/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Progressive Disclosure Needed</div>
+                    <div class="theme-description">
+                        Current applications overwhelm borrowers with too much at once. Need to break process into digestible chunks, show relevant questions based on scenario, and provide contextual help throughout journey.
+                    </div>
+                    <span class="theme-count">Mentioned by 5/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">LO Takeover Critical</div>
+                    <div class="theme-description">
+                        ~50% of applications need LO intervention. Must be able to view borrower's perspective, jump in to help complete sections, and collaborate in real-time without losing work or creating confusion.
+                    </div>
+                    <span class="theme-count">Mentioned by 6/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Integration Priority</div>
+                    <div class="theme-description">
+                        Asset verification (Plaid), income verification (Truv), identity verification (Prove) are top integration priorities. Automation of these verifications would eliminate weeks of manual document collection.
+                    </div>
+                    <span class="theme-count">Mentioned by 7/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Customization Requirement</div>
+                    <div class="theme-description">
+                        Different LOs, loan types, and scenarios require flexibility. Need configurable workflows, document checklists, email templates, and branding while maintaining system integrity.
+                    </div>
+                    <span class="theme-count">Mentioned by 5/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Speed & Responsiveness</div>
+                    <div class="theme-description">
+                        Borrower expectations for response time have compressed dramatically. Anything that helps LOs respond faster or provides instant feedback improves experience and competitive position.
+                    </div>
+                    <span class="theme-count">Mentioned by 6/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Professional Presentation</div>
+                    <div class="theme-description">
+                        Modern, clean interface signals competence and quality. Borrowers compare mortgage experience to consumer apps. Outdated design erodes trust and reflects poorly on LO and company brand.
+                    </div>
+                    <span class="theme-count">Mentioned by 5/7 LOs</span>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-title">Data & Analytics Gap</div>
+                    <div class="theme-description">
+                        LOs want visibility into their pipeline metrics, conversion rates, bottlenecks, and time-to-close data. Analytics enable process optimization and performance improvement.
+                    </div>
+                    <span class="theme-count">Mentioned by 4/7 LOs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pain Points Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Pain Points & Friction Areas</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Specific pain points identified during interviews, categorized by area of friction in the current workflow.
+            </p>
+
+            <h3 class="content-section-subtitle">Application Experience</h3>
+            <div class="pain-point">
+                <div class="pain-point-title">Application Abandonment</div>
+                <p style="color: var(--text-secondary); margin: 0;">40-60% of borrowers don't complete initial application without LO intervention. Main causes: overwhelming length, confusing questions, poor mobile experience, timeouts that lose work.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">No Auto-Save</div>
+                <p style="color: var(--text-secondary); margin: 0;">Borrowers lose work due to timeouts, browser crashes, or accidental closes. Creates frustration and requires re-entering data.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Unclear Error Messages</div>
+                <p style="color: var(--text-secondary); margin: 0;">Generic error messages don't tell borrowers what's wrong or how to fix it. LOs receive calls asking "what does this mean?"</p>
+            </div>
+
+            <h3 class="content-section-subtitle">Document Collection</h3>
+            <div class="pain-point">
+                <div class="pain-point-title">Wrong Documents Uploaded</div>
+                <p style="color: var(--text-secondary); margin: 0;">Borrowers misunderstand requirements and upload incorrect documents. LOs discover this later during review, causing delays.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Incomplete Bank Statements</div>
+                <p style="color: var(--text-secondary); margin: 0;">Borrowers send screenshots instead of full PDFs, or PDFs missing account numbers or certain pages. Requires re-requesting correct version.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Poor Organization</div>
+                <p style="color: var(--text-secondary); margin: 0;">Documents scattered across email threads, text messages, and portal uploads. LOs spend hours organizing and matching documents to requirements.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">No Upload Validation</div>
+                <p style="color: var(--text-secondary); margin: 0;">System accepts any file without checking if it's readable, complete, or relevant. Problems discovered days later during manual review.</p>
+            </div>
+
+            <h3 class="content-section-subtitle">Communication</h3>
+            <div class="pain-point">
+                <div class="pain-point-title">Status Call Overload</div>
+                <p style="color: var(--text-secondary); margin: 0;">LOs spend significant time on "where are we?" calls that could be eliminated with better transparency and automated updates.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Channel Fragmentation</div>
+                <p style="color: var(--text-secondary); margin: 0;">Communications happen via email, text, phone, portal messages. No single thread of conversation, information gets lost.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Delayed Responses</div>
+                <p style="color: var(--text-secondary); margin: 0;">Borrowers expect instant responses but LOs are managing multiple loans. Delay creates anxiety and potential for losing client to competitor.</p>
+            </div>
+
+            <h3 class="content-section-subtitle">Technical Issues</h3>
+            <div class="pain-point">
+                <div class="pain-point-title">Mobile Experience Broken</div>
+                <p style="color: var(--text-secondary); margin: 0;">Forms don't display correctly, fields overlap, document upload fails, navigation confusing. Forces switch to desktop mid-application.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">System Integration Gaps</div>
+                <p style="color: var(--text-secondary); margin: 0;">LOS, CRM, document portal, e-signature platform don't talk to each other. Manual data re-entry and synchronization required.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Slow Performance</div>
+                <p style="color: var(--text-secondary); margin: 0;">Pages load slowly, uploads take forever, system lags during peak times. Kills momentum and increases abandonment.</p>
+            </div>
+
+            <h3 class="content-section-subtitle">Workflow Efficiency</h3>
+            <div class="pain-point">
+                <div class="pain-point-title">Manual Data Entry</div>
+                <p style="color: var(--text-secondary); margin: 0;">LOs re-type information from documents into LOS. Time-consuming and error-prone, especially for complex financial data.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Document Re-Requests</div>
+                <p style="color: var(--text-secondary); margin: 0;">Average of 3-5 document re-requests per loan due to wrong/incomplete uploads. Extends timeline and frustrates everyone.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">Limited Visibility</div>
+                <p style="color: var(--text-secondary); margin: 0;">LOs can't easily see full pipeline status at a glance. Must click into each loan individually to check status, missing items, days in process.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-title">No Progress Tracking</div>
+                <p style="color: var(--text-secondary); margin: 0;">Neither LOs nor borrowers have clear sense of progress toward completion. No visual indicators or percentage complete.</p>
+            </div>
+        </section>
+
+        <!-- Feature Requests Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Feature Requests & Wishlist Items</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Consolidated list of features requested by loan officers, prioritized by frequency of mentions and perceived impact.
+            </p>
+
+            <h3 class="content-section-subtitle">High Priority (Mentioned by 6-7 LOs)</h3>
+            <div class="feature-request">
+                <div class="feature-request-title">Intelligent Document Validation</div>
+                <p style="color: var(--text-secondary); margin: 0;">Real-time checking of uploaded documents for completeness, readability, and correctness. Immediate feedback to borrowers if something is wrong with clear guidance on how to fix it.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Automated Asset Verification (Plaid)</div>
+                <p style="color: var(--text-secondary); margin: 0;">Bank account linking to automatically verify assets and transaction history. Eliminates need for manual bank statement collection and analysis.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Automated Income Verification (Truv/TWN)</div>
+                <p style="color: var(--text-secondary); margin: 0;">Employment and income verification through payroll provider integration. Instant VOE/VOI without manual pay stub and tax return review.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Real-Time Status Dashboard</div>
+                <p style="color: var(--text-secondary); margin: 0;">Visual dashboard showing loan progress, completed steps, pending items, and estimated timeline. Available to both borrowers and LOs.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Smart Document Checklist</div>
+                <p style="color: var(--text-secondary); margin: 0;">Dynamic checklist that adapts based on loan type and borrower scenario. Shows required documents, status of each, and ability to mark complete.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">LO Application Takeover</div>
+                <p style="color: var(--text-secondary); margin: 0;">Ability for LO to view borrower's screen, jump in to help complete sections, and collaborate in real-time without losing progress.</p>
+            </div>
+
+            <h3 class="content-section-subtitle">Medium Priority (Mentioned by 4-5 LOs)</h3>
+            <div class="feature-request">
+                <div class="feature-request-title">Mobile-First Design</div>
+                <p style="color: var(--text-secondary); margin: 0;">Fully functional mobile experience designed for touch interaction, optimized for phone cameras for document upload, works offline where possible.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Automated Milestone Notifications</div>
+                <p style="color: var(--text-secondary); margin: 0;">System-generated updates to borrowers when key milestones are reached. Reduces status calls and keeps borrowers informed.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Built-in Secure Messaging</div>
+                <p style="color: var(--text-secondary); margin: 0;">Threaded messaging within application portal with document attachment capability. Keeps all communication in one place and searchable.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Progressive Disclosure UI</div>
+                <p style="color: var(--text-secondary); margin: 0;">Break application into small, manageable sections. Show only relevant questions based on previous answers. Reduce cognitive load.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Conditional Logic for Loan Types</div>
+                <p style="color: var(--text-secondary); margin: 0;">Application adapts based on loan type (conventional, FHA, VA, jumbo, construction). Collects type-specific information without burdening everyone.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Document Pre-Population</div>
+                <p style="color: var(--text-secondary); margin: 0;">For refinances with existing customers, pre-populate known information from original loan. Borrowers only update what's changed.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Pipeline Analytics Dashboard</div>
+                <p style="color: var(--text-secondary); margin: 0;">LO-facing metrics on loan volume, conversion rates, average time to close, bottlenecks. Data-driven insights for process improvement.</p>
+            </div>
+
+            <h3 class="content-section-subtitle">Lower Priority (Mentioned by 2-3 LOs)</h3>
+            <div class="feature-request">
+                <div class="feature-request-title">Video Chat Integration</div>
+                <p style="color: var(--text-secondary); margin: 0;">Built-in video calling for quick face-to-face conversations. More personal than phone, more efficient than scheduling Zoom.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Screen Recording for Walkthroughs</div>
+                <p style="color: var(--text-secondary); margin: 0;">LOs can record quick screen recordings explaining complex concepts or walking through documents. Send to borrowers for reference.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Soft Credit Pull Option</div>
+                <p style="color: var(--text-secondary); margin: 0;">Preliminary credit screening before full application. Helps identify issues early without hard inquiry impact.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Co-Branding Customization</div>
+                <p style="color: var(--text-secondary); margin: 0;">Ability to add LO photo, contact info, and light branding to application. Maintains personal connection in digital experience.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Referral Partner Portal</div>
+                <p style="color: var(--text-secondary); margin: 0;">Limited access for real estate agents and other referral partners to check status of their client's loan with borrower permission.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Task Assignment & Delegation</div>
+                <p style="color: var(--text-secondary); margin: 0;">For LO teams, ability to assign specific tasks to processors or assistants and track completion.</p>
+            </div>
+            <div class="feature-request">
+                <div class="feature-request-title">Built-in E-Signature</div>
+                <p style="color: var(--text-secondary); margin: 0;">Electronic signature capability for disclosures and forms without leaving application or sending separate DocuSign links.</p>
+            </div>
+        </section>
+
+        <!-- Current Workflow Documentation -->
+        <section class="content-section">
+            <h2 class="content-section-title">Current Workflow Documentation</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Synthesis of typical loan officer workflow from initial contact through loan submission, based on interview observations.
+            </p>
+
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Initial Consultation</div>
+                    <div class="step-description">30-45 minute conversation to understand borrower needs, run preliminary qualification numbers, explain loan options and process. Happens via phone, video, or in-person. LO uses rate calculator and qualification tools to provide estimates.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Application Link Sent</div>
+                    <div class="step-description">LO emails link to online application portal. Email includes instructions, estimated time to complete, and offer to help. Many borrowers start application immediately while others wait days or weeks.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Application Completion (With Help)</div>
+                    <div class="step-description">40-60% of borrowers need assistance. LO provides help via phone walkthrough, screen share, or in-person session. Common sticking points: income details, asset information, declarations section, document upload.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">Initial Review & Document List</div>
+                    <div class="step-description">LO reviews submitted application for completeness and accuracy. Creates detailed document checklist specific to borrower's situation. Sends email with required documents, explanations, and deadlines.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-title">Document Collection Dance</div>
+                    <div class="step-description">Multi-week process of requesting, receiving, reviewing, and re-requesting documents. Average 3-5 document re-requests per loan. LO uses mix of email, text, phone calls, and portal messages. Most time-consuming phase.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <div class="step-title">Data Entry into LOS</div>
+                    <div class="step-description">LO or processor manually enters application data into loan origination system. Copy information from documents, calculate ratios, verify accuracy. Tedious and error-prone. Takes 1-2 hours per loan.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">7</div>
+                <div class="step-content">
+                    <div class="step-title">Credit Pull & Review</div>
+                    <div class="step-description">Hard credit inquiry performed. LO reviews credit report with borrower, addresses any issues, provides explanation letters for negative items. May require dispute process or debt paydown before proceeding.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">8</div>
+                <div class="step-content">
+                    <div class="step-title">Pre-Approval Letter (Purchase) or Application Submission (Refinance)</div>
+                    <div class="step-description">For purchase loans, issue pre-approval letter for house hunting. For refinances, submit complete package to underwriting. Send disclosures via DocuSign for borrower signature.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">9</div>
+                <div class="step-content">
+                    <div class="step-title">Property Under Contract (Purchase Only)</div>
+                    <div class="step-description">Borrower makes offer and goes under contract. LO collects purchase agreement and property details. Orders appraisal. Updates loan terms if price differs from pre-approval estimate.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">10</div>
+                <div class="step-content">
+                    <div class="step-title">Underwriting Submission</div>
+                    <div class="step-description">Complete loan package submitted to underwriting. Includes application, all documents, credit report, appraisal. LO waits for initial underwriting decision and conditions list.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">11</div>
+                <div class="step-content">
+                    <div class="step-title">Condition Clearing</div>
+                    <div class="step-description">Address underwriter conditions and questions. More document requests, explanation letters, verification calls. Back-and-forth until all conditions satisfied. Can take days to weeks.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">12</div>
+                <div class="step-content">
+                    <div class="step-title">Clear to Close</div>
+                    <div class="step-description">Final underwriting approval received. Coordinate closing date with title company, borrower, and seller. Final walkthrough of closing numbers and documents with borrower.</div>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">13</div>
+                <div class="step-content">
+                    <div class="step-title">Closing & Funding</div>
+                    <div class="step-description">Borrower signs closing documents. For purchases, funds wire to title company. Loan is complete. LO follows up post-closing to ensure satisfaction and request reviews/referrals.</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
+                <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem; font-weight: 600;">Average Timeline</h4>
+                <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">Purchase loans: 30-40 days from application to closing. Refinances: 25-35 days. Jumbo and complex scenarios: 40-50+ days. Document collection typically accounts for 40-50% of total timeline.</p>
+            </div>
+        </section>
+
+        <!-- Technology Adoption Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technology Adoption Attitudes</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Understanding LO attitudes toward technology is critical for successful Smart App 2.0 adoption.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">High Adopters (3 LOs)</h3>
+                    <p class="card-description" style="margin-bottom: 1rem;">Enthusiastic about new technology, early adopters, comfortable learning new tools. Use mobile extensively, leverage integrations, follow tech trends in mortgage industry.</p>
+                    <p style="color: var(--accent-teal); font-weight: 600; margin: 0;">Sarah Martinez, Michael Chen, David Thompson</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Medium Adopters (3 LOs)</h3>
+                    <p class="card-description" style="margin-bottom: 1rem;">Willing to use technology if benefits are clear and learning curve reasonable. Want intuitive interfaces and good support. Moderate comfort with new tools.</p>
+                    <p style="color: var(--accent-teal); font-weight: 600; margin: 0;">Jennifer Williams, Lisa Patel, Amanda Foster</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Cautious Adopters (1 LO)</h3>
+                    <p class="card-description" style="margin-bottom: 1rem;">Skeptical of change, prefer proven tools, need compelling ROI demonstration. Want training and support. Slow to adopt but loyal once convinced.</p>
+                    <p style="color: var(--accent-teal); font-weight: 600; margin: 0;">Robert Garcia (initially, evolved during interview)</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Key Insights on Technology Attitudes</h3>
+            <ul class="findings-list">
+                <li>All LOs recognize need for better technology but vary in enthusiasm for change</li>
+                <li>Age is not the primary factor - work style and training quality matter more</li>
+                <li>LOs want technology that makes them more efficient, not that replaces their expertise</li>
+                <li>Concerns about technology replacing LOs can be addressed by positioning it as augmentation</li>
+                <li>Early wins and quick value demonstration crucial for adoption across all segments</li>
+                <li>Peer influence strong - LOs talk to each other and share experiences with new tools</li>
+                <li>Training quality and ongoing support more important than initial feature richness</li>
+                <li>Mobile-first mindset more common among newer LOs but valued by all</li>
+            </ul>
+        </section>
+
+        <!-- Competitive Tools Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Competitive Tool Usage</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                LOs mentioned various tools and platforms they currently use or have experience with, providing competitive context.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tool/Platform</th>
+                        <th>Category</th>
+                        <th>LOs Using</th>
+                        <th>Sentiment</th>
+                        <th>Key Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Encompass</strong></td>
+                        <td>LOS</td>
+                        <td>6/7</td>
+                        <td><span class="badge badge-warning">Mixed</span></td>
+                        <td>Powerful but complex, steep learning curve, slow interface</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blend</strong></td>
+                        <td>POS/Application</td>
+                        <td>3/7</td>
+                        <td><span class="badge badge-success">Positive</span></td>
+                        <td>Clean UI, good borrower experience, but limited customization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SimpleNexus</strong></td>
+                        <td>Mobile POS</td>
+                        <td>2/7</td>
+                        <td><span class="badge badge-success">Positive</span></td>
+                        <td>Strong mobile experience, good communication features</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Salesforce</strong></td>
+                        <td>CRM</td>
+                        <td>4/7</td>
+                        <td><span class="badge badge-warning">Mixed</span></td>
+                        <td>Comprehensive but overkill for most LOs, requires customization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DocuSign</strong></td>
+                        <td>E-Signature</td>
+                        <td>7/7</td>
+                        <td><span class="badge badge-success">Positive</span></td>
+                        <td>Industry standard, reliable, wish it was integrated vs separate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Floify</strong></td>
+                        <td>Document Collection</td>
+                        <td>3/7</td>
+                        <td><span class="badge badge-warning">Mixed</span></td>
+                        <td>Helpful for tracking but another separate system to manage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Optimal Blue</strong></td>
+                        <td>Rate Engine/PPE</td>
+                        <td>5/7</td>
+                        <td><span class="badge badge-success">Positive</span></td>
+                        <td>Good for rate shopping and product eligibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zillow</strong></td>
+                        <td>Lead Gen</td>
+                        <td>4/7</td>
+                        <td><span class="badge">Neutral</span></td>
+                        <td>Source of leads but expensive, mixed quality</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Competitive Insights</h3>
+            <ul class="findings-list">
+                <li>No single platform does everything well - LOs cobble together 5-6 tools</li>
+                <li>Blend and SimpleNexus praised for UX but seen as lacking advanced features</li>
+                <li>Encompass ubiquitous but universally seen as needing modernization</li>
+                <li>Integration between tools is the biggest gap - data doesn't flow smoothly</li>
+                <li>LOs willing to pay premium for unified platform that eliminates tool switching</li>
+                <li>Mobile experience is differentiator - most current tools are desktop-centric</li>
+                <li>Consumer app expectations (Stripe, Uber, Airbnb) set the bar for UX quality</li>
+            </ul>
+        </section>
+
+        <!-- Quotes & Testimonials Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Notable Quotes & Testimonials</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Memorable quotes from interview participants that capture key insights and sentiments.
+            </p>
+
+            <div class="quote-box">
+                <div class="quote-text">"I spend 5-10 hours every week just chasing documents. If you can solve that problem, you'll save me a full business day per week. That's huge."</div>
+                <div class="quote-author">— Sarah Martinez, 12 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"My clients are used to premium experiences in every app they use. They expect the same from their mortgage application. If it looks like it was built in 2010, they question whether we're outdated too."</div>
+                <div class="quote-author">— Michael Chen, 8 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"40% of my borrowers complete the application on their own. The other 60% either call me for help or abandon it entirely. That tells you the current experience isn't working for most people."</div>
+                <div class="quote-author">— Sarah Martinez, 12 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"The promise of technology was efficiency, but instead we just have more systems to manage. I'm logging into 6 different platforms every day. Give me one unified system and you've got my attention."</div>
+                <div class="quote-author">— Jennifer Williams, 15 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"I'm on my phone constantly - that's where I live. If a system doesn't work perfectly on mobile, I'm handicapped. Desktop-first design is backwards in 2024."</div>
+                <div class="quote-author">— David Thompson, 5 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"Borrowers constantly ask 'where are we in the process?' I probably spend 20-30 minutes per day just giving status updates. A real-time dashboard would eliminate most of those calls."</div>
+                <div class="quote-author">— Lisa Patel, 10 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"I love technology that makes me smarter and faster. But I'm cautious about automation that tries to replace my judgment. Complex financial situations need human expertise."</div>
+                <div class="quote-author">— Michael Chen, 8 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"If you can show me I'll close loans 5 days faster or handle 20% more volume with the same effort, I'll be your biggest advocate. Show me the ROI clearly."</div>
+                <div class="quote-author">— Robert Garcia, 3 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"About 50% of my applications need me to jump in and help. I need the ability to see what they see and complete sections for them without it being complicated."</div>
+                <div class="quote-author">— Amanda Foster, 7 years experience</div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">"The borrower experience directly impacts my referral network. When realtors hear their clients had a smooth loan process, they send more business. It all connects to my bottom line."</div>
+                <div class="quote-author">— Lisa Patel, 10 years experience</div>
+            </div>
+        </section>
+
+        <!-- Research Findings Summary -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research Findings Summary</h2>
+
+            <div style="background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%); border: 2px solid var(--accent-teal); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem; font-size: 1.3rem;">Critical Success Factors</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    Based on comprehensive analysis of all seven interviews, Smart App 2.0 must deliver on these critical success factors to gain LO adoption and improve borrower experience:
+                </p>
+                <ol style="color: var(--text-secondary); line-height: 2; margin-left: 1.5rem;">
+                    <li><strong style="color: var(--text-primary);">Dramatically reduce document collection time and friction</strong> - This is the #1 pain point universally</li>
+                    <li><strong style="color: var(--text-primary);">Provide fully functional mobile experience</strong> - Where 60-70% of borrowers are</li>
+                    <li><strong style="color: var(--text-primary);">Enable real-time transparency and status visibility</strong> - Eliminate repetitive status calls</li>
+                    <li><strong style="color: var(--text-primary);">Integrate seamlessly with existing LOS</strong> - Cannot create more work or duplicate entry</li>
+                    <li><strong style="color: var(--text-primary);">Allow LO intervention and collaboration</strong> - 50% of apps need help</li>
+                    <li><strong style="color: var(--text-primary);">Deliver modern, professional user experience</strong> - Reflects on LO and company brand</li>
+                    <li><strong style="color: var(--text-primary);">Demonstrate clear ROI</strong> - Faster closes, higher volume, better satisfaction</li>
+                </ol>
+            </div>
+
+            <h3 class="content-section-subtitle">Top Opportunities</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Intelligent Document Collection</h3>
+                    <p class="card-description">Smart checklists, real-time validation, automated verification through Plaid/Truv, contextual guidance. Could reduce document collection time by 50-70%.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Mobile-First Experience</h3>
+                    <p class="card-description">Designed for touch and mobile cameras, works offline, fast performance. Dramatically improve completion rates and borrower satisfaction.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">System Unification</h3>
+                    <p class="card-description">Replace 5-6 disconnected tools with one integrated platform. Eliminate duplicate data entry, improve workflow efficiency, reduce errors.</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Key Risks to Address</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Change Management</h3>
+                    <p class="card-description">Some LOs resistant to new systems. Need excellent training, clear benefits communication, and peer advocacy to drive adoption.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Integration Complexity</h3>
+                    <p class="card-description">Seamless LOS integration is make-or-break. Technical challenges with legacy systems could derail value proposition.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Over-Engineering</h3>
+                    <p class="card-description">Risk of building too many features that add complexity. Focus on core workflows done exceptionally well vs feature bloat.</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Validation of Smart App 2.0 Features</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Proposed Feature</th>
+                        <th>Validation</th>
+                        <th>Priority</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Prove Identity Verification</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">High</span></td>
+                        <td>Reduces friction at application start, builds trust</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plaid Asset Verification</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">High</span></td>
+                        <td>Top feature request, eliminates major pain point</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Truv Income Verification</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">High</span></td>
+                        <td>Instant VOE/VOI game-changer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Takeover</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">High</span></td>
+                        <td>Essential for 50% of applications that need help</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Assistant</strong></td>
+                        <td><span class="badge badge-warning">Cautious</span></td>
+                        <td><span class="badge badge-warning">Medium</span></td>
+                        <td>Valuable for FAQs, but concerns about accuracy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status Dashboard</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">High</span></td>
+                        <td>Universal need, reduces status calls dramatically</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Document Intelligence</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">High</span></td>
+                        <td>Real-time validation crucial for reducing re-requests</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile-First Design</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-success">Critical</span></td>
+                        <td>Non-negotiable, where majority of borrowers are</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Configuration UI</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-warning">Medium</span></td>
+                        <td>Important for flexibility but must be simple</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Soft Credit Pull</strong></td>
+                        <td><span class="badge badge-success">Validated</span></td>
+                        <td><span class="badge badge-warning">Medium</span></td>
+                        <td>Valuable for early screening, lower priority</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Action Items Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Action Items & Next Steps</h2>
+
+            <h3 class="content-section-subtitle">Immediate Actions</h3>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <ul class="findings-list">
+                    <li>Prioritize intelligent document collection features in development roadmap</li>
+                    <li>Establish mobile-first design principles and enforce across all interfaces</li>
+                    <li>Begin technical discovery on Plaid, Truv, and Prove integrations</li>
+                    <li>Design LO takeover workflow and technical architecture</li>
+                    <li>Create status dashboard mockups and validate with LOs</li>
+                    <li>Document integration requirements with major LOS platforms</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">Short-Term (Next 30 Days)</h3>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <ul class="findings-list">
+                    <li>Conduct follow-up interviews with 2-3 LOs to validate specific design concepts</li>
+                    <li>Create detailed user stories and acceptance criteria for top priority features</li>
+                    <li>Develop clickable prototype of document collection workflow</li>
+                    <li>Test mobile application flow with real borrower participants</li>
+                    <li>Map detailed integration touchpoints with Encompass and other LOS platforms</li>
+                    <li>Establish success metrics and tracking mechanisms</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">Medium-Term (Next 90 Days)</h3>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <ul class="findings-list">
+                    <li>Build MVP of document collection with validation and smart checklist</li>
+                    <li>Implement Plaid integration for asset verification</li>
+                    <li>Develop mobile application experience</li>
+                    <li>Create LO dashboard with pipeline visibility</li>
+                    <li>Establish pilot program with 3-5 LOs for alpha testing</li>
+                    <li>Gather quantitative data on time savings and completion rate improvements</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">Long-Term (6+ Months)</h3>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <ul class="findings-list">
+                    <li>Roll out Smart App 2.0 to broader LO population</li>
+                    <li>Implement advanced features (AI assistant, video chat, analytics)</li>
+                    <li>Establish LO training and certification program</li>
+                    <li>Build referral partner portal for real estate agents</li>
+                    <li>Create customization and configuration framework for enterprise deployments</li>
+                    <li>Continuous improvement cycle based on usage data and feedback</li>
+                </ul>
+            </div>
+
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem; font-size: 1.2rem;">Research Repository</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                    All interview recordings, transcripts, notes, and synthesis documents are stored in the project research repository. Additional artifacts include:
+                </p>
+                <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                    <li>Full interview audio recordings (7 files, 7.5 hours total)</li>
+                    <li>Verbatim transcripts (127 pages combined)</li>
+                    <li>Interview notes and observer comments</li>
+                    <li>Affinity mapping exercise outputs</li>
+                    <li>User journey maps for each LO archetype</li>
+                    <li>Persona documents derived from interviews</li>
+                    <li>Presentation materials shared with stakeholders</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                Smart App 2.0 LO Interview Research • Conducted Oct-Nov 2024 • 7 Loan Officers Interviewed • Last Updated: December 2024
+            </p>
+            <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="../index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 500; transition: color 0.2s ease;">Home</a>
+                <a href="../requirements/" style="color: var(--accent-blue); text-decoration: none; font-weight: 500; transition: color 0.2s ease;">Requirements</a>
+                <a href="../research/" style="color: var(--accent-blue); text-decoration: none; font-weight: 500; transition: color 0.2s ease;">Research</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

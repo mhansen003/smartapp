@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stakeholder Interview Sessions - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .quote-block {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-teal);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-attribution {
+            font-size: 0.9rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .qa-section {
+            margin: 2rem 0;
+        }
+
+        .question {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .answer {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            padding-left: 1.5rem;
+        }
+
+        .stakeholder-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stakeholder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .stakeholder-info h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stakeholder-role {
+            color: var(--accent-teal);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .session-details {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .session-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .priority-critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .priority-high {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .priority-medium {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .priority-low {
+            background: rgba(100, 116, 139, 0.2);
+            color: var(--text-secondary);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .theme-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .theme-card h4 {
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .theme-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .theme-card li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .theme-card li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .conflict-item {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid var(--accent-red);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+
+        .conflict-title {
+            color: var(--accent-red);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .conflict-stakeholders {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .conflict-resolution {
+            color: var(--accent-green);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .action-items-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .action-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .action-owner {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .methodology-step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .methodology-step h4 {
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .methodology-step p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 35px;
+            bottom: -15px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-marker {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .timeline-date {
+            color: var(--accent-teal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link active">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../research/" class="breadcrumb-link">Research</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Stakeholder Interview Sessions</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Research Documentation</div>
+                <h1 class="page-title">Stakeholder Interview Sessions</h1>
+                <p class="page-description">Comprehensive documentation of stakeholder research sessions including executive leadership, product owners, compliance officers, and technical teams. Capturing strategic priorities, constraints, success criteria, and cross-functional collaboration requirements.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">👥</span>
+                        <span>13 Stakeholders</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📅</span>
+                        <span>15 Interview Sessions</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⏱️</span>
+                        <span>23.5 Total Hours</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📊</span>
+                        <span>Oct-Dec 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../research/" class="back-button">← Back to Research</a>
+
+        <!-- Research Methodology Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research Methodology</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Our stakeholder research followed a structured approach to capture business priorities, technical constraints,
+                compliance requirements, and user needs across the organization. We conducted semi-structured interviews with
+                key stakeholders from executive leadership, product management, engineering, compliance, operations, and
+                business development teams.
+            </p>
+
+            <div class="methodology-step">
+                <h4>Phase 1: Stakeholder Identification & Prioritization</h4>
+                <p>We mapped the organizational structure and identified key decision-makers, subject matter experts, and
+                individuals who would be most impacted by Smart App 2.0. Stakeholders were categorized by influence level
+                and domain expertise to ensure comprehensive coverage of all project dimensions.</p>
+            </div>
+
+            <div class="methodology-step">
+                <h4>Phase 2: Interview Protocol Development</h4>
+                <p>Developed customized interview guides for each stakeholder type, including questions about strategic goals,
+                pain points with current systems, success metrics, budget constraints, regulatory concerns, technical
+                infrastructure, and integration requirements. Questions were tailored based on each stakeholder's role and
+                area of responsibility.</p>
+            </div>
+
+            <div class="methodology-step">
+                <h4>Phase 3: Conducted Semi-Structured Interviews</h4>
+                <p>Sessions ranged from 60-120 minutes and were recorded with permission. We used a conversational approach
+                to uncover both explicit requirements and implicit needs. Follow-up questions probed for specific examples,
+                success criteria, and potential obstacles.</p>
+            </div>
+
+            <div class="methodology-step">
+                <h4>Phase 4: Synthesis & Theme Identification</h4>
+                <p>Transcripts were analyzed to identify common themes, conflicting priorities, gaps in understanding, and
+                areas requiring additional clarification. Key insights were documented with supporting quotes and categorized
+                by domain (technical, business, compliance, UX, etc.).</p>
+            </div>
+
+            <div class="methodology-step">
+                <h4>Phase 5: Validation & Feedback Loop</h4>
+                <p>Preliminary findings were shared with stakeholders for validation and refinement. This iterative process
+                ensured accuracy and helped surface additional insights that emerged through reflection and discussion.</p>
+            </div>
+        </section>
+
+        <!-- Stakeholder Profiles Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Stakeholder Profiles Overview</h2>
+
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Department</th>
+                            <th>Interview Date</th>
+                            <th>Duration</th>
+                            <th>Focus Areas</th>
+                            <th>Priority Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Paul Martinez</strong></td>
+                            <td>Chief Product Officer</td>
+                            <td>Product & Strategy</td>
+                            <td>Oct 15, 2024</td>
+                            <td>120 min</td>
+                            <td>Strategic Vision, ROI, Market Position</td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yaz Chen</strong></td>
+                            <td>VP of Engineering</td>
+                            <td>Technology</td>
+                            <td>Oct 18, 2024</td>
+                            <td>90 min</td>
+                            <td>Architecture, Scalability, Integration</td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kelli Thompson</strong></td>
+                            <td>Chief Compliance Officer</td>
+                            <td>Legal & Compliance</td>
+                            <td>Oct 22, 2024</td>
+                            <td>105 min</td>
+                            <td>Regulatory Requirements, Risk Management</td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marcus Johnson</strong></td>
+                            <td>Director of Operations</td>
+                            <td>Operations</td>
+                            <td>Oct 25, 2024</td>
+                            <td>75 min</td>
+                            <td>Process Efficiency, Training, Support</td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sarah Lin</strong></td>
+                            <td>Product Manager - Digital Experience</td>
+                            <td>Product</td>
+                            <td>Oct 29, 2024</td>
+                            <td>90 min</td>
+                            <td>User Experience, Feature Prioritization</td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>David Reynolds</strong></td>
+                            <td>Lead Solutions Architect</td>
+                            <td>Technology</td>
+                            <td>Nov 1, 2024</td>
+                            <td>120 min</td>
+                            <td>System Architecture, API Design, Security</td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jennifer Wallace</strong></td>
+                            <td>VP of Business Development</td>
+                            <td>Sales & BD</td>
+                            <td>Nov 5, 2024</td>
+                            <td>60 min</td>
+                            <td>Partner Integration, White-label Options</td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Robert Kim</strong></td>
+                            <td>Senior Data Analyst</td>
+                            <td>Analytics</td>
+                            <td>Nov 8, 2024</td>
+                            <td>75 min</td>
+                            <td>Data Collection, Analytics, Reporting</td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Amanda Foster</strong></td>
+                            <td>UX Research Lead</td>
+                            <td>Design</td>
+                            <td>Nov 12, 2024</td>
+                            <td>90 min</td>
+                            <td>User Research, Accessibility, Usability</td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Michael Chen</strong></td>
+                            <td>Director of IT Security</td>
+                            <td>IT Security</td>
+                            <td>Nov 15, 2024</td>
+                            <td>105 min</td>
+                            <td>Data Security, Compliance, Threat Prevention</td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lisa Patel</strong></td>
+                            <td>Training & Enablement Manager</td>
+                            <td>Operations</td>
+                            <td>Nov 19, 2024</td>
+                            <td>60 min</td>
+                            <td>LO Training, Documentation, Change Mgmt</td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tom Bradley</strong></td>
+                            <td>Integration Architect</td>
+                            <td>Technology</td>
+                            <td>Nov 22, 2024</td>
+                            <td>90 min</td>
+                            <td>LOS Integration, Third-party APIs</td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Elena Rodriguez</strong></td>
+                            <td>Chief Financial Officer</td>
+                            <td>Finance</td>
+                            <td>Dec 3, 2024</td>
+                            <td>75 min</td>
+                            <td>Budget, ROI Projections, Cost Management</td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Individual Stakeholder Sessions -->
+        <section class="content-section">
+            <h2 class="content-section-title">Detailed Interview Sessions</h2>
+
+            <!-- Paul Martinez - CPO -->
+            <div class="stakeholder-card">
+                <div class="stakeholder-header">
+                    <div class="stakeholder-info">
+                        <h3>Paul Martinez</h3>
+                        <div class="stakeholder-role">Chief Product Officer</div>
+                    </div>
+                    <div class="session-details">
+                        <div class="session-detail">
+                            <span>📅</span>
+                            <span>Oct 15, 2024</span>
+                        </div>
+                        <div class="session-detail">
+                            <span>⏱️</span>
+                            <span>120 minutes</span>
+                        </div>
+                        <div class="session-detail">
+                            <span class="priority-badge priority-critical">Critical</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Strategic Vision & Business Goals</h3>
+
+                <div class="quote-block">
+                    <p class="quote-text">"We're not just building a digital mortgage app—we're reimagining the entire borrower experience. The current market has low completion rates, around 40-50%, which means half of borrowers who start an application never finish. That's a massive opportunity loss. Smart App 2.0 needs to be so intuitive, so helpful, that borrowers want to complete it."</p>
+                    <div class="quote-attribution">— Paul Martinez, Chief Product Officer</div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What are the top 3 business objectives for Smart App 2.0?</div>
+                    <div class="answer">
+                        <strong>1. Increase application completion rate from 45% to 75%+ within first year</strong><br>
+                        This is our north star metric. We need to reduce friction, provide real-time assistance, and make the process feel more collaborative rather than a cold transaction.<br><br>
+
+                        <strong>2. Reduce time-to-submit from average 4-7 days to under 24 hours</strong><br>
+                        Borrowers hate the back-and-forth. They want speed and certainty. With Prove, Plaid, and TRUV integrations, we should be able to auto-populate 70-80% of required data instantly.<br><br>
+
+                        <strong>3. Differentiate in market with AI-powered assistance</strong><br>
+                        Our competitors are still using basic form flows. We have the opportunity to integrate Claude AI as an always-available assistant that can answer questions, guide borrowers, and even help LOs prioritize their pipeline. This could be a game-changer for conversion rates.
+                    </div>
+
+                    <div class="question">Q: What does success look like in 6 months? 12 months? 24 months?</div>
+                    <div class="answer">
+                        <strong>6 Months (MVP Launch):</strong><br>
+                        - Beta launch with 10-15 top-performing LOs<br>
+                        - 60%+ completion rate (20% improvement over current)<br>
+                        - Prove integration live and working smoothly<br>
+                        - Positive NPS score (50+) from both borrowers and LOs<br><br>
+
+                        <strong>12 Months (Full Production):</strong><br>
+                        - All LOs migrated to Smart App 2.0<br>
+                        - 75%+ completion rate<br>
+                        - Average time-to-submit under 36 hours<br>
+                        - Plaid and TRUV fully integrated<br>
+                        - AI Assistant answering 80%+ of borrower questions without human intervention<br>
+                        - 30% reduction in LO administrative time<br><br>
+
+                        <strong>24 Months (Market Leadership):</strong><br>
+                        - Industry-leading completion rates (80%+)<br>
+                        - White-label solution launched for partner lenders<br>
+                        - Predictive analytics helping LOs close more deals<br>
+                        - Mobile-first experience with 50%+ of applications started on mobile<br>
+                        - Recognition as innovation leader in mortgage tech
+                    </div>
+
+                    <div class="question">Q: What are your biggest concerns or potential roadblocks?</div>
+                    <div class="answer">
+                        Three main concerns keep me up at night:<br><br>
+
+                        <strong>1. Compliance complexity:</strong> Mortgage is one of the most regulated industries. Every feature we build has to go through compliance review. We need Kelli's team embedded from day one, not as a gatekeeper but as a partner in design.<br><br>
+
+                        <strong>2. LO adoption:</strong> Loan officers are creatures of habit. If Smart App 2.0 is perceived as "more work" or too different from what they know, they'll resist it. We need to make it so obviously better that they can't imagine going back.<br><br>
+
+                        <strong>3. Technical execution:</strong> We're integrating with multiple third-party services, our LOS, and building new features simultaneously. Scope creep is real. We need ruthless prioritization and a phased rollout plan.
+                    </div>
+
+                    <div class="question">Q: How do you envision the relationship between borrowers, LOs, and the system?</div>
+                    <div class="answer">
+                        I see it as a collaborative triangle. The borrower should feel empowered and informed, not confused and dependent. The LO should be elevated to a strategic advisor, not a data entry clerk. And the system should be an intelligent assistant to both, not a bureaucratic obstacle.<br><br>
+
+                        Concretely, this means:<br>
+                        - Borrowers can self-serve most of the application but have easy access to their LO when needed<br>
+                        - LOs can see exactly where each borrower is stuck and intervene proactively<br>
+                        - AI assistant handles routine questions 24/7, freeing up LOs for high-value conversations<br>
+                        - Real-time validation prevents errors rather than catching them at the end<br>
+                        - Transparent progress tracking so everyone knows what's needed and why
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Key Priorities</h3>
+                <div class="themes-grid">
+                    <div class="theme-card">
+                        <h4>Must-Have Features</h4>
+                        <ul>
+                            <li>Prove instant identity verification</li>
+                            <li>Auto-populate from Plaid & TRUV</li>
+                            <li>AI-powered borrower assistance</li>
+                            <li>LO dashboard with pipeline visibility</li>
+                            <li>Mobile-responsive design</li>
+                            <li>Real-time progress tracking</li>
+                        </ul>
+                    </div>
+                    <div class="theme-card">
+                        <h4>Success Metrics</h4>
+                        <ul>
+                            <li>Application completion rate 75%+</li>
+                            <li>Time to submit under 24 hours</li>
+                            <li>NPS score 50+ (borrowers & LOs)</li>
+                            <li>30% reduction in LO admin time</li>
+                            <li>Zero critical compliance violations</li>
+                        </ul>
+                    </div>
+                    <div class="theme-card">
+                        <h4>Risk Factors</h4>
+                        <ul>
+                            <li>LO resistance to change</li>
+                            <li>Compliance approval delays</li>
+                            <li>Third-party integration failures</li>
+                            <li>Scope creep and feature bloat</li>
+                            <li>Inadequate training resources</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yaz Chen - VP Engineering -->
+            <div class="stakeholder-card">
+                <div class="stakeholder-header">
+                    <div class="stakeholder-info">
+                        <h3>Yaz Chen</h3>
+                        <div class="stakeholder-role">VP of Engineering</div>
+                    </div>
+                    <div class="session-details">
+                        <div class="session-detail">
+                            <span>📅</span>
+                            <span>Oct 18, 2024</span>
+                        </div>
+                        <div class="session-detail">
+                            <span>⏱️</span>
+                            <span>90 minutes</span>
+                        </div>
+                        <div class="session-detail">
+                            <span class="priority-badge priority-critical">Critical</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Technical Architecture & Infrastructure</h3>
+
+                <div class="quote-block">
+                    <p class="quote-text">"The current system is a monolith that's been patched and extended for 8 years. Every change is risky because everything is interconnected. Smart App 2.0 gives us the opportunity to build a modern, microservices-based architecture that's actually maintainable and scalable. But we need to be smart about it—don't over-engineer, and don't try to solve every theoretical problem on day one."</p>
+                    <div class="quote-attribution">— Yaz Chen, VP of Engineering</div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What are the critical technical requirements for Smart App 2.0?</div>
+                    <div class="answer">
+                        <strong>1. API-First Architecture:</strong> Everything should be built as APIs from day one. This enables us to support multiple front-ends (web, mobile app later, LO portal, partner integrations) without duplicating business logic.<br><br>
+
+                        <strong>2. Scalability:</strong> We need to handle 10x our current volume without major rework. That means async processing for heavy operations, proper caching strategy, and cloud infrastructure that can scale horizontally.<br><br>
+
+                        <strong>3. Real-time Updates:</strong> When a borrower uploads a document or answers questions, the LO should see it immediately. WebSockets or Server-Sent Events for real-time sync across clients.<br><br>
+
+                        <strong>4. Data Security:</strong> PII encryption at rest and in transit. Role-based access control. Audit logging for all data access. SOC 2 compliance is non-negotiable.<br><br>
+
+                        <strong>5. Resilience:</strong> Third-party services will fail. Prove, Plaid, TRUV—they all have occasional outages. We need graceful degradation, retry logic, and fallback mechanisms so borrowers can still make progress even when an integration is down.
+                    </div>
+
+                    <div class="question">Q: What's your preferred tech stack and why?</div>
+                    <div class="answer">
+                        <strong>Backend:</strong> Node.js with TypeScript. Our team knows it well, it's great for I/O-heavy operations (which we have with all these API integrations), and the ecosystem is mature. Express or Fastify for the API layer.<br><br>
+
+                        <strong>Frontend:</strong> React with Next.js. Server-side rendering for better SEO and initial load performance. TypeScript for type safety. Tailwind CSS for consistent styling without bloat.<br><br>
+
+                        <strong>Database:</strong> PostgreSQL for transactional data. It's rock-solid, handles complex queries well, and has great JSON support for flexible schemas. Redis for caching and session management.<br><br>
+
+                        <strong>Infrastructure:</strong> AWS. We're already there, team has expertise, and services like Lambda, ECS, RDS, and S3 cover everything we need. Terraform for infrastructure as code.<br><br>
+
+                        <strong>Monitoring:</strong> DataDog for application performance monitoring, Sentry for error tracking, CloudWatch for infrastructure metrics.
+                    </div>
+
+                    <div class="question">Q: What are the integration challenges with existing systems?</div>
+                    <div class="answer">
+                        <strong>LOS Integration (Encompass):</strong> This is the biggest pain point. Encompass has an API but it's SOAP-based and not well documented. We'll need to build a robust abstraction layer. The data model is complex and we need to map Smart App data structures to Encompass fields carefully. Tom Bradley is our expert here—he's integrated with Encompass before and knows the gotchas.<br><br>
+
+                        <strong>Third-Party Services:</strong> Prove, Plaid, TRUV all have modern REST APIs which is good. But each has different error handling, rate limiting, and webhook patterns. We need a unified integration framework so we're not reinventing the wheel for each service.<br><br>
+
+                        <strong>Data Consistency:</strong> Borrowers might be in multiple systems at once during transition. We need a clear data synchronization strategy and source of truth for each data element. Can't have conflicting information between Smart App and LOS.<br><br>
+
+                        <strong>Authentication:</strong> Current system uses old session-based auth. We should move to JWT tokens for APIs, but need to integrate with existing SSO for LOs. Dual authentication during transition period.
+                    </div>
+
+                    <div class="question">Q: What's your biggest technical concern?</div>
+                    <div class="answer">
+                        Honestly? Over-engineering and gold-plating. I've seen too many projects fail because engineers wanted to build the "perfect" system. We need to ship an MVP that works, then iterate. Start with monolith-first approach (but well-structured), then extract microservices only when we have clear performance or team boundaries that require it.<br><br>
+
+                        Also concerned about technical debt from rushing. It's a balance—move fast but don't cut corners on security, data integrity, or code quality. We need automated tests from day one, not "we'll add them later."<br><br>
+
+                        And the elephant in the room: maintaining both old and new systems during transition. We'll need a gradual migration strategy, which means extra complexity and cost. Budget for that.
+                    </div>
+
+                    <div class="question">Q: What does the development timeline look like from your perspective?</div>
+                    <div class="answer">
+                        <strong>Months 1-2 (Foundation):</strong><br>
+                        - Architecture design and technical spec<br>
+                        - Set up dev/staging/prod environments<br>
+                        - Core API framework and authentication<br>
+                        - Database schema design<br>
+                        - CI/CD pipeline<br><br>
+
+                        <strong>Months 3-4 (Integrations & Core Features):</strong><br>
+                        - Prove integration<br>
+                        - Basic application flow (without all URLA fields)<br>
+                        - LO dashboard MVP<br>
+                        - Document upload functionality<br>
+                        - LOS data sync (initial version)<br><br>
+
+                        <strong>Months 5-6 (Polish & Beta):</strong><br>
+                        - Plaid and TRUV integrations<br>
+                        - AI assistant integration<br>
+                        - Complete URLA coverage<br>
+                        - Security audit and penetration testing<br>
+                        - Beta testing with selected LOs<br><br>
+
+                        <strong>Months 7-8 (Production Rollout):</strong><br>
+                        - Address beta feedback<br>
+                        - Performance optimization<br>
+                        - Training and documentation<br>
+                        - Gradual rollout to all LOs<br>
+                        - 24/7 monitoring and support
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Technical Priorities & Constraints</h3>
+                <div class="themes-grid">
+                    <div class="theme-card">
+                        <h4>Architecture Principles</h4>
+                        <ul>
+                            <li>API-first design</li>
+                            <li>Microservices where needed, not everywhere</li>
+                            <li>Horizontal scalability</li>
+                            <li>Real-time data synchronization</li>
+                            <li>Graceful degradation</li>
+                            <li>Infrastructure as code</li>
+                        </ul>
+                    </div>
+                    <div class="theme-card">
+                        <h4>Integration Requirements</h4>
+                        <ul>
+                            <li>Encompass LOS bidirectional sync</li>
+                            <li>Prove identity verification</li>
+                            <li>Plaid asset verification</li>
+                            <li>TRUV income/employment</li>
+                            <li>Credit bureau soft pull</li>
+                            <li>Document storage (S3/similar)</li>
+                        </ul>
+                    </div>
+                    <div class="theme-card">
+                        <h4>Non-Negotiables</h4>
+                        <ul>
+                            <li>SOC 2 compliance</li>
+                            <li>PII encryption at rest & transit</li>
+                            <li>Comprehensive audit logging</li>
+                            <li>99.5%+ uptime SLA</li>
+                            <li>Automated testing (80%+ coverage)</li>
+                            <li>Disaster recovery plan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelli Thompson - Chief Compliance Officer -->
+            <div class="stakeholder-card">
+                <div class="stakeholder-header">
+                    <div class="stakeholder-info">
+                        <h3>Kelli Thompson</h3>
+                        <div class="stakeholder-role">Chief Compliance Officer</div>
+                    </div>
+                    <div class="session-details">
+                        <div class="session-detail">
+                            <span>📅</span>
+                            <span>Oct 22, 2024</span>
+                        </div>
+                        <div class="session-detail">
+                            <span>⏱️</span>
+                            <span>105 minutes</span>
+                        </div>
+                        <div class="session-detail">
+                            <span class="priority-badge priority-critical">Critical</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Regulatory Requirements & Compliance Framework</h3>
+
+                <div class="quote-block">
+                    <p class="quote-text">"Innovation is great, but in mortgage, compliance isn't optional. Every disclosure, every data field, every communication with the borrower is governed by federal and state regulations. We can't launch Smart App 2.0 if it doesn't meet RESPA, TILA, ECOA, and fair lending requirements. The good news is that digital systems can actually improve compliance if designed correctly—better audit trails, consistent processes, fewer human errors."</p>
+                    <div class="quote-attribution">— Kelli Thompson, Chief Compliance Officer</div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What are the critical compliance requirements we must address?</div>
+                    <div class="answer">
+                        <strong>1. TILA-RESPA Integrated Disclosures (TRID):</strong><br>
+                        Loan Estimate must be provided within 3 business days of application. Application is defined as name, income, SSN, property address, estimate of property value, and loan amount. We need to capture these six pieces of information and trigger disclosure generation automatically. Timing is critical—any changes to key fields may require new disclosures with 3-day waiting periods.<br><br>
+
+                        <strong>2. Equal Credit Opportunity Act (ECOA):</strong><br>
+                        We cannot discriminate based on protected classes. This means careful review of any AI/ML features—if the AI is making recommendations or auto-filling data, we need to ensure it's not introducing bias. Also, GMI (Government Monitoring Information) collection is required and must follow specific formats and opt-out language.<br><br>
+
+                        <strong>3. Fair Lending & HMDA Reporting:</strong><br>
+                        Every application must be tracked for HMDA reporting requirements. We need to collect demographic data (race, ethnicity, sex) with proper disclosure language. Data must be reportable even for applications that don't proceed to closing.<br><br>
+
+                        <strong>4. Data Privacy & Security:</strong><br>
+                        GLBA (Gramm-Leach-Bliley Act) requires privacy notices and opt-out provisions. All PII must be protected. We're also subject to state privacy laws (CCPA in California, etc.). Right to deletion, right to access, consent management—all need to be built into the system.<br><br>
+
+                        <strong>5. E-Sign Compliance:</strong><br>
+                        Electronic signatures and consents require specific disclosures. Borrowers must affirmatively consent to electronic delivery. We need audit trails showing who signed what and when. Can't just assume they agree because they used the system.<br><br>
+
+                        <strong>6. State-Specific Requirements:</strong><br>
+                        Every state has additional rules. Some require specific disclosures, some have cooling-off periods, some restrict certain fees. System needs to be configurable by state.
+                    </div>
+
+                    <div class="question">Q: What approval process do we need for new features?</div>
+                    <div class="answer">
+                        Every user-facing feature needs compliance review before development starts, not after. Here's the process:<br><br>
+
+                        <strong>1. Requirements Review (Before Development):</strong><br>
+                        Product provides mockups/wireframes and user flows. Compliance reviews for regulatory requirements, required disclosures, consent language, and fair lending implications. We provide feedback within 5 business days.<br><br>
+
+                        <strong>2. UAT Review (Before Beta):</strong><br>
+                        We test the actual feature in staging environment. Verify disclosures are correct, timing is appropriate, data is captured correctly, audit trails are working. Sign-off required before beta testing.<br><br>
+
+                        <strong>3. Production Review (Before General Release):</strong><br>
+                        Final check after beta feedback is incorporated. Confirm no compliance-related changes were made without review. Final sign-off for production release.<br><br>
+
+                        <strong>Critical:** Any AI features get extra scrutiny. We need to understand the logic, ensure it's not discriminatory, and have clear override capabilities for edge cases.
+                    </div>
+
+                    <div class="question">Q: What are your concerns about third-party integrations like Prove, Plaid, and TRUV?</div>
+                    <div class="answer">
+                        Third-party vendors are our responsibility from a compliance perspective. If Prove makes a mistake in identity verification, we're liable. If Plaid exposes borrower data, we're accountable.<br><br>
+
+                        <strong>Due Diligence Requirements:</strong><br>
+                        - Full vendor risk assessment for each provider<br>
+                        - Review their security practices and certifications<br>
+                        - Ensure they're FCRA compliant (especially for credit-related data)<br>
+                        - Verify they have E&O insurance<br>
+                        - Contracts must include compliance provisions and SLAs<br><br>
+
+                        <strong>Ongoing Monitoring:</strong><br>
+                        - Quarterly review of vendor performance<br>
+                        - Track any incidents or data breaches<br>
+                        - Annual re-certification<br><br>
+
+                        <strong>Specific Concerns:</strong><br>
+                        - <strong>Prove:</strong> How do we verify the person on the phone is actually the applicant? What if someone's phone is stolen? Need fallback verification methods.<br>
+                        - <strong>Plaid:</strong> Borrower consents to Plaid accessing their bank accounts. We need explicit consent language and ability to revoke access. Also, what if Plaid data conflicts with what borrower tells us?<br>
+                        - <strong>TRUV:</strong> Employment and income data is sensitive. Need clear audit trail of what was retrieved and when. Borrowers should be able to review and correct if inaccurate.
+                    </div>
+
+                    <div class="question">Q: How do we handle the AI assistant from a compliance perspective?</div>
+                    <div class="answer">
+                        This is new territory for mortgage compliance, so we need to be extra careful.<br><br>
+
+                        <strong>Key Requirements:</strong><br>
+                        <strong>1. Disclosure:</strong> Borrowers must know they're interacting with AI, not a human. Clear labeling in the interface.<br><br>
+
+                        <strong>2. Accuracy:</strong> AI cannot provide inaccurate information about loan terms, rates, or requirements. Everything it says must be auditable and correct. If it makes a mistake, we're liable.<br><br>
+
+                        <strong>3. Fairness:</strong> AI must not treat protected classes differently. We'll need to monitor interactions for bias patterns. Regular audits of AI responses.<br><br>
+
+                        <strong>4. Human Oversight:</strong> There must always be a way for borrower to reach a human LO. AI is assistance, not replacement.<br><br>
+
+                        <strong>5. Data Usage:</strong> What the AI learns from borrower interactions is subject to privacy rules. Can't use one borrower's data to train responses for others without consent.<br><br>
+
+                        <strong>6. Audit Trail:</strong> Every AI interaction logged. If there's ever a complaint or lawsuit, we need to show exactly what the AI told the borrower.<br><br>
+
+                        My recommendation: Start conservative. Limit AI to factual Q&A and process guidance. No rate quotes, no loan recommendations, no qualification decisions. Expand scope gradually as we build confidence.
+                    </div>
+
+                    <div class="question">Q: What documentation and audit trails are required?</div>
+                    <div class="answer">
+                        Comprehensive audit logging is non-negotiable. We need to be able to reconstruct every step of every application for regulatory exams and potential litigation.<br><br>
+
+                        <strong>Must Log:</strong><br>
+                        - All data entered (what, when, by whom)<br>
+                        - All data changes (before/after values, timestamp, user)<br>
+                        - All documents uploaded/downloaded<br>
+                        - All communications (emails, SMS, AI chat logs)<br>
+                        - All third-party API calls and responses<br>
+                        - All disclosures delivered (what, when, method, receipt confirmation)<br>
+                        - All consents obtained (e-sign, privacy, credit pull, etc.)<br>
+                        - All access to borrower data (who, when, what they viewed)<br><br>
+
+                        <strong>Retention:</strong> Minimum 5 years for closed loans, 3 years for incomplete applications. Some states require longer. California is 7 years. Recommend 7 years across the board to be safe.<br><br>
+
+                        <strong>Format:</strong> Logs must be tamper-evident. Write-once storage. Searchable and exportable for audits. No one (including admins) should be able to delete or modify historical logs.
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Compliance Checklist for Launch</h3>
+                <div style="overflow-x: auto; margin-top: 1.5rem;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                                <th>Regulation</th>
+                                <th>Status</th>
+                                <th>Owner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>TRID Disclosure Generation</strong></td>
+                                <td>Automated LE generation within 3 days of application</td>
+                                <td>TILA-RESPA</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Product/Compliance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GMI Collection</strong></td>
+                                <td>Government Monitoring Information with proper opt-out language</td>
+                                <td>ECOA, HMDA</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Compliance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Privacy Notice</strong></td>
+                                <td>GLBA-compliant privacy notice and opt-out mechanism</td>
+                                <td>GLBA</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Legal/Compliance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>E-Sign Consents</strong></td>
+                                <td>ESIGN Act compliant consent and delivery process</td>
+                                <td>ESIGN Act</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Product/Legal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Credit Pull Authorization</strong></td>
+                                <td>FCRA-compliant consent for credit inquiries</td>
+                                <td>FCRA</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Compliance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Third-Party Data Sharing</strong></td>
+                                <td>Disclosures for Prove, Plaid, TRUV data sharing</td>
+                                <td>GLBA, State Privacy Laws</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Legal/Compliance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>State-Specific Disclosures</strong></td>
+                                <td>Configurable state-specific requirements</td>
+                                <td>Various State Laws</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Compliance/Engineering</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fair Lending Monitoring</strong></td>
+                                <td>Automated fair lending tests and reporting</td>
+                                <td>ECOA, FHA</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Compliance/Analytics</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Audit Logging System</strong></td>
+                                <td>Comprehensive, tamper-proof audit trails</td>
+                                <td>Multiple Regulations</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Engineering/Compliance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Security Assessment</strong></td>
+                                <td>Penetration testing, vulnerability scans</td>
+                                <td>GLBA, State Laws</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>IT Security</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vendor Risk Assessment</strong></td>
+                                <td>Due diligence on Prove, Plaid, TRUV, others</td>
+                                <td>CFPB Guidance</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Compliance/Legal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI Fairness Testing</strong></td>
+                                <td>Bias testing and monitoring for AI assistant</td>
+                                <td>ECOA, FHA</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Compliance/Data Science</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Marcus Johnson - Director of Operations -->
+            <div class="stakeholder-card">
+                <div class="stakeholder-header">
+                    <div class="stakeholder-info">
+                        <h3>Marcus Johnson</h3>
+                        <div class="stakeholder-role">Director of Operations</div>
+                    </div>
+                    <div class="session-details">
+                        <div class="session-detail">
+                            <span>📅</span>
+                            <span>Oct 25, 2024</span>
+                        </div>
+                        <div class="session-detail">
+                            <span>⏱️</span>
+                            <span>75 minutes</span>
+                        </div>
+                        <div class="session-detail">
+                            <span class="priority-badge priority-high">High</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Operational Requirements & Change Management</h3>
+
+                <div class="quote-block">
+                    <p class="quote-text">"The success of Smart App 2.0 isn't just about building great technology—it's about adoption. We have 200+ loan officers with varying levels of tech savviness. Some are digital natives, others still print every email. If we don't nail the training, support, and change management, even the best system will fail."</p>
+                    <div class="quote-attribution">— Marcus Johnson, Director of Operations</div>
+                </div>
+
+                <div class="qa-section">
+                    <div class="question">Q: What are the operational challenges with the current system?</div>
+                    <div class="answer">
+                        <strong>Fragmented Workflow:</strong> LOs jump between 5-6 different systems daily. Encompass for loan data, a separate portal for document requests, email for borrower communication, spreadsheets for pipeline management. It's inefficient and error-prone.<br><br>
+
+                        <strong>Inconsistent Processes:</strong> Every LO has their own way of doing things. Some send initial disclosures within hours, others take 2-3 days. Some call borrowers proactively, others wait for borrowers to reach out. This inconsistency hurts our brand and makes training new LOs difficult.<br><br>
+
+                        <strong>Support Burden:</strong> Our support team gets hammered with basic questions. "How do I reset my password?" "Where did the borrower's documents go?" "Why hasn't the credit report pulled?" These are system issues that technology should solve.<br><br>
+
+                        <strong>Limited Visibility:</strong> Management has no real-time view into what's happening. We pull reports weekly, but by then opportunities are missed. We need live dashboards showing where applications are stuck, which LOs need help, where bottlenecks exist.
+                    </div>
+
+                    <div class="question">Q: What does the ideal LO workflow look like in Smart App 2.0?</div>
+                    <div class="answer">
+                        <strong>Morning Routine (10 minutes):</strong><br>
+                        - Log into Smart App dashboard<br>
+                        - See prioritized list of "hot" applications (borrower engaged, LO action needed)<br>
+                        - Review any borrower questions from overnight (AI answered most, flagged ones requiring LO)<br>
+                        - Send any needed follow-ups<br><br>
+
+                        <strong>During the Day:</strong><br>
+                        - Get real-time notifications when borrower completes sections or uploads docs<br>
+                        - One-click review and approve/reject documents<br>
+                        - Inline communication with borrower (no switching to email)<br>
+                        - See exactly what's missing with automated checklists<br><br>
+
+                        <strong>End of Day (5 minutes):</strong><br>
+                        - Quick review of pipeline status<br>
+                        - Send any scheduled reminders to borrowers<br>
+                        - Flag any applications at risk of going stale<br><br>
+
+                        The key is that the system does the heavy lifting. LOs focus on high-value activities: relationship building, answering complex questions, closing deals. Not data entry and status checking.
+                    </div>
+
+                    <div class="question">Q: What training and change management will be required?</div>
+                    <div class="answer">
+                        This is a major change, so we need a comprehensive plan:<br><br>
+
+                        <strong>Pre-Launch (2 months before):</strong><br>
+                        - Town hall meetings introducing Smart App 2.0 and the "why"<br>
+                        - Champion identification—find enthusiastic early adopters in each region<br>
+                        - Create excitement, not fear<br><br>
+
+                        <strong>Training Program:</strong><br>
+                        - Role-based training: LO training is different from LO manager training<br>
+                        - Multiple formats: live webinars, recorded videos, written guides, practice environment<br>
+                        - Hands-on practice with test scenarios before production launch<br>
+                        - Certification program—LOs must complete training before getting access<br><br>
+
+                        <strong>Beta Phase (1-2 months):</strong><br>
+                        - Select 10-15 champion LOs to use system first<br>
+                        - Weekly feedback sessions<br>
+                        - Rapid iteration on pain points<br>
+                        - Document FAQs and best practices from beta<br><br>
+
+                        <strong>Rollout (Phased over 2-3 months):</strong><br>
+                        - Start with top performers who embrace technology<br>
+                        - Gradual expansion to broader population<br>
+                        - Mandatory training sessions for each cohort<br>
+                        - Super-users in each region who can provide peer support<br><br>
+
+                        <strong>Ongoing Support:</strong><br>
+                        - Dedicated Slack/Teams channel for questions<br>
+                        - Weekly office hours with product team<br>
+                        - Monthly "tips and tricks" training<br>
+                        - Continuous improvement based on feedback
+                    </div>
+
+                    <div class="question">Q: How do we measure operational success?</div>
+                    <div class="answer">
+                        We need clear, measurable KPIs:<br><br>
+
+                        <strong>Efficiency Metrics:</strong><br>
+                        - Time to send initial disclosures (target: &lt;4 hours)<br>
+                        - Time from application start to completion (target: &lt;24 hours)<br>
+                        - LO time spent per application (target: 30% reduction)<br>
+                        - Number of systems LOs need to access (target: down to 2)<br><br>
+
+                        <strong>Quality Metrics:</strong><br>
+                        - Application completion rate (target: 75%+)<br>
+                        - Data accuracy (fewer corrections needed downstream)<br>
+                        - Borrower satisfaction (NPS 50+)<br>
+                        - LO satisfaction (NPS 40+)<br><br>
+
+                        <strong>Adoption Metrics:</strong><br>
+                        - % of LOs actively using Smart App vs. old system<br>
+                        - % of new applications started in Smart App<br>
+                        - Feature utilization (are LOs using AI assistant, document review, etc.)<br>
+                        - Support ticket volume (should decrease over time)<br><br>
+
+                        <strong>Business Impact:</strong><br>
+                        - Pull-through rate (applications that close)<br>
+                        - Average loan amount<br>
+                        - Cost per funded loan<br>
+                        - LO productivity (funded loans per LO per month)
+                    </div>
+
+                    <div class="question">Q: What support infrastructure do we need?</div>
+                    <div class="answer">
+                        <strong>Tier 1 Support (Help Desk):</strong><br>
+                        - Handle basic questions, password resets, access issues<br>
+                        - Available 7am-7pm ET (when LOs are active)<br>
+                        - Target response time: &lt;15 minutes<br>
+                        - Self-service knowledge base for common issues<br><br>
+
+                        <strong>Tier 2 Support (Product Specialists):</strong><br>
+                        - Handle complex workflow questions, data issues, integration problems<br>
+                        - Available during business hours<br>
+                        - Target response time: &lt;2 hours<br>
+                        - Escalation path to engineering for bugs<br><br>
+
+                        <strong>Tier 3 Support (Engineering):</strong><br>
+                        - Critical system issues, outages, data corruption<br>
+                        - On-call rotation 24/7<br>
+                        - Target response time: &lt;30 minutes for critical issues<br><br>
+
+                        <strong>Proactive Monitoring:</strong><br>
+                        - System health dashboards<br>
+                        - Automated alerts for anomalies (spike in errors, integration failures, etc.)<br>
+                        - Weekly review of trends and improvement opportunities<br><br>
+
+                        Lisa Patel will lead the training program. We need at least 2 FTEs dedicated to Smart App 2.0 support initially, then reassess after 6 months.
+                    </div>
+                </div>
+
+                <h3 class="content-section-subtitle">Operational Readiness Checklist</h3>
+                <div style="overflow-x: auto; margin-top: 1.5rem;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Item</th>
+                                <th>Owner</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Training</strong></td>
+                                <td>LO training curriculum developed</td>
+                                <td>Lisa Patel</td>
+                                <td>Month 5</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Training</strong></td>
+                                <td>Video tutorials recorded</td>
+                                <td>Lisa Patel</td>
+                                <td>Month 5</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Training</strong></td>
+                                <td>Practice environment configured</td>
+                                <td>Engineering</td>
+                                <td>Month 4</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Support</strong></td>
+                                <td>Knowledge base created</td>
+                                <td>Marcus/Lisa</td>
+                                <td>Month 6</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Support</strong></td>
+                                <td>Support team trained</td>
+                                <td>Marcus</td>
+                                <td>Month 6</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Support</strong></td>
+                                <td>Escalation procedures documented</td>
+                                <td>Marcus</td>
+                                <td>Month 6</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Change Mgmt</strong></td>
+                                <td>Champion LOs identified</td>
+                                <td>Marcus</td>
+                                <td>Month 4</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Change Mgmt</strong></td>
+                                <td>Communication plan created</td>
+                                <td>Marcus/Paul</td>
+                                <td>Month 4</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Change Mgmt</strong></td>
+                                <td>Rollout schedule finalized</td>
+                                <td>Marcus</td>
+                                <td>Month 5</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monitoring</strong></td>
+                                <td>Operational dashboards built</td>
+                                <td>Robert Kim</td>
+                                <td>Month 5</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monitoring</strong></td>
+                                <td>KPI tracking automated</td>
+                                <td>Robert Kim</td>
+                                <td>Month 6</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monitoring</strong></td>
+                                <td>Alert thresholds configured</td>
+                                <td>Engineering/Ops</td>
+                                <td>Month 6</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Additional Stakeholders Summary -->
+            <div class="stakeholder-card">
+                <h3 class="content-section-subtitle">Additional Stakeholder Insights Summary</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                    Beyond the detailed sessions with Paul, Yaz, Kelli, and Marcus, we conducted interviews with 9 additional
+                    stakeholders across product, engineering, security, analytics, design, and business development. Key themes
+                    and insights from these sessions are summarized below.
+                </p>
+
+                <div class="themes-grid">
+                    <div class="theme-card">
+                        <h4>Sarah Lin - Product Manager</h4>
+                        <ul>
+                            <li>Mobile-first design critical (60% of borrowers start on mobile)</li>
+                            <li>Progressive disclosure to reduce cognitive load</li>
+                            <li>Smart defaults and auto-save features</li>
+                            <li>Clear progress indicators throughout journey</li>
+                            <li>Accessibility compliance (WCAG 2.1 AA minimum)</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>David Reynolds - Solutions Architect</h4>
+                        <ul>
+                            <li>Event-driven architecture for real-time updates</li>
+                            <li>API gateway pattern for all integrations</li>
+                            <li>GraphQL for flexible client queries</li>
+                            <li>Redis pub/sub for LO-borrower communication</li>
+                            <li>Blue-green deployment for zero-downtime releases</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Michael Chen - IT Security Director</h4>
+                        <ul>
+                            <li>Zero-trust architecture approach</li>
+                            <li>Multi-factor authentication for LOs</li>
+                            <li>Encryption: AES-256 at rest, TLS 1.3 in transit</li>
+                            <li>Regular penetration testing (quarterly)</li>
+                            <li>SOC 2 Type II certification target</li>
+                            <li>Incident response plan and regular drills</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Jennifer Wallace - VP Business Dev</h4>
+                        <ul>
+                            <li>White-label capability for partner lenders</li>
+                            <li>Co-branding options with customizable themes</li>
+                            <li>API access for partners to embed Smart App</li>
+                            <li>Revenue sharing model for partner integrations</li>
+                            <li>Strategic partnerships with real estate platforms</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Robert Kim - Senior Data Analyst</h4>
+                        <ul>
+                            <li>Comprehensive event tracking (Segment or similar)</li>
+                            <li>Funnel analysis to identify drop-off points</li>
+                            <li>A/B testing framework for optimization</li>
+                            <li>Predictive analytics for application success</li>
+                            <li>Real-time dashboards for executives</li>
+                            <li>HMDA reporting automation</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Amanda Foster - UX Research Lead</h4>
+                        <ul>
+                            <li>Continuous user testing throughout development</li>
+                            <li>Usability benchmarking against competitors</li>
+                            <li>Accessibility testing with diverse user groups</li>
+                            <li>Journey mapping for borrower and LO experiences</li>
+                            <li>Plain language review for all content</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Tom Bradley - Integration Architect</h4>
+                        <ul>
+                            <li>Encompass integration using MISMO XML standards</li>
+                            <li>Webhook-based real-time synchronization</li>
+                            <li>Retry logic and circuit breakers for resilience</li>
+                            <li>Integration testing environments for all vendors</li>
+                            <li>Monitoring and alerting for integration health</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Lisa Patel - Training Manager</h4>
+                        <ul>
+                            <li>Microlearning modules (5-10 min each)</li>
+                            <li>Gamification for training completion</li>
+                            <li>LO certification program before production access</li>
+                            <li>Just-in-time help within the application</li>
+                            <li>Regular refresher training and updates</li>
+                        </ul>
+                    </div>
+
+                    <div class="theme-card">
+                        <h4>Elena Rodriguez - CFO</h4>
+                        <ul>
+                            <li>Total project budget: $2.8M-$3.2M</li>
+                            <li>ROI target: 18-month payback period</li>
+                            <li>Cost per funded loan reduction: 25%</li>
+                            <li>Vendor costs monitored closely (Prove, Plaid, TRUV)</li>
+                            <li>Quarterly business reviews on financial performance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Themes Across Stakeholders -->
+        <section class="content-section">
+            <h2 class="content-section-title">Common Themes & Strategic Priorities</h2>
+
+            <div class="themes-grid">
+                <div class="theme-card">
+                    <h4>User Experience Excellence</h4>
+                    <ul>
+                        <li>Simplicity over feature complexity</li>
+                        <li>Mobile-first, responsive design</li>
+                        <li>Reduce borrower effort at every step</li>
+                        <li>Real-time feedback and validation</li>
+                        <li>Clear progress tracking</li>
+                        <li>Accessibility for all users</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Operational Efficiency</h4>
+                    <ul>
+                        <li>Reduce LO administrative burden</li>
+                        <li>Consolidate multiple systems into one</li>
+                        <li>Automated workflows and notifications</li>
+                        <li>Real-time visibility for managers</li>
+                        <li>Faster time-to-close</li>
+                        <li>Data-driven decision making</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Compliance & Risk Management</h4>
+                    <ul>
+                        <li>Regulatory compliance built-in, not bolted-on</li>
+                        <li>Comprehensive audit trails</li>
+                        <li>Vendor risk management</li>
+                        <li>Data security and privacy</li>
+                        <li>Fair lending protections</li>
+                        <li>Ongoing monitoring and testing</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Technology & Integration</h4>
+                    <ul>
+                        <li>Modern, scalable architecture</li>
+                        <li>API-first approach</li>
+                        <li>Seamless third-party integrations</li>
+                        <li>Real-time data synchronization</li>
+                        <li>High availability and performance</li>
+                        <li>DevOps culture and CI/CD</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>AI & Innovation</h4>
+                    <ul>
+                        <li>AI assistant as competitive differentiator</li>
+                        <li>24/7 borrower support without human cost</li>
+                        <li>Predictive analytics for LO prioritization</li>
+                        <li>Continuous learning and improvement</li>
+                        <li>Responsible AI with fairness monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Business Growth</h4>
+                    <ul>
+                        <li>Market differentiation through innovation</li>
+                        <li>White-label opportunities</li>
+                        <li>Partner ecosystem development</li>
+                        <li>Measurable ROI and cost reduction</li>
+                        <li>Scalability for future growth</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conflicting Priorities & Resolutions -->
+        <section class="content-section">
+            <h2 class="content-section-title">Conflicting Priorities & Resolution Strategies</h2>
+
+            <div class="conflict-item">
+                <div class="conflict-title">Speed to Market vs. Feature Completeness</div>
+                <div class="conflict-stakeholders">
+                    <strong>Paul (Product):</strong> "We need to launch in 6 months to stay competitive."<br>
+                    <strong>Yaz (Engineering):</strong> "6 months is aggressive. We can't compromise on quality and security."
+                </div>
+                <div class="conflict-resolution">
+                    <strong>Resolution:</strong> Phased approach with clear MVP definition. Launch beta in 6 months with core features
+                    (Prove integration, basic application flow, LO dashboard). Add Plaid, TRUV, and AI assistant in subsequent releases
+                    over following 3-4 months. Prioritize ruthlessly—features that don't support completion rate improvement get deferred.
+                </div>
+            </div>
+
+            <div class="conflict-item">
+                <div class="conflict-title">Innovation vs. Compliance Risk</div>
+                <div class="conflict-stakeholders">
+                    <strong>Paul (Product):</strong> "AI assistant is our differentiator. It needs to be front and center."<br>
+                    <strong>Kelli (Compliance):</strong> "AI in mortgage is uncharted territory. We need to be conservative until we understand the risks."
+                </div>
+                <div class="conflict-resolution">
+                    <strong>Resolution:</strong> Launch AI assistant with limited scope initially (FAQs, process guidance, definitions).
+                    No rate quotes, no qualification decisions, no loan recommendations in v1. Expand capabilities gradually with compliance
+                    approval after monitoring first 1000 interactions for bias and accuracy issues. Clear "Talk to Human LO" option always visible.
+                </div>
+            </div>
+
+            <div class="conflict-item">
+                <div class="conflict-title">Best-in-Class UX vs. Development Timeline</div>
+                <div class="conflict-stakeholders">
+                    <strong>Sarah (Product) & Amanda (UX):</strong> "Borrowers expect Netflix-level polish. We need animations, micro-interactions, delightful details."<br>
+                    <strong>Yaz (Engineering):</strong> "Polish takes time. We can build functional first, beautify later."
+                </div>
+                <div class="conflict-resolution">
+                    <strong>Resolution:</strong> Define "polish" as clear hierarchy, readable typography, logical flow, and helpful error messages—not
+                    fancy animations. Focus on usability fundamentals in MVP. Add delightful micro-interactions in v1.1 after core functionality
+                    is proven. Use design system (Tailwind UI or similar) to get professional look without custom development.
+                </div>
+            </div>
+
+            <div class="conflict-item">
+                <div class="conflict-title">LO Control vs. Automation</div>
+                <div class="conflict-stakeholders">
+                    <strong>LOs (via Marcus):</strong> "We need control over borrower communication and process. Don't auto-send things without our approval."<br>
+                    <strong>Paul (Product):</strong> "Automation is how we achieve speed. Too much manual LO involvement defeats the purpose."
+                </div>
+                <div class="conflict-resolution">
+                    <strong>Resolution:</strong> Configuration options at LO level (per Marcus and LO Config requirements). LOs can choose their
+                    automation level: Full Auto (system sends disclosures, reminders, etc. automatically), Semi-Auto (system prepares but LO approves
+                    before sending), Manual (LO initiates everything). Default to Semi-Auto, let LOs opt into Full Auto as they gain confidence.
+                </div>
+            </div>
+
+            <div class="conflict-item">
+                <div class="conflict-title">Custom Features vs. Standardization</div>
+                <div class="conflict-stakeholders">
+                    <strong>Jennifer (BD):</strong> "Partner lenders want customization. Different branding, different workflows, different integrations."<br>
+                    <strong>Yaz (Engineering):</strong> "Customization doesn't scale. Every custom feature is technical debt."
+                </div>
+                <div class="conflict-resolution">
+                    <strong>Resolution:</strong> Build configurability, not customization. White-label theming (colors, logos, fonts) via config file.
+                    Feature toggles for optional modules. Standard API for partner integrations. Custom development only for strategic partnerships
+                    above certain revenue threshold. 80% of partners get standard product, 20% get custom features if they pay for it.
+                </div>
+            </div>
+
+            <div class="conflict-item">
+                <div class="conflict-title">Budget Constraints vs. Third-Party Costs</div>
+                <div class="conflict-stakeholders">
+                    <strong>Elena (CFO):</strong> "Prove, Plaid, and TRUV have per-transaction costs. At scale, these could be significant. We need to manage costs."<br>
+                    <strong>Paul (Product):</strong> "These integrations are core to the value proposition. We can't compromise here."
+                </div>
+                <div class="conflict-resolution">
+                    <strong>Resolution:</strong> Negotiate volume-based pricing with vendors. Build in usage analytics to track ROI per integration.
+                    Consider offering "lite" version without premium integrations for price-sensitive borrowers. Make Plaid and TRUV optional
+                    (borrowers can manually upload documents instead) but default to integrations for best experience. Monitor cost-per-funded-loan
+                    closely and adjust pricing strategy if needed.
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Metrics & KPIs -->
+        <section class="content-section">
+            <h2 class="content-section-title">Success Metrics & KPIs</h2>
+
+            <h3 class="content-section-subtitle">Primary Success Metrics (North Star)</h3>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">75%</div>
+                    <div class="kpi-label">Application Completion Rate<br>(Current: 45%)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">&lt;24hrs</div>
+                    <div class="kpi-label">Time to Submit<br>(Current: 4-7 days)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">50+</div>
+                    <div class="kpi-label">Borrower NPS Score<br>(Current: 28)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">40+</div>
+                    <div class="kpi-label">LO NPS Score<br>(Current: 22)</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Operational Efficiency Metrics</h3>
+            <div style="overflow-x: auto; margin-top: 1.5rem;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Current Baseline</th>
+                            <th>6-Month Target</th>
+                            <th>12-Month Target</th>
+                            <th>Measurement Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LO Time per Application</strong></td>
+                            <td>4.5 hours</td>
+                            <td>3.5 hours (-22%)</td>
+                            <td>3.0 hours (-33%)</td>
+                            <td>Time tracking in system</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Document Upload Rate</strong></td>
+                            <td>30% self-service</td>
+                            <td>60% self-service</td>
+                            <td>75% self-service</td>
+                            <td>Analytics tracking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Auto-Population</strong></td>
+                            <td>15% of fields</td>
+                            <td>50% of fields</td>
+                            <td>70% of fields</td>
+                            <td>Field-level tracking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Support Tickets</strong></td>
+                            <td>450/month</td>
+                            <td>300/month (-33%)</td>
+                            <td>200/month (-56%)</td>
+                            <td>Support ticket system</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Application Errors</strong></td>
+                            <td>12% error rate</td>
+                            <td>6% error rate</td>
+                            <td>3% error rate</td>
+                            <td>Quality assurance reviews</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System Logins per LO/Day</strong></td>
+                            <td>5.2 systems</td>
+                            <td>3.0 systems</td>
+                            <td>2.0 systems</td>
+                            <td>LO self-report survey</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="content-section-subtitle">Technical Performance Metrics</h3>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">99.5%</div>
+                    <div class="kpi-label">System Uptime SLA</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">&lt;2sec</div>
+                    <div class="kpi-label">Average Page Load Time</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">&lt;500ms</div>
+                    <div class="kpi-label">API Response Time (p95)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">0</div>
+                    <div class="kpi-label">Critical Security Incidents</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">95%+</div>
+                    <div class="kpi-label">Integration Success Rate</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">80%+</div>
+                    <div class="kpi-label">Automated Test Coverage</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Business Impact Metrics</h3>
+            <div style="overflow-x: auto; margin-top: 1.5rem;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Current</th>
+                            <th>12-Month Target</th>
+                            <th>24-Month Target</th>
+                            <th>Stakeholder</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Pull-Through Rate</strong></td>
+                            <td>62%</td>
+                            <td>70%</td>
+                            <td>75%</td>
+                            <td>Paul, Elena</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cost per Funded Loan</strong></td>
+                            <td>$4,200</td>
+                            <td>$3,500 (-17%)</td>
+                            <td>$3,150 (-25%)</td>
+                            <td>Elena</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Productivity (Loans/Month)</strong></td>
+                            <td>3.2 loans</td>
+                            <td>4.0 loans (+25%)</td>
+                            <td>4.5 loans (+41%)</td>
+                            <td>Marcus</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Average Loan Amount</strong></td>
+                            <td>$285,000</td>
+                            <td>$295,000</td>
+                            <td>$310,000</td>
+                            <td>Paul, Jennifer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Partner White-Label Clients</strong></td>
+                            <td>0</td>
+                            <td>3-5</td>
+                            <td>10-15</td>
+                            <td>Jennifer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile Application Starts</strong></td>
+                            <td>35%</td>
+                            <td>50%</td>
+                            <td>60%</td>
+                            <td>Sarah, Amanda</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Cross-Functional Collaboration Needs -->
+        <section class="content-section">
+            <h2 class="content-section-title">Cross-Functional Collaboration Framework</h2>
+
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Collaboration Area</th>
+                            <th>Stakeholders Involved</th>
+                            <th>Frequency</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Executive Steering Committee</strong></td>
+                            <td>Paul, Yaz, Kelli, Marcus, Elena</td>
+                            <td>Bi-weekly</td>
+                            <td>Strategic decisions, budget approvals, risk management, go/no-go milestones</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Product Development Sync</strong></td>
+                            <td>Sarah, David, Amanda, Robert</td>
+                            <td>Weekly</td>
+                            <td>Feature prioritization, design reviews, technical feasibility, analytics insights</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compliance Review Board</strong></td>
+                            <td>Kelli, Sarah, Michael, Tom</td>
+                            <td>Weekly during dev, monthly after launch</td>
+                            <td>Feature compliance review, vendor assessment, audit preparation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Architecture Forum</strong></td>
+                            <td>Yaz, David, Tom, Michael</td>
+                            <td>Weekly</td>
+                            <td>Architecture decisions, integration design, security reviews, performance optimization</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operations & Training Sync</strong></td>
+                            <td>Marcus, Lisa, Sarah</td>
+                            <td>Weekly</td>
+                            <td>Training content development, support readiness, change management planning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data & Analytics Review</strong></td>
+                            <td>Robert, Paul, Sarah, Marcus</td>
+                            <td>Weekly</td>
+                            <td>Metrics review, A/B test results, funnel analysis, optimization opportunities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business Development Alignment</strong></td>
+                            <td>Jennifer, Paul, Yaz</td>
+                            <td>Monthly</td>
+                            <td>Partner roadmap, white-label requirements, competitive positioning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Feedback Sessions</strong></td>
+                            <td>Marcus, Sarah, selected LOs</td>
+                            <td>Weekly during beta, monthly after</td>
+                            <td>User feedback, pain points, feature requests, training effectiveness</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Action Items & Follow-Ups -->
+        <section class="content-section">
+            <h2 class="content-section-title">Action Items & Follow-Up Plan</h2>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Immediate (Week 1-2)</div>
+                    <div class="timeline-title">Foundation & Planning</div>
+                    <div class="timeline-description">
+                        <strong>Actions:</strong><br>
+                        • Finalize executive steering committee membership and meeting cadence (Paul)<br>
+                        • Complete vendor risk assessment for Prove, Plaid, TRUV (Kelli + Michael)<br>
+                        • Define MVP feature set and acceptance criteria (Sarah + Paul)<br>
+                        • Set up project management infrastructure and communication channels (Marcus)<br>
+                        • Kick off technical architecture design (Yaz + David)
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Month 1</div>
+                    <div class="timeline-title">Architecture & Compliance Framework</div>
+                    <div class="timeline-description">
+                        <strong>Actions:</strong><br>
+                        • Complete technical architecture document (David + Yaz)<br>
+                        • Finalize compliance requirements checklist (Kelli)<br>
+                        • Set up development, staging, production environments (Engineering)<br>
+                        • Begin vendor contract negotiations (Elena + Procurement)<br>
+                        • Identify and recruit beta LO participants (Marcus)<br>
+                        • Complete UX research plan and begin user journey mapping (Amanda)
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Months 2-3</div>
+                    <div class="timeline-title">Core Development & Integration</div>
+                    <div class="timeline-description">
+                        <strong>Actions:</strong><br>
+                        • Build core API framework and authentication (Engineering)<br>
+                        • Integrate Prove identity verification (Engineering + Prove)<br>
+                        • Develop initial application flow UI (Engineering + Sarah)<br>
+                        • Create compliance disclosure templates (Kelli + Legal)<br>
+                        • Begin LO dashboard development (Engineering)<br>
+                        • Set up analytics and event tracking (Robert + Engineering)
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Months 4-5</div>
+                    <div class="timeline-title">Feature Completion & Testing</div>
+                    <div class="timeline-description">
+                        <strong>Actions:</strong><br>
+                        • Complete Plaid and TRUV integrations (Engineering + Tom)<br>
+                        • Integrate AI assistant (initial scope) (Engineering + Product)<br>
+                        • Complete LOS bidirectional sync (Tom + Engineering)<br>
+                        • Conduct security audit and penetration testing (Michael + external firm)<br>
+                        • Develop training curriculum and materials (Lisa + Marcus)<br>
+                        • Complete compliance UAT review (Kelli's team)
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">5</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Month 6</div>
+                    <div class="timeline-title">Beta Launch & Iteration</div>
+                    <div class="timeline-description">
+                        <strong>Actions:</strong><br>
+                        • Launch beta with 10-15 selected LOs (Marcus + Product)<br>
+                        • Train beta LOs (Lisa)<br>
+                        • Daily monitoring and bug fixes (Engineering)<br>
+                        • Weekly feedback sessions with beta LOs (Marcus + Sarah)<br>
+                        • Analytics review and optimization (Robert + Sarah)<br>
+                        • Final compliance sign-off for production (Kelli)
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">6</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Months 7-8</div>
+                    <div class="timeline-title">Production Rollout</div>
+                    <div class="timeline-description">
+                        <strong>Actions:</strong><br>
+                        • Address all critical beta feedback (Engineering + Product)<br>
+                        • Train all LOs in cohorts (Lisa + Marcus)<br>
+                        • Phased rollout to production (25% → 50% → 100% of LOs) (Marcus)<br>
+                        • Establish 24/7 support rotation (Marcus + Engineering)<br>
+                        • Monitor KPIs daily and address issues proactively (All stakeholders)<br>
+                        • Begin planning for v1.1 enhancements (Sarah + Paul)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="content-section">
+            <h2 class="content-section-title">Immediate Next Steps</h2>
+
+            <ul class="action-items-list">
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Schedule Executive Steering Committee Kickoff</div>
+                        <div class="action-owner">Owner: Paul Martinez | Due: Within 1 week</div>
+                    </div>
+                    <span class="priority-badge priority-critical">Critical</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Complete Vendor Risk Assessment (Prove, Plaid, TRUV)</div>
+                        <div class="action-owner">Owner: Kelli Thompson + Michael Chen | Due: 2 weeks</div>
+                    </div>
+                    <span class="priority-badge priority-critical">Critical</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Finalize MVP Feature Set & User Stories</div>
+                        <div class="action-owner">Owner: Sarah Lin + Paul Martinez | Due: 2 weeks</div>
+                    </div>
+                    <span class="priority-badge priority-critical">Critical</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Technical Architecture Document</div>
+                        <div class="action-owner">Owner: David Reynolds + Yaz Chen | Due: 3 weeks</div>
+                    </div>
+                    <span class="priority-badge priority-high">High</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Compliance Requirements Checklist</div>
+                        <div class="action-owner">Owner: Kelli Thompson | Due: 2 weeks</div>
+                    </div>
+                    <span class="priority-badge priority-high">High</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Budget Approval and Vendor Contract Negotiations</div>
+                        <div class="action-owner">Owner: Elena Rodriguez | Due: 3 weeks</div>
+                    </div>
+                    <span class="priority-badge priority-high">High</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Identify and Recruit Beta LO Participants</div>
+                        <div class="action-owner">Owner: Marcus Johnson | Due: 4 weeks</div>
+                    </div>
+                    <span class="priority-badge priority-medium">Medium</span>
+                </li>
+
+                <li class="action-item">
+                    <div class="action-content">
+                        <div class="action-title">Set Up Project Communication Channels and Documentation</div>
+                        <div class="action-owner">Owner: Marcus Johnson | Due: 1 week</div>
+                    </div>
+                    <span class="priority-badge priority-medium">Medium</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Research Synthesis -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research Synthesis & Key Insights</h2>
+
+            <div class="quote-block">
+                <p class="quote-text">"What became clear across all stakeholder interviews is that Smart App 2.0 is not just a technology project—it's an organizational transformation. Success requires alignment across product, engineering, compliance, operations, finance, and business development. The stakeholders who are most excited are those who see this as an opportunity to fundamentally rethink how we serve borrowers, not just digitize the old process."</p>
+                <div class="quote-attribution">— Research Team Synthesis</div>
+            </div>
+
+            <h3 class="content-section-subtitle">Critical Success Factors</h3>
+            <div class="themes-grid">
+                <div class="theme-card">
+                    <h4>Executive Alignment</h4>
+                    <ul>
+                        <li>Strong buy-in from Paul, Yaz, Kelli, Elena</li>
+                        <li>Shared vision for borrower experience transformation</li>
+                        <li>Commitment to phased, iterative approach</li>
+                        <li>Willingness to invest in quality over speed</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Compliance as Partner</h4>
+                    <ul>
+                        <li>Kelli's team engaged early, not as gate-keeper</li>
+                        <li>Compliance requirements inform design, not block it</li>
+                        <li>Clear process for feature review and approval</li>
+                        <li>Audit trails and monitoring built-in from start</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>User-Centered Design</h4>
+                    <ul>
+                        <li>Deep understanding of borrower and LO pain points</li>
+                        <li>Continuous user testing and feedback loops</li>
+                        <li>Mobile-first, accessible, inclusive design</li>
+                        <li>Simplicity and clarity over feature bloat</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Technical Excellence</h4>
+                    <ul>
+                        <li>Modern, scalable architecture</li>
+                        <li>API-first for flexibility</li>
+                        <li>Comprehensive testing and quality assurance</li>
+                        <li>Security and performance non-negotiable</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Change Management</h4>
+                    <ul>
+                        <li>Robust training and enablement program</li>
+                        <li>Beta testing with champions</li>
+                        <li>Phased rollout with support at each stage</li>
+                        <li>Clear communication of benefits to LOs</li>
+                    </ul>
+                </div>
+
+                <div class="theme-card">
+                    <h4>Measurable Outcomes</h4>
+                    <ul>
+                        <li>Clear KPIs aligned to business goals</li>
+                        <li>Real-time dashboards for monitoring</li>
+                        <li>Regular reviews and course corrections</li>
+                        <li>Data-driven decision making</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Risk Mitigation Strategies</h3>
+            <div style="overflow-x: auto; margin-top: 1.5rem;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Likelihood</th>
+                            <th>Impact</th>
+                            <th>Mitigation Strategy</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LO Adoption Resistance</strong></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                            <td>Champion program, extensive training, configurable automation levels, clear benefits communication</td>
+                            <td>Marcus</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compliance Violations</strong></td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                            <td>Early compliance involvement, comprehensive review process, audit trails, regular testing</td>
+                            <td>Kelli</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Third-Party Integration Failures</strong></td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td>Graceful degradation, fallback mechanisms, vendor SLAs, regular integration testing</td>
+                            <td>Tom/Yaz</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security Breach</strong></td>
+                            <td><span class="priority-badge priority-low">Low</span></td>
+                            <td><span class="priority-badge priority-critical">Critical</span></td>
+                            <td>Penetration testing, security audits, encryption, access controls, incident response plan</td>
+                            <td>Michael</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scope Creep</strong></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td>Ruthless prioritization, change control process, MVP-first approach, defer non-essentials</td>
+                            <td>Paul/Sarah</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Budget Overrun</strong></td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td>Detailed budget tracking, contingency reserves, vendor negotiations, regular financial reviews</td>
+                            <td>Elena</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Bias or Errors</strong></td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td>Limited initial scope, comprehensive logging, fairness testing, human override capability</td>
+                            <td>Kelli/Sarah</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Timeline Delays</strong></td>
+                            <td><span class="priority-badge priority-high">High</span></td>
+                            <td><span class="priority-badge priority-medium">Medium</span></td>
+                            <td>Phased approach, buffer time in schedule, agile methodology, regular sprint reviews</td>
+                            <td>Yaz/Paul</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

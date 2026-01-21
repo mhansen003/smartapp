@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartApp Features List - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../documents/" class="breadcrumb-link">Documents</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Features List</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Product Roadmap</div>
+                <h1 class="page-title">SmartApp 2.0 Master Features List</h1>
+                <p class="page-description">Comprehensive feature inventory with priorities, specifications, and implementation roadmap for the Smart App 2.0 reimagined digital mortgage application.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Core Features</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔌</span>
+                        <span>Integrations</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎯</span>
+                        <span>Priorities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../documents/" class="back-button">← Back to Documents</a>
+
+        <!-- Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                This master features list consolidates all planned functionality for Smart App 2.0, organized by category
+                and priority level. It serves as the single source of truth for product planning, development sprints,
+                and stakeholder alignment.
+            </p>
+
+            <div class="card-grid">
+                <div class="card" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-red);">P0 - Critical</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-red); margin: 1rem 0;">12</div>
+                    <p class="card-description">Must-have features for MVP launch - core functionality</p>
+                </div>
+
+                <div class="card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-yellow);">P1 - High</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-yellow); margin: 1rem 0;">18</div>
+                    <p class="card-description">Important features for competitive differentiation</p>
+                </div>
+
+                <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-blue);">P2 - Medium</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">25</div>
+                    <p class="card-description">Nice-to-have features for enhanced user experience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Application Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">Core Application Features</h2>
+
+            <h3 class="content-section-subtitle">Identity & Authentication</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Prove Integration</td>
+                        <td>Identity verification with magic link, pre-fill borrower data (name, email, phone, SSN)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>OTP Authentication</td>
+                        <td>One-time password system for secure login and session management</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-in-progress">Specified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Manual Entry Fallback</td>
+                        <td>Allow manual data entry if Prove verification fails (< 10% no-hit rate)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Returning User Flow</td>
+                        <td>Detect existing customers via email, pull servicing data for pre-fill</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Third-Party Integrations</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Integration</th>
+                        <th>Purpose</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Plaid VOA</td>
+                        <td>Verification of Assets - connect bank accounts, pull balances</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-in-progress">Specified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Truv VOIE</td>
+                        <td>Verification of Income & Employment - $7 per run, 22% pull-through rate</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-in-progress">Specified</span></td>
+                    </tr>
+                    <tr>
+                        <td>FlueID / True ID (Title Data)</td>
+                        <td>Property data, mortgage info, title records - $5k/mo flat fee unlimited runs</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-in-progress">Researched</span></td>
+                    </tr>
+                    <tr>
+                        <td>Soft Credit Pull</td>
+                        <td>$30 soft pull for AUS pre-run, saves money vs immediate hard pull ($60)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-in-progress">Specified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Hard Credit Pull (Tri-Merge)</td>
+                        <td>$60 hard pull when necessary for final qualification</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-pending">Standard</span></td>
+                    </tr>
+                    <tr>
+                        <td>Solex E-Consent</td>
+                        <td>Replace fake consent with real Solex consent integration</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>Candor Needs List</td>
+                        <td>Auto-generate borrower needs list from AUS results</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>Calendly Scheduling</td>
+                        <td>LO calendar integration for immediate appointment booking</td>
+                        <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- User Experience Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">User Experience Features</h2>
+
+            <h3 class="content-section-subtitle">Guided Application Flow</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Shorter Initial Application</td>
+                        <td>Separate intake from completion - collect only what's needed for pre-qualification</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Gamified Task Workflow</td>
+                        <td>One-at-a-time task completion post-submission (Task 1 of 7) with skip option</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-pending">High Priority</span></td>
+                    </tr>
+                    <tr>
+                        <td>Progress Tracking</td>
+                        <td>Visual stepper showing completion status, first step auto-completed on submit</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Branching Logic</td>
+                        <td>Smart question routing based on borrower type, transaction, scenario</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-in-progress">Partial</span></td>
+                    </tr>
+                    <tr>
+                        <td>Co-Borrower Management</td>
+                        <td>Improved flow for adding co-borrowers with invite or complete jointly options</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Review & Edit Screen</td>
+                        <td>On-screen editing of pre-filled data before submission</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Income Calculator</td>
+                        <td>Built-in tool for hourly workers to estimate annual income</td>
+                        <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile-First Design</td>
+                        <td>Responsive design optimized for mobile devices (many borrowers start on mobile)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- AI & Automation Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">AI & Automation Features</h2>
+
+            <h3 class="content-section-subtitle">AI Assistant</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Universal AI Chat</td>
+                        <td>AI assistant available throughout application flow for contextual help</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Proactive Engagement</td>
+                        <td>AI triggers after X seconds on page with common questions for that screen</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>Smart Tooltips Replacement</td>
+                        <td>Replace static tooltips with AI-triggered conversations and answers</td>
+                        <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                        <td><span class="status-badge status-pending">Phase 2</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile AI Experience</td>
+                        <td>Fixed bottom bar (not popover) with "reason you're here + ask question" functionality</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Needs Design</span></td>
+                    </tr>
+                    <tr>
+                        <td>LO Summary Report</td>
+                        <td>Deliver AI summary to LO showing borrower questions, concerns, progress</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Automation & Pre-Fill</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Auto Soft Credit Pull</td>
+                        <td>Automatically run soft credit after application submission</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>AUS Pre-Run</td>
+                        <td>Pre-run AUS with sample data to generate needs list early</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>FlueID Property Match</td>
+                        <td>Match credit lines to properties using title data for complete picture</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>AI Document Scanning</td>
+                        <td>Scan driver's license uploads with AI to auto-populate fields</td>
+                        <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                        <td><span class="status-badge status-pending">Phase 2</span></td>
+                    </tr>
+                    <tr>
+                        <td>"AI Future" Mode</td>
+                        <td>Full automation toggle: soft pull, AUS, needs list, vendor integrations, enrichment</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Strategic</span></td>
+                    </tr>
+                    <tr>
+                        <td>"Stone Age" Mode</td>
+                        <td>Manual entry toggle for users/LOs who prefer traditional process</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Strategic</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- LO Experience Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">Loan Officer Experience Features</h2>
+
+            <h3 class="content-section-subtitle">Visibility & Control</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>LO Configuration System</td>
+                        <td>LO-level toggles for customizing borrower experience (14+ toggles)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">Specified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Application Progress Visibility</td>
+                        <td>LO can see where borrower is in application, what's completed</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>Stuck Point Detection</td>
+                        <td>Alert LO when borrower is stuck on a screen for too long</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                    <tr>
+                        <td>LO Takeover</td>
+                        <td>LO can jump in to help borrower complete application</td>
+                        <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                        <td><span class="status-badge status-pending">Specified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Invite Borrower Flow</td>
+                        <td>LO-initiated invitation system with co-branded link</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Co-Branding Throughout</td>
+                        <td>LO and realtor partner branding visible on every screen</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td><span class="status-badge status-complete">In Prototype</span></td>
+                    </tr>
+                    <tr>
+                        <td>Vendor Integration Dashboard</td>
+                        <td>Visual map showing when each vendor is called throughout flow</td>
+                        <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                        <td><span class="status-badge status-pending">Planned</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Transaction-Specific Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">Transaction-Specific Features</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Refinance Flow</h3>
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title data auto-identification of co-borrowers</td>
+                                <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                            </tr>
+                            <tr>
+                                <td>Automatic lien detection from title records</td>
+                                <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                            </tr>
+                            <tr>
+                                <td>6 RESPA questions auto-populated from title data</td>
+                                <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                            </tr>
+                            <tr>
+                                <td>Property/liability matching with FlueID</td>
+                                <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Purchase Flow</h3>
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First-time homebuyer education mode</td>
+                                <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                            </tr>
+                            <tr>
+                                <td>Realtor partner co-branding</td>
+                                <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Property search integration (future)</td>
+                                <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">REO (Investment Properties)</h3>
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title data validation for investment properties</td>
+                                <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                            </tr>
+                            <tr>
+                                <td>Rental income estimation tools</td>
+                                <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                            </tr>
+                            <tr>
+                                <td>Multiple property management interface</td>
+                                <td><span class="badge" style="background: var(--accent-blue); color: white;">P2</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document & Task Management -->
+        <section class="content-section">
+            <h2 class="content-section-title">Document & Task Management</h2>
+
+            <h3 class="content-section-subtitle">Post-Submission Tasks</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>E-Consent Setup</td>
+                        <td>Solex integration for document consent management</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Borrower Authorization</td>
+                        <td>Sign authorization documents for data pulls</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Pre-Disclosure Package</td>
+                        <td>Review and sign required disclosures</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Truv Verification</td>
+                        <td>Complete employment/income verification (multiple attempts allowed)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Plaid Asset Verification</td>
+                        <td>Connect bank accounts for asset verification</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Additional Documentation</td>
+                        <td>Upload any remaining required documents</td>
+                        <td><span class="badge" style="background: var(--accent-yellow); color: white;">P1</span></td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>Declarations Completion</td>
+                        <td>Answer declaration questions (Section 5)</td>
+                        <td><span class="badge" style="background: var(--accent-red); color: white;">P0</span></td>
+                        <td>7</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Priority Matrix -->
+        <section class="content-section">
+            <h2 class="content-section-title">Implementation Priority Matrix</h2>
+
+            <div class="card-grid">
+                <div class="card" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3);">
+                    <h3 class="card-title">Phase 1: MVP (P0)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Prove integration & identity verification</div>
+                        <div class="priority-item">Plaid VOA & Truv VOIE integrations</div>
+                        <div class="priority-item">Soft/hard credit pull functionality</div>
+                        <div class="priority-item">Shorter initial application flow</div>
+                        <div class="priority-item">Gamified task workflow (post-submission)</div>
+                        <div class="priority-item">Co-borrower management</div>
+                        <div class="priority-item">LO configuration system</div>
+                        <div class="priority-item">Review & edit screen</div>
+                        <div class="priority-item">Mobile-first responsive design</div>
+                        <div class="priority-item">Co-branding throughout</div>
+                        <div class="priority-item">Invite borrower flow</div>
+                        <div class="priority-item">Progress tracking & completion</div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
+                    <h3 class="card-title">Phase 2: Differentiation (P1)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">FlueID title data integration</div>
+                        <div class="priority-item">AI assistant (universal chat)</div>
+                        <div class="priority-item">Proactive AI engagement</div>
+                        <div class="priority-item">Mobile AI experience (fixed bar)</div>
+                        <div class="priority-item">LO summary report with AI insights</div>
+                        <div class="priority-item">Auto soft credit pull</div>
+                        <div class="priority-item">AUS pre-run automation</div>
+                        <div class="priority-item">FlueID property/liability matching</div>
+                        <div class="priority-item">"AI Future vs Stone Age" toggle</div>
+                        <div class="priority-item">Solex E-consent integration</div>
+                        <div class="priority-item">Candor needs list integration</div>
+                        <div class="priority-item">Refinance-specific flow</div>
+                        <div class="priority-item">REO section with title validation</div>
+                        <div class="priority-item">Application progress visibility</div>
+                        <div class="priority-item">Stuck point detection</div>
+                        <div class="priority-item">Returning user flow</div>
+                        <div class="priority-item">Branching logic enhancements</div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                    <h3 class="card-title">Phase 3: Enhancements (P2)</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Smart tooltips replacement with AI</div>
+                        <div class="priority-item">AI document scanning (driver's license)</div>
+                        <div class="priority-item">LO takeover functionality</div>
+                        <div class="priority-item">Vendor integration dashboard</div>
+                        <div class="priority-item">First-time homebuyer education mode</div>
+                        <div class="priority-item">Property search integration</div>
+                        <div class="priority-item">Rental income estimation tools</div>
+                        <div class="priority-item">Multiple property management</div>
+                        <div class="priority-item">Income calculator enhancements</div>
+                        <div class="priority-item">Calendly scheduling integration</div>
+                        <div class="priority-item">Reviews integration (Zillow, etc.)</div>
+                        <div class="priority-item">Advanced analytics & reporting</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reference Information -->
+        <section class="content-section">
+            <h2 class="content-section-title">Reference Information</h2>
+
+            <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                <h3 class="card-title">Source Documentation</h3>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item">📄 SmartApp Features List.xlsx (Master spreadsheet)</div>
+                    <div class="priority-item">📋 14 Requirements Modules (detailed specifications)</div>
+                    <div class="priority-item">💬 Bolt Feedback Synthesis (stakeholder input)</div>
+                    <div class="priority-item">🔍 FlueID Findings (vendor capabilities)</div>
+                    <div class="priority-item">🎤 CX Platform Intake Meeting (Dec 17, 2025)</div>
+                    <div class="priority-item">👥 7 LO Interviews (pain points & requirements)</div>
+                    <div class="priority-item">🎯 Competitive Analysis (market benchmarking)</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • Master Features List</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../documents/">Documents</a>
+                <a href="../requirements/">Requirements</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

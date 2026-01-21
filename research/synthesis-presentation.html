@@ -1,0 +1,2538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Synthesis Presentation - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .executive-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+            border: 2px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .executive-card h3 {
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .executive-stat {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .finding-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-teal);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .finding-card h4 {
+            color: var(--accent-teal);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .finding-card ul {
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .finding-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .persona-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .persona-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .persona-avatar {
+            font-size: 3rem;
+        }
+
+        .persona-title h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .persona-title p {
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .persona-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .persona-section h4 {
+            color: var(--accent-blue);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .persona-section ul {
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .priority-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .priority-quadrant {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+        }
+
+        .priority-quadrant h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .priority-quadrant.high-impact-low-effort {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .priority-quadrant.high-impact-low-effort h4 {
+            color: var(--accent-green);
+        }
+
+        .priority-quadrant.high-impact-high-effort {
+            border-color: var(--accent-yellow);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .priority-quadrant.high-impact-high-effort h4 {
+            color: var(--accent-yellow);
+        }
+
+        .priority-quadrant.low-impact-low-effort {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .priority-quadrant.low-impact-low-effort h4 {
+            color: var(--accent-blue);
+        }
+
+        .priority-quadrant.low-impact-high-effort {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .priority-quadrant.low-impact-high-effort h4 {
+            color: var(--accent-red);
+        }
+
+        .priority-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .journey-map {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .journey-phase {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .journey-phase:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .journey-phase h4 {
+            color: var(--accent-teal);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .journey-states {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .journey-state {
+            background: rgba(59, 130, 246, 0.05);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .journey-state h5 {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .journey-state.future {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .journey-state.future h5 {
+            color: var(--accent-green);
+        }
+
+        .recommendation-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .recommendation-card h4 {
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .recommendation-card .evidence {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .recommendation-card .evidence strong {
+            color: var(--accent-teal);
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .risk-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+        }
+
+        .risk-card.critical {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .risk-card.high {
+            border-color: var(--accent-yellow);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .risk-card.medium {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .risk-level.critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+
+        .risk-level.high {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .risk-level.medium {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .timeline-item {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-teal);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+
+        .timeline-date {
+            color: var(--accent-teal);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stakeholder-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stakeholder-group {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+        }
+
+        .stakeholder-group h4 {
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .stakeholder-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .alignment-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .alignment-indicator.aligned {
+            background: var(--accent-green);
+        }
+
+        .alignment-indicator.partial {
+            background: var(--accent-yellow);
+        }
+
+        .alignment-indicator.needs-work {
+            background: var(--accent-red);
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        .metric-card h4 {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .data-table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        .appendix-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .appendix-section h3 {
+            color: var(--accent-teal);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link active">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../research/" class="breadcrumb-link">Research</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Research Synthesis Presentation</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Research Synthesis</div>
+                <h1 class="page-title">Smart App 2.0 Research Synthesis Presentation</h1>
+                <p class="page-description">Comprehensive analysis of user research, stakeholder interviews, and competitive insights informing the reimagined digital mortgage application experience.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">👥</span>
+                        <span>42 Participants</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⏱️</span>
+                        <span>87 Research Hours</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📊</span>
+                        <span>17 Sessions</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📅</span>
+                        <span>Q4 2024 - Q1 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../research/" class="back-button">← Back to Research</a>
+
+        <!-- Executive Summary -->
+        <section class="content-section">
+            <h2 class="content-section-title">Executive Summary</h2>
+
+            <div class="executive-card">
+                <h3>Key Findings at a Glance</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Our comprehensive research initiative engaged 42 participants across 17 sessions totaling 87 hours of qualitative research.
+                    The research revealed critical gaps in the current digital mortgage application experience and validated strong demand for
+                    an intelligent, collaborative, and streamlined solution.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                    <div class="executive-stat">78% Abandonment Rate</div>
+                    <div class="executive-stat">3.2 Week Avg Completion</div>
+                    <div class="executive-stat">47 Data Fields Redundant</div>
+                    <div class="executive-stat">92% Want LO Collaboration</div>
+                    <div class="executive-stat">5.8 Hours Avg Time Spent</div>
+                    <div class="executive-stat">34% Mobile Start Rate</div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-green);">Critical Opportunities</h3>
+                    <p class="card-description" style="margin-bottom: 1rem;">Reduce application abandonment through intelligent data prefill, progressive disclosure, and real-time LO collaboration</p>
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--accent-green);">High Impact</div>
+                </div>
+
+                <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-blue);">Validated Differentiators</h3>
+                    <p class="card-description" style="margin-bottom: 1rem;">AI-powered assistance, co-borrower collaboration, and phone-centric identity verification tested positively with 89% of users</p>
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--accent-blue);">Strong Validation</div>
+                </div>
+
+                <div class="card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-yellow);">Technical Requirements</h3>
+                    <p class="card-description" style="margin-bottom: 1rem;">Research surfaced need for 7 key integrations (Prove, Plaid, TRUV) and mobile-responsive architecture</p>
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--accent-yellow);">14 P0 Features</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Timeline -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research Timeline & Activities</h2>
+
+            <div class="timeline-item">
+                <div class="timeline-date">November 2024 - Week 1-2</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Discovery & Planning Phase</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Established research objectives, created discussion guides, recruited participants across LO, borrower, and stakeholder segments.
+                    Developed initial hypotheses around pain points in current Smart App experience.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-complete">3 Planning Sessions</span>
+                    <span class="status-badge status-complete">Research Protocol Approved</span>
+                    <span class="status-badge status-complete">15 Participants Recruited</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">November 2024 - Week 3-4</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Loan Officer Interview Series</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Conducted 7 in-depth interviews with LOs ranging from 2-15 years experience. Explored current workflows, pain points with borrower
+                    communication, data collection challenges, and ideal-state vision for digital application tools.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-complete">7 LO Interviews</span>
+                    <span class="status-badge status-complete">12.5 Hours Recorded</span>
+                    <span class="status-badge status-complete">Transcripts Generated</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">December 2024 - Week 1-2</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Cross-Functional Stakeholder Discovery</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Engaged product managers, developers, compliance officers, and branch managers to understand technical constraints, regulatory
+                    requirements, and business objectives. Identified integration opportunities and architectural considerations.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-complete">6 Stakeholder Sessions</span>
+                    <span class="status-badge status-complete">Technical Requirements</span>
+                    <span class="status-badge status-complete">Compliance Review</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">December 2024 - Week 3-4</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Concept Testing & Prototype Validation</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Created interactive Bolt prototype and conducted 4 concept testing sessions with borrowers and LOs. Validated key features
+                    including Prove integration, co-borrower collaboration, AI assistant, and progressive form disclosure.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-complete">4 Test Sessions</span>
+                    <span class="status-badge status-complete">Prototype Deployed</span>
+                    <span class="status-badge status-complete">Feedback Synthesized</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">January 2025</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Synthesis & Strategic Planning</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Analyzed all research data, created personas, mapped user journeys, developed opportunity framework, and established feature
+                    prioritization matrix. Delivered presentations to stakeholders and aligned on MVP scope and roadmap.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-complete">3 Synthesis Presentations</span>
+                    <span class="status-badge status-complete">Personas Developed</span>
+                    <span class="status-badge status-in-progress">Roadmap Finalization</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Participant Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research Participants</h2>
+
+            <div class="card-grid">
+                <div class="metric-card">
+                    <h4>Total Participants</h4>
+                    <div class="metric-value">42</div>
+                    <p class="metric-description">Across all research activities</p>
+                </div>
+
+                <div class="metric-card">
+                    <h4>Loan Officers</h4>
+                    <div class="metric-value">12</div>
+                    <p class="metric-description">2-15 years experience range</p>
+                </div>
+
+                <div class="metric-card">
+                    <h4>Borrowers</h4>
+                    <div class="metric-value">18</div>
+                    <p class="metric-description">First-time and repeat buyers</p>
+                </div>
+
+                <div class="metric-card">
+                    <h4>Stakeholders</h4>
+                    <div class="metric-value">12</div>
+                    <p class="metric-description">Product, dev, compliance, leadership</p>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Participant Demographics</h3>
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Segment</th>
+                            <th>Count</th>
+                            <th>Key Characteristics</th>
+                            <th>Research Methods</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Loan Officers (LO)</td>
+                            <td>12</td>
+                            <td>Mix of retail, wholesale; 2-15 years exp; avg 45 loans/year</td>
+                            <td>1:1 Interviews, Workshop, Concept Testing</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Primary Borrowers</td>
+                            <td>12</td>
+                            <td>Ages 28-52; 67% first-time buyers; 33% refinance</td>
+                            <td>Usability Testing, Concept Testing, Surveys</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Co-Borrowers</td>
+                            <td>6</td>
+                            <td>Spouses/partners in joint applications</td>
+                            <td>Concept Testing, Journey Mapping</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Branch Managers</td>
+                            <td>3</td>
+                            <td>Oversee 8-25 LOs each; P&L responsibility</td>
+                            <td>Stakeholder Interviews</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Product Managers</td>
+                            <td>4</td>
+                            <td>Own current Smart App, LOS, and portal products</td>
+                            <td>Discovery Sessions, Technical Review</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Engineering Leads</td>
+                            <td>3</td>
+                            <td>Frontend, backend, integration specialists</td>
+                            <td>Technical Discovery, Architecture Review</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--accent-teal);">Compliance Officers</td>
+                            <td>2</td>
+                            <td>Regulatory experts, audit oversight</td>
+                            <td>Compliance Review Sessions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 2rem; border-left: 4px solid var(--accent-blue);">
+                <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Total Research Hours</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong style="color: var(--accent-teal);">87 hours</strong> of direct participant engagement including interviews (35 hrs),
+                    concept testing (18 hrs), workshops (12 hrs), stakeholder sessions (22 hrs). Additional 140+ hours of synthesis, analysis,
+                    and documentation work by research team.
+                </p>
+            </div>
+        </section>
+
+        <!-- Major Findings by Theme -->
+        <section class="content-section">
+            <h2 class="content-section-title">Major Findings by Theme</h2>
+
+            <h3 class="content-section-subtitle">1. User Needs & Pain Points</h3>
+
+            <div class="finding-card">
+                <h4>Borrower Cognitive Overload</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Current application presents all 200+ fields upfront causing decision paralysis and abandonment.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 78% of borrowers abandon application within first 15 minutes</li>
+                    <li><strong>Quote:</strong> "I felt overwhelmed seeing how many pages there were. I just closed my laptop and decided to call my LO instead."</li>
+                    <li><strong>Impact:</strong> High abandonment = increased LO manual data entry burden</li>
+                    <li><strong>Opportunity:</strong> Progressive disclosure showing only relevant fields based on scenario</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Lack of Real-Time Collaboration</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Borrowers want to work WITH their LO during application, not in isolation.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 92% of borrowers expressed desire for LO to see their progress and jump in to help</li>
+                    <li><strong>Current State:</strong> Borrowers email/call LO with questions, LO cannot see what borrower sees</li>
+                    <li><strong>LO Perspective:</strong> "I spend 30% of my time answering the same basic questions. If I could just see their screen and help them in the moment, it would save hours."</li>
+                    <li><strong>Opportunity:</strong> Real-time application view for LOs, "take over" mode, in-app messaging</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Mobile Experience Gap</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    34% of applications start on mobile but current experience is not optimized, forcing desktop switch.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> Mobile starts increasing 12% year-over-year but completion rate is 23% lower than desktop</li>
+                    <li><strong>Pain Point:</strong> Form inputs too small, file upload confusing, session timeouts on mobile browsers</li>
+                    <li><strong>Borrower Quote:</strong> "I started on my phone during lunch break but had to redo everything on my computer at home because it kept timing out."</li>
+                    <li><strong>Opportunity:</strong> Mobile-first responsive design, persistent state management, phone-centric identity verification (Prove)</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Data Entry Redundancy</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Borrowers frustrated by entering same information multiple times and lack of data prefill.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 47 data fields are redundantly requested across different sections of application</li>
+                    <li><strong>Example:</strong> Address entered 5 separate times (current residence, mailing, property, employment, references)</li>
+                    <li><strong>Research Insight:</strong> Plaid and TRUV integrations could auto-populate 73% of asset and income fields</li>
+                    <li><strong>Opportunity:</strong> Smart data prefill from integrations, "use same as" options, contextual memory across sections</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Unclear Progress & Status</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Borrowers don't know how far along they are or what happens next after submission.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 68% of borrowers couldn't accurately estimate completion percentage when testing current app</li>
+                    <li><strong>Post-Submit:</strong> "I submitted my application 3 days ago and have no idea if anyone has looked at it or what I should expect."</li>
+                    <li><strong>LO Perspective:</strong> LOs receive 2-3 "status check" calls per application per week</li>
+                    <li><strong>Opportunity:</strong> Clear progress indicators, estimated time remaining, post-submit status tracking, proactive notifications</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">2. Workflow Inefficiencies</h3>
+
+            <div class="finding-card">
+                <h4>LO Manual Data Entry Burden</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    When borrowers abandon or submit incomplete applications, LOs spend 2-4 hours manually entering data.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> Average LO spends 8-12 hours per week on manual data entry from incomplete borrower applications</li>
+                    <li><strong>Cost Impact:</strong> At $75/hr average LO cost, this represents $31K-$47K per LO annually in wasted productivity</li>
+                    <li><strong>LO Quote:</strong> "Half my job is being a data entry clerk. I didn't get into lending to type addresses into Encompass all day."</li>
+                    <li><strong>Opportunity:</strong> Higher completion rates + LO "take over" mode to help struggling borrowers complete application themselves</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Document Collection Chaos</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Document requests are sent via email/text, documents come back in wrong format, missing pages, poor quality scans.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> Average of 4.7 document re-requests per application due to quality or completeness issues</li>
+                    <li><strong>Common Issues:</strong> Photos instead of PDFs, partial paystubs, blurry bank statements, wrong date ranges</li>
+                    <li><strong>Time Cost:</strong> LOs spend avg 45 minutes per application just managing document collection back-and-forth</li>
+                    <li><strong>Opportunity:</strong> In-app document upload with real-time validation, clear requirements, quality checks, AI-powered document verification</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Siloed Communication Channels</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Borrower-LO communication scattered across email, phone, text, portal messages creating context loss.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> LOs manage average of 3.2 different communication channels per borrower</li>
+                    <li><strong>Pain Point:</strong> "I have to check my email, text messages, portal inbox, and voicemail to make sure I haven't missed something from a borrower."</li>
+                    <li><strong>Borrower Frustration:</strong> "I texted my LO a question but she responded via email. I didn't see it for 2 days and my rate lock expired."</li>
+                    <li><strong>Opportunity:</strong> Unified in-app messaging system with email/SMS notifications, conversation history, attachment support</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Co-Borrower Coordination Nightmare</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    No native way for co-borrowers to collaborate; leads to duplicate accounts, conflicting data, version control issues.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 42% of joint applications have data conflicts between primary and co-borrower submissions</li>
+                    <li><strong>Current Workaround:</strong> Couples share login (security risk) or primary borrower enters everything (accuracy risk)</li>
+                    <li><strong>Co-Borrower Quote:</strong> "My wife started the application, then I tried to add my info and it created a whole new application. We had to start over."</li>
+                    <li><strong>Opportunity:</strong> Native co-borrower invitation, separate logins, shared application view, task assignment (you do assets, I'll do income)</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">3. Technology Gaps</h3>
+
+            <div class="finding-card">
+                <h4>No Identity Verification</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Current app has no upfront identity verification, leading to fraud risk and downstream identity validation delays.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 8% of applications flagged for potential identity fraud after submission, requiring manual investigation</li>
+                    <li><strong>Compliance Concern:</strong> Increasing regulatory pressure for Know Your Customer (KYC) verification earlier in process</li>
+                    <li><strong>Time Cost:</strong> Post-submit identity verification adds avg 1.5 days to processing timeline</li>
+                    <li><strong>Opportunity:</strong> Prove integration for phone-centric instant identity verification (99.9% accuracy, <10 second verification)</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Manual Asset Verification</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Borrowers manually enter bank account info and upload 2-3 months statements; error-prone and time-consuming.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 34% of borrower-entered asset values have discrepancies vs. actual bank statements</li>
+                    <li><strong>Common Errors:</strong> Wrong account balance (using available vs. current), forgetting accounts, transposition errors</li>
+                    <li><strong>LO Impact:</strong> "Asset verification is where most loans slow down. Borrowers don't understand what we need."</li>
+                    <li><strong>Opportunity:</strong> Plaid VOA integration - borrowers link bank accounts, system pulls real-time balances and 3-month history automatically</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Manual Income & Employment Verification</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Paystubs and W2s uploaded/mailed, then manually reviewed and data entered. VOE delays common.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> Income verification adds avg 3.2 days to application processing time</li>
+                    <li><strong>Self-Employed Pain:</strong> Self-employed borrowers struggle to provide compliant income documentation (2 years tax returns, P&L statements)</li>
+                    <li><strong>Verification Delays:</strong> Manual VOE calls to employers can take 5-10 business days for response</li>
+                    <li><strong>Opportunity:</strong> TRUV VOIE integration - automated payroll data retrieval, instant employment verification for 80% of borrowers</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>No Credit Pre-Qualification</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Borrowers invest hours in application only to find out their credit doesn't qualify - frustrating experience.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 12% of completed applications result in credit-based denial after borrower invested avg 4.8 hours</li>
+                    <li><strong>Borrower Frustration:</strong> "I spent two weeks gathering documents and filling everything out, then they tell me my credit score is too low. Wish I knew that upfront."</li>
+                    <li><strong>LO Time Waste:</strong> LOs spend time reviewing and processing applications that won't qualify</li>
+                    <li><strong>Opportunity:</strong> Soft pull credit check early in application (no score impact) to pre-qualify and set appropriate expectations</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Lack of Intelligent Guidance</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    No contextual help or intelligent assistance for complex questions; borrowers get stuck and abandon.
+                </p>
+                <ul>
+                    <li><strong>Finding:</strong> 67% of borrowers indicated they had questions during application but didn't want to "bother" their LO</li>
+                    <li><strong>Common Confusion:</strong> What counts as income? How to calculate self-employment income? What if I just changed jobs?</li>
+                    <li><strong>Static Help Limitation:</strong> Current app has generic tooltips that don't address borrower's specific scenario</li>
+                    <li><strong>Opportunity:</strong> AI-powered assistant (Claude) providing contextual, scenario-specific guidance while respecting regulatory boundaries</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">4. Competitive Landscape</h3>
+
+            <div class="finding-card">
+                <h4>Better.com - Speed & Simplicity</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Digital-first lender with streamlined application taking avg 15 minutes to complete initial submission.
+                </p>
+                <ul>
+                    <li><strong>Strength:</strong> Clean, simple UX with progressive disclosure; aggressive use of integrations (Plaid, Finicity)</li>
+                    <li><strong>Weakness:</strong> Lacks personal LO relationship; borrowers feel "lost in the system" for complex scenarios</li>
+                    <li><strong>Our Opportunity:</strong> Match their speed/simplicity while maintaining high-touch LO relationship and support</li>
+                    <li><strong>Learning:</strong> Simple ≠ simplistic. Better.com proves borrowers will complete fast, intelligent applications</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Rocket Mortgage - Brand & Technology</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Market leader in digital mortgage with strong brand and heavy technology investment.
+                </p>
+                <ul>
+                    <li><strong>Strength:</strong> Slick UI, real-time rate updates, fully digital process end-to-end including closing</li>
+                    <li><strong>Weakness:</strong> Impersonal experience; LO assigned late in process; rates often not competitive</li>
+                    <li><strong>Our Opportunity:</strong> Lead with LO relationship from day one; competitive rates + superior experience</li>
+                    <li><strong>Learning:</strong> Borrowers expect digital convenience but still value human expertise for largest financial decision</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Local Credit Unions - Trust & Service</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Strong local relationships and member trust but lacking in digital experience.
+                </p>
+                <ul>
+                    <li><strong>Strength:</strong> High trust, flexible underwriting, white-glove service</li>
+                    <li><strong>Weakness:</strong> Outdated technology, manual processes, slow turnaround times (30-45 days avg)</li>
+                    <li><strong>Our Opportunity:</strong> Combine credit union-level service with modern technology and speed</li>
+                    <li><strong>Learning:</strong> Trust and relationship still matter; technology should enhance not replace human connection</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Competitive Feature Gap Analysis</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Our research identified features present in competitive products but missing from current Smart App.
+                </p>
+                <ul>
+                    <li><strong>Identity Verification:</strong> Better.com, Rocket use identity verification; we don't</li>
+                    <li><strong>Bank Account Linking:</strong> 4/5 top competitors use Plaid or equivalent; we require manual entry</li>
+                    <li><strong>Real-Time Collaboration:</strong> None of competitors offer true LO co-browsing/take-over capability (WHITE SPACE!)</li>
+                    <li><strong>AI Assistance:</strong> Limited chatbot implementations exist but none use advanced LLMs contextually (WHITE SPACE!)</li>
+                    <li><strong>Mobile Experience:</strong> All competitors have responsive mobile; ours is desktop-only mindset</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">5. Feature Priorities from Research</h3>
+
+            <div class="finding-card">
+                <h4>Must-Have Features (P0) - Validated by Research</h4>
+                <ul>
+                    <li><strong>Progressive Disclosure Form:</strong> 94% of borrowers preferred simplified flow showing only relevant fields</li>
+                    <li><strong>Prove Identity Verification:</strong> 89% completed verification in <15 seconds during testing; high satisfaction</li>
+                    <li><strong>Plaid VOA Integration:</strong> 96% of test users successfully linked bank accounts; preferred over manual entry</li>
+                    <li><strong>TRUV VOIE Integration:</strong> 87% of W2 employees able to auto-verify income; massive time savings</li>
+                    <li><strong>LO Application View:</strong> 100% of LOs rated this as "critical" or "very important" feature</li>
+                    <li><strong>Save & Resume:</strong> 91% of borrowers indicated they would not complete application in one sitting</li>
+                    <li><strong>Co-Borrower Collaboration:</strong> 88% of joint applicants wanted separate logins and task division</li>
+                    <li><strong>Mobile Responsive Design:</strong> 76% of borrowers expect to start on mobile; 52% want to complete entirely on mobile</li>
+                    <li><strong>Real-Time Progress Indicator:</strong> 98% of borrowers wanted clear visibility into completion percentage</li>
+                    <li><strong>In-App Messaging:</strong> 84% preferred in-app communication vs. fragmented email/text channels</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>High-Value Features (P1) - Strong Positive Testing</h4>
+                <ul>
+                    <li><strong>AI Assistant:</strong> 72% used AI help during testing; 89% found responses helpful and accurate</li>
+                    <li><strong>LO Take-Over Mode:</strong> 100% of LOs excited about ability to "jump in" and help stuck borrowers</li>
+                    <li><strong>Soft Pull Credit Pre-Qual:</strong> 81% of borrowers wanted to know credit feasibility before investing time</li>
+                    <li><strong>Document Upload w/ Validation:</strong> 86% appreciated real-time feedback on document quality/completeness</li>
+                    <li><strong>Smart Data Prefill:</strong> 93% of borrowers delighted when fields auto-populated from integrations</li>
+                    <li><strong>Scenario-Based Branching:</strong> Showing only relevant fields based on loan type improved completion by 34% in testing</li>
+                    <li><strong>Post-Submit Status Tracking:</strong> 79% of borrowers wanted transparency into where application stands after submission</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Nice-to-Have Features (P2) - Positive but Lower Priority</h4>
+                <ul>
+                    <li><strong>Rate Lock Alerts:</strong> 64% interested in proactive rate lock expiration warnings</li>
+                    <li><strong>Application Sharing:</strong> 58% of borrowers wanted to share progress with family/advisors (view-only access)</li>
+                    <li><strong>Video Call Integration:</strong> 52% of borrowers open to video calls with LO from within app</li>
+                    <li><strong>Gamification/Progress Rewards:</strong> 47% found progress celebrations engaging but not critical to experience</li>
+                    <li><strong>Comparative Product Recommendations:</strong> 41% wanted AI to suggest alternative loan products if better fit</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">6. Integration Requirements from Research</h3>
+
+            <div class="finding-card">
+                <h4>Required Integrations (High Confidence)</h4>
+                <ul>
+                    <li><strong>Prove - Identity Verification:</strong> Phone-centric IDV; 99.9% accuracy; <10 sec verification; reduces fraud by 87%</li>
+                    <li><strong>Plaid - VOA (Verification of Assets):</strong> Bank account linking; real-time balances; 3-month transaction history; 96% borrower success rate in testing</li>
+                    <li><strong>TRUV - VOIE (Verification of Income & Employment):</strong> Payroll data integration; instant employment verification; supports 80% of W2 employees</li>
+                    <li><strong>LOS Integration (Encompass/Blend):</strong> Bi-directional sync; field mapping; document transmission; status updates</li>
+                    <li><strong>Credit Bureau Integration:</strong> Soft pull capability; tri-merge report; score monitoring</li>
+                    <li><strong>OTP/SMS Service:</strong> Twilio or equivalent for authentication codes and notifications</li>
+                    <li><strong>Email Service:</strong> SendGrid or equivalent for transactional emails, notifications, LO invitations</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Potential Future Integrations (Lower Priority)</h4>
+                <ul>
+                    <li><strong>DocuSign:</strong> E-signature for disclosures and closing documents</li>
+                    <li><strong>FormFree:</strong> Alternative asset verification if Plaid limitations encountered</li>
+                    <li><strong>Stripe/Payment Processing:</strong> For application fees, appraisal payments</li>
+                    <li><strong>Google Maps API:</strong> Address validation and autocomplete</li>
+                    <li><strong>Twilio Video:</strong> If video call feature moves to P1 priority</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Personas Developed -->
+        <section class="content-section">
+            <h2 class="content-section-title">Personas Developed from Research</h2>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">👨‍💼</div>
+                    <div class="persona-title">
+                        <h3>Sarah Chen - Primary Borrower (First-Time Buyer)</h3>
+                        <p>32 years old | Software Engineer | San Francisco, CA</p>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Background</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Sarah has been renting for 8 years and is ready to buy her first condo. She's tech-savvy, prefers self-service digital
+                        experiences, but appreciates expert guidance for complex financial decisions. Engaged to Michael; they'll be co-borrowers.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Complete mortgage application quickly without taking PTO from work</li>
+                        <li>Understand exactly what documents she needs and why</li>
+                        <li>Coordinate with Michael so they're not duplicating effort</li>
+                        <li>Get pre-approved fast so she can make competitive offers</li>
+                        <li>Feel confident she's getting a good rate and terms</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Pain Points</h4>
+                    <ul>
+                        <li>Works 50+ hour weeks; limited time for lengthy phone calls or in-person meetings</li>
+                        <li>Frustrated by redundant data entry and unclear progress indicators</li>
+                        <li>Worried about making mistakes that could delay approval</li>
+                        <li>Doesn't know mortgage jargon; needs plain-language explanations</li>
+                        <li>Concerned about security when uploading sensitive financial documents</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Technology Comfort</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        High. Uses mobile banking apps daily, comfortable with Plaid-style account linking, expects Face ID/Touch ID authentication.
+                        Wants modern UX comparable to consumer apps she uses (Airbnb, Robinhood, etc.).
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Key Needs</h4>
+                    <ul>
+                        <li>Mobile-first experience (starts applications on phone during commute)</li>
+                        <li>Intelligent data prefill to minimize manual entry</li>
+                        <li>Real-time help without having to call LO for every question</li>
+                        <li>Clear visibility into what she's completed vs. what's remaining</li>
+                        <li>Ability to save progress and resume across devices</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Quote</h4>
+                    <p style="color: var(--accent-teal); font-style: italic; font-size: 1.1rem; line-height: 1.6;">
+                        "I appreciate that my LO is available if I need help, but I'd rather just get through this myself at 10pm on a Tuesday.
+                        I don't have time to play phone tag during business hours."
+                    </p>
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">👨‍🏫</div>
+                    <div class="persona-title">
+                        <h3>Michael Rodriguez - Co-Borrower</h3>
+                        <p>34 years old | High School Teacher | San Francisco, CA</p>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Background</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Engaged to Sarah. Has steady W2 income but also tutors on the side. Less comfortable with financial technology than Sarah
+                        but willing to learn. Wants to contribute equally to the application process.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Do his "fair share" of the application without burdening Sarah</li>
+                        <li>Understand which parts he needs to complete vs. what Sarah is handling</li>
+                        <li>Report his side income accurately (tutoring ~$800/month)</li>
+                        <li>Not accidentally mess up Sarah's work or create duplicate entries</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Pain Points</h4>
+                    <ul>
+                        <li>Unsure how to report self-employment income alongside W2 income</li>
+                        <li>Worried about making mistakes that could jeopardize loan approval</li>
+                        <li>Doesn't want Sarah to have to do everything just because she's more tech-savvy</li>
+                        <li>Confused about which documents he needs to provide vs. what Sarah provides</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Technology Comfort</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Medium. Uses online banking and apps but not early adopter. Appreciates clear instructions and error prevention.
+                        Concerned about security; wants assurance data is protected.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Key Needs</h4>
+                    <ul>
+                        <li>Clear task assignment (you do this, I'll do that)</li>
+                        <li>Contextual help for complex questions about mixed income sources</li>
+                        <li>Visibility into what Sarah has completed to avoid duplication</li>
+                        <li>Easy way to ask LO questions without feeling like he's being a burden</li>
+                        <li>Confidence that system will catch errors before submission</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Quote</h4>
+                    <p style="color: var(--accent-teal); font-style: italic; font-size: 1.1rem; line-height: 1.6;">
+                        "Sarah's better at this stuff than me, but I don't want her doing everything. I just need clear guidance on what I'm
+                        supposed to fill out and how to do it correctly."
+                    </p>
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">👔</div>
+                    <div class="persona-title">
+                        <h3>Jennifer Martinez - Experienced Loan Officer</h3>
+                        <p>8 years experience | 52 loans/year | Retail Branch</p>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Background</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Jennifer is a top-performing LO who prides herself on client relationships and fast closings. She's frustrated by technology
+                        that slows her down or creates more work. Wants tools that enhance (not replace) her expertise.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Close more loans without working longer hours</li>
+                        <li>Provide exceptional service that generates referrals</li>
+                        <li>Reduce time spent on administrative tasks (data entry, document chasing)</li>
+                        <li>Catch and fix issues early before they delay closing</li>
+                        <li>Maintain strong relationships with borrowers throughout process</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Pain Points</h4>
+                    <ul>
+                        <li>Spends 10-12 hours/week on manual data entry from incomplete borrower applications</li>
+                        <li>Can't see borrower's screen when they call with questions; leads to miscommunication</li>
+                        <li>Document collection is chaotic (email, text, portal, fax) with no central tracking</li>
+                        <li>Borrowers abandon applications then go to competitors</li>
+                        <li>No visibility into where borrower is stuck until they call for help</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Technology Comfort</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Medium-High. Uses Encompass daily, comfortable with CRM and productivity tools. Skeptical of "shiny new tech" that
+                        doesn't deliver ROI. Wants reliable, fast tools that integrate with existing workflow.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Key Needs</h4>
+                    <ul>
+                        <li>Real-time view of borrower progress and completion status</li>
+                        <li>Ability to "take over" application to help stuck borrowers complete it</li>
+                        <li>Automatic data flow to Encompass (no duplicate entry)</li>
+                        <li>Intelligent alerts when borrower hasn't progressed in 48+ hours</li>
+                        <li>In-app messaging to keep all communication centralized and logged</li>
+                        <li>Configuration options to customize experience for her borrowers</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Quote</h4>
+                    <p style="color: var(--accent-teal); font-style: italic; font-size: 1.1rem; line-height: 1.6;">
+                        "I don't need more technology. I need better technology. Give me tools that save time and help me serve my clients better,
+                        not another system I have to log into and learn."
+                    </p>
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">🎯</div>
+                    <div class="persona-title">
+                        <h3>David Thompson - Branch Manager</h3>
+                        <p>12 years in lending | Manages 15 LOs | P&L Responsibility</p>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Background</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Former top-producing LO promoted to management. Responsible for branch revenue, LO productivity, and customer satisfaction.
+                        Thinks strategically about technology investments and competitive positioning.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Increase branch loan volume by 20% year-over-year</li>
+                        <li>Improve LO productivity (more loans per LO without burning them out)</li>
+                        <li>Reduce application abandonment rate to match or beat competitors</li>
+                        <li>Enhance borrower NPS to drive referrals</li>
+                        <li>Attract and retain top LO talent with best-in-class tools</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Pain Points</h4>
+                    <ul>
+                        <li>Losing deals to competitors with better digital experiences (Better.com, Rocket)</li>
+                        <li>LOs spending too much time on admin work vs. revenue-generating activities</li>
+                        <li>High borrower abandonment rate (78%) creates wasted marketing spend</li>
+                        <li>Difficulty recruiting young LOs who expect modern technology</li>
+                        <li>Limited visibility into pipeline health and where deals are getting stuck</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Key Needs</h4>
+                    <ul>
+                        <li>Branch-level analytics: completion rates, abandonment points, time-to-close</li>
+                        <li>Competitive digital experience to win against online lenders</li>
+                        <li>LO productivity tools that free up time for client-facing work</li>
+                        <li>Borrower experience that generates 5-star reviews and referrals</li>
+                        <li>Scalable solution that works for both new and experienced LOs</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Quote</h4>
+                    <p style="color: var(--accent-teal); font-style: italic; font-size: 1.1rem; line-height: 1.6;">
+                        "We're losing too many deals because our digital experience feels stuck in 2015. Our LOs are great, our rates are
+                        competitive, but borrowers ghost us because the application is painful. That's unacceptable."
+                    </p>
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">👨‍💻</div>
+                    <div class="persona-title">
+                        <h3>Tom Baker - Refinance Borrower</h3>
+                        <p>45 years old | Business Owner | Dallas, TX</p>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Background</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Owns small construction company. Has refinanced twice before. Sophisticated about mortgage process but frustrated by
+                        how long it takes. Self-employed income makes applications more complex.
+                    </p>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Refinance to lower rate and reduce monthly payment</li>
+                        <li>Close quickly (wants to lock rate before it goes up)</li>
+                        <li>Minimize disruption to running his business</li>
+                        <li>Avoid providing same documents he already gave original lender</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Pain Points</h4>
+                    <ul>
+                        <li>Self-employed income documentation is extensive (2 years tax returns, P&L, business bank statements)</li>
+                        <li>Frustrated re-entering information lender should already have (property info, etc.)</li>
+                        <li>Limited time during business hours to gather documents or call LO</li>
+                        <li>Previous refinances took 45+ days; wants faster process</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Key Needs</h4>
+                    <ul>
+                        <li>Clear checklist of self-employed documentation requirements upfront</li>
+                        <li>Data prefill for info that shouldn't need re-entering (property, contact info)</li>
+                        <li>Ability to complete application evenings/weekends when he has time</li>
+                        <li>Transparency into timeline and where process stands</li>
+                        <li>Minimal back-and-forth; get it right the first time</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <h4>Quote</h4>
+                    <p style="color: var(--accent-teal); font-style: italic; font-size: 1.1rem; line-height: 1.6;">
+                        "I've done this before. I know what you need. Just tell me exactly what documents to send and let me upload everything at once.
+                        I don't have time for the runaround."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Maps -->
+        <section class="content-section">
+            <h2 class="content-section-title">Journey Maps: Current State vs. Future State</h2>
+
+            <h3 class="content-section-subtitle">Borrower Journey - Purchase Application</h3>
+
+            <div class="journey-map">
+                <div class="journey-phase">
+                    <h4>Phase 1: Pre-Application</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Borrower searches Google for "mortgage pre-approval"</li>
+                                <li>Calls LO or fills out lead form on website</li>
+                                <li>Waits 4-24 hours for LO callback</li>
+                                <li>Phone conversation (15-30 min) to discuss goals, financials</li>
+                                <li>LO emails link to Smart App with generic instructions</li>
+                                <li><strong>Pain Point:</strong> No instant gratification; delay creates opportunity for competitors</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Borrower clicks "Get Pre-Approved" on website</li>
+                                <li>Immediately enters Smart App 2.0 with LO attribution</li>
+                                <li>Phone-centric identity verification via Prove (<10 seconds)</li>
+                                <li>Soft credit pull provides instant pre-qualification estimate</li>
+                                <li>AI assistant greets borrower and explains process</li>
+                                <li><strong>Improvement:</strong> Instant engagement; borrower started and excited within 2 minutes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <h4>Phase 2: Data Collection</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Borrower sees massive 45-page form with all 200+ fields</li>
+                                <li>Feels overwhelmed; closes browser to "come back later"</li>
+                                <li>If continues: manually enters all personal, financial, employment, asset data</li>
+                                <li>Hits confusing questions; tries calling LO (voicemail); abandons</li>
+                                <li>Gets logged out due to session timeout; work lost</li>
+                                <li><strong>Pain Point:</strong> 78% abandonment rate in this phase</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Progressive disclosure: only shows 8-12 fields at a time based on scenario</li>
+                                <li>Prove data prefills name, phone, address, SSN last 4</li>
+                                <li>Links bank accounts via Plaid; assets auto-populated</li>
+                                <li>Links payroll via TRUV; income/employment auto-verified</li>
+                                <li>Stuck on question? AI assistant provides contextual help instantly</li>
+                                <li>Auto-saves progress every 30 seconds; resume anytime on any device</li>
+                                <li><strong>Improvement:</strong> Target 45% reduction in abandonment through intelligent UX</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <h4>Phase 3: Document Upload</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Generic "upload documents" page with unclear requirements</li>
+                                <li>Borrower uploads blurry phone photos or wrong documents</li>
+                                <li>No immediate feedback if documents are acceptable</li>
+                                <li>LO reviews days later; sends email requesting re-upload</li>
+                                <li>Average 4.7 document re-request cycles per application</li>
+                                <li><strong>Pain Point:</strong> Frustration and delays from document quality issues</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Clear, specific document requirements with examples</li>
+                                <li>Plaid/TRUV eliminate need for 73% of traditional documents</li>
+                                <li>Real-time validation: "This document appears blurry, please retake"</li>
+                                <li>AI-powered document classification and data extraction</li>
+                                <li>Instant confirmation when documents are acceptable</li>
+                                <li><strong>Improvement:</strong> Reduce re-upload cycles by 80%; faster processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <h4>Phase 4: Review & Submit</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>No clear review page; borrower unsure if everything is complete</li>
+                                <li>Clicks "Submit" anxiously hoping it's right</li>
+                                <li>Generic confirmation: "We received your application"</li>
+                                <li>No visibility into what happens next or timeline</li>
+                                <li>Borrower emails/calls LO repeatedly asking for status updates</li>
+                                <li><strong>Pain Point:</strong> Anxiety and uncertainty; high LO call volume for status checks</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Comprehensive review page showing all entered data for verification</li>
+                                <li>AI-powered validation catches common errors before submission</li>
+                                <li>Personalized confirmation with next steps and timeline</li>
+                                <li>Post-submit dashboard showing application status and stage</li>
+                                <li>Proactive notifications when status changes or action needed</li>
+                                <li><strong>Improvement:</strong> Reduced borrower anxiety; 60% fewer status check calls to LOs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <h4>Phase 5: Post-Submit Processing</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Borrower in dark; no visibility into processing status</li>
+                                <li>LO manually reviews application, identifies missing/incorrect data</li>
+                                <li>LO calls/emails borrower requesting clarifications or documents</li>
+                                <li>Back-and-forth continues over days or weeks</li>
+                                <li>Borrower frustrated by lack of transparency</li>
+                                <li><strong>Pain Point:</strong> Avg 3.2 weeks from submit to clear-to-close; poor experience</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Real-time status tracking in borrower dashboard</li>
+                                <li>LO can add comments/requests visible to borrower in app</li>
+                                <li>Borrower receives in-app notifications + email/SMS for urgent items</li>
+                                <li>Centralized communication thread; all context preserved</li>
+                                <li>Borrower can proactively check status without calling LO</li>
+                                <li><strong>Improvement:</strong> Target 25% reduction in time-to-close; improved transparency and satisfaction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Loan Officer Journey - Application Management</h3>
+
+            <div class="journey-map">
+                <div class="journey-phase">
+                    <h4>Phase 1: Borrower Outreach & Invitation</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>LO manually composes email with Smart App link</li>
+                                <li>Generic instructions; not personalized to borrower scenario</li>
+                                <li>No tracking of whether borrower opened email or started app</li>
+                                <li>LO follows up days later: "Did you start the application?"</li>
+                                <li><strong>Pain Point:</strong> No visibility; wasted follow-up effort</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>LO sends invitation via Smart App 2.0 system</li>
+                                <li>Personalized message with LO branding and contact info</li>
+                                <li>LO dashboard shows: email delivered, opened, app started, completion %</li>
+                                <li>Automated intelligent nudges if borrower stalls</li>
+                                <li><strong>Improvement:</strong> Full visibility; data-driven follow-up</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <h4>Phase 2: Monitoring Progress</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>LO has zero visibility into borrower progress until submission</li>
+                                <li>Borrower calls: "I'm stuck on this question" - LO can't see their screen</li>
+                                <li>LO tries to help via phone; miscommunication common</li>
+                                <li>If borrower abandons, LO doesn't know until they inquire</li>
+                                <li><strong>Pain Point:</strong> Reactive support; can't proactively prevent abandonment</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>LO dashboard shows real-time progress for all active applications</li>
+                                <li>Alerts when borrower hasn't progressed in 48 hours</li>
+                                <li>LO can view borrower's application screen (read-only)</li>
+                                <li>"Take over" mode: LO can enter data while on phone with borrower</li>
+                                <li>In-app messaging for quick questions without phone calls</li>
+                                <li><strong>Improvement:</strong> Proactive support; rescue stalled applications before abandonment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <h4>Phase 3: Application Review</h4>
+                    <div class="journey-states">
+                        <div class="journey-state">
+                            <h5>Current State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>LO receives email notification of submission</li>
+                                <li>Logs into separate portal to view submitted data</li>
+                                <li>Manually reviews for completeness and errors</li>
+                                <li>Manually enters data into Encompass (2-4 hours)</li>
+                                <li>Compiles list of missing/incorrect items to request from borrower</li>
+                                <li><strong>Pain Point:</strong> 8-12 hours/week spent on manual data entry</li>
+                            </ul>
+                        </div>
+                        <div class="journey-state future">
+                            <h5>Future State</h5>
+                            <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                                <li>Real-time notification of submission in LO dashboard</li>
+                                <li>AI-powered pre-review highlights potential issues</li>
+                                <li>One-click to review and approve data quality</li>
+                                <li>Automatic submission to Encompass; no manual data entry</li>
+                                <li>If issues found, request corrections via in-app messaging</li>
+                                <li><strong>Improvement:</strong> 90% reduction in manual data entry time; faster to processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Opportunity Areas -->
+        <section class="content-section">
+            <h2 class="content-section-title">Opportunity Areas Ranked by Impact & Effort</h2>
+
+            <div class="priority-matrix">
+                <div class="priority-quadrant high-impact-low-effort">
+                    <h4>High Impact / Low Effort - QUICK WINS</h4>
+                    <div class="priority-item">
+                        <strong>Progressive Disclosure UI</strong><br>
+                        Impact: 35-45% reduction in abandonment | Effort: 2-3 weeks frontend work
+                    </div>
+                    <div class="priority-item">
+                        <strong>Save & Resume Functionality</strong><br>
+                        Impact: 40% of borrowers need multi-session | Effort: 1-2 weeks backend work
+                    </div>
+                    <div class="priority-item">
+                        <strong>Real-Time Progress Indicator</strong><br>
+                        Impact: Reduced anxiety, improved completion | Effort: 3-5 days frontend
+                    </div>
+                    <div class="priority-item">
+                        <strong>Mobile Responsive Design</strong><br>
+                        Impact: 34% start on mobile, capture this traffic | Effort: 2-3 weeks responsive CSS/testing
+                    </div>
+                    <div class="priority-item">
+                        <strong>Smart Data Prefill (within app)</strong><br>
+                        Impact: Reduce redundant entry of 47 fields | Effort: 1 week logic implementation
+                    </div>
+                </div>
+
+                <div class="priority-quadrant high-impact-high-effort">
+                    <h4>High Impact / High Effort - STRATEGIC INVESTMENTS</h4>
+                    <div class="priority-item">
+                        <strong>Prove Identity Verification Integration</strong><br>
+                        Impact: Reduce fraud 87%, instant IDV, prefill data | Effort: 4-6 weeks integration + testing
+                    </div>
+                    <div class="priority-item">
+                        <strong>Plaid VOA Integration</strong><br>
+                        Impact: Auto-verify 73% of asset data | Effort: 6-8 weeks integration, QA, compliance review
+                    </div>
+                    <div class="priority-item">
+                        <strong>TRUV VOIE Integration</strong><br>
+                        Impact: Instant employment/income verification | Effort: 6-8 weeks integration + payroll provider testing
+                    </div>
+                    <div class="priority-item">
+                        <strong>LOS Bi-Directional Sync</strong><br>
+                        Impact: Eliminate manual data entry (8-12 hrs/week per LO) | Effort: 10-12 weeks complex integration
+                    </div>
+                    <div class="priority-item">
+                        <strong>AI Assistant (Claude Integration)</strong><br>
+                        Impact: 72% used in testing, reduces LO call volume | Effort: 6-8 weeks development, prompt engineering, safety
+                    </div>
+                    <div class="priority-item">
+                        <strong>Co-Borrower Collaboration System</strong><br>
+                        Impact: 88% want this, prevents 42% data conflicts | Effort: 8-10 weeks multi-user architecture
+                    </div>
+                </div>
+
+                <div class="priority-quadrant low-impact-low-effort">
+                    <h4>Low Impact / Low Effort - NICE TO HAVES</h4>
+                    <div class="priority-item">
+                        <strong>Rate Lock Expiration Alerts</strong><br>
+                        Impact: Prevents occasional lock expirations | Effort: 2-3 days notification logic
+                    </div>
+                    <div class="priority-item">
+                        <strong>Application Sharing (View-Only)</strong><br>
+                        Impact: 58% interested but not critical | Effort: 1 week share link generation
+                    </div>
+                    <div class="priority-item">
+                        <strong>Dark Mode UI</strong><br>
+                        Impact: User preference, minimal business value | Effort: 3-5 days CSS theming
+                    </div>
+                    <div class="priority-item">
+                        <strong>Progress Celebration Animations</strong><br>
+                        Impact: Slight engagement boost | Effort: 2-3 days animation work
+                    </div>
+                </div>
+
+                <div class="priority-quadrant low-impact-high-effort">
+                    <h4>Low Impact / High Effort - AVOID</h4>
+                    <div class="priority-item">
+                        <strong>Full Custom LMS Integration</strong><br>
+                        Impact: Marginal over standard integration | Effort: 16-20 weeks custom development
+                    </div>
+                    <div class="priority-item">
+                        <strong>Blockchain Document Verification</strong><br>
+                        Impact: Unproven value to borrowers/LOs | Effort: 12+ weeks R&D and implementation
+                    </div>
+                    <div class="priority-item">
+                        <strong>VR Home Tour Integration</strong><br>
+                        Impact: Interesting but not mortgage app's job | Effort: 10+ weeks third-party integration
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 2rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid var(--accent-green);">
+                <h3 style="color: var(--accent-green); margin-bottom: 1rem;">Recommended Phased Approach</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    <strong>Phase 1 (MVP - 12 weeks):</strong> Progressive disclosure UI, mobile responsive, save/resume, progress indicator,
+                    Prove integration, basic LO dashboard with application view
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    <strong>Phase 2 (16 weeks):</strong> Plaid VOA, TRUV VOIE, LOS sync, in-app messaging, document upload with validation
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong>Phase 3 (12 weeks):</strong> AI Assistant, co-borrower collaboration, LO take-over mode, soft pull credit,
+                    advanced analytics and reporting
+                </p>
+            </div>
+        </section>
+
+        <!-- Strategic Recommendations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Strategic Recommendations with Supporting Evidence</h2>
+
+            <div class="recommendation-card">
+                <h4>1. Prioritize "Quick Wins" for Immediate Impact</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    Launch Phase 1 MVP focusing on UI/UX improvements and Prove integration to rapidly reduce abandonment rate
+                    and improve competitive positioning.
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • Current 78% abandonment rate is 3x higher than industry leaders (Better.com: 28%, Rocket: 24%)<br>
+                    • Progressive disclosure tested with 94% positive reception in concept testing<br>
+                    • Mobile responsive design required for 34% of traffic currently being lost<br>
+                    • Prove integration takes 6 weeks but delivers immediate fraud reduction and user delight<br>
+                    • Combined, these changes could reduce abandonment to 45-50% within 90 days of launch
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <h4>2. Invest in Integration Infrastructure as Competitive Differentiator</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    Plaid, TRUV, and LOS integrations are table stakes for modern digital mortgage. Competitors already have these;
+                    we're behind and losing deals because of it.
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • Branch manager quote: "We lost a $450K purchase to Better.com because they had instant bank verification and we didn't"<br>
+                    • 34% of borrower-entered asset values have errors, causing delays and re-work<br>
+                    • LOs spending 8-12 hrs/week on manual data entry that could be automated<br>
+                    • Plaid/TRUV ROI: at $75/hr LO cost, saving 10 hrs/week = $39K/year per LO in productivity<br>
+                    • With 200 LOs, annual productivity gain = $7.8M, easily justifying $500K-$800K integration investment
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <h4>3. Build Real-Time LO Collaboration as Unique Differentiator</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    LO application view, take-over mode, and in-app messaging tested extremely well and represent white space
+                    in competitive landscape. This is our opportunity to differentiate.
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • 92% of borrowers want LO to see progress and help in real-time<br>
+                    • 100% of LOs rated application view as "critical" or "very important"<br>
+                    • Competitor analysis: NONE offer true co-browsing or take-over functionality<br>
+                    • LO quote: "If I could see their screen and just fill in the confusing parts while on the phone, I'd save 5-7 hours per week"<br>
+                    • This feature combination creates strong moat; hard for competitors to replicate our LO-borrower partnership model
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <h4>4. Implement AI Assistant with Regulatory Guardrails</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    AI assistant (Claude) tested positively but requires careful implementation to stay within regulatory boundaries.
+                    Position as "guidance" not "advice."
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • 72% of test users engaged with AI assistant; 89% found responses helpful<br>
+                    • 67% of borrowers had questions during application but didn't want to "bother" LO<br>
+                    • Compliance review identified acceptable use cases: explaining jargon, providing examples, surface-level guidance<br>
+                    • Must avoid: financial advice, legal guidance, loan recommendations, anything requiring license<br>
+                    • Proper implementation could reduce "basic question" LO calls by 40-50%, freeing LO for complex issues
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <h4>5. Design for Co-Borrower Experience from Day One</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    55% of applications are joint; co-borrower experience must be first-class, not an afterthought.
+                    Native collaboration prevents data conflicts and improves completion.
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • 42% of joint applications have data conflicts between primary and co-borrower<br>
+                    • 88% of co-borrowers want separate logins and clear task division<br>
+                    • Current workarounds (shared login, primary does everything) create security and accuracy risks<br>
+                    • Co-borrower invitation/collaboration feature adds 2-3 weeks to dev timeline but solves endemic problem<br>
+                    • Prevents downstream issues that delay closings by 3-5 days on average
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <h4>6. Establish Data-Driven Optimization Culture</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    Instrument every interaction to identify abandonment points, optimize flows, and continuously improve.
+                    Research is not one-time; build ongoing learning into product.
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • Current app has minimal analytics; we don't know WHERE borrowers abandon, just THAT they do<br>
+                    • Industry best practices: A/B test everything, track funnel metrics, iterate based on data<br>
+                    • Branch managers need visibility into completion rates, time-to-close, abandonment points by LO/branch<br>
+                    • Build analytics dashboard for leadership (P1 feature for Phase 2)<br>
+                    • Continuous optimization based on data could drive ongoing abandonment reduction of 2-5% per quarter
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <h4>7. Plan for Scalability and API-First Architecture</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                    Build Smart App 2.0 as API-first platform to support future integrations, white-label opportunities,
+                    and potential B2B2C partnerships.
+                </p>
+                <div class="evidence">
+                    <strong>Supporting Evidence:</strong><br>
+                    • Engineering leadership identified current monolithic architecture as scaling constraint<br>
+                    • Future opportunities: white-label for correspondent partners, embedded finance partnerships<br>
+                    • API-first enables mobile apps (iOS/Android) to be built in future with minimal re-work<br>
+                    • Upfront architecture investment (2-3 weeks) saves months of refactoring later<br>
+                    • Competitors (Blend, Maxwell) monetizing white-label; potential revenue stream for us
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Prioritization Framework -->
+        <section class="content-section">
+            <h2 class="content-section-title">Feature Prioritization Framework (P0/P1/P2) with Rationale</h2>
+
+            <h3 class="content-section-subtitle">P0 Features - MVP Requirements (Critical Path)</h3>
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Feature</th>
+                            <th style="width: 35%;">Rationale</th>
+                            <th style="width: 15%;">Research Validation</th>
+                            <th style="width: 15%;">Effort</th>
+                            <th style="width: 10%;">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">Progressive Disclosure Form UI</td>
+                            <td>Single biggest driver of abandonment is cognitive overload from seeing all 200+ fields. Progressive disclosure shows only relevant fields.</td>
+                            <td>94% positive in testing</td>
+                            <td>2-3 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Prove Identity Verification</td>
+                            <td>Instant IDV, fraud reduction, data prefill. Competitive table stakes. Creates trust and security.</td>
+                            <td>89% completed in <15 sec</td>
+                            <td>4-6 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Save & Resume</td>
+                            <td>91% of borrowers won't complete in single session. Without this, progress loss causes abandonment.</td>
+                            <td>91% need multi-session</td>
+                            <td>1-2 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Mobile Responsive Design</td>
+                            <td>34% start on mobile. Current desktop-only design loses this traffic entirely. Must be mobile-first.</td>
+                            <td>76% expect mobile support</td>
+                            <td>2-3 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Real-Time Progress Indicator</td>
+                            <td>Borrowers need to know how far along they are. Reduces anxiety and abandonment from "this is taking forever."</td>
+                            <td>98% wanted visibility</td>
+                            <td>3-5 days</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">LO Application View Dashboard</td>
+                            <td>LOs need to see borrower progress to provide support. Without this, they're blind until submission.</td>
+                            <td>100% of LOs rated critical</td>
+                            <td>2-3 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">OTP Authentication System</td>
+                            <td>Secure login required for PII/financial data. Industry standard approach via SMS/email codes.</td>
+                            <td>Security requirement</td>
+                            <td>1-2 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Scenario-Based Branching Logic</td>
+                            <td>Show different fields based on loan type, property type, employment status. Reduces irrelevant questions.</td>
+                            <td>34% completion improvement</td>
+                            <td>3-4 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Basic Document Upload</td>
+                            <td>Must collect documents that can't be automated. Simple upload with file type validation minimum requirement.</td>
+                            <td>Universal need</td>
+                            <td>1 week</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Application Submit & Confirmation</td>
+                            <td>Final step with validation, review screen, clear confirmation of what happens next.</td>
+                            <td>Universal need</td>
+                            <td>1-2 weeks</td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red);">P0</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="content-section-subtitle">P1 Features - High Value Enhancements (Phase 2)</h3>
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Feature</th>
+                            <th style="width: 35%;">Rationale</th>
+                            <th style="width: 15%;">Research Validation</th>
+                            <th style="width: 15%;">Effort</th>
+                            <th style="width: 10%;">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">Plaid VOA Integration</td>
+                            <td>Auto-verify assets via bank linking. Huge time saver, reduces errors, competitive differentiator.</td>
+                            <td>96% success rate in testing</td>
+                            <td>6-8 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">TRUV VOIE Integration</td>
+                            <td>Auto-verify income/employment. Speeds up processing, reduces document requests.</td>
+                            <td>87% W2 employees verified</td>
+                            <td>6-8 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">LOS Bi-Directional Sync</td>
+                            <td>Eliminate manual data entry for LOs. Biggest LO productivity gain possible.</td>
+                            <td>Saves 8-12 hrs/week per LO</td>
+                            <td>10-12 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">AI Assistant (Claude)</td>
+                            <td>Contextual help reduces LO call volume for basic questions. Unique differentiator.</td>
+                            <td>72% usage, 89% helpful</td>
+                            <td>6-8 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Co-Borrower Collaboration</td>
+                            <td>Native multi-user support prevents data conflicts. 55% of apps are joint; this is critical for them.</td>
+                            <td>88% of joint apps want this</td>
+                            <td>8-10 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">LO Take-Over Mode</td>
+                            <td>LO can enter data while on phone with stuck borrower. Prevents abandonment, improves service.</td>
+                            <td>100% LO excitement</td>
+                            <td>4-5 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">In-App Messaging</td>
+                            <td>Centralized communication vs. scattered email/text/phone. Better experience, creates audit trail.</td>
+                            <td>84% preferred in-app</td>
+                            <td>4-6 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Advanced Document Upload</td>
+                            <td>Real-time validation, quality checks, AI classification. Reduces re-upload cycles by 80%.</td>
+                            <td>86% appreciated validation</td>
+                            <td>4-5 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Soft Pull Credit Pre-Qual</td>
+                            <td>Early credit check prevents wasted effort on non-qualifying borrowers. Sets expectations.</td>
+                            <td>81% wanted credit visibility</td>
+                            <td>3-4 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Post-Submit Status Tracking</td>
+                            <td>Borrower dashboard showing application stage. Reduces "where is my application" calls by 60%.</td>
+                            <td>79% wanted transparency</td>
+                            <td>3-4 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">LO Configuration System</td>
+                            <td>LOs can customize experience (require vs. optional fields, feature toggles). Flexibility for different LO styles.</td>
+                            <td>LO feedback: one size doesn't fit all</td>
+                            <td>3-4 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Analytics Dashboard</td>
+                            <td>Branch managers need completion metrics, abandonment analysis, LO performance data.</td>
+                            <td>Leadership requirement</td>
+                            <td>5-6 weeks</td>
+                            <td><span class="status-badge status-in-progress">P1</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="content-section-subtitle">P2 Features - Nice to Haves (Phase 3 or Later)</h3>
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Feature</th>
+                            <th style="width: 35%;">Rationale</th>
+                            <th style="width: 15%;">Research Validation</th>
+                            <th style="width: 15%;">Effort</th>
+                            <th style="width: 10%;">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">Rate Lock Expiration Alerts</td>
+                            <td>Proactive notifications prevent accidental lock expirations. Nice customer service touch.</td>
+                            <td>64% interested</td>
+                            <td>2-3 days</td>
+                            <td><span class="status-badge status-pending">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Application Sharing</td>
+                            <td>View-only link for family/advisors. Interesting but limited use case.</td>
+                            <td>58% interested</td>
+                            <td>1 week</td>
+                            <td><span class="status-badge status-pending">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Video Call Integration</td>
+                            <td>In-app video with LO. Some interest but phone/Zoom sufficient for now.</td>
+                            <td>52% open to it</td>
+                            <td>3-4 weeks</td>
+                            <td><span class="status-badge status-pending">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Gamification Elements</td>
+                            <td>Progress celebrations, achievement badges. Engaging but not critical to completion.</td>
+                            <td>47% found engaging</td>
+                            <td>2-3 weeks</td>
+                            <td><span class="status-badge status-pending">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Product Recommendations</td>
+                            <td>AI suggests alternative loan products. Interesting but requires regulatory review.</td>
+                            <td>41% interested</td>
+                            <td>4-5 weeks</td>
+                            <td><span class="status-badge status-pending">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Native Mobile Apps</td>
+                            <td>iOS/Android apps. Responsive web sufficient for now; revisit if mobile usage hits 50%+.</td>
+                            <td>Not yet validated</td>
+                            <td>12-16 weeks</td>
+                            <td><span class="status-badge status-pending">P2</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Technical Architecture Implications -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technical Architecture Implications from Research</h2>
+
+            <div class="finding-card">
+                <h4>Multi-Tenant Architecture Required</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Research identified need for LO-level configuration and potential white-label opportunities. Requires multi-tenant design.
+                </p>
+                <ul>
+                    <li><strong>Requirement:</strong> Each LO/branch can have custom configurations (feature toggles, field requirements, branding)</li>
+                    <li><strong>Implication:</strong> Database schema must support tenant isolation; configuration management system needed</li>
+                    <li><strong>Effort:</strong> 2-3 weeks additional architecture planning; implement early to avoid refactoring</li>
+                    <li><strong>Future Benefit:</strong> Enables white-label opportunities for correspondent partners (potential revenue stream)</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Real-Time Sync and WebSocket Infrastructure</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    LO application view, co-borrower collaboration, and take-over mode require real-time data synchronization.
+                </p>
+                <ul>
+                    <li><strong>Requirement:</strong> Multiple users viewing/editing same application simultaneously with instant updates</li>
+                    <li><strong>Technology:</strong> WebSocket connections for real-time sync; consider Socket.io or similar</li>
+                    <li><strong>Challenges:</strong> Conflict resolution when LO and borrower edit same field; optimistic locking strategy needed</li>
+                    <li><strong>Effort:</strong> 3-4 weeks to implement robust real-time infrastructure</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>API-First Design for Integration Ecosystem</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    7 key integrations identified (Prove, Plaid, TRUV, LOS, Credit, OTP, Email). Need clean API architecture.
+                </p>
+                <ul>
+                    <li><strong>Requirement:</strong> RESTful APIs with clear versioning, comprehensive documentation, webhook support</li>
+                    <li><strong>Integration Pattern:</strong> Adapter pattern for each integration; makes swapping providers easier (Plaid → FormFree)</li>
+                    <li><strong>Testing Strategy:</strong> Mock/sandbox modes for each integration to enable development without live API costs</li>
+                    <li><strong>Monitoring:</strong> Integration health dashboard; alerts when third-party APIs fail or slow down</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Mobile-First Responsive Framework</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    34% mobile start rate growing 12% YoY. Must be mobile-first, not desktop-first with mobile afterthought.
+                </p>
+                <ul>
+                    <li><strong>Framework Decision:</strong> React + Tailwind CSS or similar for responsive component library</li>
+                    <li><strong>Testing Requirements:</strong> Cross-browser testing (Safari, Chrome, Samsung Internet); device testing (iOS, Android)</li>
+                    <li><strong>Performance:</strong> Mobile-optimized bundle size; lazy loading; service workers for offline resilience</li>
+                    <li><strong>PWA Consideration:</strong> Progressive Web App capabilities (add to home screen, offline mode) for Phase 2</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>State Management and Session Persistence</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Save & resume critical; borrowers switch devices; session timeouts must not lose data.
+                </p>
+                <ul>
+                    <li><strong>Strategy:</strong> Auto-save every 30 seconds to backend; optimistic UI updates with eventual consistency</li>
+                    <li><strong>Cross-Device:</strong> Backend-persisted state enables borrower to start on phone, resume on desktop</li>
+                    <li><strong>Offline Considerations:</strong> Local storage backup if network unavailable; sync when reconnected</li>
+                    <li><strong>Data Privacy:</strong> Encrypt sensitive data at rest; comply with state data protection laws</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>AI/LLM Integration Architecture</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Claude AI assistant requires thoughtful integration with safety, monitoring, and cost management.
+                </p>
+                <ul>
+                    <li><strong>API Integration:</strong> Anthropic Claude API with streaming responses for better UX</li>
+                    <li><strong>Context Management:</strong> Inject borrower's application context into prompts for personalized responses</li>
+                    <li><strong>Safety:</strong> Content filtering, regulatory compliance guardrails, human-in-the-loop for certain topics</li>
+                    <li><strong>Cost Management:</strong> Rate limiting, caching common questions/answers, monitoring token usage</li>
+                    <li><strong>Fallback:</strong> If AI unavailable, gracefully degrade to static FAQ or LO contact</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Security and Compliance Architecture</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Handling PII and financial data requires enterprise-grade security and regulatory compliance.
+                </p>
+                <ul>
+                    <li><strong>Authentication:</strong> OTP-based with optional MFA; session management with secure tokens</li>
+                    <li><strong>Encryption:</strong> TLS 1.3 in transit; AES-256 at rest for sensitive fields (SSN, account numbers)</li>
+                    <li><strong>Access Control:</strong> Role-based (borrower, co-borrower, LO, admin); field-level permissions</li>
+                    <li><strong>Audit Logging:</strong> Comprehensive logs of who accessed/modified what data when (compliance requirement)</li>
+                    <li><strong>Data Retention:</strong> Comply with state-specific data retention and destruction policies</li>
+                    <li><strong>Pen Testing:</strong> Third-party security audit before launch; ongoing vulnerability scanning</li>
+                </ul>
+            </div>
+
+            <div class="finding-card">
+                <h4>Analytics and Observability</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Data-driven optimization requires comprehensive instrumentation and monitoring.
+                </p>
+                <ul>
+                    <li><strong>User Analytics:</strong> Track every interaction (field focus, abandonment points, time per section)</li>
+                    <li><strong>Funnel Metrics:</strong> Completion rate by step, drop-off analysis, cohort comparisons</li>
+                    <li><strong>Performance Monitoring:</strong> Page load times, API response times, error rates by endpoint</li>
+                    <li><strong>Business Metrics:</strong> Applications started, completed, LO intervention rate, time-to-submit</li>
+                    <li><strong>Tools:</strong> Consider Segment + Amplitude for analytics; Datadog or New Relic for APM</li>
+                </ul>
+            </div>
+
+            <div style="background: rgba(139, 92, 246, 0.1); padding: 2rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid var(--accent-purple);">
+                <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">Recommended Technology Stack</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div>
+                        <h4 style="color: var(--accent-teal); font-size: 0.9rem; margin-bottom: 0.5rem;">Frontend</h4>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>React 18+ (UI framework)</li>
+                            <li>TypeScript (type safety)</li>
+                            <li>Tailwind CSS (styling)</li>
+                            <li>React Query (data fetching)</li>
+                            <li>Socket.io Client (real-time)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-teal); font-size: 0.9rem; margin-bottom: 0.5rem;">Backend</h4>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Node.js + Express (API server)</li>
+                            <li>PostgreSQL (primary database)</li>
+                            <li>Redis (caching, session store)</li>
+                            <li>Socket.io Server (WebSockets)</li>
+                            <li>Bull (job queue)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-teal); font-size: 0.9rem; margin-bottom: 0.5rem;">Infrastructure</h4>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>AWS or Azure (cloud platform)</li>
+                            <li>Docker + Kubernetes (containers)</li>
+                            <li>CloudFront/CDN (static assets)</li>
+                            <li>AWS S3 (document storage)</li>
+                            <li>GitHub Actions (CI/CD)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-teal); font-size: 0.9rem; margin-bottom: 0.5rem;">Integrations</h4>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Prove (identity verification)</li>
+                            <li>Plaid (bank account linking)</li>
+                            <li>TRUV (payroll verification)</li>
+                            <li>Twilio (OTP/SMS)</li>
+                            <li>SendGrid (email)</li>
+                            <li>Anthropic Claude (AI)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Analysis -->
+        <section class="content-section">
+            <h2 class="content-section-title">Risk Analysis & Mitigation Strategies</h2>
+
+            <div class="risk-matrix">
+                <div class="risk-card critical">
+                    <div class="risk-level critical">Critical Risk</div>
+                    <h4 style="color: var(--accent-red); margin-bottom: 0.75rem;">Integration Dependency Failures</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        If Prove, Plaid, or TRUV APIs fail or have performance issues, core user experience degrades significantly.
+                    </p>
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-red);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Graceful degradation: fall back to manual entry if integration unavailable</li>
+                            <li>Real-time monitoring and alerting for integration health</li>
+                            <li>SLA contracts with providers; escalation paths for critical issues</li>
+                            <li>Secondary provider relationships (FormFree as Plaid backup)</li>
+                            <li>Comprehensive integration testing and staging environments</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card critical">
+                    <div class="risk-level critical">Critical Risk</div>
+                    <h4 style="color: var(--accent-red); margin-bottom: 0.75rem;">Data Security Breach</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        Breach of borrower PII/financial data would be catastrophic reputationally and legally.
+                    </p>
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-red);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>SOC 2 Type II compliance; annual security audits</li>
+                            <li>Penetration testing before launch and quarterly thereafter</li>
+                            <li>Field-level encryption for sensitive data; tokenization where possible</li>
+                            <li>Comprehensive access controls and audit logging</li>
+                            <li>Incident response plan; cyber insurance coverage</li>
+                            <li>Security training for all engineers; secure coding practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card high">
+                    <div class="risk-level high">High Risk</div>
+                    <h4 style="color: var(--accent-yellow); margin-bottom: 0.75rem;">Regulatory Compliance Issues</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        Mortgage lending heavily regulated (TILA, RESPA, ECOA, state laws). Non-compliance = fines, lawsuits, shutdown.
+                    </p>
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-yellow);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Compliance officer involved from day one; review all features</li>
+                            <li>Legal review of AI assistant responses; clear disclaimers</li>
+                            <li>Audit trail of all borrower interactions and data changes</li>
+                            <li>WCAG accessibility compliance for ADA requirements</li>
+                            <li>State-specific compliance variations documented and tested</li>
+                            <li>Beta testing with compliance team before production launch</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card high">
+                    <div class="risk-level high">High Risk</div>
+                    <h4 style="color: var(--accent-yellow); margin-bottom: 0.75rem;">LO Adoption Resistance</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        If LOs don't use new system or don't promote it to borrowers, product fails regardless of quality.
+                    </p>
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-yellow);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Include top-performing LOs in beta testing; make them champions</li>
+                            <li>Comprehensive training program with role-specific content</li>
+                            <li>Branch manager incentive alignment (bonus tied to adoption metrics)</li>
+                            <li>Demonstrate ROI clearly: time saved, higher close rates, better borrower experience</li>
+                            <li>Gradual rollout; don't force immediate 100% adoption</li>
+                            <li>Support hotline and in-app help specifically for LOs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card high">
+                    <div class="risk-level high">High Risk</div>
+                    <h4 style="color: var(--accent-yellow); margin-bottom: 0.75rem;">Project Scope Creep</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        With 14 P0 features and 12 P1 features, risk of delays and budget overruns if scope expands.
+                    </p>
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-yellow);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Strict prioritization framework (P0/P1/P2); ruthless about MVP scope</li>
+                            <li>Change control process; new features must have executive approval</li>
+                            <li>Phased releases; ship MVP fast, iterate based on real usage data</li>
+                            <li>Weekly sprint reviews to catch scope drift early</li>
+                            <li>Separate backlog for "nice to haves" to be considered post-launch</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card medium">
+                    <div class="risk-level medium">Medium Risk</div>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">AI Assistant Regulatory Issues</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        AI providing inaccurate information or crossing into regulated advice could create liability.
+                    </p>
+                    <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-blue);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Extensive prompt engineering to stay within approved topics</li>
+                            <li>Content filtering prevents financial/legal advice</li>
+                            <li>Clear disclaimers: "I'm an AI assistant, not a licensed loan officer"</li>
+                            <li>Human review of sample AI responses before launch</li>
+                            <li>Logging all AI interactions for compliance review</li>
+                            <li>Easy escalation to human LO: "Let me connect you with your LO for that"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card medium">
+                    <div class="risk-level medium">Medium Risk</div>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Mobile Performance Issues</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        Complex forms with real-time sync could perform poorly on older mobile devices or slow networks.
+                    </p>
+                    <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-blue);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Performance budgets; monitor bundle size and load times</li>
+                            <li>Test on real devices (old iPhones, mid-range Android)</li>
+                            <li>Lazy loading; code splitting; optimize images</li>
+                            <li>Offline-first architecture with service workers</li>
+                            <li>Graceful degradation on slow connections</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-card medium">
+                    <div class="risk-level medium">Medium Risk</div>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Integration Cost Overruns</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8;">
+                        Plaid, TRUV, Prove usage fees based on volume. If adoption higher than expected, costs could exceed budget.
+                    </p>
+                    <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 6px;">
+                        <strong style="color: var(--accent-blue);">Mitigation:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Negotiate volume pricing with providers upfront</li>
+                            <li>Model costs at 2x expected volume for safety margin</li>
+                            <li>Monitoring dashboard tracking integration usage and costs</li>
+                            <li>Cost per application metric; alert if exceeds threshold</li>
+                            <li>Fallback to manual processes if costs become prohibitive</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Projections -->
+        <section class="content-section">
+            <h2 class="content-section-title">ROI Projections Based on Research Insights</h2>
+
+            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%); padding: 2.5rem; border-radius: 16px; border: 2px solid var(--accent-green);">
+                <h3 style="color: var(--accent-green); margin-bottom: 1.5rem; font-size: 1.75rem;">ROI Summary - First Year</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Incremental Revenue</div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-green);">$7.68M</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Cost Savings</div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-green);">$9.17M</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Total Investment</div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue);">$2.19M</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Net Benefit Year 1</div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-green);">$14.66M</div>
+                    </div>
+                </div>
+                <div style="padding-top: 1.5rem; border-top: 2px solid rgba(16, 185, 129, 0.3);">
+                    <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.75rem;">ROI:</div>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-green);">670%</div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.8;">
+                        <strong style="color: var(--accent-teal);">Payback Period: 2.1 months</strong> from MVP launch. Research validates $14.66M net benefit in Year 1 through reduced abandonment (78% → 43%), LO productivity gains (10 hrs/week saved), and 2,400 additional loans funded annually.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Metrics & Next Steps -->
+        <section class="content-section">
+            <h2 class="content-section-title">Success Metrics & Next Steps</h2>
+
+            <div class="executive-card">
+                <h3>Primary Success Metrics</h3>
+                <div class="card-grid" style="margin-top: 1.5rem;">
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px;">
+                        <div style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 700; margin-bottom: 0.5rem;">Application Completion Rate</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-green);">22% → 57%</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Target: 55-60% by Month 12</div>
+                    </div>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px;">
+                        <div style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 700; margin-bottom: 0.5rem;">Time to Submit</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-green);">3.2 wks → 4 days</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Target: 4-6 days by Month 12</div>
+                    </div>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px;">
+                        <div style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 700; margin-bottom: 0.5rem;">Borrower NPS</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-green);">18 → 50+</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Target: 50+ by Month 12</div>
+                    </div>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px;">
+                        <div style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 700; margin-bottom: 0.5rem;">LO Productivity</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-green);">45 → 57 loans/yr</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Target: 55-60 loans/LO/year</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Immediate Action Items (Next 30 Days)</h3>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Week 1: January 22-26</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Executive Approval & Budget</h4>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Present research synthesis to executive team</li>
+                    <li>Secure $2.19M budget approval for 3-phase development</li>
+                    <li>Assign executive sponsor and steering committee</li>
+                    <li>Get Phase 1 MVP green light (12 weeks, Feb-April)</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Week 2-3: January 29 - February 9</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Team Assembly & Vendor Contracts</h4>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Finalize development team: 6 developers, 2 designers, 1 QA, 1 DevOps</li>
+                    <li>Initiate Prove contract (4-week vendor setup lead time)</li>
+                    <li>Request Encompass API credentials from IT</li>
+                    <li>Complete UI/UX designs for MVP features</li>
+                    <li>Finalize technical architecture (API-first, multi-tenant, real-time sync)</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Week 4: February 12-16</div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Development Kickoff</h4>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Sprint 1 begins - Progressive disclosure UI development</li>
+                    <li>Prove integration work starts</li>
+                    <li>Schedule monthly compliance review sessions</li>
+                    <li>Set up development environment, CI/CD pipeline, monitoring</li>
+                </ul>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 2rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid var(--accent-green);">
+                <h3 style="color: var(--accent-green); margin-bottom: 1rem;">Decision Required: Proceed to Development?</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Research validates strong market need and compelling business case for Smart App 2.0:
+                </p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                    <li><strong>ROI: 670%</strong> ($14.66M net benefit Year 1 on $2.19M investment)</li>
+                    <li><strong>Payback: 2.1 months</strong> from MVP launch</li>
+                    <li><strong>Competitive Necessity:</strong> Losing deals to Better.com, Rocket due to digital experience gap</li>
+                    <li><strong>Stakeholder Alignment:</strong> LOs, product, engineering enthusiastic; compliance supportive with guardrails</li>
+                    <li><strong>Validated Features:</strong> 94% positive reception for progressive disclosure; 89% for Prove; 92% want LO collaboration</li>
+                </ul>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 1.5rem;">
+                    <strong style="color: var(--accent-teal);">Recommendation:</strong> Proceed with Phase 1 MVP development starting February 2025.
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="margin-top: 5rem; padding: 2rem 0; border-top: 2px solid var(--border-color); text-align: center;">
+            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                Smart App 2.0 Research Synthesis Presentation
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Generated: January 2025 | 42 Participants | 87 Research Hours | 17 Sessions | 670% ROI Projected
+            </p>
+            <div style="margin-top: 1.5rem;">
+                <a href="../index.html" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Home</a>
+                <a href="../requirements/" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Requirements</a>
+                <a href="../research/" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Research</a>
+                <a href="https://streamlined-digital-a1nj.bolt.host/" target="_blank" style="color: var(--accent-teal); text-decoration: none; margin: 0 1rem;">Live Prototype</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

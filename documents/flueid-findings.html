@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlueID Findings - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../documents/" class="breadcrumb-link">Documents</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">FlueID Findings</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Vendor Analysis</div>
+                <h1 class="page-title">FlueID Data Coverage Analysis</h1>
+                <p class="page-description">Comprehensive analysis of FlueID (title data vendor) capabilities for URLA 2020 field mapping, data prefill opportunities, and strategic integration recommendations.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🏠</span>
+                        <span>Property Data</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📋</span>
+                        <span>URLA Mapping</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔍</span>
+                        <span>Data Quality</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../documents/" class="back-button">← Back to Documents</a>
+
+        <!-- Executive Summary -->
+        <section class="content-section">
+            <h2 class="content-section-title">Executive Summary</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                FlueID provides comprehensive property and mortgage data through title records. This analysis evaluates how FlueID data maps to URLA 2020 fields and identifies opportunities for automated data prefill in Smart App 2.0.
+            </p>
+
+            <div class="card-grid">
+                <div class="card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-green);">With Address Only</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-green); margin: 1rem 0;">22-28</div>
+                    <p class="card-description">URLA fields can be prefilled/verified using FlueID with property address alone</p>
+                </div>
+
+                <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-blue);">With SSN (Credit)</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin: 1rem 0;">15-20</div>
+                    <p class="card-description">Additional URLA fields accessible through credit bureau integration</p>
+                </div>
+
+                <div class="card" style="background: rgba(139, 92, 246, 0.05); border-color: rgba(139, 92, 246, 0.3);">
+                    <h3 class="card-title" style="color: var(--accent-purple);">Combined Power</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-purple); margin: 1rem 0;">~40</div>
+                    <p class="card-description">Total URLA fields (of 150+) that can be prefilled with Address + SSN</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Quality Flags -->
+        <section class="content-section">
+            <h2 class="content-section-title">FlueID Data Quality Flags for URLA</h2>
+
+            <h3 class="content-section-subtitle">High Confidence - Use Immediately ✓</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Data Point</th>
+                        <th>FlueID Source</th>
+                        <th>Reliability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Property address and location</td>
+                        <td>location.siteAddress</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Property type and characteristics</td>
+                        <td>characteristics.propertyType</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Current owner names</td>
+                        <td>ownership.ownerNames</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Owner occupancy status</td>
+                        <td>ownership.ownerOccupied</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Current lender name</td>
+                        <td>openLiens[0].lender</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Loan type (FHA, Conventional, etc.)</td>
+                        <td>openLiens[0].loanType</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Property tax amount</td>
+                        <td>taxes.taxAmount</td>
+                        <td><span class="status-badge status-complete">High</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Medium Confidence - Verify with User ⚠</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Data Point</th>
+                        <th>FlueID Source</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mortgage balance</td>
+                        <td>openLiens[0].estimatedBalance</td>
+                        <td><span class="status-badge status-in-progress">±$5-10K variance</span></td>
+                    </tr>
+                    <tr>
+                        <td>Property value</td>
+                        <td>valuation.estimatedValue</td>
+                        <td><span class="status-badge status-in-progress">Confidence score dependent</span></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly mortgage payment</td>
+                        <td>openLiens[0].estimatedMonthlyPI</td>
+                        <td><span class="status-badge status-in-progress">Estimate only</span></td>
+                    </tr>
+                    <tr>
+                        <td>Interest rate</td>
+                        <td>openLiens[0].interestRate</td>
+                        <td><span class="status-badge status-in-progress">May be outdated</span></td>
+                    </tr>
+                    <tr>
+                        <td>HOA fees</td>
+                        <td>associations[0].fees</td>
+                        <td><span class="status-badge status-in-progress">If association exists</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Requires Validation - Flag for Review 🚩</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Action Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ownership name mismatch with applicant</td>
+                        <td><span class="status-badge status-pending">Manual verification</span></td>
+                    </tr>
+                    <tr>
+                        <td>Non-institutional lender (private lender)</td>
+                        <td><span class="status-badge status-pending">Additional documentation</span></td>
+                    </tr>
+                    <tr>
+                        <td>Recent transaction (&lt;6 months)</td>
+                        <td><span class="status-badge status-pending">Confirm details</span></td>
+                    </tr>
+                    <tr>
+                        <td>Multiple open liens</td>
+                        <td><span class="status-badge status-pending">Review all liens</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bankruptcy or foreclosure indicators</td>
+                        <td><span class="status-badge status-pending">Flag for LO review</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section-by-Section Breakdown -->
+        <section class="content-section">
+            <h2 class="content-section-title">URLA Section-by-Section Coverage</h2>
+
+            <h3 class="content-section-subtitle">Borrower Information (Section 1)</h3>
+            <div class="card" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3);">
+                <p class="card-description"><strong>FlueID Coverage with Address Only: 0 fields</strong></p>
+                <p class="card-description" style="margin-top: 0.5rem;">
+                    Borrower personal information (Name, SSN, DOB, Employment, Income) is not available in property records.
+                    With SSN (Credit Bureau), we can potentially verify name spelling, DOB, SSN, and see employment history.
+                </p>
+            </div>
+
+            <h3 class="content-section-subtitle">Financial Information - Real Estate (Section 3) ⭐ HIGH VALUE</h3>
+            <div class="card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3);">
+                <p class="card-description"><strong>FlueID Coverage with Address Only: 8-12 fields</strong></p>
+            </div>
+
+            <table class="data-table" style="margin-top: 1rem;">
+                <thead>
+                    <tr>
+                        <th>URLA Field</th>
+                        <th>Available from FlueID?</th>
+                        <th>FlueID Data Source</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Property Address</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>location.siteAddress</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Property Value</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>valuation.estimatedValue ($374,522)</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Intended Occupancy</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>ownership.ownerOccupied + primaryResidence</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Taxes</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>taxes.taxAmount / 12 ($2,311/yr = $192/mo)</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly HOA</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>associations[0].fees</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Insurance</td>
+                        <td><span class="badge">NO</span></td>
+                        <td>Not in public records</td>
+                        <td><span class="badge">N/A</span></td>
+                    </tr>
+                    <tr>
+                        <td>Creditor Name</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>openLiens[0].lender ("ABC Mortgage LLC")</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Mortgage Payment</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>openLiens[0].estimatedMonthlyPI ($1,842)</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Unpaid Balance</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>openLiens[0].estimatedBalance ($212,301)</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td>Loan Type</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>openLiens[0].loanType ("FHA", "Conventional")</td>
+                        <td><span class="badge badge-success">HIGH</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Loan and Property Information (Section 4)</h3>
+            <div class="card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3);">
+                <p class="card-description"><strong>FlueID Coverage with Address Only: 6-8 fields</strong></p>
+            </div>
+
+            <table class="data-table" style="margin-top: 1rem;">
+                <thead>
+                    <tr>
+                        <th>URLA Field</th>
+                        <th>Available from FlueID?</th>
+                        <th>Data Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Property Address</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>User enters, we validate via FlueID</td>
+                    </tr>
+                    <tr>
+                        <td>Number of Units</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>characteristics.unitsTotal</td>
+                    </tr>
+                    <tr>
+                        <td>Property Value</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>valuation.estimatedValue</td>
+                    </tr>
+                    <tr>
+                        <td>Occupancy Type</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>ownership.ownerOccupied → Primary/Second/Investment</td>
+                    </tr>
+                    <tr>
+                        <td>Mixed-Use Property</td>
+                        <td><span class="badge">NO</span></td>
+                        <td>User must answer</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Declarations (Section 5) 🚨 CRITICAL FOR ROUTING</h3>
+            <div class="card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
+                <p class="card-description"><strong>FlueID Coverage with Address Only: 4-6 fields</strong></p>
+            </div>
+
+            <table class="data-table" style="margin-top: 1rem;">
+                <thead>
+                    <tr>
+                        <th>URLA Question</th>
+                        <th>Available from FlueID?</th>
+                        <th>FlueID Data Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5a.A - Will occupy as primary?</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>ownership.ownerOccupied</td>
+                    </tr>
+                    <tr>
+                        <td>5a.E - PACE lien?</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>Specific check in title data</td>
+                    </tr>
+                    <tr>
+                        <td>5b.G - Outstanding judgments?</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>Title search findings</td>
+                    </tr>
+                    <tr>
+                        <td>5b.L - Foreclosure (7 years)?</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>preForeclosure.currentForeclosureStatus</td>
+                    </tr>
+                    <tr>
+                        <td>5b.M - Bankruptcy (7 years)?</td>
+                        <td><span class="badge badge-success">YES</span></td>
+                        <td>Title search (Sample Report 2 shows 2020 bankruptcy)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Integration Strategy -->
+        <section class="content-section">
+            <h2 class="content-section-title">Practical Application in SmartApp 2.0</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Stage 1: Property Address Entry</h3>
+                    <p class="card-description"><strong>Trigger:</strong> User enters address</p>
+                    <p class="card-description"><strong>Action:</strong> Call FlueID API</p>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">✓ Property type, beds, baths, sqft, year built</div>
+                        <div class="priority-item">✓ Owner names, occupancy for internal validation</div>
+                        <div class="priority-item">✓ Estimated value for Section 3 & 4</div>
+                        <div class="priority-item">✓ Current mortgage lender, balance, rate, payment</div>
+                        <div class="priority-item">✓ Property taxes, HOA for Section 3</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem; color: var(--accent-green); font-weight: 600;">
+                        Time Saved: 8-10 minutes → 10-20 seconds of confirmation
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Stage 2: SSN Entry & Credit Pull</h3>
+                    <p class="card-description"><strong>Trigger:</strong> After property confirmation, before qualification</p>
+                    <p class="card-description"><strong>Action:</strong> Soft credit pull (or full pull for qualification)</p>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">✓ All credit accounts → Section 2c</div>
+                        <div class="priority-item">✓ Account numbers for existing mortgages → Section 3</div>
+                        <div class="priority-item">✓ Verify mortgage balances → Section 3</div>
+                        <div class="priority-item">✓ All liabilities and monthly payments → Section 2c</div>
+                        <div class="priority-item">✓ Verify name, DOB, address history → Section 1a</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem; color: var(--accent-green); font-weight: 600;">
+                        Time Saved: 5-7 minutes → 20-30 seconds of confirmation
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Stage 3: Income & Assets</h3>
+                    <p class="card-description"><strong>Trigger:</strong> After qualification, before underwriting</p>
+                    <p class="card-description"><strong>Action:</strong> Plaid/Truv integration for bank/employment verification</p>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">✓ Bank account balances → Section 2a</div>
+                        <div class="priority-item">✓ Employment info → Section 1b</div>
+                        <div class="priority-item">✓ Income amounts → Section 1b</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem; font-style: italic; color: var(--text-muted);">
+                        Note: This is NOT from FlueID, but part of overall vendor strategy
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Recommendations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Strategic Recommendations</h2>
+
+            <div class="card" style="background: rgba(139, 92, 246, 0.05); border-color: rgba(139, 92, 246, 0.3);">
+                <h3 class="card-title">Recommended FlueID Use Cases for Smart App 2.0</h3>
+                <div class="priority-list">
+                    <div class="priority-item">1. <strong>Refinance Flows:</strong> Use title data to auto-identify co-borrowers on title and existing liens</div>
+                    <div class="priority-item">2. <strong>REO Section:</strong> Validate investment properties against title records for accurate data</div>
+                    <div class="priority-item">3. <strong>Data Prefill:</strong> Auto-populate property details, mortgage info, and tax/HOA data</div>
+                    <div class="priority-item">4. <strong>Risk Flagging:</strong> Identify bankruptcy, foreclosure, or judgment indicators for LO review</div>
+                    <div class="priority-item">5. <strong>Cost Efficiency:</strong> Leverage flat-fee model ($5k/month unlimited runs) for enhanced data enrichment</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • FlueID Findings</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../documents/">Documents</a>
+                <a href="bolt-feedback.html">Next: Bolt Feedback →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
