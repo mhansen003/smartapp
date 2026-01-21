@@ -1,0 +1,2633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources Library - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .resources-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .search-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .category-count {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .resource-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .resource-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            word-break: break-all;
+            display: block;
+            margin-bottom: 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--accent-blue);
+        }
+
+        .resource-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .resource-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .resource-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .access-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .access-public {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+        }
+
+        .access-team {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .access-admin {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+
+        .tag {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent-purple);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .quick-links {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .quick-links h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-link-item {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--accent-blue);
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .quick-link-item:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📚</span>
+                <span>Smart App 2.0 - Resources Library</span>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../integrations/" class="nav-link">Integrations</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Resources Library</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">RESOURCES LIBRARY</div>
+                <h1 class="page-title">Comprehensive Resources & Links</h1>
+                <p class="page-description">Central hub for all project documentation, design assets, development resources, external tools, and team information. Everything you need to build, deploy, and maintain Smart App 2.0.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📦</span>
+                        <span>72 Total Resources</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🗂️</span>
+                        <span>10 Categories</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔄</span>
+                        <span>Updated: January 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="resources-container">
+        <!-- Statistics Overview -->
+        <div class="stats-overview">
+            <div class="stat-box">
+                <div class="stat-number">72</div>
+                <div class="stat-label">Total Resources</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Access Levels</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">25+</div>
+                <div class="stat-label">External Tools</div>
+            </div>
+        </div>
+
+        <!-- Quick Access Guide -->
+        <div class="quick-links">
+            <h3>Quick Access Guide</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Jump directly to the most frequently accessed resources</p>
+            <div class="quick-links-grid">
+                <a href="#documentation" class="quick-link-item">Documentation</a>
+                <a href="#design" class="quick-link-item">Design Assets</a>
+                <a href="#development" class="quick-link-item">Development</a>
+                <a href="#project-mgmt" class="quick-link-item">Project Management</a>
+                <a href="#external-tools" class="quick-link-item">External Tools</a>
+                <a href="#compliance" class="quick-link-item">Compliance</a>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <span style="font-size: 1.25rem;">🔍</span>
+            <input type="text" class="search-input" placeholder="Search resources by name, category, or tag..." id="searchInput">
+        </div>
+
+        <!-- Category 1: Documentation & Specs -->
+        <section id="documentation" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">📋</span>
+                <h2 class="category-title">Documentation & Specifications</h2>
+                <span class="category-count">8 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 1 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📄</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Product Requirements Document (PRD)</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive PRD outlining Smart App 2.0 vision, features, user stories, and acceptance criteria</p>
+                    <a href="#" class="resource-link">confluence.example.com/smart-app-2.0-prd</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 15, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">PRD</span>
+                        <span class="tag">Product</span>
+                    </div>
+                </div>
+
+                <!-- Resource 2 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔧</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Technical Specification Document</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Detailed technical architecture, API designs, database schemas, and system integrations</p>
+                    <a href="#" class="resource-link">confluence.example.com/smart-app-tech-spec</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 18, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Tech Spec</span>
+                        <span class="tag">Architecture</span>
+                    </div>
+                </div>
+
+                <!-- Resource 3 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🏦</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Plaid API Documentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Complete Plaid integration guide for VOA (Verification of Assets) including Auth, Balance, and Identity endpoints</p>
+                    <a href="https://plaid.com/docs/" class="resource-link">plaid.com/docs/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Continuous</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Plaid</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">API</span>
+                        <span class="tag">Integration</span>
+                    </div>
+                </div>
+
+                <!-- Resource 4 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">💼</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">TRUV API Documentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">TRUV VOIE (Verification of Income & Employment) API documentation with integration patterns and best practices</p>
+                    <a href="https://docs.truv.com/" class="resource-link">docs.truv.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Continuous</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: TRUV</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">API</span>
+                        <span class="tag">Integration</span>
+                    </div>
+                </div>
+
+                <!-- Resource 5 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📱</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Prove API Documentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Prove identity verification API docs covering Pre-Fill, Trust, and AuthToken endpoints</p>
+                    <a href="https://developer.prove.com/" class="resource-link">developer.prove.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Continuous</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Prove</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">API</span>
+                        <span class="tag">Identity</span>
+                    </div>
+                </div>
+
+                <!-- Resource 6 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🗄️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Database Schema Documentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Complete database schema with 42 tables, ERD diagrams, relationships, and data dictionary</p>
+                    <a href="#" class="resource-link">confluence.example.com/db-schema</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 10, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Data Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Database</span>
+                        <span class="tag">Schema</span>
+                    </div>
+                </div>
+
+                <!-- Resource 7 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🏗️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">System Architecture Diagram</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Lucidchart diagrams showing microservices architecture, AWS infrastructure, and service dependencies</p>
+                    <a href="#" class="resource-link">lucidchart.com/smart-app-architecture</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 12, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Architecture Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Architecture</span>
+                        <span class="tag">Diagram</span>
+                    </div>
+                </div>
+
+                <!-- Resource 8 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔄</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">User Flow Diagrams</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Complete user journey maps for borrower, co-borrower, and LO flows with decision trees</p>
+                    <a href="https://www.figma.com/board/T7KV8XnyZwutyW3GB0tR5L/" class="resource-link">figma.com/refinance-buying-flow</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 8, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Design</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">UX</span>
+                        <span class="tag">Flow</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 2: Design Assets -->
+        <section id="design" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🎨</span>
+                <h2 class="category-title">Design Assets</h2>
+                <span class="category-count">7 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 9 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎯</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Figma Design Files - Main App</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">High-fidelity designs for all borrower-facing screens, components, and interactions</p>
+                    <a href="#" class="resource-link">figma.com/smart-app-main-designs</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 20, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Design Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI Design</span>
+                    </div>
+                </div>
+
+                <!-- Resource 10 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📐</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Design System & Component Library</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive design system with reusable components, patterns, colors, typography, and spacing</p>
+                    <a href="#" class="resource-link">figma.com/smart-app-design-system</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 16, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Design Ops</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Design System</span>
+                        <span class="tag">Components</span>
+                    </div>
+                </div>
+
+                <!-- Resource 11 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📱</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Mobile Responsive Designs</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Mobile-optimized designs for iOS and Android with responsive breakpoints and touch interactions</p>
+                    <a href="#" class="resource-link">figma.com/smart-app-mobile</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 14, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Mobile Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Mobile</span>
+                        <span class="tag">Responsive</span>
+                    </div>
+                </div>
+
+                <!-- Resource 12 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎨</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Brand Guidelines</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Official brand guidelines including logo usage, color palette, typography, voice & tone</p>
+                    <a href="#" class="resource-link">brand.example.com/guidelines</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Brand Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Brand</span>
+                        <span class="tag">Guidelines</span>
+                    </div>
+                </div>
+
+                <!-- Resource 13 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🖼️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Logo & Asset Library</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Downloadable logos, icons, illustrations, and marketing assets in multiple formats</p>
+                    <a href="#" class="resource-link">assets.example.com/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Creative Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Assets</span>
+                        <span class="tag">Logos</span>
+                    </div>
+                </div>
+
+                <!-- Resource 14 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🚀</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Interactive Prototypes</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Clickable prototypes for user testing including Bolt POC and Figma prototypes</p>
+                    <a href="https://streamlined-digital-a1nj.bolt.host/" class="resource-link">bolt.host/streamlined-digital</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 18, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Design</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">Prototype</span>
+                        <span class="tag">Demo</span>
+                    </div>
+                </div>
+
+                <!-- Resource 15 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🧪</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">User Testing Recordings</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Video recordings and notes from 42 user testing sessions with borrowers and LOs</p>
+                    <a href="#" class="resource-link">drive.example.com/user-testing</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 5, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Research Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Testing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 3: Development Resources -->
+        <section id="development" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">💻</span>
+                <h2 class="category-title">Development Resources</h2>
+                <span class="category-count">9 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 16 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🐙</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">GitHub Repository - Frontend</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Main frontend repository built with React, TypeScript, and Tailwind CSS</p>
+                    <a href="#" class="resource-link">github.com/company/smart-app-frontend</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Frontend Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">Frontend</span>
+                    </div>
+                </div>
+
+                <!-- Resource 17 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">⚙️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">GitHub Repository - Backend API</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Backend API services built with Node.js, Express, and PostgreSQL</p>
+                    <a href="#" class="resource-link">github.com/company/smart-app-api</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Backend Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">Backend</span>
+                    </div>
+                </div>
+
+                <!-- Resource 18 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔧</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Development Environment Setup</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Complete setup guide for local development including Docker, dependencies, and environment variables</p>
+                    <a href="#" class="resource-link">confluence.example.com/dev-setup</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 10, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Setup</span>
+                        <span class="tag">Documentation</span>
+                    </div>
+                </div>
+
+                <!-- Resource 19 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📝</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Coding Standards & Conventions</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Team coding standards, ESLint rules, Prettier config, and best practices</p>
+                    <a href="#" class="resource-link">confluence.example.com/coding-standards</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Standards</span>
+                        <span class="tag">Best Practices</span>
+                    </div>
+                </div>
+
+                <!-- Resource 20 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🌿</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Git Workflow & Branching Strategy</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Git workflow documentation including branch naming, commit messages, and merge strategies</p>
+                    <a href="#" class="resource-link">confluence.example.com/git-workflow</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 5, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Workflow</span>
+                    </div>
+                </div>
+
+                <!-- Resource 21 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">✅</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">PR Review Checklist</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive checklist for code reviews including security, performance, and accessibility</p>
+                    <a href="#" class="resource-link">confluence.example.com/pr-checklist</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 8, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Code Review</span>
+                        <span class="tag">Quality</span>
+                    </div>
+                </div>
+
+                <!-- Resource 22 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🧪</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Testing Guidelines</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Testing strategy covering unit tests, integration tests, E2E tests with Jest and Cypress</p>
+                    <a href="#" class="resource-link">confluence.example.com/testing-guide</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 12, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: QA Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Testing</span>
+                        <span class="tag">QA</span>
+                    </div>
+                </div>
+
+                <!-- Resource 23 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🚀</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Deployment Runbooks</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Step-by-step deployment procedures for staging and production environments</p>
+                    <a href="#" class="resource-link">confluence.example.com/deployment</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 15, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Deployment</span>
+                        <span class="tag">Operations</span>
+                    </div>
+                </div>
+
+                <!-- Resource 24 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📚</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Code Snippet Library</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Reusable code snippets and utilities for common patterns and integrations</p>
+                    <a href="#" class="resource-link">github.com/company/code-snippets</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Ongoing</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Code</span>
+                        <span class="tag">Utilities</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 4: Project Management -->
+        <section id="project-mgmt" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">📊</span>
+                <h2 class="category-title">Project Management</h2>
+                <span class="category-count">8 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 25 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📋</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Jira Project Board</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Main project board for sprint planning, task tracking, and bug management</p>
+                    <a href="#" class="resource-link">jira.example.com/smart-app-2.0</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: PM Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Jira</span>
+                        <span class="tag">Tasks</span>
+                    </div>
+                </div>
+
+                <!-- Resource 26 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📖</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Confluence Wiki</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Central knowledge base for all project documentation, meeting notes, and decisions</p>
+                    <a href="#" class="resource-link">confluence.example.com/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: All Teams</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Wiki</span>
+                        <span class="tag">Documentation</span>
+                    </div>
+                </div>
+
+                <!-- Resource 27 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📅</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Sprint Planning Templates</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Templates for sprint planning, retrospectives, and standup meetings</p>
+                    <a href="#" class="resource-link">confluence.example.com/sprint-templates</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Scrum Masters</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Templates</span>
+                        <span class="tag">Agile</span>
+                    </div>
+                </div>
+
+                <!-- Resource 28 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔄</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Retrospective Notes Archive</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Historical sprint retrospectives with action items and team feedback</p>
+                    <a href="#" class="resource-link">confluence.example.com/retros</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Bi-weekly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Scrum Masters</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Retros</span>
+                        <span class="tag">Archive</span>
+                    </div>
+                </div>
+
+                <!-- Resource 29 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📝</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Meeting Notes Repository</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Centralized repository for all meeting notes, decisions, and action items</p>
+                    <a href="#" class="resource-link">confluence.example.com/meeting-notes</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: All Teams</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Notes</span>
+                        <span class="tag">Meetings</span>
+                    </div>
+                </div>
+
+                <!-- Resource 30 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📊</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Status Report Templates</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Weekly and monthly status report templates for stakeholder updates</p>
+                    <a href="#" class="resource-link">confluence.example.com/status-reports</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Monthly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: PM Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Reports</span>
+                        <span class="tag">Templates</span>
+                    </div>
+                </div>
+
+                <!-- Resource 31 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎯</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">OKR Tracking Dashboard</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Quarterly OKRs with progress tracking and key results metrics</p>
+                    <a href="#" class="resource-link">sheets.example.com/okr-tracking</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Weekly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Leadership</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">OKRs</span>
+                        <span class="tag">Goals</span>
+                    </div>
+                </div>
+
+                <!-- Resource 32 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🗓️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Project Gantt Chart</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">14-month project timeline with phases, milestones, and dependencies</p>
+                    <a href="../scoping/gantt-chart.html" class="resource-link">../scoping/gantt-chart.html</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 20, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: PM Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Timeline</span>
+                        <span class="tag">Planning</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 5: Research & Data -->
+        <section id="research-data" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🔬</span>
+                <h2 class="category-title">Research & Data</h2>
+                <span class="category-count">8 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 33 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📊</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">User Research Findings</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive research findings from 25+ participants across LO interviews and borrower testing</p>
+                    <a href="../research/index.html" class="resource-link">../research/index.html</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 5, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Research Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Insights</span>
+                    </div>
+                </div>
+
+                <!-- Resource 34 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎤</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Interview Transcripts</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Full transcripts from 7 LO interviews and 13 stakeholder sessions</p>
+                    <a href="#" class="resource-link">drive.example.com/transcripts</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Research Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Transcripts</span>
+                        <span class="tag">Interviews</span>
+                    </div>
+                </div>
+
+                <!-- Resource 35 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📋</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Survey Results</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Quantitative survey data from borrowers and LOs about current pain points and desired features</p>
+                    <a href="#" class="resource-link">sheets.example.com/survey-results</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Research Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Survey</span>
+                        <span class="tag">Data</span>
+                    </div>
+                </div>
+
+                <!-- Resource 36 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📈</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Mixpanel Analytics Dashboard</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Product analytics tracking user behavior, conversion funnels, and feature adoption</p>
+                    <a href="#" class="resource-link">mixpanel.com/smart-app-analytics</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Analytics Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Metrics</span>
+                    </div>
+                </div>
+
+                <!-- Resource 37 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🧪</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">A/B Test Results</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Historical A/B test results showing progressive disclosure achieved 134% completion increase</p>
+                    <a href="#" class="resource-link">sheets.example.com/ab-test-results</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Ongoing</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Testing</span>
+                        <span class="tag">Results</span>
+                    </div>
+                </div>
+
+                <!-- Resource 38 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🏆</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Competitive Analysis</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Analysis of competitor mortgage applications including feature comparisons and UX audits</p>
+                    <a href="#" class="resource-link">confluence.example.com/competitive-analysis</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Nov 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Strategy</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Competitive</span>
+                        <span class="tag">Analysis</span>
+                    </div>
+                </div>
+
+                <!-- Resource 39 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📊</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Market Research Reports</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Industry reports on digital mortgage trends, consumer preferences, and market opportunities</p>
+                    <a href="#" class="resource-link">drive.example.com/market-research</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Quarterly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Strategy Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Market</span>
+                        <span class="tag">Research</span>
+                    </div>
+                </div>
+
+                <!-- Resource 40 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎯</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Research Synthesis Presentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Executive summary with 670% ROI projection and key insights from all research activities</p>
+                    <a href="../research/synthesis-presentation.html" class="resource-link">../research/synthesis-presentation.html</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 5, 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Research Lead</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Synthesis</span>
+                        <span class="tag">ROI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 6: External Tools & Services -->
+        <section id="external-tools" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🛠️</span>
+                <h2 class="category-title">External Tools & Services</h2>
+                <span class="category-count">12 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 41 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🏦</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Plaid Dashboard</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Production and sandbox dashboards for managing Plaid API integrations and monitoring usage</p>
+                    <a href="https://dashboard.plaid.com/" class="resource-link">dashboard.plaid.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: API Admin</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">Plaid</span>
+                        <span class="tag">API</span>
+                    </div>
+                </div>
+
+                <!-- Resource 42 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">💼</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">TRUV Portal</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">TRUV admin portal for managing income/employment verifications and viewing reports</p>
+                    <a href="https://app.truv.com/" class="resource-link">app.truv.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: API Admin</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">TRUV</span>
+                        <span class="tag">VOIE</span>
+                    </div>
+                </div>
+
+                <!-- Resource 43 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📱</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Prove Console</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Prove identity verification console for managing API credentials and viewing transaction logs</p>
+                    <a href="#" class="resource-link">console.prove.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: API Admin</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">Prove</span>
+                        <span class="tag">Identity</span>
+                    </div>
+                </div>
+
+                <!-- Resource 44 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📞</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Twilio Console</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Twilio dashboard for SMS/OTP services, phone number management, and usage analytics</p>
+                    <a href="https://console.twilio.com/" class="resource-link">console.twilio.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">Twilio</span>
+                        <span class="tag">SMS</span>
+                    </div>
+                </div>
+
+                <!-- Resource 45 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📧</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">SendGrid Dashboard</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Email service dashboard for managing templates, monitoring delivery, and viewing analytics</p>
+                    <a href="https://app.sendgrid.com/" class="resource-link">app.sendgrid.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">SendGrid</span>
+                        <span class="tag">Email</span>
+                    </div>
+                </div>
+
+                <!-- Resource 46 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">☁️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">AWS Console</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">AWS management console for infrastructure, databases, Lambda functions, and monitoring</p>
+                    <a href="https://console.aws.amazon.com/" class="resource-link">console.aws.amazon.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Infrastructure</span>
+                    </div>
+                </div>
+
+                <!-- Resource 47 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">▲</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Vercel Dashboard</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Vercel deployment dashboard for frontend hosting, preview deployments, and analytics</p>
+                    <a href="https://vercel.com/dashboard" class="resource-link">vercel.com/dashboard</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Frontend Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Vercel</span>
+                        <span class="tag">Hosting</span>
+                    </div>
+                </div>
+
+                <!-- Resource 48 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">⚡</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">GitHub Actions</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">CI/CD pipeline workflows for automated testing, building, and deployments</p>
+                    <a href="#" class="resource-link">github.com/company/smart-app/actions</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                </div>
+
+                <!-- Resource 49 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📊</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Datadog Monitoring</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Application performance monitoring with real-time metrics, logs, and alerting</p>
+                    <a href="#" class="resource-link">app.datadoghq.com/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Monitoring</span>
+                        <span class="tag">APM</span>
+                    </div>
+                </div>
+
+                <!-- Resource 50 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🐛</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Sentry Error Tracking</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Real-time error tracking and debugging for frontend and backend applications</p>
+                    <a href="#" class="resource-link">sentry.io/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Sentry</span>
+                        <span class="tag">Errors</span>
+                    </div>
+                </div>
+
+                <!-- Resource 51 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📈</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">New Relic APM</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Application performance insights including transaction tracing and database query analysis</p>
+                    <a href="#" class="resource-link">one.newrelic.com/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Performance Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">APM</span>
+                        <span class="tag">Performance</span>
+                    </div>
+                </div>
+
+                <!-- Resource 52 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔐</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">1Password Team Vault</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Secure password and credential management for all team accounts and API keys</p>
+                    <a href="#" class="resource-link">team.1password.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Ongoing</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Security Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Passwords</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 7: Compliance & Legal -->
+        <section id="compliance" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">⚖️</span>
+                <h2 class="category-title">Compliance & Legal</h2>
+                <span class="category-count">7 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 53 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔒</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Privacy Policy</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive privacy policy covering data collection, usage, storage, and user rights</p>
+                    <a href="#" class="resource-link">example.com/privacy-policy</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Legal Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">Privacy</span>
+                        <span class="tag">Legal</span>
+                    </div>
+                </div>
+
+                <!-- Resource 54 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📜</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Terms of Service</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Legal terms governing use of Smart App platform and services</p>
+                    <a href="#" class="resource-link">example.com/terms-of-service</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Legal Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">Terms</span>
+                        <span class="tag">Legal</span>
+                    </div>
+                </div>
+
+                <!-- Resource 55 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🏛️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">GLBA Compliance Documentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Gramm-Leach-Bliley Act compliance policies, procedures, and audit documentation</p>
+                    <a href="#" class="resource-link">confluence.example.com/glba-compliance</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Compliance Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">GLBA</span>
+                        <span class="tag">Compliance</span>
+                    </div>
+                </div>
+
+                <!-- Resource 56 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📋</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">FCRA Documentation</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Fair Credit Reporting Act compliance for credit checks and consumer reporting</p>
+                    <a href="#" class="resource-link">confluence.example.com/fcra-compliance</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Compliance Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">FCRA</span>
+                        <span class="tag">Compliance</span>
+                    </div>
+                </div>
+
+                <!-- Resource 57 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔐</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">SOC 2 Audit Reports</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">SOC 2 Type II audit reports demonstrating security and compliance controls</p>
+                    <a href="#" class="resource-link">secure.example.com/soc2-reports</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Annual</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Security Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-admin">Admin</span>
+                        <span class="tag">SOC 2</span>
+                        <span class="tag">Audit</span>
+                    </div>
+                </div>
+
+                <!-- Resource 58 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🛡️</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Security Policies & Procedures</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Information security policies including access control, data encryption, and breach response</p>
+                    <a href="#" class="resource-link">confluence.example.com/security-policies</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Security Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Policies</span>
+                    </div>
+                </div>
+
+                <!-- Resource 59 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🚨</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Incident Response Plan</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive incident response procedures for security breaches and data incidents</p>
+                    <a href="#" class="resource-link">confluence.example.com/incident-response</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Security Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Incident</span>
+                        <span class="tag">Response</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 8: Training & Onboarding -->
+        <section id="training" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">📚</span>
+                <h2 class="category-title">Training & Onboarding</h2>
+                <span class="category-count">6 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 60 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎓</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">New Team Member Onboarding Guide</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Complete onboarding guide for new engineers, designers, and product team members</p>
+                    <a href="#" class="resource-link">confluence.example.com/onboarding</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: People Ops</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Onboarding</span>
+                        <span class="tag">Training</span>
+                    </div>
+                </div>
+
+                <!-- Resource 61 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">💼</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Product Training Materials</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Internal product training decks, videos, and documentation for all team members</p>
+                    <a href="#" class="resource-link">drive.example.com/product-training</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Product</span>
+                        <span class="tag">Training</span>
+                    </div>
+                </div>
+
+                <!-- Resource 62 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎥</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">LO Training Videos</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Video training library for Loan Officers on Smart App features and workflows</p>
+                    <a href="#" class="resource-link">training.example.com/lo-videos</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Training Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">LO Training</span>
+                        <span class="tag">Videos</span>
+                    </div>
+                </div>
+
+                <!-- Resource 63 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📖</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Borrower User Guides</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Step-by-step guides for borrowers on completing the application and common tasks</p>
+                    <a href="#" class="resource-link">help.example.com/borrower-guides</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Support Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">User Guide</span>
+                        <span class="tag">Help</span>
+                    </div>
+                </div>
+
+                <!-- Resource 64 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">❓</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">FAQ Documents</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Frequently asked questions for borrowers, LOs, and support staff</p>
+                    <a href="#" class="resource-link">help.example.com/faq</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Ongoing</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Support Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">FAQ</span>
+                        <span class="tag">Help</span>
+                    </div>
+                </div>
+
+                <!-- Resource 65 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📚</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Knowledge Base Articles</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Searchable knowledge base with troubleshooting guides and feature documentation</p>
+                    <a href="#" class="resource-link">help.example.com/knowledge-base</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Support Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-public">Public</span>
+                        <span class="tag">Knowledge Base</span>
+                        <span class="tag">Documentation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 9: Communication Channels -->
+        <section id="communication" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">💬</span>
+                <h2 class="category-title">Communication Channels</h2>
+                <span class="category-count">6 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 66 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">💬</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Slack Workspace</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Team Slack workspace with channels: #smart-app-dev, #smart-app-design, #smart-app-pm, #smart-app-general</p>
+                    <a href="#" class="resource-link">company.slack.com/</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Real-time</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: All Teams</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Slack</span>
+                        <span class="tag">Chat</span>
+                    </div>
+                </div>
+
+                <!-- Resource 67 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📧</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Email Distribution Lists</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Team distribution lists: smart-app-team@, smart-app-eng@, smart-app-design@, smart-app-pm@</p>
+                    <a href="#" class="resource-link">Directory of email lists</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Ongoing</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: IT Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Email</span>
+                        <span class="tag">Lists</span>
+                    </div>
+                </div>
+
+                <!-- Resource 68 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📅</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Meeting Calendars</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Shared team calendars for standups, sprint planning, demos, and retrospectives</p>
+                    <a href="#" class="resource-link">calendar.google.com/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Daily</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: PM Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Calendar</span>
+                        <span class="tag">Meetings</span>
+                    </div>
+                </div>
+
+                <!-- Resource 69 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">👥</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Team Directory</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Complete team roster with roles, contact info, and areas of expertise</p>
+                    <a href="#" class="resource-link">confluence.example.com/team-directory</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Monthly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: People Ops</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Directory</span>
+                        <span class="tag">Contacts</span>
+                    </div>
+                </div>
+
+                <!-- Resource 70 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🚨</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">On-Call Rotation Schedule</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Current on-call rotation for production support and incident response</p>
+                    <a href="#" class="resource-link">pagerduty.com/schedules/smart-app</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Weekly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">On-Call</span>
+                        <span class="tag">Support</span>
+                    </div>
+                </div>
+
+                <!-- Resource 71 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📞</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Escalation Contacts</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Emergency escalation tree for critical incidents and executive contacts</p>
+                    <a href="#" class="resource-link">confluence.example.com/escalation</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Quarterly</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Leadership</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Escalation</span>
+                        <span class="tag">Emergency</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 10: Templates & Tools -->
+        <section id="templates" class="category-section">
+            <div class="category-header">
+                <span class="category-icon">📝</span>
+                <h2 class="category-title">Templates & Tools</h2>
+                <span class="category-count">8 Resources</span>
+            </div>
+            <div class="resources-grid">
+                <!-- Resource 72 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📋</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">User Story Template</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Standardized template for writing user stories with acceptance criteria</p>
+                    <a href="#" class="resource-link">confluence.example.com/user-story-template</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">User Stories</span>
+                    </div>
+                </div>
+
+                <!-- Resource 73 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🐛</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Bug Report Template</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Template for filing bug reports with repro steps, environment, and screenshots</p>
+                    <a href="#" class="resource-link">jira.example.com/bug-template</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: QA Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">Bugs</span>
+                    </div>
+                </div>
+
+                <!-- Resource 74 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📄</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">PRD Template</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Product Requirements Document template with standard sections and best practices</p>
+                    <a href="#" class="resource-link">confluence.example.com/prd-template</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Nov 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">PRD</span>
+                    </div>
+                </div>
+
+                <!-- Resource 75 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔧</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Technical Spec Template</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Engineering design doc template for technical specifications and architecture</p>
+                    <a href="#" class="resource-link">confluence.example.com/tech-spec-template</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Nov 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Engineering</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">Tech Spec</span>
+                    </div>
+                </div>
+
+                <!-- Resource 76 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🧪</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Test Plan Template</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Comprehensive test plan template covering unit, integration, and E2E testing</p>
+                    <a href="#" class="resource-link">confluence.example.com/test-plan-template</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: QA Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">Testing</span>
+                    </div>
+                </div>
+
+                <!-- Resource 77 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">🔍</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Postmortem Template</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Incident postmortem template for root cause analysis and action items</p>
+                    <a href="#" class="resource-link">confluence.example.com/postmortem-template</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Dec 2024</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: DevOps</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">Postmortem</span>
+                    </div>
+                </div>
+
+                <!-- Resource 78 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">📧</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Email Templates</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Collection of email templates for borrower communications, LO notifications, and team updates</p>
+                    <a href="#" class="resource-link">confluence.example.com/email-templates</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Jan 2025</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: Product Team</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Template</span>
+                        <span class="tag">Email</span>
+                    </div>
+                </div>
+
+                <!-- Resource 79 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-icon">💻</span>
+                        <div class="resource-info">
+                            <h3 class="resource-name">Miro Collaboration Board</h3>
+                        </div>
+                    </div>
+                    <p class="resource-description">Interactive whiteboard for brainstorming, workshops, and visual collaboration</p>
+                    <a href="https://miro.com/app/board/uXjVJw_CSEw=/" class="resource-link">miro.com/smart-app-board</a>
+                    <div class="resource-meta">
+                        <div class="resource-meta-item">
+                            <span>📅</span>
+                            <span>Updated: Ongoing</span>
+                        </div>
+                        <div class="resource-meta-item">
+                            <span>👤</span>
+                            <span>Owner: All Teams</span>
+                        </div>
+                    </div>
+                    <div class="resource-tags">
+                        <span class="access-badge access-team">Team</span>
+                        <span class="tag">Miro</span>
+                        <span class="tag">Collaboration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 3rem 0; margin-top: 4rem;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Smart App 2.0 Resources Library - Your comprehensive resource hub</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Last Updated: January 21, 2025 | 79 Total Resources</p>
+            <div style="margin-top: 1.5rem;">
+                <a href="../index.html" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Home</a>
+                <a href="../requirements/" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Requirements</a>
+                <a href="../integrations/" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Integrations</a>
+                <a href="../research/" style="color: var(--accent-blue); text-decoration: none; margin: 0 1rem;">Research</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const resourceCards = document.querySelectorAll('.resource-card');
+
+            resourceCards.forEach(card => {
+                const name = card.querySelector('.resource-name').textContent.toLowerCase();
+                const description = card.querySelector('.resource-description').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.tag, .access-badge')).map(t => t.textContent.toLowerCase()).join(' ');
+
+                if (name.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

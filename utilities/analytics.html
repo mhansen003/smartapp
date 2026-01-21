@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .analytics-container {
+            margin-left: 240px;
+            padding: 2rem 3rem;
+            max-width: 1800px;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .last-updated {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            border-color: var(--border-color-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+        }
+
+        .kpi-card.blue::before { background: linear-gradient(90deg, var(--accent-blue), transparent); }
+        .kpi-card.teal::before { background: linear-gradient(90deg, var(--accent-teal), transparent); }
+        .kpi-card.purple::before { background: linear-gradient(90deg, var(--accent-purple), transparent); }
+        .kpi-card.green::before { background: linear-gradient(90deg, var(--accent-green), transparent); }
+        .kpi-card.yellow::before { background: linear-gradient(90deg, var(--accent-yellow), transparent); }
+        .kpi-card.red::before { background: linear-gradient(90deg, var(--accent-red), transparent); }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-icon {
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-target {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .kpi-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .kpi-trend.up {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .kpi-trend.down {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        .kpi-trend.neutral {
+            background: rgba(148, 163, 184, 0.15);
+            color: var(--text-secondary);
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-controls {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-blue);
+            background: var(--bg-card-hover);
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        /* Chart Cards */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .chart-card:hover {
+            border-color: var(--border-color-hover);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .chart-card.large {
+            grid-column: span 2;
+        }
+
+        .chart-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .chart-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .chart-container.tall {
+            height: 400px;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: var(--bg-secondary);
+        }
+
+        .data-table th {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Metric Badges */
+        .metric-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .metric-badge.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .metric-badge.warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-yellow);
+        }
+
+        .metric-badge.danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        .metric-badge.info {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .comparison-header {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Export Section */
+        .export-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .export-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-card.large {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .analytics-container {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-icon">📊</span>
+            <h2>Analytics</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#overview">📈 Overview</a></li>
+            <li><a href="#kpis">🎯 KPIs</a></li>
+            <li><a href="#trends">📊 Trends</a></li>
+            <li><a href="#performance">⚡ Performance</a></li>
+            <li><a href="#integrations">🔌 Integrations</a></li>
+            <li><a href="#users">👥 Users</a></li>
+            <li><a href="#geography">🌍 Geography</a></li>
+            <li><a href="#funnel">🔄 Funnel</a></li>
+            <li><a href="#roi">💰 ROI</a></li>
+            <li><a href="#export">💾 Export</a></li>
+            <li><a href="../index.html">← Back to Hub</a></li>
+        </ul>
+    </nav>
+
+    <div class="analytics-container">
+        <!-- Page Header -->
+        <div class="page-header" id="overview">
+            <h1>Analytics Dashboard</h1>
+            <p class="subtitle">Real-time metrics and comprehensive performance insights for Smart App 2.0</p>
+            <div class="last-updated">
+                <span class="pulse-dot"></span>
+                <span>Live • Last updated: <span id="updateTime"></span></span>
+            </div>
+        </div>
+
+        <!-- Executive KPI Cards -->
+        <section id="kpis" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Key Performance Indicators</h2>
+                <div class="section-controls">
+                    <select class="btn" id="kpiTimeRange">
+                        <option>Last 30 Days</option>
+                        <option>Last 90 Days</option>
+                        <option>Last 6 Months</option>
+                        <option>Last Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card blue">
+                    <div class="kpi-header">
+                        <div>
+                            <div class="kpi-label">Completion Rate</div>
+                        </div>
+                        <div class="kpi-icon">✅</div>
+                    </div>
+                    <div class="kpi-value">78.2%</div>
+                    <div class="kpi-target">Target: 80%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78.2%;"></div>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="kpi-trend up">↑ 12.4% vs last month</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card teal">
+                    <div class="kpi-header">
+                        <div>
+                            <div class="kpi-label">Avg. Time to Complete</div>
+                        </div>
+                        <div class="kpi-icon">⏱️</div>
+                    </div>
+                    <div class="kpi-value">18.6<span style="font-size: 1.2rem; margin-left: 0.25rem;">min</span></div>
+                    <div class="kpi-target">Target: 15 min</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80.6%;"></div>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="kpi-trend up">↓ 2.3 min vs last month</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card purple">
+                    <div class="kpi-header">
+                        <div>
+                            <div class="kpi-label">Mobile Usage</div>
+                        </div>
+                        <div class="kpi-icon">📱</div>
+                    </div>
+                    <div class="kpi-value">64%</div>
+                    <div class="kpi-target">Target: 70%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 64%;"></div>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="kpi-trend up">↑ 8.2% vs last month</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card green">
+                    <div class="kpi-header">
+                        <div>
+                            <div class="kpi-label">LO Satisfaction</div>
+                        </div>
+                        <div class="kpi-icon">⭐</div>
+                    </div>
+                    <div class="kpi-value">4.7<span style="font-size: 1.2rem; margin-left: 0.25rem;">/5</span></div>
+                    <div class="kpi-target">Target: 4.5/5</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%;"></div>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="kpi-trend up">↑ 0.3 pts vs last month</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card yellow">
+                    <div class="kpi-header">
+                        <div>
+                            <div class="kpi-label">Borrower NPS</div>
+                        </div>
+                        <div class="kpi-icon">💯</div>
+                    </div>
+                    <div class="kpi-value">52</div>
+                    <div class="kpi-target">Target: 50+</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 52%;"></div>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="kpi-trend up">↑ 7 pts vs last month</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card red">
+                    <div class="kpi-header">
+                        <div>
+                            <div class="kpi-label">System Uptime</div>
+                        </div>
+                        <div class="kpi-icon">🔧</div>
+                    </div>
+                    <div class="kpi-value">99.8%</div>
+                    <div class="kpi-target">Target: 99.9%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 99.8%;"></div>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="kpi-trend neutral">→ Stable</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Visualizations -->
+        <section id="trends" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Trend Analysis</h2>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Application Volume Trend</h3>
+                        <p class="chart-subtitle">Last 6 months - Applications started vs. completed</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="volumeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Completion Rate by Channel</h3>
+                        <p class="chart-subtitle">Performance across different entry points</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="channelChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Device Usage Breakdown</h3>
+                        <p class="chart-subtitle">Distribution of device types</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="deviceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section id="performance" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Performance Metrics</h2>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">LO Productivity Metrics</h3>
+                        <p class="chart-subtitle">Applications handled per LO over time</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="productivityChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Time to Complete Distribution</h3>
+                        <p class="chart-subtitle">Histogram of completion times</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="timeDistributionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Feature Adoption Over Time</h3>
+                        <p class="chart-subtitle">Usage trends for key features</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="featureAdoptionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Performance -->
+        <section id="integrations" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Integration Performance</h2>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Integration Success Rates</h3>
+                        <p class="chart-subtitle">Success rates for third-party integrations</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="integrationChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">API Response Times</h3>
+                        <p class="chart-subtitle">Average response times by integration</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="apiResponseChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration Details Table -->
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Integration</th>
+                            <th>Success Rate</th>
+                            <th>Avg Response Time</th>
+                            <th>Daily Volume</th>
+                            <th>Error Rate</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Plaid VOA</strong></td>
+                            <td>96.4%</td>
+                            <td>1,247ms</td>
+                            <td>2,847</td>
+                            <td>3.6%</td>
+                            <td><span class="metric-badge success">Healthy</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>TRUV VOIE</strong></td>
+                            <td>94.8%</td>
+                            <td>1,892ms</td>
+                            <td>1,923</td>
+                            <td>5.2%</td>
+                            <td><span class="metric-badge success">Healthy</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prove Identity</strong></td>
+                            <td>98.2%</td>
+                            <td>486ms</td>
+                            <td>4,216</td>
+                            <td>1.8%</td>
+                            <td><span class="metric-badge success">Healthy</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Soft Credit Pull</strong></td>
+                            <td>92.1%</td>
+                            <td>2,341ms</td>
+                            <td>3,142</td>
+                            <td>7.9%</td>
+                            <td><span class="metric-badge warning">Degraded</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>OTP Service</strong></td>
+                            <td>99.6%</td>
+                            <td>124ms</td>
+                            <td>8,947</td>
+                            <td>0.4%</td>
+                            <td><span class="metric-badge success">Healthy</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- User Analytics -->
+        <section id="users" class="section">
+            <div class="section-header">
+                <h2 class="section-title">User Segment Performance</h2>
+            </div>
+
+            <!-- User Segments Table -->
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Segment</th>
+                            <th>Users</th>
+                            <th>Completion Rate</th>
+                            <th>Avg Time</th>
+                            <th>Mobile %</th>
+                            <th>NPS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>First-time Buyers</strong></td>
+                            <td>12,847</td>
+                            <td>72.3%</td>
+                            <td>21.4 min</td>
+                            <td>68%</td>
+                            <td>48</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Refinance</strong></td>
+                            <td>8,942</td>
+                            <td>82.7%</td>
+                            <td>16.2 min</td>
+                            <td>61%</td>
+                            <td>56</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Repeat Customers</strong></td>
+                            <td>3,218</td>
+                            <td>89.4%</td>
+                            <td>12.8 min</td>
+                            <td>58%</td>
+                            <td>62</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Move-up Buyers</strong></td>
+                            <td>5,691</td>
+                            <td>76.1%</td>
+                            <td>19.3 min</td>
+                            <td>65%</td>
+                            <td>51</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment Property</strong></td>
+                            <td>2,104</td>
+                            <td>68.9%</td>
+                            <td>24.7 min</td>
+                            <td>52%</td>
+                            <td>44</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Browser & Device Stats -->
+            <div class="comparison-grid" style="margin-top: 2rem;">
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Browser Distribution</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Chrome</span>
+                        <span class="comparison-value">46.2%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Safari</span>
+                        <span class="comparison-value">31.8%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Firefox</span>
+                        <span class="comparison-value">9.4%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Edge</span>
+                        <span class="comparison-value">8.1%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Other</span>
+                        <span class="comparison-value">4.5%</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Operating System</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">iOS</span>
+                        <span class="comparison-value">38.4%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Android</span>
+                        <span class="comparison-value">25.6%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Windows</span>
+                        <span class="comparison-value">24.2%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">macOS</span>
+                        <span class="comparison-value">10.3%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Other</span>
+                        <span class="comparison-value">1.5%</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Time of Day Usage</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Morning (6-12)</span>
+                        <span class="comparison-value">18.7%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Afternoon (12-17)</span>
+                        <span class="comparison-value">24.3%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Evening (17-22)</span>
+                        <span class="comparison-value">42.8%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Night (22-6)</span>
+                        <span class="comparison-value">14.2%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geographic Distribution -->
+        <section id="geography" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Geographic Distribution</h2>
+            </div>
+
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>State</th>
+                            <th>Applications</th>
+                            <th>Completion Rate</th>
+                            <th>Avg Value</th>
+                            <th>Growth (MoM)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>California</strong></td>
+                            <td>8,247</td>
+                            <td>76.8%</td>
+                            <td>$684,200</td>
+                            <td><span class="metric-badge success">↑ 14.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Texas</strong></td>
+                            <td>6,842</td>
+                            <td>81.3%</td>
+                            <td>$412,500</td>
+                            <td><span class="metric-badge success">↑ 18.7%</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Florida</strong></td>
+                            <td>5,923</td>
+                            <td>74.2%</td>
+                            <td>$445,300</td>
+                            <td><span class="metric-badge success">↑ 11.4%</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>New York</strong></td>
+                            <td>4,618</td>
+                            <td>69.8%</td>
+                            <td>$742,100</td>
+                            <td><span class="metric-badge success">↑ 8.3%</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>Washington</strong></td>
+                            <td>3,947</td>
+                            <td>79.4%</td>
+                            <td>$587,900</td>
+                            <td><span class="metric-badge success">↑ 16.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>Georgia</strong></td>
+                            <td>3,214</td>
+                            <td>80.1%</td>
+                            <td>$368,400</td>
+                            <td><span class="metric-badge success">↑ 22.1%</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>Arizona</strong></td>
+                            <td>2,892</td>
+                            <td>77.6%</td>
+                            <td>$421,700</td>
+                            <td><span class="metric-badge success">↑ 13.8%</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>Colorado</strong></td>
+                            <td>2,647</td>
+                            <td>82.3%</td>
+                            <td>$532,200</td>
+                            <td><span class="metric-badge success">↑ 19.4%</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><strong>North Carolina</strong></td>
+                            <td>2,418</td>
+                            <td>78.9%</td>
+                            <td>$394,600</td>
+                            <td><span class="metric-badge success">↑ 15.7%</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><strong>Pennsylvania</strong></td>
+                            <td>2,154</td>
+                            <td>75.4%</td>
+                            <td>$312,800</td>
+                            <td><span class="metric-badge warning">↑ 6.2%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Conversion Funnel -->
+        <section id="funnel" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Conversion Funnel Analysis</h2>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Application Drop-off Funnel</h3>
+                        <p class="chart-subtitle">Where users drop off in the application process</p>
+                    </div>
+                    <div class="chart-container tall">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funnel Details Table -->
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Started</th>
+                            <th>Completed</th>
+                            <th>Drop-off Rate</th>
+                            <th>Avg Time</th>
+                            <th>Main Issue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Identity Verification</strong></td>
+                            <td>42,847</td>
+                            <td>40,214</td>
+                            <td>6.1%</td>
+                            <td>2.3 min</td>
+                            <td>Phone verification timeout</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Basic Information</strong></td>
+                            <td>40,214</td>
+                            <td>38,692</td>
+                            <td>3.8%</td>
+                            <td>3.7 min</td>
+                            <td>Address validation errors</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Employment & Income</strong></td>
+                            <td>38,692</td>
+                            <td>35,841</td>
+                            <td>7.4%</td>
+                            <td>4.2 min</td>
+                            <td>TRUV connection failures</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Asset Verification</strong></td>
+                            <td>35,841</td>
+                            <td>33,214</td>
+                            <td>7.3%</td>
+                            <td>3.8 min</td>
+                            <td>Bank account linking issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Property Information</strong></td>
+                            <td>33,214</td>
+                            <td>31,847</td>
+                            <td>4.1%</td>
+                            <td>2.4 min</td>
+                            <td>Property value uncertainty</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. Credit Authorization</strong></td>
+                            <td>31,847</td>
+                            <td>30,924</td>
+                            <td>2.9%</td>
+                            <td>1.2 min</td>
+                            <td>Privacy concerns</td>
+                        </tr>
+                        <tr>
+                            <td><strong>7. Review & Submit</strong></td>
+                            <td>30,924</td>
+                            <td>29,741</td>
+                            <td>3.8%</td>
+                            <td>4.1 min</td>
+                            <td>Missing document uploads</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ROI & Cost Metrics -->
+        <section id="roi" class="section">
+            <div class="section-header">
+                <h2 class="section-title">ROI & Financial Metrics</h2>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Cost per Application</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Current</span>
+                        <span class="comparison-value">$28.47</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Previous (Legacy)</span>
+                        <span class="comparison-value">$42.18</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Savings</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">-32.5%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Monthly Savings</span>
+                        <span class="comparison-value">$47,284</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Processing Efficiency</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">LO Time Saved</span>
+                        <span class="comparison-value">18.4 min</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Per Application</span>
+                        <span class="comparison-value">$34.20</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Monthly Value</span>
+                        <span class="comparison-value">$1.18M</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Annual Projection</span>
+                        <span class="comparison-value">$14.2M</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-header">ROI Analysis</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Development Cost</span>
+                        <span class="comparison-value">$2.4M</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Annual Return</span>
+                        <span class="comparison-value">$14.8M</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">ROI</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">516%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Payback Period</span>
+                        <span class="comparison-value">2.1 months</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROI Chart -->
+            <div class="charts-grid" style="margin-top: 2rem;">
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Cumulative ROI Projection</h3>
+                        <p class="chart-subtitle">24-month financial impact projection</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cohort Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Cohort Analysis</h2>
+            </div>
+
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cohort (Start Date)</th>
+                            <th>Users</th>
+                            <th>Week 1</th>
+                            <th>Week 2</th>
+                            <th>Week 3</th>
+                            <th>Week 4</th>
+                            <th>Overall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Dec 2024</strong></td>
+                            <td>8,247</td>
+                            <td>64.2%</td>
+                            <td>73.8%</td>
+                            <td>76.4%</td>
+                            <td>78.1%</td>
+                            <td>78.2%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nov 2024</strong></td>
+                            <td>7,892</td>
+                            <td>61.4%</td>
+                            <td>70.2%</td>
+                            <td>73.9%</td>
+                            <td>75.8%</td>
+                            <td>76.1%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Oct 2024</strong></td>
+                            <td>7,341</td>
+                            <td>59.8%</td>
+                            <td>68.4%</td>
+                            <td>71.2%</td>
+                            <td>73.4%</td>
+                            <td>74.2%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sep 2024</strong></td>
+                            <td>6,924</td>
+                            <td>57.2%</td>
+                            <td>65.8%</td>
+                            <td>69.1%</td>
+                            <td>71.2%</td>
+                            <td>72.3%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aug 2024</strong></td>
+                            <td>6,418</td>
+                            <td>55.1%</td>
+                            <td>63.4%</td>
+                            <td>67.2%</td>
+                            <td>69.8%</td>
+                            <td>70.4%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- A/B Test Results -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">A/B Test Results Summary</h2>
+            </div>
+
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Start Date</th>
+                            <th>Sample Size</th>
+                            <th>Control</th>
+                            <th>Variant</th>
+                            <th>Improvement</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Progressive Disclosure v2</strong></td>
+                            <td>2024-11-15</td>
+                            <td>12,847</td>
+                            <td>68.4%</td>
+                            <td>78.2%</td>
+                            <td><span class="metric-badge success">+14.3%</span></td>
+                            <td><span class="metric-badge success">Winner</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auto-save Frequency</strong></td>
+                            <td>2024-11-22</td>
+                            <td>9,214</td>
+                            <td>72.1%</td>
+                            <td>76.8%</td>
+                            <td><span class="metric-badge success">+6.5%</span></td>
+                            <td><span class="metric-badge success">Winner</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>One-click Bank Connect</strong></td>
+                            <td>2024-12-01</td>
+                            <td>8,947</td>
+                            <td>84.2%</td>
+                            <td>91.4%</td>
+                            <td><span class="metric-badge success">+8.6%</span></td>
+                            <td><span class="metric-badge success">Winner</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile Touch Targets</strong></td>
+                            <td>2024-12-08</td>
+                            <td>7,421</td>
+                            <td>76.8%</td>
+                            <td>81.2%</td>
+                            <td><span class="metric-badge success">+5.7%</span></td>
+                            <td><span class="metric-badge info">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Assistant Placement</strong></td>
+                            <td>2024-12-15</td>
+                            <td>6,184</td>
+                            <td>41.2%</td>
+                            <td>38.7%</td>
+                            <td><span class="metric-badge danger">-6.1%</span></td>
+                            <td><span class="metric-badge info">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Comparative Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Comparative Analysis</h2>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Month-over-Month (MoM)</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Applications</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+14.7%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Completion Rate</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+3.2%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Mobile Usage</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+8.2%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Avg Time</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">-11.8%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Error Rate</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">-22.4%</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-header">Year-over-Year (YoY)</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Applications</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+127.4%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Completion Rate</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+24.8%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Mobile Usage</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+156.3%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Avg Time</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">-38.2%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">LO Productivity</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+42.1%</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-header">vs. Industry Average</h3>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Completion Rate</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+31.2%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Time to Complete</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">-47.8%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Mobile Experience</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+28.4%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Customer Satisfaction</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+18.7%</span>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comparison-label">Cost Efficiency</span>
+                        <span class="comparison-value" style="color: var(--accent-green);">+41.3%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Tracking -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Error Rate Tracking</h2>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Error Rate Trend</h3>
+                        <p class="chart-subtitle">System errors over the last 30 days</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="errorTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Error Type</th>
+                            <th>Count (30d)</th>
+                            <th>% of Total</th>
+                            <th>Avg Resolution Time</th>
+                            <th>Trend</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Integration Timeout</strong></td>
+                            <td>847</td>
+                            <td>38.2%</td>
+                            <td>4.2 min</td>
+                            <td><span class="metric-badge success">↓ 18.3%</span></td>
+                            <td><span class="metric-badge warning">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Validation Errors</strong></td>
+                            <td>624</td>
+                            <td>28.1%</td>
+                            <td>Instant</td>
+                            <td><span class="metric-badge success">↓ 24.7%</span></td>
+                            <td><span class="metric-badge info">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Session Expiration</strong></td>
+                            <td>412</td>
+                            <td>18.6%</td>
+                            <td>2.1 min</td>
+                            <td><span class="metric-badge success">↓ 31.2%</span></td>
+                            <td><span class="metric-badge warning">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Rate Limit</strong></td>
+                            <td>184</td>
+                            <td>8.3%</td>
+                            <td>8.7 min</td>
+                            <td><span class="metric-badge danger">↑ 12.4%</span></td>
+                            <td><span class="metric-badge danger">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database Connection</strong></td>
+                            <td>147</td>
+                            <td>6.6%</td>
+                            <td>6.3 min</td>
+                            <td><span class="metric-badge success">↓ 8.1%</span></td>
+                            <td><span class="metric-badge danger">High</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Export Section -->
+        <section id="export" class="section">
+            <div class="export-section">
+                <h2 class="export-title">Export Analytics Data</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Download comprehensive analytics reports in your preferred format
+                </p>
+                <div class="export-buttons">
+                    <button class="btn btn-primary" onclick="exportData('pdf')">
+                        📄 Export as PDF
+                    </button>
+                    <button class="btn btn-primary" onclick="exportData('excel')">
+                        📊 Export to Excel
+                    </button>
+                    <button class="btn btn-primary" onclick="exportData('csv')">
+                        📋 Export as CSV
+                    </button>
+                    <button class="btn" onclick="exportData('json')">
+                        💾 Export JSON Data
+                    </button>
+                    <button class="btn" onclick="printReport()">
+                        🖨️ Print Report
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('updateTime').textContent = now.toLocaleTimeString();
+        }
+        updateTimestamp();
+        setInterval(updateTimestamp, 1000);
+
+        // Chart.js default config
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.borderColor = '#334155';
+        Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+        // Application Volume Trend Chart
+        const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+        new Chart(volumeCtx, {
+            type: 'line',
+            data: {
+                labels: ['August', 'September', 'October', 'November', 'December', 'January'],
+                datasets: [{
+                    label: 'Applications Started',
+                    data: [5842, 6247, 6894, 7341, 8247, 8942],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Applications Completed',
+                    data: [4124, 4518, 5084, 5592, 6451, 6994],
+                    borderColor: '#14b8a6',
+                    backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Completion Rate by Channel Chart
+        const channelCtx = document.getElementById('channelChart').getContext('2d');
+        new Chart(channelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['LO Portal', 'Direct Link', 'Website', 'Mobile App', 'Email Link'],
+                datasets: [{
+                    label: 'Completion Rate',
+                    data: [84.2, 78.6, 72.4, 68.9, 81.3],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(20, 184, 166, 0.8)',
+                        'rgba(139, 92, 246, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ],
+                    borderColor: [
+                        '#3b82f6',
+                        '#14b8a6',
+                        '#8b5cf6',
+                        '#10b981',
+                        '#f59e0b'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: '#334155'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Device Usage Chart
+        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+        new Chart(deviceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Mobile', 'Desktop', 'Tablet'],
+                datasets: [{
+                    data: [64, 28, 8],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(20, 184, 166, 0.8)',
+                        'rgba(139, 92, 246, 0.8)'
+                    ],
+                    borderColor: [
+                        '#3b82f6',
+                        '#14b8a6',
+                        '#8b5cf6'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // LO Productivity Chart
+        const productivityCtx = document.getElementById('productivityChart').getContext('2d');
+        new Chart(productivityCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                datasets: [{
+                    label: 'Apps per LO',
+                    data: [12.4, 13.8, 14.2, 15.7, 16.3, 17.2],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Time Distribution Chart
+        const timeDistCtx = document.getElementById('timeDistributionChart').getContext('2d');
+        new Chart(timeDistCtx, {
+            type: 'bar',
+            data: {
+                labels: ['0-10 min', '10-15 min', '15-20 min', '20-25 min', '25-30 min', '30+ min'],
+                datasets: [{
+                    label: 'Applications',
+                    data: [1847, 4214, 8942, 6124, 3214, 1847],
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderColor: '#10b981',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Feature Adoption Chart
+        const featureCtx = document.getElementById('featureAdoptionChart').getContext('2d');
+        new Chart(featureCtx, {
+            type: 'line',
+            data: {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{
+                    label: 'Plaid VOA',
+                    data: [34, 42, 56, 68, 74, 82],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'TRUV VOIE',
+                    data: [28, 36, 48, 61, 69, 76],
+                    borderColor: '#14b8a6',
+                    backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Prove Identity',
+                    data: [41, 52, 64, 78, 86, 92],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'AI Assistant',
+                    data: [12, 18, 24, 32, 38, 44],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: '#334155'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Integration Success Rates Chart
+        const integrationCtx = document.getElementById('integrationChart').getContext('2d');
+        new Chart(integrationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Plaid VOA', 'TRUV VOIE', 'Prove', 'Soft Credit', 'OTP'],
+                datasets: [{
+                    label: 'Success Rate',
+                    data: [96.4, 94.8, 98.2, 92.1, 99.6],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(16, 185, 129, 0.8)'
+                    ],
+                    borderColor: [
+                        '#10b981',
+                        '#10b981',
+                        '#10b981',
+                        '#f59e0b',
+                        '#10b981'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: '#334155'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // API Response Times Chart
+        const apiCtx = document.getElementById('apiResponseChart').getContext('2d');
+        new Chart(apiCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Plaid VOA', 'TRUV VOIE', 'Prove', 'Soft Credit', 'OTP'],
+                datasets: [{
+                    label: 'Response Time (ms)',
+                    data: [1247, 1892, 486, 2341, 124],
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + 'ms';
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Funnel Chart
+        const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+        new Chart(funnelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Identity', 'Basic Info', 'Employment', 'Assets', 'Property', 'Credit', 'Submit'],
+                datasets: [{
+                    label: 'Users Remaining',
+                    data: [42847, 40214, 38692, 35841, 33214, 31847, 30924, 29741],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.9)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(20, 184, 166, 0.8)',
+                        'rgba(20, 184, 166, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(16, 185, 129, 0.6)',
+                        'rgba(16, 185, 129, 0.5)'
+                    ],
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // ROI Chart
+        const roiCtx = document.getElementById('roiChart').getContext('2d');
+        new Chart(roiCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 3', 'Month 6', 'Month 9', 'Month 12', 'Month 15', 'Month 18', 'Month 24'],
+                datasets: [{
+                    label: 'Cumulative Return ($M)',
+                    data: [0.6, 2.1, 4.8, 7.8, 11.2, 14.8, 18.7, 26.4],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Investment ($M)',
+                    data: [2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    borderDash: [5, 5],
+                    tension: 0,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Error Trend Chart
+        const errorCtx = document.getElementById('errorTrendChart').getContext('2d');
+        new Chart(errorCtx, {
+            type: 'line',
+            data: {
+                labels: ['Day 1', 'Day 5', 'Day 10', 'Day 15', 'Day 20', 'Day 25', 'Day 30'],
+                datasets: [{
+                    label: 'Total Errors',
+                    data: [124, 118, 102, 94, 86, 78, 71],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Export functions
+        function exportData(format) {
+            alert(`Exporting analytics data as ${format.toUpperCase()}...\n\nThis would generate a comprehensive report including:\n- All KPIs and metrics\n- Chart visualizations\n- Data tables\n- Comparative analysis\n\nFormat: ${format}`);
+        }
+
+        function printReport() {
+            window.print();
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            // Could update KPI values here for real-time feel
+        }, 30000);
+    </script>
+</body>
+</html>
