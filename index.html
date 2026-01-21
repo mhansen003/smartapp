@@ -18,6 +18,7 @@
             <h2>Quick Jump</h2>
         </div>
         <ul class="sidebar-nav">
+            <li><a href="#executive">🎯 Exec & TODO's</a></li>
             <li><a href="#prototypes">🚀 Prototypes</a></li>
             <li><a href="#requirements">📋 Requirements</a></li>
             <li><a href="#integrations">🔌 Integrations</a></li>
@@ -58,6 +59,72 @@
                 </div>
             </div>
         </header>
+
+        <!-- Executive Summary & TODO's Section -->
+        <section id="executive" class="section">
+            <h2 class="section-title">🎯 EXEC & TODO'S</h2>
+            <p class="section-description">Executive-level overview, current scope, talking points, strategic suggestions, and open decisions</p>
+            <div class="tiles-grid">
+                <a href="executive/executive-summary.html" class="tile" style="border-color: var(--accent-purple);">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Executive Summary</h3>
+                        <p class="tile-description">Strategic overview, current status, achievements, and business value</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">Q2 2026 Launch</span>
+                            <span class="badge badge-success">65% Complete</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="executive/scope.html" class="tile" style="border-color: var(--accent-blue);">
+                    <div class="tile-icon">🎯</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Current Scope</h3>
+                        <p class="tile-description">P0/P1/P2 priorities, vendor integrations, and out-of-scope items</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-danger">12 P0</span>
+                            <span class="badge badge-warning">19 P1</span>
+                            <span class="badge">24 P2</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="executive/talking-points.html" class="tile" style="border-color: var(--accent-teal);">
+                    <div class="tile-icon">💬</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Talking Points</h3>
+                        <p class="tile-description">Stakeholder messaging, elevator pitch, demo script, objection handling</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">6 Audiences</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="executive/suggestions.html" class="tile" style="border-color: var(--accent-green);">
+                    <div class="tile-icon">💡</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Strategic Suggestions</h3>
+                        <p class="tile-description">Quick wins, product/UX recommendations, risk mitigation strategies</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">5 Quick Wins</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="executive/open-questions.html" class="tile" style="border-color: var(--accent-red);">
+                    <div class="tile-icon">❓</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Open Questions & Decisions</h3>
+                        <p class="tile-description">Key decisions needed, blocking items, risks requiring mitigation plans</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-danger">5 Blocking</span>
+                            <span class="badge badge-warning">7 High Priority</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
 
         <!-- Quick Links Section -->
         <section id="prototypes" class="section">
@@ -707,47 +774,17 @@
         <section id="metrics" class="section">
             <h2 class="section-title">📈 PROJECT METRICS & VISUALIZATION</h2>
             <div class="tiles-grid">
-                <div class="tile tile-chart">
+                <a href="metrics/dashboard.html" class="tile tile-highlight" style="border-color: var(--accent-blue);">
+                    <div class="tile-icon">📊</div>
                     <div class="tile-content">
-                        <h3 class="tile-title">Research Data Distribution</h3>
-                        <canvas id="researchChart"></canvas>
+                        <h3 class="tile-title">Analytics Dashboard</h3>
+                        <p class="tile-description">6 interactive charts with real project data: research distribution, requirements coverage, timeline, features, vendors, and documentation</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live Data</span>
+                            <span class="badge badge-info">6 Charts</span>
+                        </div>
                     </div>
-                </div>
-
-                <div class="tile tile-chart">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Requirements Framework Coverage</h3>
-                        <canvas id="requirementsChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="tile tile-chart">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Project Phase Timeline</h3>
-                        <canvas id="timelineChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="tile tile-chart">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Feature Prioritization (P0/P1/P2)</h3>
-                        <canvas id="featureChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="tile tile-chart">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Vendor Integration Status</h3>
-                        <canvas id="vendorChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="tile tile-chart">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Documentation Completion by Section</h3>
-                        <canvas id="docsChart"></canvas>
-                    </div>
-                </div>
+                </a>
             </div>
         </section>
 

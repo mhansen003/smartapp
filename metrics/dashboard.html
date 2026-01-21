@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .metrics-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-card h3 {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-wrapper canvas {
+            max-height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-wrapper {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../documents/" class="nav-link">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <a href="../index.html" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Analytics Dashboard</span>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Data Visualization</div>
+                <h1 class="page-title">Project Metrics & Analytics Dashboard</h1>
+                <p class="page-description">Real-time project metrics with interactive charts showing research distribution, requirements coverage, timeline, features, vendor integrations, and documentation progress</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📊</span>
+                        <span>6 Live Charts</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔄</span>
+                        <span>Real-Time Data</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📈</span>
+                        <span>65% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="metrics-container">
+        <a href="../index.html" class="back-button">← Back to Dashboard</a>
+
+        <!-- Stats Overview -->
+        <section class="content-section">
+            <div class="stats-grid" style="margin-bottom: 3rem;">
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-blue);">53</div>
+                    <div class="stat-label">Research Artifacts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-teal);">14</div>
+                    <div class="stat-label">Requirement Modules</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-purple);">55</div>
+                    <div class="stat-label">Features Scoped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-green);">8</div>
+                    <div class="stat-label">Vendor Integrations</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Grid -->
+        <div class="chart-grid">
+            <!-- Research Distribution -->
+            <div class="chart-card">
+                <h3>Research Data Distribution</h3>
+                <div class="chart-wrapper">
+                    <canvas id="researchChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Requirements Coverage -->
+            <div class="chart-card">
+                <h3>Requirements Framework Coverage</h3>
+                <div class="chart-wrapper">
+                    <canvas id="requirementsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="chart-card" style="grid-column: 1 / -1;">
+                <h3>Project Phase Timeline</h3>
+                <div class="chart-wrapper">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Feature Prioritization -->
+            <div class="chart-card">
+                <h3>Feature Prioritization (P0/P1/P2)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="featureChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Vendor Status -->
+            <div class="chart-card">
+                <h3>Vendor Integration Status</h3>
+                <div class="chart-wrapper">
+                    <canvas id="vendorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Documentation Progress -->
+            <div class="chart-card">
+                <h3>Documentation Completion by Section</h3>
+                <div class="chart-wrapper">
+                    <canvas id="docsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>Smart App 2.0 Strategy Hub - Analytics Dashboard</p>
+                <p class="footer-meta">Last Updated: <span id="lastUpdated"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../app.js"></script>
+</body>
+</html>
