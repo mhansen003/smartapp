@@ -359,6 +359,65 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        /* Template Warning Banner */
+        .template-warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
+            border: 2px solid #ef4444;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1400px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .template-warning-icon {
+            font-size: 3rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .template-warning-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .template-warning-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .template-warning-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .template-warning-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .template-warning-content ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .template-warning-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-red);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -390,6 +449,32 @@
                     <span class="breadcrumb-current">Questions & Decisions Log</span>
                 </li>
             </ul>
+        </div>
+    </div>
+
+    <!-- Template Warning Banner -->
+    <div class="template-warning-banner">
+        <div class="template-warning-icon">⚠️</div>
+        <div class="template-warning-content">
+            <h2>TEMPLATE: Example Decisions for Demonstration</h2>
+            <p>
+                This page contains <strong>fabricated example decisions (D-001 through D-048)</strong> and
+                <strong>ADRs (ADR-001 through ADR-008)</strong> for demonstration purposes only.
+            </p>
+            <p>
+                <strong>REAL project questions, ideas, and decisions are tracked in:</strong>
+            </p>
+            <p style="font-size: 1.1rem; margin-left: 1.5rem;">
+                📄 <strong>Smart App 2.0 - Questions & Decisions Log.xlsx</strong>
+            </p>
+            <ul>
+                <li>33 real questions from Dave, Brooke, Cathy, and team</li>
+                <li>30 real product ideas from LOs and developers</li>
+                <li>Use the Excel file for actual project decision tracking</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                <strong>Update this template with real decisions as they are made.</strong>
+            </p>
         </div>
     </div>
 
