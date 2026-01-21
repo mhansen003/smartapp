@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrower Scenario Logic - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Borrower Scenarios</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 13</div>
+                <h1 class="page-title">Borrower Scenario Logic</h1>
+                <p class="page-description">Comprehensive UI scenarios matrix covering all borrower pathways, decision trees, and conditional logic that determines what borrowers see and when.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🎭</span>
+                        <span>UI Scenarios</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🌳</span>
+                        <span>Decision Trees</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Conditional Logic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Every borrower's journey through Smart App is unique. The Borrower Scenario Logic defines all possible
+                pathways, conditional displays, and decision points that create a personalized, relevant experience.
+                This includes property type variations, loan purpose differences, employment scenarios, and co-borrower workflows.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">25+</div>
+                    <div class="stat-label">Unique Scenarios</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">40+</div>
+                    <div class="stat-label">Decision Points</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">Conditional Sections</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Major Pathways</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Primary Scenario Drivers -->
+        <section class="content-section">
+            <h2 class="content-section-title">Primary Scenario Drivers</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">1️⃣ Loan Purpose</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Purchase</div>
+                        <div class="priority-item">Refinance</div>
+                        <div class="priority-item">Cash-out Refinance</div>
+                        <div class="priority-item">Construction</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">Determines property search vs current property questions</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">2️⃣ Property Type</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Single Family</div>
+                        <div class="priority-item">Condo</div>
+                        <div class="priority-item">Multi-Unit (2-4)</div>
+                        <div class="priority-item">Manufactured</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">Affects required disclosures and property questions</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">3️⃣ Occupancy</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Primary Residence</div>
+                        <div class="priority-item">Second Home</div>
+                        <div class="priority-item">Investment Property</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">Changes rental income questions and documentation needs</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">4️⃣ Co-Borrower Status</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">Solo Borrower</div>
+                        <div class="priority-item">With Co-Borrower</div>
+                        <div class="priority-item">Co-Borrower Added Later</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">Determines invite workflow and dual data collection</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">5️⃣ Employment Type</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">W-2 Employee</div>
+                        <div class="priority-item">Self-Employed</div>
+                        <div class="priority-item">Retired</div>
+                        <div class="priority-item">Other Income</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">Affects income verification method and documentation</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">6️⃣ First-Time Homebuyer</h3>
+                    <div class="priority-list" style="margin-top: 1rem;">
+                        <div class="priority-item">First-Time Buyer (Yes)</div>
+                        <div class="priority-item">Experienced Buyer (No)</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">Shows educational content and program eligibility</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Scenario Examples -->
+        <section class="content-section">
+            <h2 class="content-section-title">Key Scenario Examples</h2>
+
+            <h3 class="content-section-subtitle">Scenario 1: First-Time Homebuyer Purchase</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Question/Screen</th>
+                        <th>Logic/Condition</th>
+                        <th>Next Step</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>What are you looking to do?</td>
+                        <td>User selects "Purchase a home"</td>
+                        <td>Skip to property search</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Is this your first home?</td>
+                        <td>User selects "Yes"</td>
+                        <td>Show first-time buyer programs</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Have you found a property?</td>
+                        <td>If No: Show home search resources</td>
+                        <td>Continue to pre-qualification</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Property type</td>
+                        <td>User selects property type</td>
+                        <td>Conditional questions based on type</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Down payment amount</td>
+                        <td>Calculate LTV, show PMI if <20%</td>
+                        <td>Continue to income section</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Scenario 2: Cash-Out Refinance</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Question/Screen</th>
+                        <th>Logic/Condition</th>
+                        <th>Next Step</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>What are you looking to do?</td>
+                        <td>User selects "Cash-out Refinance"</td>
+                        <td>Current mortgage questions</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Current property address</td>
+                        <td>Auto-fill from Prove if available</td>
+                        <td>Verify with AVM</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Current mortgage balance</td>
+                        <td>User enters amount</td>
+                        <td>Calculate available equity</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Desired cash-out amount</td>
+                        <td>Validate against LTV limits</td>
+                        <td>Show estimated new payment</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Purpose of cash-out</td>
+                        <td>Required disclosure</td>
+                        <td>Continue to income verification</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Scenario 3: Self-Employed Borrower</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Question/Screen</th>
+                        <th>Logic/Condition</th>
+                        <th>Alternative Path</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Employment status</td>
+                        <td>User selects "Self-Employed"</td>
+                        <td>Skip TRUV, show manual entry</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Business name and type</td>
+                        <td>Required for self-employed</td>
+                        <td>Collect business details</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Years in business</td>
+                        <td>If <2 years, flag for review</td>
+                        <td>May need additional docs</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Monthly income</td>
+                        <td>Show info: "We'll verify with tax returns"</td>
+                        <td>Set expectation for docs</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Business expenses</td>
+                        <td>Optional field for more accurate calculation</td>
+                        <td>Calculate qualifying income</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Conditional UI Elements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Conditional UI Elements</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>UI Element</th>
+                        <th>Show When...</th>
+                        <th>Hide When...</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Co-Borrower Invite Button</strong></td>
+                        <td>Solo borrower, any time during app</td>
+                        <td>Co-borrower already added</td>
+                        <td>Allow adding co-borrower mid-flow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rental Income Section</strong></td>
+                        <td>Property is 2-4 unit OR investment property</td>
+                        <td>Primary residence, single family</td>
+                        <td>Collect rental income data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HOA Fee Question</strong></td>
+                        <td>Property type is Condo or Townhouse</td>
+                        <td>Single family detached</td>
+                        <td>Include in monthly payment calc</td>
+                    </tr>
+                    <tr>
+                        <td><strong>First-Time Buyer Programs</strong></td>
+                        <td>User indicates first-time buyer</td>
+                        <td>Not first-time buyer</td>
+                        <td>Show available assistance programs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Current Mortgage Details</strong></td>
+                        <td>Loan purpose is Refinance or Cash-out</td>
+                        <td>Purchase</td>
+                        <td>Gather payoff information</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Property Search Help</strong></td>
+                        <td>Purchase + Haven't found property</td>
+                        <td>Property already identified</td>
+                        <td>Connect with real estate agent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Military Service Question</strong></td>
+                        <td>Always shown (VA loan eligibility)</td>
+                        <td>Never</td>
+                        <td>Determine VA loan eligibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Additional Income Sources</strong></td>
+                        <td>Primary income insufficient for loan amount</td>
+                        <td>Income already qualifies</td>
+                        <td>Help borrower qualify</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Decision Tree Summary -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision Tree Summary</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">🌳 Main Decision Tree</h3>
+                    <div style="font-family: var(--font-mono); font-size: 0.85rem; margin-top: 1rem; color: var(--text-secondary);">
+                        <div>START</div>
+                        <div>  ├─ Loan Purpose?</div>
+                        <div>  │   ├─ Purchase → Property Search</div>
+                        <div>  │   ├─ Refinance → Current Property</div>
+                        <div>  │   └─ Cash-out → Equity Calculation</div>
+                        <div>  ├─ Property Type?</div>
+                        <div>  │   ├─ Condo → HOA Questions</div>
+                        <div>  │   ├─ Multi-Unit → Rental Income</div>
+                        <div>  │   └─ Other → Standard Path</div>
+                        <div>  ├─ Employment?</div>
+                        <div>  │   ├─ W-2 → TRUV Integration</div>
+                        <div>  │   ├─ Self-Employed → Manual Entry</div>
+                        <div>  │   └─ Retired → Retirement Income</div>
+                        <div>  └─ Co-Borrower?</div>
+                        <div>      ├─ Yes → Duplicate Sections</div>
+                        <div>      └─ No → Single Path</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📊 Complexity Matrix</h3>
+                    <table style="width: 100%; margin-top: 1rem; font-size: 0.9rem;">
+                        <tr>
+                            <td style="color: var(--text-secondary);">Simplest Path:</td>
+                            <td style="color: var(--accent-green); font-weight: 600;">Purchase, W-2, Solo</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--text-secondary);">Most Common:</td>
+                            <td style="color: var(--accent-blue); font-weight: 600;">Purchase, W-2, With Co-borrower</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--text-secondary);">Most Complex:</td>
+                            <td style="color: var(--accent-yellow); font-weight: 600;">Cash-out, Self-Employed, Investment Property</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Notes -->
+        <section class="content-section">
+            <h2 class="content-section-title">Implementation Considerations</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">All conditional logic must be testable and documented</div>
+                <div class="priority-item">Default values should guide borrower to most common path</div>
+                <div class="priority-item">Progressive disclosure keeps initial screens simple</div>
+                <div class="priority-item">Back button must correctly handle conditional sections</div>
+                <div class="priority-item">Analytics should track which paths borrowers take</div>
+                <div class="priority-item">Edge cases require LO review flag, not blocking errors</div>
+                <div class="priority-item">Scenario matrix must be maintained with each feature addition</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • Borrower Scenario Logic</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="urla-gap.html">← Previous: URLA Gap</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LO Configuration System - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link active">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../scoping/" class="nav-link">Scoping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="../requirements/" class="breadcrumb-link">Requirements</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">LO Configuration</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Module 09</div>
+                <h1 class="page-title">Smart App Configuration System</h1>
+                <p class="page-description">Loan Officer level toggles and configuration options allowing customization of the borrower experience based on LO preferences and business requirements.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">⚙️</span>
+                        <span>Configuration Toggles</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">👤</span>
+                        <span>LO Level Settings</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎯</span>
+                        <span>Customizable Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../requirements/" class="back-button">← Back to Requirements</a>
+
+        <!-- Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The LO Configuration System empowers Loan Officers to customize the Smart App experience for their borrowers.
+                This includes controlling which features are enabled, setting default values, customizing branding elements,
+                and determining workflow behaviors. Research shows that LOs have diverse preferences and this flexibility
+                is critical for adoption.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Purpose</h3>
+                    <p class="card-description">Enable LOs to tailor the borrower experience while maintaining compliance and data quality standards.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Research Insight</h3>
+                    <p class="card-description">7 LO interviews revealed strong preferences for control over borrower communications and feature visibility.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Implementation</h3>
+                    <p class="card-description">Toggle system with sensible defaults, overridable at LO level with admin oversight capabilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configuration Categories -->
+        <section class="content-section">
+            <h2 class="content-section-title">Configuration Categories</h2>
+
+            <h3 class="content-section-subtitle">Feature Toggles</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Prove Identity Verification</strong></td>
+                        <td>Enable/disable Prove integration for identity verification</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>High - Affects data collection speed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plaid VOA</strong></td>
+                        <td>Allow borrowers to link bank accounts via Plaid</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>High - Asset verification efficiency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TRUV VOIE</strong></td>
+                        <td>Enable income/employment verification through TRUV</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>High - Income verification automation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Soft Credit Pull</strong></td>
+                        <td>Automatically pull soft credit during application</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>Medium - Pre-qualification accuracy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Assistant</strong></td>
+                        <td>Show AI assistant chat widget to borrowers</td>
+                        <td><span class="status-badge status-pending">OFF</span></td>
+                        <td>Medium - Borrower support experience</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Co-Borrower Invite</strong></td>
+                        <td>Allow primary borrower to invite co-borrower</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>Medium - Application completion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Document Upload</strong></td>
+                        <td>Enable borrower document upload during application</td>
+                        <td><span class="status-badge status-pending">OFF</span></td>
+                        <td>Low - LO prefers to request specific docs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rate Lock Option</strong></td>
+                        <td>Show rate lock options to borrower</td>
+                        <td><span class="status-badge status-pending">OFF</span></td>
+                        <td>High - LO wants to discuss first</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Branding & Personalization</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Description</th>
+                        <th>Options</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LO Photo</strong></td>
+                        <td>Display loan officer photo in borrower portal</td>
+                        <td>Upload image / Use default avatar</td>
+                        <td>Default avatar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Welcome Message</strong></td>
+                        <td>Personalized message shown to borrower</td>
+                        <td>Custom text (up to 500 chars)</td>
+                        <td>Standard welcome message</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contact Preferences</strong></td>
+                        <td>How LO prefers to be contacted</td>
+                        <td>Email / Phone / Text / Any</td>
+                        <td>Any</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Hours</strong></td>
+                        <td>LO availability for borrower questions</td>
+                        <td>Set schedule by day/time</td>
+                        <td>Mon-Fri 9am-5pm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Display</strong></td>
+                        <td>Show LO team members (processor, etc.)</td>
+                        <td>Show team / Hide team</td>
+                        <td>Show team</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Workflow Settings</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Description</th>
+                        <th>Options</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Auto-Submit Behavior</strong></td>
+                        <td>What happens when borrower completes app</td>
+                        <td>Auto-submit / LO review first / Borrower confirms</td>
+                        <td>Controls submission timing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pre-Approval vs Pre-Qual</strong></td>
+                        <td>Initial goal for borrower application</td>
+                        <td>Pre-qualification / Pre-approval / Let borrower choose</td>
+                        <td>Determines data collection depth</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Required Fields Override</strong></td>
+                        <td>Make optional fields required for this LO</td>
+                        <td>Select fields from list</td>
+                        <td>Can increase data collection</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notification Frequency</strong></td>
+                        <td>How often LO is notified of borrower progress</td>
+                        <td>Real-time / Daily digest / Only at milestones</td>
+                        <td>LO inbox management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Borrower Progress Visibility</strong></td>
+                        <td>Can borrower see application status/timeline</td>
+                        <td>Full visibility / Limited / Hidden</td>
+                        <td>Borrower transparency level</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="content-section-subtitle">Communication Settings</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                        <th>Research Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Email Notifications</strong></td>
+                        <td>Send email updates to borrower</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>All LOs preferred this</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMS Notifications</strong></td>
+                        <td>Send text message updates</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>5/7 LOs wanted this enabled</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto-Reminder Frequency</strong></td>
+                        <td>Days before sending completion reminder</td>
+                        <td>3 days</td>
+                        <td>LOs split between 3 and 7 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Co-Borrower Notifications</strong></td>
+                        <td>Notify co-borrower of primary borrower actions</td>
+                        <td><span class="status-badge status-complete">ON</span></td>
+                        <td>Important for transparency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Intro Call Required</strong></td>
+                        <td>Require LO call before borrower can start app</td>
+                        <td><span class="status-badge status-pending">OFF</span></td>
+                        <td>2/7 LOs wanted this option</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Research Insights -->
+        <section class="content-section">
+            <h2 class="content-section-title">Research-Driven Insights</h2>
+
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--accent-teal);">
+                    <h3 class="card-title">💡 Key Finding</h3>
+                    <p class="card-description" style="font-size: 1rem; margin-top: 1rem;">
+                        "I need to be able to turn things on and off based on my borrower. Not all situations are the same."
+                        <br><br><em>- CJ Nelson, Loan Officer</em>
+                    </p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3 class="card-title">🎯 Design Principle</h3>
+                    <p class="card-description" style="font-size: 1rem; margin-top: 1rem;">
+                        Default settings should reflect the "happy path" for most scenarios, but LOs must have the ability
+                        to override based on their specific borrower relationships and business practices.
+                    </p>
+                </div>
+
+                <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                    <h3 class="card-title">⚠️ Critical Requirement</h3>
+                    <p class="card-description" style="font-size: 1rem; margin-top: 1rem;">
+                        Configuration changes must be tracked and auditable. Some settings may require compliance approval
+                        before activation, particularly those affecting data collection or disclosures.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Enhancements -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Configuration Enhancements</h2>
+
+            <div class="priority-list">
+                <div class="priority-item">Borrower-specific overrides (apply settings to individual borrowers)</div>
+                <div class="priority-item">Configuration templates (save and reuse sets of configurations)</div>
+                <div class="priority-item">Team-level defaults (apply settings across LO teams)</div>
+                <div class="priority-item">A/B testing capabilities (test configuration impact on completion rates)</div>
+                <div class="priority-item">Configuration analytics (show which settings correlate with better outcomes)</div>
+                <div class="priority-item">Seasonal toggles (automatically enable/disable based on market conditions)</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Strategy Hub • LO Configuration System</p>
+            <div class="footer-links">
+                <a href="../index.html">Dashboard</a>
+                <a href="../requirements/">Requirements</a>
+                <a href="scenarios.html">Next: Borrower Scenarios →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
