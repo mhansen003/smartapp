@@ -3408,6 +3408,1548 @@ export const useAutoSave = (formData, isDirty) => {
             </div>
         </section>
 
+        <!-- Visual UI Mockups & Flow Diagrams -->
+        <section class="content-section">
+            <h2 class="content-section-title">Visual UI Mockups & Flow Diagrams</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The following interactive mockups demonstrate the progressive disclosure pattern in action, showing how each step appears to borrowers and how the interface adapts across devices. These visual representations help stakeholders understand the user experience and guide implementation.
+            </p>
+
+            <style>
+                .mockup-container {
+                    margin: 3rem 0;
+                }
+
+                .screen-mockup {
+                    background: #ffffff;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 16px;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                    overflow: hidden;
+                    max-width: 480px;
+                    margin: 2rem auto;
+                }
+
+                .mockup-browser-bar {
+                    background: #f3f4f6;
+                    padding: 12px 16px;
+                    border-bottom: 1px solid #e5e7eb;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .browser-dot {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: #ef4444;
+                }
+
+                .browser-dot:nth-child(2) {
+                    background: #f59e0b;
+                }
+
+                .browser-dot:nth-child(3) {
+                    background: #10b981;
+                }
+
+                .mockup-header {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 2rem 1.5rem;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    text-align: center;
+                }
+
+                .mockup-progress {
+                    padding: 1rem 1.5rem;
+                    background: #f9fafb;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+
+                .progress-bar-container {
+                    background: #e5e7eb;
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin-bottom: 0.5rem;
+                }
+
+                .progress-bar-fill {
+                    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                    height: 100%;
+                    border-radius: 4px;
+                    transition: width 0.3s ease;
+                }
+
+                .progress-text {
+                    font-size: 0.875rem;
+                    color: #6b7280;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .mockup-body {
+                    padding: 2rem 1.5rem;
+                }
+
+                .form-field {
+                    margin-bottom: 1.5rem;
+                }
+
+                .form-field label {
+                    display: block;
+                    font-weight: 600;
+                    color: #374151;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.875rem;
+                }
+
+                .input-placeholder {
+                    background: #f9fafb;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 8px;
+                    height: 48px;
+                    padding: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                    color: #9ca3af;
+                    font-size: 0.875rem;
+                }
+
+                .input-placeholder.filled {
+                    border-color: #667eea;
+                    background: white;
+                    color: #374151;
+                }
+
+                .input-placeholder.half-width {
+                    width: calc(50% - 0.5rem);
+                    display: inline-block;
+                }
+
+                .field-row {
+                    display: flex;
+                    gap: 1rem;
+                }
+
+                .mockup-footer {
+                    padding: 1.5rem;
+                    background: #f9fafb;
+                    border-top: 1px solid #e5e7eb;
+                    display: flex;
+                    gap: 1rem;
+                    justify-content: space-between;
+                }
+
+                .btn-next, .btn-back {
+                    flex: 1;
+                    padding: 1rem 2rem;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 700;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                .btn-next {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+                }
+
+                .btn-next:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 8px rgba(102, 126, 234, 0.4);
+                }
+
+                .btn-back {
+                    background: white;
+                    color: #667eea;
+                    border: 2px solid #667eea;
+                }
+
+                .mockup-hero {
+                    text-align: center;
+                    padding: 3rem 2rem;
+                }
+
+                .mockup-hero h1 {
+                    font-size: 2rem;
+                    font-weight: 800;
+                    color: #1f2937;
+                    margin-bottom: 1rem;
+                }
+
+                .time-badge {
+                    display: inline-block;
+                    background: #dbeafe;
+                    color: #1e40af;
+                    padding: 0.5rem 1rem;
+                    border-radius: 20px;
+                    font-weight: 600;
+                    font-size: 0.875rem;
+                    margin: 1rem 0;
+                }
+
+                .checklist {
+                    text-align: left;
+                    max-width: 400px;
+                    margin: 2rem auto;
+                }
+
+                .checklist-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    margin-bottom: 1rem;
+                    color: #4b5563;
+                }
+
+                .checklist-icon {
+                    width: 24px;
+                    height: 24px;
+                    background: #10b981;
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                }
+
+                .integration-button {
+                    background: white;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    margin-bottom: 1rem;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                .integration-button:hover {
+                    border-color: #667eea;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+
+                .integration-icon {
+                    width: 48px;
+                    height: 48px;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 1.5rem;
+                    flex-shrink: 0;
+                }
+
+                .integration-text {
+                    flex: 1;
+                    text-align: left;
+                }
+
+                .integration-text strong {
+                    display: block;
+                    color: #1f2937;
+                    margin-bottom: 0.25rem;
+                }
+
+                .integration-text small {
+                    color: #6b7280;
+                    font-size: 0.875rem;
+                }
+
+                .review-section {
+                    background: #f9fafb;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 8px;
+                    padding: 1.5rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .review-section h3 {
+                    font-size: 1rem;
+                    font-weight: 700;
+                    color: #1f2937;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .edit-link {
+                    color: #667eea;
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+
+                .review-item {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0.5rem 0;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+
+                .review-item:last-child {
+                    border-bottom: none;
+                }
+
+                .review-label {
+                    color: #6b7280;
+                    font-size: 0.875rem;
+                }
+
+                .review-value {
+                    color: #1f2937;
+                    font-weight: 600;
+                    font-size: 0.875rem;
+                }
+
+                .comparison-container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                    margin: 2rem 0;
+                }
+
+                @media (max-width: 768px) {
+                    .comparison-container {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                .comparison-label {
+                    text-align: center;
+                    font-weight: 700;
+                    color: #1f2937;
+                    margin-bottom: 1rem;
+                    font-size: 1.125rem;
+                }
+
+                .traditional-mockup {
+                    background: #fef2f2;
+                    border: 2px solid #fca5a5;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    max-height: 400px;
+                    overflow-y: auto;
+                }
+
+                .progressive-mockup {
+                    background: #f0fdf4;
+                    border: 2px solid #86efac;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                }
+
+                .field-overflow {
+                    font-size: 0.75rem;
+                    color: #6b7280;
+                    text-align: center;
+                    padding: 1rem;
+                    font-style: italic;
+                }
+
+                .help-tooltip {
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    background: #6b7280;
+                    color: white;
+                    border-radius: 50%;
+                    text-align: center;
+                    font-size: 0.75rem;
+                    line-height: 16px;
+                    cursor: help;
+                    margin-left: 0.25rem;
+                }
+
+                .conditional-field {
+                    background: #fef3c7;
+                    border-left: 4px solid #f59e0b;
+                    padding-left: 1rem;
+                    margin-left: 1rem;
+                }
+
+                .flow-diagram {
+                    background: white;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 12px;
+                    padding: 2rem;
+                    margin: 2rem 0;
+                }
+
+                .flow-step {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                }
+
+                .flow-number {
+                    width: 40px;
+                    height: 40px;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 700;
+                    flex-shrink: 0;
+                    margin-right: 1rem;
+                }
+
+                .flow-content {
+                    flex: 1;
+                }
+
+                .flow-title {
+                    font-weight: 700;
+                    color: #1f2937;
+                    margin-bottom: 0.25rem;
+                }
+
+                .flow-description {
+                    font-size: 0.875rem;
+                    color: #6b7280;
+                }
+
+                .responsive-showcase {
+                    display: flex;
+                    gap: 2rem;
+                    align-items: flex-start;
+                    justify-content: center;
+                    margin: 2rem 0;
+                    flex-wrap: wrap;
+                }
+
+                .device-mockup {
+                    text-align: center;
+                }
+
+                .device-label {
+                    font-weight: 600;
+                    color: #6b7280;
+                    margin-bottom: 1rem;
+                    font-size: 0.875rem;
+                }
+
+                .mobile-frame {
+                    width: 375px;
+                    border: 12px solid #1f2937;
+                    border-radius: 36px;
+                    overflow: hidden;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+                }
+
+                .desktop-frame {
+                    width: 100%;
+                    max-width: 768px;
+                    border: 8px solid #1f2937;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+                }
+
+                .animation-demo {
+                    background: #f9fafb;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 12px;
+                    padding: 2rem;
+                    margin: 2rem 0;
+                }
+
+                .collapsed-section {
+                    background: white;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 8px;
+                    padding: 1rem 1.5rem;
+                    margin-bottom: 1rem;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    transition: all 0.3s;
+                }
+
+                .collapsed-section:hover {
+                    border-color: #667eea;
+                }
+
+                .expand-icon {
+                    color: #667eea;
+                    font-size: 1.5rem;
+                    transition: transform 0.3s;
+                }
+
+                .expanded-section {
+                    background: white;
+                    border: 2px solid #667eea;
+                    border-radius: 8px;
+                    padding: 1.5rem;
+                    margin-bottom: 1rem;
+                }
+
+                .expanded-section .expand-icon {
+                    transform: rotate(180deg);
+                }
+
+                .section-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                    cursor: pointer;
+                }
+            </style>
+
+            <!-- Step 0: Welcome Screen Mockup -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 0: Welcome Screen</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-hero">
+                        <h1>Let's Get You Pre-Approved</h1>
+                        <div class="time-badge">Takes about 15-20 minutes</div>
+                        <p style="color: #6b7280; margin: 1.5rem 0;">Complete your mortgage application in simple steps. Save and resume anytime.</p>
+
+                        <div class="checklist">
+                            <h4 style="font-weight: 700; color: #1f2937; margin-bottom: 1rem;">What You'll Need:</h4>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">✓</div>
+                                <span>Personal information (SSN, DOB)</span>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">✓</div>
+                                <span>Employment history (2 years)</span>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">✓</div>
+                                <span>Income documentation</span>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checklist-icon">✓</div>
+                                <span>Bank account information</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mockup-footer" style="flex-direction: column;">
+                        <button class="btn-next" style="width: 100%;">Get Started →</button>
+                        <a href="#" style="color: #667eea; text-align: center; font-size: 0.875rem; text-decoration: none;">Already started? Resume your application</a>
+                        <div style="text-align: center; margin-top: 1rem; color: #6b7280; font-size: 0.75rem;">
+                            <span style="display: inline-block; margin-right: 0.5rem;">🔒</span>
+                            Bank-level encryption • Your data is secure
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 1: Basic Information Mockup -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 1: Basic Information</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 12.5%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 1 of 8: Basic Information</span>
+                            <span>12% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="field-row">
+                            <div class="form-field" style="flex: 1;">
+                                <label>First Name</label>
+                                <div class="input-placeholder">John</div>
+                            </div>
+                            <div class="form-field" style="flex: 1;">
+                                <label>Last Name</label>
+                                <div class="input-placeholder">Smith</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Email Address</label>
+                            <div class="input-placeholder">john.smith@example.com</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Phone Number</label>
+                            <div class="input-placeholder">(555) 123-4567</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Date of Birth</label>
+                            <div class="input-placeholder">MM / DD / YYYY</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Social Security Number <span class="help-tooltip">?</span></label>
+                            <div class="input-placeholder">•••-••-••••</div>
+                            <small style="color: #6b7280; font-size: 0.75rem; display: block; margin-top: 0.5rem;">Your SSN is encrypted and used only for credit verification</small>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Property Details with Conditional Fields -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 2: Property & Loan Details (with Conditional Logic)</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 25%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 2 of 8: Property Details</span>
+                            <span>25% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="form-field">
+                            <label>Loan Purpose</label>
+                            <div class="input-placeholder filled">Purchase</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Property Type</label>
+                            <div class="input-placeholder filled">Single Family Home</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Property Address</label>
+                            <div class="input-placeholder">123 Main Street, City, ST 12345</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Estimated Purchase Price</label>
+                            <div class="input-placeholder">$450,000</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Down Payment Amount</label>
+                            <div class="input-placeholder">$90,000</div>
+                        </div>
+
+                        <div class="form-field conditional-field">
+                            <label>How will you use this property?</label>
+                            <div class="input-placeholder">Primary Residence</div>
+                            <small style="color: #92400e; font-size: 0.75rem; display: block; margin-top: 0.5rem;">This field appeared because you selected "Purchase"</small>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Employment & Income with TRUV Integration -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 3: Employment & Income (TRUV Integration)</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 37.5%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 3 of 8: Employment & Income</span>
+                            <span>38% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <p style="color: #6b7280; margin-bottom: 1.5rem; font-size: 0.875rem;">Choose how you'd like to verify your employment and income:</p>
+
+                        <div class="integration-button" style="border-color: #667eea; background: #eff6ff;">
+                            <div class="integration-icon">⚡</div>
+                            <div class="integration-text">
+                                <strong>Instant Verification with TRUV</strong>
+                                <small>Connect your payroll account - takes 2 minutes</small>
+                            </div>
+                            <span style="color: #667eea; font-weight: 600;">Recommended</span>
+                        </div>
+
+                        <div style="text-align: center; margin: 1rem 0; color: #9ca3af; font-size: 0.875rem;">or</div>
+
+                        <div class="integration-button">
+                            <div class="integration-icon" style="background: #6b7280;">📝</div>
+                            <div class="integration-text">
+                                <strong>Manual Entry</strong>
+                                <small>Enter employment details yourself</small>
+                            </div>
+                        </div>
+
+                        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 1rem; margin-top: 1.5rem;">
+                            <p style="color: #166534; font-size: 0.875rem; margin: 0;">
+                                <strong>Why choose instant verification?</strong><br>
+                                <small style="color: #15803d;">Get approved faster • No documents to upload • More accurate • Secure and private</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Identity Verification with Prove -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 4: Identity Verification (Prove Integration)</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 50%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 4 of 8: Identity Verification</span>
+                            <span>50% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body" style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem;">
+                            ✓
+                        </div>
+                        <h3 style="color: #1f2937; margin-bottom: 0.5rem;">Verify Your Identity</h3>
+                        <p style="color: #6b7280; margin-bottom: 2rem; font-size: 0.875rem;">We'll send a one-time code to your phone to confirm your identity. This takes less than 1 minute.</p>
+
+                        <div class="form-field">
+                            <label style="text-align: left;">Mobile Phone Number</label>
+                            <div class="input-placeholder filled" style="font-size: 1.125rem; text-align: center;">(555) 123-4567</div>
+                        </div>
+
+                        <button class="btn-next" style="width: 100%; margin-top: 1rem;">Send Verification Code</button>
+
+                        <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 1rem; margin-top: 1.5rem;">
+                            <p style="color: #78350f; font-size: 0.75rem; margin: 0;">
+                                <strong>Why verify?</strong> This helps protect you from identity theft and speeds up your application approval.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next" disabled style="opacity: 0.5;">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Assets with Plaid Integration -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 5: Assets & Accounts (Plaid Integration)</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 62.5%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 5 of 8: Assets</span>
+                            <span>63% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <p style="color: #6b7280; margin-bottom: 1.5rem; font-size: 0.875rem;">Connect your bank accounts securely to verify your assets:</p>
+
+                        <div class="integration-button" style="border-color: #10b981; background: #f0fdf4;">
+                            <div class="integration-icon" style="background: #10b981;">🏦</div>
+                            <div class="integration-text">
+                                <strong>Connect with Plaid</strong>
+                                <small>Link your bank accounts securely in seconds</small>
+                            </div>
+                            <span style="color: #10b981; font-weight: 600;">Fast & Secure</span>
+                        </div>
+
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <div style="display: inline-block; background: white; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem 1.5rem;">
+                                <div style="font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem;">Connected Accounts</div>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">💳</div>
+                                    <div style="text-align: left;">
+                                        <div style="font-weight: 600; color: #1f2937;">Chase Checking</div>
+                                        <div style="font-size: 0.875rem; color: #6b7280;">••••4567</div>
+                                    </div>
+                                    <div style="margin-left: auto; font-weight: 700; color: #1f2937;">$24,500</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin: 1rem 0; color: #9ca3af; font-size: 0.875rem;">or</div>
+
+                        <div class="integration-button">
+                            <div class="integration-icon" style="background: #6b7280;">✍️</div>
+                            <div class="integration-text">
+                                <strong>Enter Manually</strong>
+                                <small>Add your account information yourself</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Additional Information -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 6: Additional Information</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 75%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 6 of 8: Additional Details</span>
+                            <span>75% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <p style="color: #6b7280; margin-bottom: 1.5rem; font-size: 0.875rem;">Just a few more details to complete your application:</p>
+
+                        <div class="form-field">
+                            <label>Ethnicity <span class="help-tooltip">?</span></label>
+                            <div class="input-placeholder">Select option</div>
+                            <small style="color: #6b7280; font-size: 0.75rem; display: block; margin-top: 0.5rem;">This information is optional and used for government monitoring purposes only</small>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Race <span class="help-tooltip">?</span></label>
+                            <div class="input-placeholder">Select option</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Sex</label>
+                            <div class="input-placeholder">Select option</div>
+                        </div>
+
+                        <div style="background: #eff6ff; border: 2px solid #dbeafe; border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem;">
+                            <h4 style="color: #1e40af; margin-bottom: 0.75rem; font-size: 0.875rem; font-weight: 700;">Declarations</h4>
+                            <div style="margin-bottom: 0.75rem;">
+                                <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                                    <input type="checkbox" style="margin-top: 0.25rem;">
+                                    <span style="color: #1f2937; font-size: 0.875rem;">Are you a co-maker or endorser on any debt?</span>
+                                </label>
+                            </div>
+                            <div style="margin-bottom: 0.75rem;">
+                                <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                                    <input type="checkbox" style="margin-top: 0.25rem;">
+                                    <span style="color: #1f2937; font-size: 0.875rem;">Have you declared bankruptcy in the past 7 years?</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                                    <input type="checkbox" style="margin-top: 0.25rem;">
+                                    <span style="color: #1f2937; font-size: 0.875rem;">Are you currently delinquent on any federal debt?</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7: Review & Submit -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Step 7: Review & Submit</h3>
+                <div class="screen-mockup">
+                    <div class="mockup-browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="mockup-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 87.5%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Step 7 of 8: Review & Submit</span>
+                            <span>88% Complete</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <p style="color: #6b7280; margin-bottom: 1.5rem; font-size: 0.875rem;">Please review your information before submitting:</p>
+
+                        <div class="review-section">
+                            <h3>
+                                Basic Information
+                                <span class="edit-link">Edit</span>
+                            </h3>
+                            <div class="review-item">
+                                <span class="review-label">Name</span>
+                                <span class="review-value">John Smith</span>
+                            </div>
+                            <div class="review-item">
+                                <span class="review-label">Email</span>
+                                <span class="review-value">john.smith@example.com</span>
+                            </div>
+                            <div class="review-item">
+                                <span class="review-label">Phone</span>
+                                <span class="review-value">(555) 123-4567</span>
+                            </div>
+                        </div>
+
+                        <div class="review-section">
+                            <h3>
+                                Property Details
+                                <span class="edit-link">Edit</span>
+                            </h3>
+                            <div class="review-item">
+                                <span class="review-label">Purchase Price</span>
+                                <span class="review-value">$450,000</span>
+                            </div>
+                            <div class="review-item">
+                                <span class="review-label">Down Payment</span>
+                                <span class="review-value">$90,000</span>
+                            </div>
+                            <div class="review-item">
+                                <span class="review-label">Property Type</span>
+                                <span class="review-value">Single Family</span>
+                            </div>
+                        </div>
+
+                        <div class="review-section">
+                            <h3>
+                                Employment & Income
+                                <span class="edit-link">Edit</span>
+                            </h3>
+                            <div class="review-item">
+                                <span class="review-label">Status</span>
+                                <span class="review-value">✓ Verified via TRUV</span>
+                            </div>
+                            <div class="review-item">
+                                <span class="review-label">Annual Income</span>
+                                <span class="review-value">$85,000</span>
+                            </div>
+                        </div>
+
+                        <div style="background: #fef3c7; border: 2px solid #fbbf24; border-radius: 8px; padding: 1rem; margin-top: 1.5rem;">
+                            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                                <input type="checkbox" style="margin-top: 0.25rem;">
+                                <span style="color: #78350f; font-size: 0.875rem;">I certify that all information provided is accurate and complete to the best of my knowledge.</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mockup-footer">
+                        <button class="btn-back">← Back</button>
+                        <button class="btn-next" style="background: #10b981;">Submit Application ✓</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Indicator Visual States -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Progress Indicator at Different States</h3>
+                <div style="background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 2rem;">
+                    <div style="margin-bottom: 2rem;">
+                        <div style="font-weight: 600; color: #6b7280; margin-bottom: 0.5rem; font-size: 0.875rem;">Step 1 - Getting Started</div>
+                        <div class="mockup-progress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 12.5%;"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Step 1 of 8</span>
+                                <span>12% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <div style="font-weight: 600; color: #6b7280; margin-bottom: 0.5rem; font-size: 0.875rem;">Step 4 - Halfway Through</div>
+                        <div class="mockup-progress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 50%;"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Step 4 of 8</span>
+                                <span>50% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-weight: 600; color: #6b7280; margin-bottom: 0.5rem; font-size: 0.875rem;">Step 7 - Almost Done</div>
+                        <div class="mockup-progress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 87.5%;"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Step 7 of 8</span>
+                                <span>88% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile vs Desktop Comparison -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Mobile vs Desktop Responsive Design</h3>
+                <div class="responsive-showcase">
+                    <div class="device-mockup">
+                        <div class="device-label">📱 Mobile (375px)</div>
+                        <div class="mobile-frame">
+                            <div class="mockup-progress" style="border-radius: 0;">
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 37.5%;"></div>
+                                </div>
+                                <div class="progress-text">
+                                    <span style="font-size: 0.75rem;">Step 3 of 8</span>
+                                    <span style="font-size: 0.75rem;">38%</span>
+                                </div>
+                            </div>
+                            <div class="mockup-body" style="padding: 1rem;">
+                                <div class="form-field">
+                                    <label style="font-size: 0.75rem;">Employment Status</label>
+                                    <div class="input-placeholder" style="height: 44px; font-size: 0.875rem;">Employed Full-Time</div>
+                                </div>
+                                <div class="form-field">
+                                    <label style="font-size: 0.75rem;">Employer Name</label>
+                                    <div class="input-placeholder" style="height: 44px; font-size: 0.875rem;">Acme Corporation</div>
+                                </div>
+                                <div class="form-field">
+                                    <label style="font-size: 0.75rem;">Annual Income</label>
+                                    <div class="input-placeholder" style="height: 44px; font-size: 0.875rem;">$85,000</div>
+                                </div>
+                            </div>
+                            <div class="mockup-footer" style="border-radius: 0; flex-direction: column; gap: 0.75rem;">
+                                <button class="btn-next" style="width: 100%; padding: 0.875rem; font-size: 0.875rem;">Continue →</button>
+                                <button class="btn-back" style="width: 100%; padding: 0.875rem; font-size: 0.875rem;">← Back</button>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.75rem; color: #6b7280;">
+                            ✓ Single column layout<br>
+                            ✓ Full-width buttons<br>
+                            ✓ Larger touch targets (44px)
+                        </div>
+                    </div>
+
+                    <div class="device-mockup">
+                        <div class="device-label">💻 Desktop (768px+)</div>
+                        <div class="desktop-frame">
+                            <div class="mockup-progress" style="border-radius: 0;">
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 37.5%;"></div>
+                                </div>
+                                <div class="progress-text">
+                                    <span>Step 3 of 8: Employment & Income</span>
+                                    <span>38% Complete</span>
+                                </div>
+                            </div>
+                            <div class="mockup-body">
+                                <div class="field-row">
+                                    <div class="form-field" style="flex: 1;">
+                                        <label>Employment Status</label>
+                                        <div class="input-placeholder">Employed Full-Time</div>
+                                    </div>
+                                    <div class="form-field" style="flex: 1;">
+                                        <label>Years at Job</label>
+                                        <div class="input-placeholder">5 years</div>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <label>Employer Name</label>
+                                    <div class="input-placeholder">Acme Corporation</div>
+                                </div>
+                                <div class="field-row">
+                                    <div class="form-field" style="flex: 1;">
+                                        <label>Annual Base Salary</label>
+                                        <div class="input-placeholder">$75,000</div>
+                                    </div>
+                                    <div class="form-field" style="flex: 1;">
+                                        <label>Other Income</label>
+                                        <div class="input-placeholder">$10,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mockup-footer" style="border-radius: 0;">
+                                <button class="btn-back" style="max-width: 200px;">← Back</button>
+                                <button class="btn-next" style="max-width: 200px;">Continue →</button>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.75rem; color: #6b7280;">
+                            ✓ Multi-column layout<br>
+                            ✓ Side-by-side buttons<br>
+                            ✓ More fields visible
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progressive Disclosure Animation -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Progressive Disclosure: Expand/Collapse Behavior</h3>
+                <div class="animation-demo">
+                    <p style="color: #6b7280; margin-bottom: 1.5rem; font-size: 0.875rem;">Sections start collapsed and expand when selected, showing only relevant information:</p>
+
+                    <div class="collapsed-section">
+                        <div>
+                            <div style="font-weight: 600; color: #1f2937;">Basic Information</div>
+                            <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">✓ Complete</div>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+
+                    <div class="expanded-section">
+                        <div class="section-header">
+                            <div>
+                                <div style="font-weight: 600; color: #1f2937;">Employment Details</div>
+                                <div style="font-size: 0.75rem; color: #f59e0b; margin-top: 0.25rem;">● In Progress</div>
+                            </div>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="form-field">
+                            <label>Employment Status</label>
+                            <div class="input-placeholder filled">Employed Full-Time</div>
+                        </div>
+                        <div class="form-field">
+                            <label>Employer Name</label>
+                            <div class="input-placeholder">Enter employer name...</div>
+                        </div>
+                        <div class="form-field">
+                            <label>Annual Income</label>
+                            <div class="input-placeholder">$</div>
+                        </div>
+                    </div>
+
+                    <div class="collapsed-section" style="opacity: 0.6;">
+                        <div>
+                            <div style="font-weight: 600; color: #6b7280;">Assets & Liabilities</div>
+                            <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">Not started</div>
+                        </div>
+                        <span class="expand-icon" style="color: #9ca3af;">▼</span>
+                    </div>
+
+                    <div style="background: #eff6ff; border: 1px solid #dbeafe; border-radius: 8px; padding: 1rem; margin-top: 1.5rem;">
+                        <p style="color: #1e40af; font-size: 0.875rem; margin: 0;">
+                            <strong>Cognitive Load Reduction:</strong> Users focus on one section at a time, preventing overwhelm from seeing 200+ fields simultaneously.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Before/After Comparison -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Before/After: Traditional vs Progressive Disclosure</h3>
+                <div class="comparison-container">
+                    <div>
+                        <div class="comparison-label" style="color: #dc2626;">❌ Traditional Form (All at Once)</div>
+                        <div class="traditional-mockup">
+                            <h4 style="font-size: 0.875rem; margin-bottom: 0.75rem;">Complete Mortgage Application</h4>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">First Name</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Last Name</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Email</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Phone</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">SSN</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Property Address</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Purchase Price</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Employer Name</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="field-overflow">
+                                ... 192 more fields below ...
+                            </div>
+                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #fca5a5;">
+                                <div style="font-size: 0.75rem; color: #991b1b; margin-bottom: 0.5rem;">
+                                    <strong>Issues:</strong>
+                                </div>
+                                <div style="font-size: 0.75rem; color: #7f1d1d;">
+                                    • 73% abandonment rate<br>
+                                    • 42 minute avg completion<br>
+                                    • Overwhelming to users<br>
+                                    • High error rate (4.7 per app)<br>
+                                    • No context for why fields needed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="comparison-label" style="color: #16a34a;">✓ Progressive Disclosure (Step-by-Step)</div>
+                        <div class="progressive-mockup">
+                            <div class="mockup-progress" style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 25%;"></div>
+                                </div>
+                                <div class="progress-text" style="font-size: 0.75rem;">
+                                    <span>Step 2 of 8</span>
+                                    <span>25%</span>
+                                </div>
+                            </div>
+
+                            <h4 style="font-size: 0.875rem; margin-bottom: 0.75rem;">Property Details</h4>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Loan Purpose</label>
+                                <div class="input-placeholder" style="height: 32px;">Purchase</div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Property Type</label>
+                                <div class="input-placeholder" style="height: 32px;">Single Family</div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Property Address</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Purchase Price</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+                            <div class="form-field">
+                                <label style="font-size: 0.75rem;">Down Payment</label>
+                                <div class="input-placeholder" style="height: 32px;"></div>
+                            </div>
+
+                            <div style="text-align: center; margin: 1.5rem 0; color: #6b7280; font-size: 0.75rem;">
+                                Only 5 fields on this step
+                            </div>
+
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn-back" style="padding: 0.5rem 1rem; font-size: 0.75rem;">← Back</button>
+                                <button class="btn-next" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Continue →</button>
+                            </div>
+
+                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #86efac;">
+                                <div style="font-size: 0.75rem; color: #15803d; margin-bottom: 0.5rem;">
+                                    <strong>Benefits:</strong>
+                                </div>
+                                <div style="font-size: 0.75rem; color: #14532d;">
+                                    • 78% completion rate<br>
+                                    • 18.6 minute avg completion<br>
+                                    • Manageable, focused sections<br>
+                                    • Low error rate (0.8 per app)<br>
+                                    • Clear context and progress
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow Diagram -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Complete Application Flow Diagram</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-number">0</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Welcome / Getting Started</div>
+                            <div class="flow-description">Set expectations • Show time estimate • Build trust • Explain process</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">1</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Basic Information</div>
+                            <div class="flow-description">Name, contact info, DOB, SSN • 8 fields • ~2 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">2</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Property & Loan Details</div>
+                            <div class="flow-description">Purchase/refinance, property type, address, price • Conditional fields based on loan purpose • 10-12 fields • ~3 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">3</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Employment & Income <span style="background: #dbeafe; color: #1e40af; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">TRUV</span></div>
+                            <div class="flow-description">Option for instant verification or manual entry • Employer info, income sources • 9-14 fields • ~4 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">4</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Identity Verification <span style="background: #dbeafe; color: #1e40af; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">Prove</span></div>
+                            <div class="flow-description">Phone verification for instant identity check • 4 fields + integration • ~2 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">5</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Assets & Liabilities <span style="background: #dbeafe; color: #1e40af; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-left: 0.5rem;">Plaid</span></div>
+                            <div class="flow-description">Bank account connections or manual entry • Debt obligations • 8-16 fields • ~5 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">6</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Additional Information</div>
+                            <div class="flow-description">Demographics (optional), declarations, special circumstances • 12 fields • ~3 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">7</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Review & Submit</div>
+                            <div class="flow-description">Review all sections • Edit any section • Final consent • Submit application • ~3 min</div>
+                        </div>
+                    </div>
+
+                    <div style="border-left: 2px dashed #e5e7eb; height: 24px; margin-left: 20px;"></div>
+
+                    <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                        <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: 0.25rem;">Application Submitted</div>
+                        <div style="font-size: 0.875rem; opacity: 0.95;">Total time: ~18 minutes • Completion rate: 78%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics Visualization -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Impact Metrics: Visual Comparison</h3>
+                <div style="background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 2rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">78%</div>
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Completion Rate</div>
+                            <div style="font-size: 0.875rem; color: #10b981;">↑ 136% vs traditional</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">18.6</div>
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Avg Minutes</div>
+                            <div style="font-size: 0.875rem; color: #10b981;">↓ 56% time savings</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">89%</div>
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Satisfaction Score</div>
+                            <div style="font-size: 0.875rem; color: #10b981;">↑ 71% increase</div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">0.8</div>
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Errors Per App</div>
+                            <div style="font-size: 0.875rem; color: #10b981;">↓ 83% error reduction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Specifications -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Visual Design Specifications</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Specification</th>
+                            <th>Mobile</th>
+                            <th>Desktop</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Progress Bar Height</strong></td>
+                            <td>Visual indicator thickness</td>
+                            <td>6px</td>
+                            <td>8px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Input Field Height</strong></td>
+                            <td>Minimum touch target size</td>
+                            <td>48px</td>
+                            <td>48px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Button Height</strong></td>
+                            <td>Primary CTA minimum</td>
+                            <td>56px</td>
+                            <td>48px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Content Width</strong></td>
+                            <td>Maximum readable line length</td>
+                            <td>100% - 32px padding</td>
+                            <td>640px max</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Field Spacing</strong></td>
+                            <td>Vertical gap between fields</td>
+                            <td>24px</td>
+                            <td>24px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Section Padding</strong></td>
+                            <td>Internal padding for cards</td>
+                            <td>20px</td>
+                            <td>32px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Font Sizes</strong></td>
+                            <td>Body text / Labels / Headings</td>
+                            <td>16px / 14px / 24px</td>
+                            <td>16px / 14px / 32px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Border Radius</strong></td>
+                            <td>Cards / Inputs / Buttons</td>
+                            <td>12px / 8px / 8px</td>
+                            <td>16px / 8px / 8px</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Color Palette -->
+            <div class="mockup-container">
+                <h3 class="content-section-subtitle">Color Palette & Usage</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 80px; border-radius: 8px; margin-bottom: 0.75rem;"></div>
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Primary Gradient</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace;">#667eea → #764ba2</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Progress bar, CTAs, accents</div>
+                    </div>
+
+                    <div>
+                        <div style="background: #10b981; height: 80px; border-radius: 8px; margin-bottom: 0.75rem;"></div>
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Success Green</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace;">#10b981</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Checkmarks, completed states</div>
+                    </div>
+
+                    <div>
+                        <div style="background: #f59e0b; height: 80px; border-radius: 8px; margin-bottom: 0.75rem;"></div>
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Warning Orange</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace;">#f59e0b</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Conditional fields, alerts</div>
+                    </div>
+
+                    <div>
+                        <div style="background: #1f2937; height: 80px; border-radius: 8px; margin-bottom: 0.75rem;"></div>
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Text Primary</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace;">#1f2937</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Headings, labels, body text</div>
+                    </div>
+
+                    <div>
+                        <div style="background: #6b7280; height: 80px; border-radius: 8px; margin-bottom: 0.75rem;"></div>
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Text Secondary</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace;">#6b7280</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Descriptions, helper text</div>
+                    </div>
+
+                    <div>
+                        <div style="background: #f9fafb; border: 2px solid #e5e7eb; height: 80px; border-radius: 8px; margin-bottom: 0.75rem;"></div>
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">Background Light</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace;">#f9fafb / #e5e7eb</div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Input fields, sections, borders</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Notes -->
+            <div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 12px; padding: 2rem; margin-top: 3rem;">
+                <h3 style="color: #1e40af; margin-bottom: 1rem;">Implementation Notes for Developers</h3>
+                <div class="priority-list">
+                    <div class="priority-item"><strong>Component Library:</strong> Build reusable React components for each screen mockup shown above</div>
+                    <div class="priority-item"><strong>Responsive Breakpoints:</strong> Mobile-first with breakpoints at 640px (tablet) and 1024px (desktop)</div>
+                    <div class="priority-item"><strong>Animations:</strong> Use CSS transitions (0.3s ease) for expand/collapse, progress bar fills, and hover states</div>
+                    <div class="priority-item"><strong>Accessibility:</strong> All mockup patterns support keyboard navigation, screen readers, and WCAG 2.1 AA</div>
+                    <div class="priority-item"><strong>State Management:</strong> Progress tracked in Redux/Context, auto-save to localStorage every 30 seconds</div>
+                    <div class="priority-item"><strong>Integration Points:</strong> TRUV (Step 3), Prove (Step 4), and Plaid (Step 5) SDKs with fallback to manual entry</div>
+                    <div class="priority-item"><strong>Validation:</strong> Real-time field validation with debounced API calls for complex rules (e.g., SSN format)</div>
+                    <div class="priority-item"><strong>Testing:</strong> Visual regression tests using Percy or Chromatic to catch UI changes</div>
+                </div>
+            </div>
+        </section>
+
         <!-- Conclusion & Next Steps -->
         <section class="content-section">
             <h2 class="content-section-title">Summary & Next Steps</h2>

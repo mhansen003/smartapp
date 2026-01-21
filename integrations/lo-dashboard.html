@@ -997,6 +997,684 @@
             </div>
         </section>
 
+        <!-- Visual Dashboard Mockups & Interface Designs -->
+        <section class="content-section">
+            <h2 class="content-section-title">Visual Dashboard Mockups & Interface Designs</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                The following mockups illustrate the dashboard's visual design and user experience. These represent the actual interface that loan officers will interact with daily.
+            </p>
+
+            <!-- Dashboard Overview Mockup -->
+            <h3 class="content-section-subtitle">Dashboard Overview - Main View</h3>
+            <div class="dashboard-mockup" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); margin: 2rem 0;">
+
+                <!-- Header -->
+                <div class="mockup-header" style="background: rgba(255,255,255,0.98); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.08);">
+                    <div style="display: flex; align-items: center; gap: 2rem;">
+                        <div class="logo" style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Smart App 2.0</div>
+                        <nav style="display: flex; gap: 1.5rem;">
+                            <a href="#" style="color: #667eea; font-weight: 600; text-decoration: none; padding-bottom: 0.25rem; border-bottom: 2px solid #667eea;">Dashboard</a>
+                            <a href="#" style="color: #64748b; font-weight: 500; text-decoration: none;">Applications</a>
+                            <a href="#" style="color: #64748b; font-weight: 500; text-decoration: none;">Reports</a>
+                            <a href="#" style="color: #64748b; font-weight: 500; text-decoration: none;">Settings</a>
+                        </nav>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="position: relative;">
+                            <span style="font-size: 1.5rem;">🔔</span>
+                            <span style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700;">5</span>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">JD</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; min-height: 800px;">
+                    <!-- Sidebar -->
+                    <div class="mockup-sidebar" style="background: rgba(255,255,255,0.95); width: 280px; padding: 2rem 1.5rem; border-right: 1px solid rgba(0,0,0,0.08);">
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: #64748b; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Filters</h4>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <label style="display: block; color: #334155; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Status</label>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-size: 0.875rem;">
+                                        <input type="checkbox" checked style="width: 16px; height: 16px;"> All <span style="margin-left: auto; color: #94a3b8; font-size: 0.75rem;">34</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-size: 0.875rem;">
+                                        <input type="checkbox" style="width: 16px; height: 16px;"> In Progress <span style="margin-left: auto; color: #94a3b8; font-size: 0.75rem;">18</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-size: 0.875rem;">
+                                        <input type="checkbox" style="width: 16px; height: 16px;"> Stalled <span style="margin-left: auto; background: #fef3c7; color: #f59e0b; padding: 0.125rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">7</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-size: 0.875rem;">
+                                        <input type="checkbox" style="width: 16px; height: 16px;"> Ready <span style="margin-left: auto; background: #d1fae5; color: #10b981; padding: 0.125rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">9</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <label style="display: block; color: #334155; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Progress</label>
+                                <input type="range" min="0" max="100" value="0" style="width: 100%; margin-bottom: 0.25rem;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #94a3b8;">
+                                    <span>0%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <label style="display: block; color: #334155; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Date Range</label>
+                                <select style="width: 100%; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.875rem; color: #475569;">
+                                    <option>This Week</option>
+                                    <option>This Month</option>
+                                    <option>Last 30 Days</option>
+                                    <option>Custom</option>
+                                </select>
+                            </div>
+
+                            <button style="width: 100%; padding: 0.625rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px; color: #64748b; font-size: 0.875rem; font-weight: 600; cursor: pointer;">Clear Filters</button>
+                        </div>
+
+                        <div style="border-top: 1px solid #e2e8f0; padding-top: 1.5rem;">
+                            <h4 style="color: #64748b; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Saved Views</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <a href="#" style="color: #475569; font-size: 0.875rem; text-decoration: none; padding: 0.5rem; border-radius: 6px; display: flex; align-items: center; gap: 0.5rem; background: #f1f5f9;">
+                                    📌 My Priority Queue
+                                </a>
+                                <a href="#" style="color: #475569; font-size: 0.875rem; text-decoration: none; padding: 0.5rem; border-radius: 6px; display: flex; align-items: center; gap: 0.5rem;">
+                                    ⚠️ Needs Attention
+                                </a>
+                                <a href="#" style="color: #475569; font-size: 0.875rem; text-decoration: none; padding: 0.5rem; border-radius: 6px; display: flex; align-items: center; gap: 0.5rem;">
+                                    ✅ Ready to Submit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="mockup-main" style="flex: 1; padding: 2rem; background: #f8fafc; overflow-y: auto;">
+
+                        <!-- Metrics Row -->
+                        <div class="metrics-row" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                    <span style="color: #64748b; font-size: 0.875rem; font-weight: 600;">Total Applications</span>
+                                    <span style="font-size: 1.5rem;">📊</span>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: 800; color: #1e293b; margin-bottom: 0.25rem;">34</div>
+                                <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;">↑ 12% vs last week</div>
+                            </div>
+
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                    <span style="color: #64748b; font-size: 0.875rem; font-weight: 600;">In Progress</span>
+                                    <span style="font-size: 1.5rem;">⚡</span>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: 800; color: #1e293b; margin-bottom: 0.25rem;">18</div>
+                                <div style="font-size: 0.75rem; color: #64748b;">Avg 63% complete</div>
+                            </div>
+
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                    <span style="color: #64748b; font-size: 0.875rem; font-weight: 600;">Needs Attention</span>
+                                    <span style="font-size: 1.5rem;">⚠️</span>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.25rem;">7</div>
+                                <div style="font-size: 0.75rem; color: #64748b;">Stalled 7+ days</div>
+                            </div>
+
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                    <span style="color: #64748b; font-size: 0.875rem; font-weight: 600;">Completion Rate</span>
+                                    <span style="font-size: 1.5rem;">🎯</span>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: 800; color: #10b981; margin-bottom: 0.25rem;">87%</div>
+                                <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;">Above target (75%)</div>
+                            </div>
+                        </div>
+
+                        <!-- Application Grid -->
+                        <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
+                            <div style="padding: 1.5rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">Recent Applications</h3>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="text" placeholder="Search borrowers..." style="padding: 0.5rem 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.875rem; width: 250px;">
+                                    <button style="padding: 0.5rem 1rem; background: #667eea; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">+ New Application</button>
+                                </div>
+                            </div>
+
+                            <div class="application-grid" style="padding: 1.5rem;">
+                                <!-- Application Card 1 -->
+                                <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; transition: all 0.2s; cursor: pointer; background: #fffbeb; border-left: 4px solid #f59e0b;">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h4 style="font-size: 1rem; font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">Sarah Johnson</h4>
+                                            <p style="font-size: 0.875rem; color: #64748b;">sarah.j@email.com • (555) 123-4567</p>
+                                        </div>
+                                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                            <span style="background: #fef3c7; color: #f59e0b; padding: 0.375rem 0.75rem; border-radius: 16px; font-size: 0.75rem; font-weight: 700;">⚠️ STALLED</span>
+                                            <button style="padding: 0.5rem; background: transparent; border: none; font-size: 1.25rem; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.875rem; color: #64748b; font-weight: 600;">Progress</span>
+                                            <span style="font-size: 0.875rem; color: #1e293b; font-weight: 700;">42%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                            <div style="width: 42%; height: 100%; background: linear-gradient(90deg, #f59e0b 0%, #fb923c 100%);"></div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem;">
+                                        <div>
+                                            <span style="color: #64748b;">Property:</span>
+                                            <div style="color: #1e293b; font-weight: 600;">$425,000 Purchase</div>
+                                        </div>
+                                        <div>
+                                            <span style="color: #64748b;">Last Activity:</span>
+                                            <div style="color: #f59e0b; font-weight: 600;">9 days ago</div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="flex: 1; padding: 0.625rem; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;">Take Over</button>
+                                        <button style="flex: 1; padding: 0.625rem; background: white; color: #667eea; border: 1px solid #667eea; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;">Send Message</button>
+                                    </div>
+                                </div>
+
+                                <!-- Application Card 2 -->
+                                <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; transition: all 0.2s; cursor: pointer;">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h4 style="font-size: 1rem; font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">Michael Chen</h4>
+                                            <p style="font-size: 0.875rem; color: #64748b;">m.chen@email.com • (555) 234-5678</p>
+                                        </div>
+                                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                            <span style="background: #dbeafe; color: #3b82f6; padding: 0.375rem 0.75rem; border-radius: 16px; font-size: 0.75rem; font-weight: 700;">IN PROGRESS</span>
+                                            <button style="padding: 0.5rem; background: transparent; border: none; font-size: 1.25rem; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.875rem; color: #64748b; font-weight: 600;">Progress</span>
+                                            <span style="font-size: 0.875rem; color: #1e293b; font-weight: 700;">78%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                            <div style="width: 78%; height: 100%; background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);"></div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem;">
+                                        <div>
+                                            <span style="color: #64748b;">Property:</span>
+                                            <div style="color: #1e293b; font-weight: 600;">$680,000 Refinance</div>
+                                        </div>
+                                        <div>
+                                            <span style="color: #64748b;">Last Activity:</span>
+                                            <div style="color: #10b981; font-weight: 600;">2 hours ago</div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="flex: 1; padding: 0.625rem; background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;">View Details</button>
+                                        <button style="flex: 1; padding: 0.625rem; background: white; color: #667eea; border: 1px solid #667eea; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;">Send Message</button>
+                                    </div>
+                                </div>
+
+                                <!-- Application Card 3 -->
+                                <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; transition: all 0.2s; cursor: pointer; background: #f0fdf4; border-left: 4px solid #10b981;">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h4 style="font-size: 1rem; font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">Amanda Rodriguez</h4>
+                                            <p style="font-size: 0.875rem; color: #64748b;">amanda.r@email.com • (555) 345-6789</p>
+                                        </div>
+                                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                            <span style="background: #d1fae5; color: #10b981; padding: 0.375rem 0.75rem; border-radius: 16px; font-size: 0.75rem; font-weight: 700;">✓ READY</span>
+                                            <button style="padding: 0.5rem; background: transparent; border: none; font-size: 1.25rem; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.875rem; color: #64748b; font-weight: 600;">Progress</span>
+                                            <span style="font-size: 0.875rem; color: #1e293b; font-weight: 700;">100%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                            <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #10b981 0%, #34d399 100%);"></div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem;">
+                                        <div>
+                                            <span style="color: #64748b;">Property:</span>
+                                            <div style="color: #1e293b; font-weight: 600;">$525,000 Purchase</div>
+                                        </div>
+                                        <div>
+                                            <span style="color: #64748b;">Last Activity:</span>
+                                            <div style="color: #10b981; font-weight: 600;">15 minutes ago</div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="flex: 1; padding: 0.625rem; background: #10b981; color: white; border: none; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;">Review & Submit</button>
+                                        <button style="flex: 1; padding: 0.625rem; background: white; color: #10b981; border: 1px solid #10b981; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;">View Application</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Detail View Mockup -->
+            <h3 class="content-section-subtitle" style="margin-top: 3rem;">Application Detail View</h3>
+            <div style="background: #f8fafc; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin: 2rem 0;">
+
+                <!-- Breadcrumb & Actions -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #64748b; font-size: 0.875rem;">
+                        <a href="#" style="color: #667eea; text-decoration: none;">Dashboard</a>
+                        <span>›</span>
+                        <a href="#" style="color: #667eea; text-decoration: none;">Applications</a>
+                        <span>›</span>
+                        <span style="color: #1e293b; font-weight: 600;">Sarah Johnson</span>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem;">
+                        <button style="padding: 0.625rem 1.25rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 600; color: #64748b; cursor: pointer;">Export</button>
+                        <button style="padding: 0.625rem 1.25rem; background: #667eea; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Take Over Application</button>
+                    </div>
+                </div>
+
+                <!-- Borrower Summary Card -->
+                <div style="background: white; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="display: flex; gap: 1.5rem;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">SJ</div>
+                            <div>
+                                <h2 style="font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-bottom: 0.5rem;">Sarah Johnson</h2>
+                                <div style="display: flex; gap: 1.5rem; color: #64748b; font-size: 0.875rem; margin-bottom: 1rem;">
+                                    <div>📧 sarah.j@email.com</div>
+                                    <div>📱 (555) 123-4567</div>
+                                    <div>📍 Austin, TX</div>
+                                </div>
+                                <div style="display: flex; gap: 1rem;">
+                                    <div style="background: #f8fafc; padding: 0.75rem 1rem; border-radius: 8px;">
+                                        <div style="color: #64748b; font-size: 0.75rem; margin-bottom: 0.25rem;">Loan Amount</div>
+                                        <div style="color: #1e293b; font-weight: 700; font-size: 1rem;">$425,000</div>
+                                    </div>
+                                    <div style="background: #f8fafc; padding: 0.75rem 1rem; border-radius: 8px;">
+                                        <div style="color: #64748b; font-size: 0.75rem; margin-bottom: 0.25rem;">Loan Type</div>
+                                        <div style="color: #1e293b; font-weight: 700; font-size: 1rem;">Purchase - Conventional</div>
+                                    </div>
+                                    <div style="background: #f8fafc; padding: 0.75rem 1rem; border-radius: 8px;">
+                                        <div style="color: #64748b; font-size: 0.75rem; margin-bottom: 0.25rem;">Started</div>
+                                        <div style="color: #1e293b; font-weight: 700; font-size: 1rem;">Jan 12, 2026</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="background: #fef3c7; color: #f59e0b; padding: 0.5rem 1rem; border-radius: 16px; font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem;">⚠️ STALLED - 9 days</div>
+                            <div style="font-size: 3rem; font-weight: 800; color: #f59e0b; line-height: 1;">42%</div>
+                            <div style="color: #64748b; font-size: 0.875rem;">Complete</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Timeline -->
+                <div style="background: white; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b; margin-bottom: 1.5rem;">Application Progress</h3>
+                    <div style="position: relative;">
+                        <div style="position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e2e8f0;"></div>
+
+                        <!-- Timeline Item 1 -->
+                        <div style="position: relative; padding-left: 3rem; padding-bottom: 2rem;">
+                            <div style="position: absolute; left: 12px; width: 18px; height: 18px; background: #10b981; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 0 2px #10b981;"></div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">✓ Personal Information</div>
+                                    <div style="color: #64748b; font-size: 0.875rem;">Completed Jan 12, 2026 at 2:30 PM</div>
+                                </div>
+                                <span style="background: #d1fae5; color: #10b981; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">Complete</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div style="position: relative; padding-left: 3rem; padding-bottom: 2rem;">
+                            <div style="position: absolute; left: 12px; width: 18px; height: 18px; background: #10b981; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 0 2px #10b981;"></div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">✓ Income & Employment</div>
+                                    <div style="color: #64748b; font-size: 0.875rem;">Completed Jan 12, 2026 at 3:45 PM</div>
+                                </div>
+                                <span style="background: #d1fae5; color: #10b981; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">Complete</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div style="position: relative; padding-left: 3rem; padding-bottom: 2rem;">
+                            <div style="position: absolute; left: 12px; width: 18px; height: 18px; background: #f59e0b; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 0 2px #f59e0b;"></div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">⚠️ Assets & Liabilities</div>
+                                    <div style="color: #64748b; font-size: 0.875rem;">Last activity: Jan 12, 2026 at 4:15 PM</div>
+                                    <div style="color: #f59e0b; font-size: 0.875rem; font-weight: 600; margin-top: 0.25rem;">Stuck on bank account verification</div>
+                                </div>
+                                <span style="background: #fef3c7; color: #f59e0b; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">In Progress</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 4 -->
+                        <div style="position: relative; padding-left: 3rem; padding-bottom: 2rem;">
+                            <div style="position: absolute; left: 12px; width: 18px; height: 18px; background: #e2e8f0; border: 3px solid white; border-radius: 50%;"></div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: 700; color: #94a3b8; margin-bottom: 0.25rem;">Property Details</div>
+                                    <div style="color: #94a3b8; font-size: 0.875rem;">Not started</div>
+                                </div>
+                                <span style="background: #f1f5f9; color: #94a3b8; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">Pending</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 5 -->
+                        <div style="position: relative; padding-left: 3rem;">
+                            <div style="position: absolute; left: 12px; width: 18px; height: 18px; background: #e2e8f0; border: 3px solid white; border-radius: 50%;"></div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: 700; color: #94a3b8; margin-bottom: 0.25rem;">Document Upload</div>
+                                    <div style="color: #94a3b8; font-size: 0.875rem;">Not started</div>
+                                </div>
+                                <span style="background: #f1f5f9; color: #94a3b8; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Status -->
+                <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b; margin-bottom: 1.5rem;">Integration Status</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                        <div style="border: 1px solid #d1fae5; background: #f0fdf4; border-radius: 8px; padding: 1rem;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">Plaid</div>
+                            <div style="color: #10b981; font-size: 0.75rem; font-weight: 600;">Connected</div>
+                            <div style="color: #64748b; font-size: 0.75rem; margin-top: 0.25rem;">2 accounts verified</div>
+                        </div>
+                        <div style="border: 1px solid #fecaca; background: #fef2f2; border-radius: 8px; padding: 1rem;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚠️</div>
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">TRUV</div>
+                            <div style="color: #ef4444; font-size: 0.75rem; font-weight: 600;">Failed</div>
+                            <div style="color: #64748b; font-size: 0.75rem; margin-top: 0.25rem;">
+                                <button style="background: transparent; border: none; color: #667eea; font-weight: 600; cursor: pointer; padding: 0; font-size: 0.75rem;">Retry</button>
+                            </div>
+                        </div>
+                        <div style="border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 8px; padding: 1rem;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⏳</div>
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">Prove</div>
+                            <div style="color: #64748b; font-size: 0.75rem; font-weight: 600;">Not Started</div>
+                        </div>
+                        <div style="border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 8px; padding: 1rem;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⏳</div>
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">Soft Credit</div>
+                            <div style="color: #64748b; font-size: 0.75rem; font-weight: 600;">Not Started</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Panel Mockup -->
+            <h3 class="content-section-subtitle" style="margin-top: 3rem;">Notification Panel</h3>
+            <div style="background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); max-width: 400px; margin: 2rem 0;">
+                <div style="padding: 1.5rem; border-bottom: 1px solid #e2e8f0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">Notifications</h3>
+                        <button style="color: #667eea; font-size: 0.875rem; font-weight: 600; background: transparent; border: none; cursor: pointer;">Mark all read</button>
+                    </div>
+                </div>
+
+                <!-- Notification Item 1 -->
+                <div style="padding: 1rem 1.5rem; border-bottom: 1px solid #f1f5f9; background: #fffbeb; cursor: pointer;">
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex-shrink: 0; width: 40px; height: 40px; background: #fef3c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">⚠️</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem; font-size: 0.875rem;">Application Stalled</div>
+                            <div style="color: #64748b; font-size: 0.875rem; line-height: 1.4;">Sarah Johnson's application has been inactive for 9 days</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 0.5rem;">15 minutes ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Item 2 -->
+                <div style="padding: 1rem 1.5rem; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex-shrink: 0; width: 40px; height: 40px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">✓</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem; font-size: 0.875rem;">Application Ready</div>
+                            <div style="color: #64748b; font-size: 0.875rem; line-height: 1.4;">Amanda Rodriguez completed her application</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 0.5rem;">2 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Item 3 -->
+                <div style="padding: 1rem 1.5rem; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex-shrink: 0; width: 40px; height: 40px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">💬</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem; font-size: 0.875rem;">New Message</div>
+                            <div style="color: #64748b; font-size: 0.875rem; line-height: 1.4;">Michael Chen sent you a message about verification</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 0.5rem;">3 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Item 4 -->
+                <div style="padding: 1rem 1.5rem; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex-shrink: 0; width: 40px; height: 40px; background: #fef3c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">🤖</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem; font-size: 0.875rem;">AI Escalation</div>
+                            <div style="color: #64748b; font-size: 0.875rem; line-height: 1.4;">Borrower needs help with income documentation</div>
+                            <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 0.5rem;">5 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding: 1rem 1.5rem; text-align: center;">
+                    <button style="color: #667eea; font-weight: 600; background: transparent; border: none; cursor: pointer; font-size: 0.875rem;">View All Notifications</button>
+                </div>
+            </div>
+
+            <!-- Mobile Dashboard Mockup -->
+            <h3 class="content-section-subtitle" style="margin-top: 3rem;">Mobile Dashboard View</h3>
+            <div style="max-width: 375px; margin: 2rem auto; background: white; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 1rem; border: 12px solid #1e293b;">
+                <div style="background: #f8fafc; border-radius: 20px; overflow: hidden;">
+                    <!-- Mobile Header -->
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem 1rem; color: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div style="font-weight: 700; font-size: 1.125rem;">Smart App 2.0</div>
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <div style="position: relative;">
+                                    <span style="font-size: 1.25rem;">🔔</span>
+                                    <span style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 0.625rem; font-weight: 700;">3</span>
+                                </div>
+                                <div style="width: 32px; height: 32px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem;">JD</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Dashboard</h2>
+                        <div style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">Last updated: 2 minutes ago</div>
+                    </div>
+
+                    <!-- Mobile Metrics -->
+                    <div style="padding: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">34</div>
+                            <div style="color: #64748b; font-size: 0.75rem;">Total Apps</div>
+                        </div>
+                        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem; color: #f59e0b;">7</div>
+                            <div style="color: #64748b; font-size: 0.75rem;">Needs Attention</div>
+                        </div>
+                        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem; color: #10b981;">9</div>
+                            <div style="color: #64748b; font-size: 0.75rem;">Ready</div>
+                        </div>
+                        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem; color: #667eea;">87%</div>
+                            <div style="color: #64748b; font-size: 0.75rem;">Completion</div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Application List -->
+                    <div style="padding: 0 1rem 1rem 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-weight: 700; color: #1e293b; font-size: 1rem;">Recent Activity</h3>
+                            <button style="color: #667eea; font-size: 0.875rem; background: transparent; border: none; font-weight: 600;">View All</button>
+                        </div>
+
+                        <!-- Mobile App Card -->
+                        <div style="background: white; border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #f59e0b;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                                <div>
+                                    <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">Sarah Johnson</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">$425K Purchase</div>
+                                </div>
+                                <span style="background: #fef3c7; color: #f59e0b; padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.65rem; font-weight: 700;">STALLED</span>
+                            </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <div style="width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 42%; height: 100%; background: #f59e0b;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                                    <span style="font-size: 0.75rem; color: #64748b;">42% Complete</span>
+                                    <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 600;">9 days ago</span>
+                                </div>
+                            </div>
+                            <button style="width: 100%; padding: 0.5rem; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 0.8rem; font-weight: 600;">Take Action</button>
+                        </div>
+
+                        <!-- Mobile App Card 2 -->
+                        <div style="background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #10b981;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                                <div>
+                                    <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">Amanda Rodriguez</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">$525K Purchase</div>
+                                </div>
+                                <span style="background: #d1fae5; color: #10b981; padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.65rem; font-weight: 700;">READY</span>
+                            </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <div style="width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 100%; height: 100%; background: #10b981;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                                    <span style="font-size: 0.75rem; color: #64748b;">100% Complete</span>
+                                    <span style="font-size: 0.75rem; color: #10b981; font-weight: 600;">15 min ago</span>
+                                </div>
+                            </div>
+                            <button style="width: 100%; padding: 0.5rem; background: #10b981; color: white; border: none; border-radius: 8px; font-size: 0.8rem; font-weight: 600;">Review & Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Bottom Nav -->
+                    <div style="background: white; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; padding: 0.75rem 0;">
+                        <div style="text-align: center; color: #667eea;">
+                            <div style="font-size: 1.25rem;">📊</div>
+                            <div style="font-size: 0.65rem; font-weight: 600; margin-top: 0.25rem;">Dashboard</div>
+                        </div>
+                        <div style="text-align: center; color: #94a3b8;">
+                            <div style="font-size: 1.25rem;">📋</div>
+                            <div style="font-size: 0.65rem; font-weight: 600; margin-top: 0.25rem;">Applications</div>
+                        </div>
+                        <div style="text-align: center; color: #94a3b8;">
+                            <div style="font-size: 1.25rem;">📈</div>
+                            <div style="font-size: 0.65rem; font-weight: 600; margin-top: 0.25rem;">Reports</div>
+                        </div>
+                        <div style="text-align: center; color: #94a3b8;">
+                            <div style="font-size: 1.25rem;">⚙️</div>
+                            <div style="font-size: 0.65rem; font-weight: 600; margin-top: 0.25rem;">Settings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Update Flow Diagram -->
+            <h3 class="content-section-subtitle" style="margin-top: 3rem;">Real-Time WebSocket Update Flow</h3>
+            <div style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 16px; padding: 3rem; margin: 2rem 0; color: white;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; position: relative;">
+
+                    <!-- Step 1 -->
+                    <div style="flex: 1; text-align: center;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);">📱</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem;">Borrower Action</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.875rem; line-height: 1.4;">Borrower updates application or completes section</div>
+                    </div>
+
+                    <div style="color: rgba(255,255,255,0.5); font-size: 2rem; flex-shrink: 0;">→</div>
+
+                    <!-- Step 2 -->
+                    <div style="flex: 1; text-align: center;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, #10b981 0%, #34d399 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5);">⚡</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem;">Event Triggered</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.875rem; line-height: 1.4;">Backend captures event and processes update</div>
+                    </div>
+
+                    <div style="color: rgba(255,255,255,0.5); font-size: 2rem; flex-shrink: 0;">→</div>
+
+                    <!-- Step 3 -->
+                    <div style="flex: 1; text-align: center;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, #f59e0b 0%, #fb923c 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);">🔄</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem;">WebSocket Push</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.875rem; line-height: 1.4;">Real-time update sent to connected LO dashboards</div>
+                    </div>
+
+                    <div style="color: rgba(255,255,255,0.5); font-size: 2rem; flex-shrink: 0;">→</div>
+
+                    <!-- Step 4 -->
+                    <div style="flex: 1; text-align: center;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);">✨</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem;">Dashboard Updates</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.875rem; line-height: 1.4;">LO sees instant update, no refresh needed</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                        <div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem; color: #60a5fa;">Update Latency</div>
+                            <div style="font-size: 1.5rem; font-weight: 800;">< 300ms</div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">Average time to dashboard</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem; color: #34d399;">Events Tracked</div>
+                            <div style="font-size: 1.5rem; font-weight: 800;">47 Types</div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">All borrower actions</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem; color: #fb923c;">Connection Reliability</div>
+                            <div style="font-size: 1.5rem; font-weight: 800;">99.9%</div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">Auto-reconnect enabled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 700;">Design Principles Applied</h4>
+                <div class="priority-list">
+                    <div class="priority-item"><strong>Visual Hierarchy:</strong> Critical alerts and stalled applications prominently displayed with color-coded status badges</div>
+                    <div class="priority-item"><strong>Progressive Disclosure:</strong> Summary cards provide overview, detailed views available on click for deeper investigation</div>
+                    <div class="priority-item"><strong>Real-Time Feedback:</strong> WebSocket updates ensure dashboard reflects current state without page refreshes</div>
+                    <div class="priority-item"><strong>Mobile-First Responsive:</strong> Touch-optimized interface adapts seamlessly from desktop to mobile devices</div>
+                    <div class="priority-item"><strong>Action-Oriented:</strong> Quick action buttons (Take Over, Send Message) positioned for immediate LO response</div>
+                    <div class="priority-item"><strong>Data Density Balance:</strong> Sufficient information visible without overwhelming, with expandable sections for detail</div>
+                    <div class="priority-item"><strong>Consistent Color Language:</strong> Green (ready/complete), Orange (stalled/warning), Blue (in progress), Gray (pending)</div>
+                    <div class="priority-item"><strong>Contextual Actions:</strong> Available actions change based on application state and LO permissions</div>
+                </div>
+            </div>
+        </section>
+
         <!-- Bulk Actions -->
         <section class="content-section">
             <h2 class="content-section-title">Bulk Actions</h2>

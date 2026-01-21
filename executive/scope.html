@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Scope - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../documents/" class="nav-link">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="breadcrumb-link">Executive</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Current Scope</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Project Scope</div>
+                <h1 class="page-title">Current High-Level Scope</h1>
+                <p class="page-description">Detailed scope breakdown with P0/P1/P2 priorities, in-scope features, and explicit out-of-scope items</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">🎯</span>
+                        <span>12 P0 Features</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📋</span>
+                        <span>19 P1 Features</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Q2 2026 Target</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="index.html" class="back-button">← Back to Executive Dashboard</a>
+
+        <!-- Scope Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Scope Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-red);">12</div>
+                    <div class="stat-label">P0 - Critical</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Must-have for launch</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-yellow);">19</div>
+                    <div class="stat-label">P1 - High Priority</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Needed for full value</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-blue);">24</div>
+                    <div class="stat-label">P2 - Future Phase</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Post-launch enhancements</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-green);">8</div>
+                    <div class="stat-label">Vendor Integrations</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Third-party APIs</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- P0 Critical Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">P0 - Critical Features (Must-Have for Launch)</h2>
+
+            <div class="card" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3);">
+                <h3 class="card-title" style="color: var(--accent-red);">Core Application Features</h3>
+                <table class="data-table" style="margin-top: 1rem;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Feature</th>
+                            <th>Description</th>
+                            <th>Complexity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Task Workflow System</strong></td>
+                            <td>One-at-a-time guided task completion with progress tracking</td>
+                            <td><span class="badge badge-warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Prove Integration</strong></td>
+                            <td>Instant identity verification via phone number</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>FlueID Integration</strong></td>
+                            <td>Auto-populate 22-40 URLA fields from title data</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>Streamlined Intake Form</strong></td>
+                            <td>Condensed initial data capture (10-15 min vs 30+ min)</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>Mobile-Responsive Design</strong></td>
+                            <td>Full mobile-first UI for all borrower-facing screens</td>
+                            <td><span class="badge badge-warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>E-Consent Integration</strong></td>
+                            <td>Solex integration for e-signature setup</td>
+                            <td><span class="badge badge-success">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>Document Upload</strong></td>
+                            <td>Mobile-friendly file upload with camera capture</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>Progress Persistence</strong></td>
+                            <td>Save and resume application from any device</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><strong>LO Dashboard View</strong></td>
+                            <td>Basic LO view of borrower progress and data</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><strong>Email/SMS Notifications</strong></td>
+                            <td>Application status updates and task reminders</td>
+                            <td><span class="badge badge-success">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td><strong>Co-Borrower Flow</strong></td>
+                            <td>Invite and data collection for co-borrower</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td><strong>URLA Export</strong></td>
+                            <td>Generate URLA 1003 form from collected data</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- P1 High Priority Features -->
+        <section class="content-section">
+            <h2 class="content-section-title">P1 - High Priority Features (Needed for Full Value)</h2>
+
+            <div class="card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
+                <h3 class="card-title" style="color: var(--accent-yellow);">Enhanced Capabilities</h3>
+                <table class="data-table" style="margin-top: 1rem;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Feature</th>
+                            <th>Description</th>
+                            <th>Complexity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Mobile AI Chat</strong></td>
+                            <td>Context-aware AI assistant for borrower questions</td>
+                            <td><span class="badge badge-warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>LO Configuration Dashboard</strong></td>
+                            <td>Toggle switches for automation vs manual control</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Truv Integration</strong></td>
+                            <td>Income/employment verification with retry logic</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>Plaid Integration</strong></td>
+                            <td>Bank account verification and asset data</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>"AI Future vs Stone Age" Toggle</strong></td>
+                            <td>LO choice between automated vs traditional workflow</td>
+                            <td><span class="badge badge-success">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>Smart Field Validation</strong></td>
+                            <td>Real-time validation with helpful error messages</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>Progressive Disclosure</strong></td>
+                            <td>Contextual field display based on loan type</td>
+                            <td><span class="badge badge-warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>LO Analytics Dashboard</strong></td>
+                            <td>Completion rates, time savings, borrower metrics</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><strong>Automated Credit Pull</strong></td>
+                            <td>Trigger credit report after authorization</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><strong>Multi-Language Support</strong></td>
+                            <td>Spanish translation for all borrower-facing UI</td>
+                            <td><span class="badge badge-warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td><strong>Conditional Logic Engine</strong></td>
+                            <td>Show/hide fields based on previous answers</td>
+                            <td><span class="badge badge-warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td><strong>Task Skip with Explanation</strong></td>
+                            <td>Allow borrowers to skip tasks with reason tracking</td>
+                            <td><span class="badge badge-success">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td><strong>Pre-Disclosure Package</strong></td>
+                            <td>Auto-generate and deliver disclosure documents</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td><strong>LO Collaboration Features</strong></td>
+                            <td>LO can add notes, request documents, message borrower</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td><strong>Data Confidence Flags</strong></td>
+                            <td>Visual indicators for FlueID data quality</td>
+                            <td><span class="badge badge-success">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td><strong>Referral Tracking</strong></td>
+                            <td>Track referral source and conversion metrics</td>
+                            <td><span class="badge badge-success">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td><strong>Borrower Dashboard</strong></td>
+                            <td>Post-submission portal showing application status</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td><strong>Task Priority Reordering</strong></td>
+                            <td>LO can reorder task sequence per application</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td><strong>Accessibility Compliance</strong></td>
+                            <td>WCAG 2.1 AA compliance for all screens</td>
+                            <td><span class="badge">Medium</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- P2 Future Phase -->
+        <section class="content-section">
+            <h2 class="content-section-title">P2 - Future Phase (Post-Launch)</h2>
+            <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                <p class="card-description">
+                    These features are documented and valuable but not required for initial launch.
+                    They will be prioritized in Phase 2 based on user feedback and business value.
+                </p>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item">Video verification integration</div>
+                    <div class="priority-item">Voice-based data entry</div>
+                    <div class="priority-item">Predictive field suggestions using ML</div>
+                    <div class="priority-item">Integration with third-party CRMs</div>
+                    <div class="priority-item">Advanced analytics and reporting suite</div>
+                    <div class="priority-item">Borrower referral program automation</div>
+                    <div class="priority-item">Native mobile apps (iOS/Android)</div>
+                    <div class="priority-item">Offline mode with sync</div>
+                    <div class="priority-item">...and 16 more features documented in features-list.html</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vendor Integrations Scope -->
+        <section class="content-section">
+            <h2 class="content-section-title">Third-Party Vendor Integrations</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Vendor</th>
+                        <th>Purpose</th>
+                        <th>Priority</th>
+                        <th>Timeline</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Prove</strong></td>
+                        <td>Instant identity verification via phone</td>
+                        <td><span class="badge badge-danger">P0</span></td>
+                        <td>Week 3-4</td>
+                        <td><span class="badge badge-success">POC Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>FlueID</strong></td>
+                        <td>Title data auto-population (22-40 fields)</td>
+                        <td><span class="badge badge-danger">P0</span></td>
+                        <td>Week 4-6</td>
+                        <td><span class="badge badge-success">Research Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Solex</strong></td>
+                        <td>E-consent and e-signature</td>
+                        <td><span class="badge badge-danger">P0</span></td>
+                        <td>Week 5-6</td>
+                        <td><span class="badge">Scoped</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Truv</strong></td>
+                        <td>Income/employment verification</td>
+                        <td><span class="badge badge-warning">P1</span></td>
+                        <td>Week 7-8</td>
+                        <td><span class="badge">Scoped</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plaid</strong></td>
+                        <td>Bank account and asset verification</td>
+                        <td><span class="badge badge-warning">P1</span></td>
+                        <td>Week 8-9</td>
+                        <td><span class="badge">Scoped</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credit Bureau API</strong></td>
+                        <td>Automated credit pull</td>
+                        <td><span class="badge badge-warning">P1</span></td>
+                        <td>Week 9-10</td>
+                        <td><span class="badge">Vendor TBD</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>LOS Integration</strong></td>
+                        <td>Export data to existing Loan Origination System</td>
+                        <td><span class="badge badge-danger">P0</span></td>
+                        <td>Week 10-12</td>
+                        <td><span class="badge">System TBD</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anthropic Claude API</strong></td>
+                        <td>AI chat assistant</td>
+                        <td><span class="badge badge-warning">P1</span></td>
+                        <td>Week 6-7</td>
+                        <td><span class="badge">Ready</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Explicitly OUT of Scope -->
+        <section class="content-section">
+            <h2 class="content-section-title">Explicitly OUT of Scope for Phase 1</h2>
+            <div class="card" style="background: rgba(100, 116, 139, 0.05); border: 2px solid var(--text-muted);">
+                <h3 class="card-title" style="color: var(--text-muted);">Not Included in Current Scope</h3>
+                <p class="card-description" style="margin-bottom: 1rem;">
+                    These items are intentionally excluded from the current scope to maintain focus and timeline:
+                </p>
+                <div class="priority-list">
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Back-office loan processing workflow (separate system)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Underwriting decision engine (LOS handles this)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Closing/funding workflow (separate from application)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Post-closing servicing features
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Native mobile apps (web-based mobile-first only)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ White-label multi-tenant architecture (single instance)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Blockchain/cryptocurrency integration
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Social media login (email/phone only)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Gamification beyond task progress (no points/badges)
+                    </div>
+                    <div class="priority-item" style="border-color: var(--text-muted); opacity: 0.7;">
+                        ❌ Video call integration (handled separately)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scope Change Process -->
+        <section class="content-section">
+            <h2 class="content-section-title">Scope Change Management</h2>
+            <div class="card">
+                <h3 class="card-title">How to Request Scope Changes</h3>
+                <div class="priority-list">
+                    <div class="priority-item">
+                        1. <strong>Document the request</strong> in open-questions.html with business justification
+                    </div>
+                    <div class="priority-item">
+                        2. <strong>Estimate impact</strong> on timeline, resources, and dependencies
+                    </div>
+                    <div class="priority-item">
+                        3. <strong>Present to stakeholders</strong> with tradeoff analysis (what gets deprioritized?)
+                    </div>
+                    <div class="priority-item">
+                        4. <strong>Get approval</strong> from Paul Akinmade and project sponsor
+                    </div>
+                    <div class="priority-item">
+                        5. <strong>Update documentation</strong> and communicate changes to team
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>Smart App 2.0 Strategy Hub - Current Scope</p>
+                <p class="footer-meta">Last Updated: January 21, 2026</p>
+            </div>
+            <div class="footer-nav">
+                <a href="executive-summary.html" class="footer-link">← Previous: Executive Summary</a>
+                <a href="talking-points.html" class="footer-link">Next: Talking Points →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

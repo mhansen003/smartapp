@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Suggestions - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../documents/" class="nav-link">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="breadcrumb-link">Executive</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Strategic Suggestions</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Strategic Recommendations</div>
+                <h1 class="page-title">Strategic Suggestions & Recommendations</h1>
+                <p class="page-description">Actionable recommendations across product, UX, technology, business strategy, and process improvement to maximize Smart App 2.0 success</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">⚡</span>
+                        <span>Quick Wins</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎯</span>
+                        <span>Long-Term Strategy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🛡️</span>
+                        <span>Risk Mitigation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="index.html" class="back-button">← Back to Executive Dashboard</a>
+
+        <!-- Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Overview</h2>
+            <div class="card" style="background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3);">
+                <p class="card-description">
+                    Based on our comprehensive research, LO interviews, vendor analysis, and prototype validation,
+                    these strategic recommendations are designed to maximize project success, minimize risk, and
+                    ensure Smart App 2.0 delivers exceptional value to borrowers, loan officers, and the organization.
+                </p>
+            </div>
+        </section>
+
+        <!-- Quick Wins -->
+        <section class="content-section">
+            <h2 class="content-section-title">Quick Wins (0-3 Months)</h2>
+            <div class="card" style="background: rgba(34, 197, 94, 0.05); border-color: rgba(34, 197, 94, 0.3);">
+                <h3 class="card-title" style="color: var(--accent-green);">High Impact, Low Effort Opportunities</h3>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item" style="border-color: var(--accent-green);">
+                        <strong>1. Launch LO Advisory Board:</strong> Form a 5-6 person LO advisory group who meet bi-weekly
+                        during development. Give them early access, gather feedback, build champions. This ensures adoption
+                        and catches UX issues early.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-green);">
+                        <strong>2. Create "Why This Matters" Video:</strong> 3-minute video showing current pain points vs
+                        Smart App 2.0 solution. Use for LO training, stakeholder buy-in, vendor pitches. Make it emotional
+                        and borrower-focused.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-green);">
+                        <strong>3. Establish Weekly Demo Cadence:</strong> Every Friday, show working software to stakeholders.
+                        Even small increments. Builds confidence, catches issues early, maintains momentum.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-green);">
+                        <strong>4. Implement Feature Flags From Day One:</strong> Build toggle switches into architecture from
+                        the start. Enables gradual rollout, A/B testing, instant rollback. Essential for risk mitigation.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-green);">
+                        <strong>5. Create Vendor Scorecard:</strong> Track API uptime, response time, data quality, support
+                        responsiveness for each vendor. Share quarterly. Holds vendors accountable, identifies issues early.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product & UX Recommendations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Product & UX Recommendations</h2>
+
+            <div class="card">
+                <h3 class="card-title">1. Make Mobile the Primary Design Target</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Borrowers increasingly start on mobile. Design for mobile first, then enhance for desktop.<br>
+                    <strong>How:</strong> All UI design reviews happen on actual phones. Use thumb-reachable zones. Test on
+                    older/slower devices. One-handed operation where possible.<br>
+                    <strong>Impact:</strong> Higher mobile completion rates, better borrower satisfaction, competitive advantage.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">2. Implement Progressive Trust Building</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Borrowers hesitant to share sensitive data upfront. Build trust gradually.<br>
+                    <strong>How:</strong> Start with minimal info (address, loan type). Show value immediately (FlueID auto-fill).
+                    Then request identity verification. Explain "why we need this" for each data request.<br>
+                    <strong>Impact:</strong> Reduced abandonment, higher data quality, better borrower confidence.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">3. Add Micro-Interactions and Delight Moments</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Small UX touches make big emotional impact. Mortgage stress is high - reduce it.<br>
+                    <strong>How:</strong> Celebration animation when task completes. Progress confetti. Encouraging messages:
+                    "Great job! You're 71% done - faster than 90% of borrowers." Smooth transitions.<br>
+                    <strong>Impact:</strong> Memorable experience, positive word-of-mouth, higher Net Promoter Score.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">4. Create "Resume Later" Excellence</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Life interrupts applications. Make resuming seamless.<br>
+                    <strong>How:</strong> Magic link via SMS. No password needed. "Pick up where you left off" with exact screen.
+                    Show what's completed, what's next. Email reminder after 24 hours with link.<br>
+                    <strong>Impact:</strong> 20-30% of abandoned applications can be recovered with great resume experience.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">5. Build "LO Override" Into Every Automation</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Automation will fail or be wrong sometimes. LOs need escape hatch.<br>
+                    <strong>How:</strong> Every auto-filled field has "Edit" button. Every automation has "Skip this" option.
+                    Log all overrides for learning. Make manual path as easy as automated path.<br>
+                    <strong>Impact:</strong> LO confidence, no data quality compromise, graceful degradation.
+                </p>
+            </div>
+        </section>
+
+        <!-- Technology & Architecture Recommendations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technology & Architecture Recommendations</h2>
+
+            <div class="card">
+                <h3 class="card-title">1. API-First Architecture with Fallback Strategies</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Third-party APIs will have downtime. Cannot block borrowers.<br>
+                    <strong>How:</strong> Every integration has manual fallback. Circuit breaker pattern. Cache successful responses.
+                    Queue failed requests for retry. Status dashboard shows which integrations are healthy.<br>
+                    <strong>Impact:</strong> 99.9% uptime even with vendor issues, no data loss, better vendor accountability.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">2. Implement Comprehensive Observability Early</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> You can't fix what you can't see. Debugging production is critical.<br>
+                    <strong>How:</strong> Structured logging from day one. Distributed tracing across services. Real-time alerting
+                    for errors. User session replay for support. Performance monitoring per page.<br>
+                    <strong>Impact:</strong> 80% faster issue resolution, proactive problem detection, data-driven optimization.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">3. Build Data Quality Dashboard for Vendors</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> FlueID/Truv/Plaid data quality varies. Need visibility.<br>
+                    <strong>How:</strong> Track confidence scores over time. Flag low-confidence data. Compare auto-filled vs
+                    LO-corrected values. Share report with vendors monthly. Use for contract negotiations.<br>
+                    <strong>Impact:</strong> Continuous vendor improvement, better pricing leverage, reduced manual corrections.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">4. Create Vendor Sandbox Environment</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Test vendor changes, new features, contract renewals without production risk.<br>
+                    <strong>How:</strong> Separate sandbox with production-like data. Test new vendor versions here first.
+                    QA team can validate integrations independently. Use for vendor demos.<br>
+                    <strong>Impact:</strong> Zero-downtime vendor upgrades, safer experimentation, better vendor relations.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">5. Implement Blue-Green Deployment Strategy</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Must deploy without downtime. Instant rollback if issues detected.<br>
+                    <strong>How:</strong> Run two identical production environments. Switch traffic instantly. Monitor new version
+                    before full cutover. Rollback is one switch flip. Zero borrower impact.<br>
+                    <strong>Impact:</strong> Deploy daily without risk, faster feature delivery, no maintenance windows.
+                </p>
+            </div>
+        </section>
+
+        <!-- Business Strategy Recommendations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Business Strategy Recommendations</h2>
+
+            <div class="card">
+                <h3 class="card-title">1. Launch with Limited Beta, Then Expand</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Catch real-world issues before full rollout. Build confidence gradually.<br>
+                    <strong>How:</strong> Start with 5 champion LOs, 50 applications. Gather feedback. Fix issues. Expand to
+                    20 LOs, 200 apps. Then full launch. Each phase is 2-4 weeks.<br>
+                    <strong>Impact:</strong> 90% fewer launch issues, LO champions evangelize to peers, lower risk.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">2. Create ROI Tracking Dashboard from Day One</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Justify continued investment. Prove value. Get executive support for Phase 2.<br>
+                    <strong>How:</strong> Track: time saved per application, completion rate improvement, LO productivity gain,
+                    support ticket reduction. Monthly executive report. Tie to revenue impact.<br>
+                    <strong>Impact:</strong> Secure Phase 2 funding, executive champions, clear success metrics.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">3. Build Strategic Vendor Partnerships</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> You're dependent on Prove, FlueID, Truv. Make it mutual.<br>
+                    <strong>How:</strong> Negotiate co-marketing. Case study opportunities. Feature in their materials.
+                    Priority support. Volume discounts. Joint roadmap planning sessions.<br>
+                    <strong>Impact:</strong> Better pricing, priority treatment, influence vendor roadmap, marketing value.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">4. Create Borrower Referral Incentive Program</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Great UX is marketing. Borrowers will tell friends if incentivized.<br>
+                    <strong>How:</strong> After closing, offer $100 gift card per referral who completes application. Track
+                    via unique link. "Your friend Sarah started their mortgage" notification. Make it easy to share.<br>
+                    <strong>Impact:</strong> 15-20% application growth from referrals, viral adoption, authentic marketing.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">5. Establish Industry Thought Leadership</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Position organization as innovation leader. Recruiting, partnerships, press.<br>
+                    <strong>How:</strong> Conference presentations on transformation journey. Blog series on lessons learned.
+                    Vendor case studies. LinkedIn posts from leadership. "How We Modernized Our Mortgage App" series.<br>
+                    <strong>Impact:</strong> Brand elevation, attract top talent, vendor eagerness to partner, competitive moat.
+                </p>
+            </div>
+        </section>
+
+        <!-- Process Improvement Recommendations -->
+        <section class="content-section">
+            <h2 class="content-section-title">Process Improvement Recommendations</h2>
+
+            <div class="card">
+                <h3 class="card-title">1. Implement Two-Week Sprint Cadence with Demos</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Agile methodology keeps team focused, stakeholders engaged, progress visible.<br>
+                    <strong>How:</strong> Two-week sprints. Friday demos of working features. Sprint retrospectives. Prioritized
+                    backlog. No feature works more than 2 weeks without showing progress.<br>
+                    <strong>Impact:</strong> Faster delivery, better stakeholder communication, team morale, course correction.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">2. Create Dedicated Project War Room (Physical or Virtual)</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Cross-functional collaboration needs dedicated space. Faster decisions.<br>
+                    <strong>How:</strong> Slack channel with key stakeholders. Daily standups. Shared dashboard showing progress.
+                    Decision log. "No meetings about this project outside this space" rule.<br>
+                    <strong>Impact:</strong> 50% faster decisions, better alignment, reduced meeting overhead, team cohesion.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">3. Establish "Red Team" Review Process</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Team bias prevents seeing flaws. Need external critical review.<br>
+                    <strong>How:</strong> Quarterly reviews by people NOT on project team. Challenge assumptions. Play devil's
+                    advocate. "How could this fail?" sessions. Document concerns and mitigations.<br>
+                    <strong>Impact:</strong> Catch blind spots early, better risk mitigation, stronger project resilience.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">4. Build Reusable Component Library</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Consistency across UI, faster development, easier maintenance.<br>
+                    <strong>How:</strong> Storybook or similar. Document all components. Form fields, buttons, cards, modals.
+                    Usage examples. Accessibility built in. Design and dev use same source of truth.<br>
+                    <strong>Impact:</strong> 40% faster feature development, consistent UX, easier designer-developer handoff.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">5. Create Knowledge Transfer Documentation Strategy</h3>
+                <p class="card-description">
+                    <strong>Why:</strong> Team members leave. Contractors end. Knowledge must persist.<br>
+                    <strong>How:</strong> Architecture decision records (ADRs). Video walkthroughs of key features. Code comments
+                    for "why" not just "what". Onboarding guide for new developers. Keep current.<br>
+                    <strong>Impact:</strong> 80% faster new developer onboarding, reduced key person risk, better maintainability.
+                </p>
+            </div>
+        </section>
+
+        <!-- Risk Mitigation Suggestions -->
+        <section class="content-section">
+            <h2 class="content-section-title">Risk Mitigation Suggestions</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Risk Area</th>
+                        <th>Mitigation Strategy</th>
+                        <th>Timeline</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vendor Integration Failures</strong></td>
+                        <td>Build manual fallback for every integration. Test vendor downtimes quarterly. Maintain vendor scorecards.</td>
+                        <td>Ongoing</td>
+                        <td>Tech Lead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LO Adoption Resistance</strong></td>
+                        <td>LO Advisory Board. Configuration dashboard. "AI vs Stone Age" toggle. Early champion identification.</td>
+                        <td>Week 1</td>
+                        <td>Product Manager</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Quality Issues</strong></td>
+                        <td>Confidence flags on all auto-filled data. LO review required. Data quality dashboard. Vendor accountability.</td>
+                        <td>Week 4-6</td>
+                        <td>Data Architect</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scope Creep</strong></td>
+                        <td>Strict P0/P1/P2 enforcement. "Not in Phase 1" parking lot. Executive approval for scope changes.</td>
+                        <td>Ongoing</td>
+                        <td>Project Manager</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Timeline Slippage</strong></td>
+                        <td>Two-week sprints. Weekly demos. Buffer in timeline. MVP prioritization. Phase 1 vs Phase 2 clarity.</td>
+                        <td>Ongoing</td>
+                        <td>Project Manager</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security/Compliance Issues</strong></td>
+                        <td>Security review at architecture phase. Pen testing before launch. Compliance checklist. Audit trail everything.</td>
+                        <td>Week 2, Week 10</td>
+                        <td>Security Lead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Poor Mobile Performance</strong></td>
+                        <td>Test on real devices. Performance budget per page. Optimize images. Lazy loading. CDN for assets.</td>
+                        <td>Ongoing</td>
+                        <td>Frontend Lead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Person Dependency</strong></td>
+                        <td>Knowledge transfer documentation. Pair programming. Architecture Decision Records. Cross-training.</td>
+                        <td>Ongoing</td>
+                        <td>Tech Lead</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Long-Term Strategic Initiatives -->
+        <section class="content-section">
+            <h2 class="content-section-title">Long-Term Strategic Initiatives (6-18 Months)</h2>
+            <div class="card" style="background: rgba(139, 92, 246, 0.05); border-color: rgba(139, 92, 246, 0.3);">
+                <h3 class="card-title" style="color: var(--accent-purple);">Future Vision</h3>
+                <div class="priority-list" style="margin-top: 1rem;">
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>1. AI-Powered Application Assistant:</strong> Move beyond chat to proactive AI that suggests
+                        answers, identifies missing documents, predicts approval likelihood, guides borrowers intelligently.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>2. Marketplace for Loan Products:</strong> After capturing borrower data, show personalized
+                        loan options. Let borrowers compare rates, terms, monthly payments. Transparency builds trust.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>3. Open Banking Integration:</strong> Beyond Plaid for assets - full financial picture. Spending
+                        patterns, cash flow analysis, predictive affordability. Better underwriting, faster decisions.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>4. Voice-Based Application:</strong> "Alexa, update my mortgage application." Hands-free data
+                        entry while cooking dinner. Accessibility win. Novelty factor for marketing.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>5. Borrower Financial Wellness Hub:</strong> Post-closing, keep relationship. Credit monitoring,
+                        refinance alerts, home value tracking. Turn one-time transaction into ongoing relationship.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>6. LO AI Copilot:</strong> AI assistant for LOs. "Draft response to this borrower question."
+                        "Summarize this application." "What's missing for underwriting?" Supercharge LO productivity.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>7. Blockchain for Document Verification:</strong> Immutable audit trail. Instant verification
+                        of employment, income, assets across lenders. Industry transformation opportunity.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-purple);">
+                        <strong>8. White-Label Platform for Other Lenders:</strong> License Smart App 2.0 technology. Recurring
+                        revenue stream. Become mortgage tech vendor, not just user. Strategic pivot option.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Metrics -->
+        <section class="content-section">
+            <h2 class="content-section-title">Recommended Success Metrics</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Borrower Metrics</h3>
+                    <div class="priority-list">
+                        <div class="priority-item">Application completion rate (target: 75%+)</div>
+                        <div class="priority-item">Average completion time (target: <15 min)</div>
+                        <div class="priority-item">Mobile completion % (target: 60%+)</div>
+                        <div class="priority-item">Net Promoter Score (target: 50+)</div>
+                        <div class="priority-item">Resume rate after abandonment (target: 30%+)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">LO Metrics</h3>
+                    <div class="priority-list">
+                        <div class="priority-item">LO time saved per app (target: 60%+)</div>
+                        <div class="priority-item">LO satisfaction score (target: 8/10+)</div>
+                        <div class="priority-item">Configuration toggle usage rate</div>
+                        <div class="priority-item">Manual override frequency (track trend)</div>
+                        <div class="priority-item">LO-initiated applications via smart link</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Technical Metrics</h3>
+                    <div class="priority-list">
+                        <div class="priority-item">System uptime (target: 99.9%)</div>
+                        <div class="priority-item">Vendor API success rate (target: 95%+)</div>
+                        <div class="priority-item">Page load time (target: <2 sec)</div>
+                        <div class="priority-item">Error rate (target: <0.5%)</div>
+                        <div class="priority-item">Data quality score (target: 95%+ accurate)</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Business Metrics</h3>
+                    <div class="priority-list">
+                        <div class="priority-item">Applications per month (track growth)</div>
+                        <div class="priority-item">Cost per completed application</div>
+                        <div class="priority-item">Referral conversion rate (target: 10%+)</div>
+                        <div class="priority-item">Time to underwriting (track improvement)</div>
+                        <div class="priority-item">ROI vs target (target: 300%+ Year 1)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>Smart App 2.0 Strategy Hub - Strategic Suggestions</p>
+                <p class="footer-meta">Last Updated: January 21, 2026</p>
+            </div>
+            <div class="footer-nav">
+                <a href="talking-points.html" class="footer-link">← Previous: Talking Points</a>
+                <a href="open-questions.html" class="footer-link">Next: Open Questions →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

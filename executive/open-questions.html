@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Questions - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0 Strategy Hub
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../research/" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../documents/" class="nav-link">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="breadcrumb-link">Executive</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Open Questions</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">Decision Tracker</div>
+                <h1 class="page-title">Open Questions & Decisions Needed</h1>
+                <p class="page-description">Critical decisions requiring stakeholder input, unresolved items, risks needing mitigation plans, and strategic tradeoffs</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">⚠️</span>
+                        <span>12 High Priority</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📋</span>
+                        <span>8 Medium Priority</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎯</span>
+                        <span>Action Required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="index.html" class="back-button">← Back to Executive Dashboard</a>
+
+        <!-- Summary -->
+        <section class="content-section">
+            <h2 class="content-section-title">Summary</h2>
+            <div class="card" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
+                <p class="card-description">
+                    This page tracks all open questions, unresolved decisions, and strategic choices that require stakeholder
+                    input or executive approval. Each item includes impact assessment, recommended owner, target decision date,
+                    and current status. Red items are blocking or high-risk. Yellow items are important but not immediately blocking.
+                </p>
+            </div>
+
+            <div class="stats-grid" style="margin-top: 2rem;">
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-red);">5</div>
+                    <div class="stat-label">Blocking Decisions</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Need immediate resolution</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-yellow);">7</div>
+                    <div class="stat-label">High Priority</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Within 2 weeks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-blue);">8</div>
+                    <div class="stat-label">Medium Priority</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Within 4 weeks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--accent-green);">3</div>
+                    <div class="stat-label">Recently Resolved</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Past 7 days</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blocking Decisions -->
+        <section class="content-section">
+            <h2 class="content-section-title">🚨 Blocking Decisions (Immediate Action Required)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 30%;">Question / Decision</th>
+                        <th style="width: 25%;">Impact</th>
+                        <th style="width: 15%;">Owner</th>
+                        <th style="width: 12%;">Target Date</th>
+                        <th style="width: 13%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Which LOS system will we integrate with?</strong><br>
+                        Need to confirm target Loan Origination System for URLA export and data sync.</td>
+                        <td><span class="badge badge-danger">Critical</span><br>
+                        Blocks architecture design, API contracts, data mapping</td>
+                        <td>Paul Akinmade</td>
+                        <td>Jan 24, 2026</td>
+                        <td><span class="badge badge-danger">Urgent</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>What is the deployment infrastructure?</strong><br>
+                        AWS vs Azure vs on-premise? Who manages? What's budget?</td>
+                        <td><span class="badge badge-danger">Critical</span><br>
+                        Affects tech stack choice, cost estimates, timeline</td>
+                        <td>IT Director</td>
+                        <td>Jan 26, 2026</td>
+                        <td><span class="badge badge-danger">Urgent</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Prove contract status and pricing?</strong><br>
+                        Is contract signed? What's per-transaction cost? Volume tiers?</td>
+                        <td><span class="badge badge-danger">Critical</span><br>
+                        P0 feature, need confirmation before building integration</td>
+                        <td>Procurement</td>
+                        <td>Jan 28, 2026</td>
+                        <td><span class="badge badge-warning">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Who are the 5 LO advisors for beta testing?</strong><br>
+                        Need committed LOs for advisory board and early testing.</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Critical for adoption, UX feedback, champion building</td>
+                        <td>Sales Manager</td>
+                        <td>Jan 30, 2026</td>
+                        <td><span class="badge badge-warning">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Security/compliance review schedule?</strong><br>
+                        When can security team review architecture? Need 2 week window.</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Delays could push launch date, compliance requirement</td>
+                        <td>Security Lead</td>
+                        <td>Feb 1, 2026</td>
+                        <td><span class="badge">Scheduled</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- High Priority Questions -->
+        <section class="content-section">
+            <h2 class="content-section-title">⚡ High Priority Questions (Decision Within 2 Weeks)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 30%;">Question / Decision</th>
+                        <th style="width: 25%;">Impact</th>
+                        <th style="width: 15%;">Owner</th>
+                        <th style="width: 12%;">Target Date</th>
+                        <th style="width: 13%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>FlueID: Do we start with address-only or address+SSN?</strong><br>
+                        Address-only = 22 fields. Address+SSN = 40 fields. Privacy vs completeness tradeoff.</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Affects UX flow, privacy policy, borrower trust</td>
+                        <td>Product Manager</td>
+                        <td>Feb 3, 2026</td>
+                        <td><span class="badge badge-warning">Under Review</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>Should Truv integration be P0 or P1?</strong><br>
+                        Income verification is valuable but has 60% success rate. Worth P0 priority?</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Affects scope, timeline, vendor prioritization</td>
+                        <td>Product Manager</td>
+                        <td>Feb 5, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>What level of LO configuration control do we provide?</strong><br>
+                        Global toggles only? Per-application? Per-borrower-segment?</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Impacts UI complexity, adoption, development effort</td>
+                        <td>Product Manager</td>
+                        <td>Feb 7, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>Do we need Spanish language support in Phase 1?</strong><br>
+                        Significant development effort. What % of borrowers need it?</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        P1 vs P2 decision, affects timeline and scope</td>
+                        <td>Marketing Director</td>
+                        <td>Feb 8, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>What is credit bureau vendor preference?</strong><br>
+                        Experian, TransUnion, Equifax? Do we have existing contract?</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        P1 feature, existing relationships may simplify</td>
+                        <td>Operations Manager</td>
+                        <td>Feb 10, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>Mobile app vs responsive web: Phase 1 decision?</strong><br>
+                        Native apps offer better UX but 3-4 month extra timeline.</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Major scope/timeline tradeoff decision</td>
+                        <td>Product Manager</td>
+                        <td>Feb 12, 2026</td>
+                        <td><span class="badge badge-success">Decided: Web-first</span></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><strong>What is the rollout strategy: big bang or phased?</strong><br>
+                        All LOs at once vs gradual expansion? All loan types or purchase-only first?</td>
+                        <td><span class="badge badge-warning">High</span><br>
+                        Risk management, support planning, training needs</td>
+                        <td>Paul Akinmade</td>
+                        <td>Feb 14, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Medium Priority Questions -->
+        <section class="content-section">
+            <h2 class="content-section-title">📋 Medium Priority Questions (Decision Within 4 Weeks)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 30%;">Question / Decision</th>
+                        <th style="width: 25%;">Impact</th>
+                        <th style="width: 15%;">Owner</th>
+                        <th style="width: 12%;">Target Date</th>
+                        <th style="width: 13%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>13</td>
+                        <td><strong>Should we build referral tracking in Phase 1?</strong><br>
+                        Borrower referral program. Marketing value vs scope addition.</td>
+                        <td><span class="badge">Medium</span><br>
+                        Nice-to-have, marketing benefit, low technical complexity</td>
+                        <td>Marketing Director</td>
+                        <td>Feb 20, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><strong>What analytics/monitoring tools do we use?</strong><br>
+                        Datadog? New Relic? Splunk? What's approved and budgeted?</td>
+                        <td><span class="badge">Medium</span><br>
+                        Important for operations but not blocking development</td>
+                        <td>IT Director</td>
+                        <td>Feb 22, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><strong>Co-borrower flow: Sequential or parallel data entry?</strong><br>
+                        Both fill out together or primary first then invite co-borrower?</td>
+                        <td><span class="badge">Medium</span><br>
+                        UX decision, affects task workflow logic</td>
+                        <td>UX Designer</td>
+                        <td>Feb 25, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><strong>What is disaster recovery and backup strategy?</strong><br>
+                        RPO/RTO requirements? Backup frequency? Multi-region?</td>
+                        <td><span class="badge">Medium</span><br>
+                        Risk management, compliance requirement</td>
+                        <td>IT Director</td>
+                        <td>Feb 28, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td><strong>Should LOs get real-time notifications or digest emails?</strong><br>
+                        Application status changes, borrower actions, task completions.</td>
+                        <td><span class="badge">Medium</span><br>
+                        LO experience, alert fatigue consideration</td>
+                        <td>Product Manager</td>
+                        <td>Mar 3, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td><strong>What level of customization per LO do we support?</strong><br>
+                        Custom branding? Custom task order? Custom welcome message?</td>
+                        <td><span class="badge">Medium</span><br>
+                        LO satisfaction vs system complexity tradeoff</td>
+                        <td>Product Manager</td>
+                        <td>Mar 7, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td><strong>Do we need borrower identity proofing beyond Prove?</strong><br>
+                        Video verification? Backup ID verification vendor?</td>
+                        <td><span class="badge">Medium</span><br>
+                        Compliance, fraud prevention, vendor redundancy</td>
+                        <td>Compliance Lead</td>
+                        <td>Mar 10, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td><strong>What is the content strategy for AI chat?</strong><br>
+                        What can AI answer? What goes to LO? Who writes knowledge base?</td>
+                        <td><span class="badge">Medium</span><br>
+                        P1 feature quality, support reduction potential</td>
+                        <td>Operations Manager</td>
+                        <td>Mar 14, 2026</td>
+                        <td><span class="badge">Open</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Risks Needing Mitigation Plans -->
+        <section class="content-section">
+            <h2 class="content-section-title">🛡️ Risks Requiring Mitigation Plans</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Risk</th>
+                        <th style="width: 20%;">Probability</th>
+                        <th style="width: 20%;">Impact</th>
+                        <th style="width: 30%;">Mitigation Plan Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>FlueID data quality lower than expected</strong><br>
+                        If auto-filled data is <85% accurate, LO trust erodes</td>
+                        <td><span class="badge">Medium</span></td>
+                        <td><span class="badge badge-warning">High</span></td>
+                        <td><span class="badge badge-warning">Plan Needed</span><br>
+                        Need confidence scoring system, fallback strategy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prove API downtime during peak hours</strong><br>
+                        Identity verification unavailable blocks applications</td>
+                        <td><span class="badge badge-success">Low</span></td>
+                        <td><span class="badge badge-danger">Critical</span></td>
+                        <td><span class="badge badge-success">Plan In Place</span><br>
+                        Manual ID upload fallback, status monitoring</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LOS integration more complex than anticipated</strong><br>
+                        API documentation incomplete, custom mapping needed</td>
+                        <td><span class="badge badge-warning">High</span></td>
+                        <td><span class="badge badge-warning">High</span></td>
+                        <td><span class="badge badge-warning">Plan Needed</span><br>
+                        Needs early technical discovery with LOS vendor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile performance issues on older devices</strong><br>
+                        Android 5-7 years old, budget phones, poor connectivity</td>
+                        <td><span class="badge">Medium</span></td>
+                        <td><span class="badge">Medium</span></td>
+                        <td><span class="badge badge-warning">Plan Needed</span><br>
+                        Performance testing strategy, optimization budget</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key developer departure mid-project</strong><br>
+                        Loss of technical knowledge, project continuity risk</td>
+                        <td><span class="badge badge-success">Low</span></td>
+                        <td><span class="badge badge-warning">High</span></td>
+                        <td><span class="badge badge-warning">Plan Needed</span><br>
+                        Knowledge transfer, documentation, pair programming</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scope creep from stakeholder requests</strong><br>
+                        "While you're building this, can we also add..."</td>
+                        <td><span class="badge badge-warning">High</span></td>
+                        <td><span class="badge badge-warning">High</span></td>
+                        <td><span class="badge badge-success">Plan In Place</span><br>
+                        Strict change control, P0/P1/P2 enforcement</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vendor pricing changes post-contract</strong><br>
+                        Per-transaction costs higher than budgeted at scale</td>
+                        <td><span class="badge">Medium</span></td>
+                        <td><span class="badge">Medium</span></td>
+                        <td><span class="badge badge-warning">Plan Needed</span><br>
+                        Volume tier negotiations, multi-year contracts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Timeline & Scope Tradeoff Decisions -->
+        <section class="content-section">
+            <h2 class="content-section-title">⚖️ Timeline vs Scope Tradeoff Decisions</h2>
+            <div class="card">
+                <h3 class="card-title">If Timeline Slips, What Gets Deprioritized?</h3>
+                <p class="card-description" style="margin-bottom: 1rem;">
+                    These are the recommended tradeoffs if we need to protect the Q2 2026 launch date.
+                    Each item shows what could move from P0→P1 or P1→P2 with minimal impact to core value.
+                </p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Current Priority</th>
+                            <th>Could Become</th>
+                            <th>Impact of Delay</th>
+                            <th>Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mobile AI Chat</strong></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-info">P2</span></td>
+                            <td><span class="badge badge-success">Low</span><br>
+                            LOs provide support initially</td>
+                            <td>Safe to defer if needed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Truv Integration</strong></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-info">P2</span></td>
+                            <td><span class="badge">Medium</span><br>
+                            Manual employment verification works</td>
+                            <td>Defer if vendor delays occur</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plaid Integration</strong></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-info">P2</span></td>
+                            <td><span class="badge">Medium</span><br>
+                            Manual asset verification works</td>
+                            <td>Defer if vendor delays occur</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Analytics Dashboard</strong></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-info">P2</span></td>
+                            <td><span class="badge badge-success">Low</span><br>
+                            Basic reporting sufficient for Phase 1</td>
+                            <td>Safe to defer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Language Support</strong></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-info">P2</span></td>
+                            <td><span class="badge">Medium</span><br>
+                            Depends on borrower demographics</td>
+                            <td>Defer unless data shows high demand</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FlueID Integration</strong></td>
+                            <td><span class="badge badge-danger">P0</span></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-warning">High</span><br>
+                            Major time-saving feature lost</td>
+                            <td><strong>DO NOT defer</strong> - core value prop</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prove Integration</strong></td>
+                            <td><span class="badge badge-danger">P0</span></td>
+                            <td><span class="badge badge-warning">P1</span></td>
+                            <td><span class="badge badge-danger">Critical</span><br>
+                            Identity verification is key differentiator</td>
+                            <td><strong>DO NOT defer</strong> - core value prop</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Task Workflow System</strong></td>
+                            <td><span class="badge badge-danger">P0</span></td>
+                            <td><span style="opacity: 0.5;">N/A</span></td>
+                            <td><span class="badge badge-danger">Critical</span><br>
+                            This IS the product</td>
+                            <td><strong>NEVER defer</strong> - non-negotiable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Recently Resolved Questions -->
+        <section class="content-section">
+            <h2 class="content-section-title">✅ Recently Resolved Questions (Past 7 Days)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Question</th>
+                        <th style="width: 30%;">Decision</th>
+                        <th style="width: 15%;">Decided By</th>
+                        <th style="width: 12%;">Date</th>
+                        <th style="width: 13%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mobile app vs responsive web for Phase 1?</strong></td>
+                        <td>Responsive web first. Mobile apps in Phase 2 if demand justifies.</td>
+                        <td>Product Manager</td>
+                        <td>Jan 18, 2026</td>
+                        <td><span class="badge badge-success">Resolved</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Which AI model for chat: Claude vs GPT?</strong></td>
+                        <td>Claude API (Anthropic) - better context handling, safer outputs.</td>
+                        <td>Tech Lead</td>
+                        <td>Jan 19, 2026</td>
+                        <td><span class="badge badge-success">Resolved</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Should we build custom design system or use library?</strong></td>
+                        <td>Custom component library - better brand fit, more control.</td>
+                        <td>UX Designer</td>
+                        <td>Jan 20, 2026</td>
+                        <td><span class="badge badge-success">Resolved</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Decision-Making Process -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision-Making Process</h2>
+            <div class="card">
+                <h3 class="card-title">How to Get Decisions Made</h3>
+                <div class="priority-list">
+                    <div class="priority-item" style="border-color: var(--accent-blue);">
+                        <strong>1. Add New Question:</strong> Document in this page with impact assessment, recommended owner,
+                        suggested timeline. Include context and tradeoff analysis.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-blue);">
+                        <strong>2. Escalate Blocking Items:</strong> Red items go to Paul Akinmade immediately. Cannot proceed
+                        without resolution. Weekly executive review of all blocking items.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-blue);">
+                        <strong>3. Provide Options with Recommendation:</strong> Don't just ask questions. Provide 2-3 options
+                        with pros/cons and your recommended choice. Makes decisions easier.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-blue);">
+                        <strong>4. Set Decision Deadline:</strong> Every question has target decision date. If missed, auto-escalate.
+                        Prevents decisions lingering indefinitely.
+                    </div>
+                    <div class="priority-item" style="border-color: var(--accent-blue);">
+                        <strong>5. Document and Communicate:</strong> Once decided, update status, send summary email to stakeholders,
+                        update related documentation. Keep everyone aligned.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact for Questions -->
+        <section class="content-section">
+            <h2 class="content-section-title">Who to Contact</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Product & Scope Questions</h3>
+                    <p class="card-description">
+                        <strong>Product Manager</strong><br>
+                        Feature prioritization, scope decisions, UX tradeoffs, roadmap questions
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Technical & Architecture</h3>
+                    <p class="card-description">
+                        <strong>Tech Lead</strong><br>
+                        Technology choices, vendor integrations, performance, security, infrastructure
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Business & Strategy</h3>
+                    <p class="card-description">
+                        <strong>Paul Akinmade</strong><br>
+                        Strategic direction, budget, timeline, vendor selection, executive approval
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Operations & Compliance</h3>
+                    <p class="card-description">
+                        <strong>Operations Manager</strong><br>
+                        LO workflows, training, support, compliance requirements, process changes
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>Smart App 2.0 Strategy Hub - Open Questions & Decisions</p>
+                <p class="footer-meta">Last Updated: January 21, 2026</p>
+            </div>
+            <div class="footer-nav">
+                <a href="suggestions.html" class="footer-link">← Previous: Suggestions</a>
+                <a href="executive-summary.html" class="footer-link">Return to Executive Summary →</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

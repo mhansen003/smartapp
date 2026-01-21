@@ -293,6 +293,291 @@
             color: var(--accent-green);
             margin-right: 0.5rem;
         }
+
+        /* Visual Flow Diagrams */
+        .visual-flow-container {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(20, 184, 166, 0.05));
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .diagram-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .tier-box {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tier-box:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .tier-box.tier-frontend {
+            border-left: 4px solid var(--accent-blue);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+        }
+
+        .tier-box.tier-api {
+            border-left: 4px solid var(--accent-teal);
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(20, 184, 166, 0.03));
+        }
+
+        .tier-box.tier-integration {
+            border-left: 4px solid var(--accent-purple);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(139, 92, 246, 0.03));
+        }
+
+        .tier-box.tier-data {
+            border-left: 4px solid var(--accent-green);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
+        }
+
+        .tier-box-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tier-box-content {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .tier-box-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .tier-box-content li {
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tier-box-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+        }
+
+        .dependency-arrow {
+            text-align: center;
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .flow-sequence {
+            display: grid;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .flow-sequence-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .flow-sequence-item:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-blue);
+        }
+
+        .flow-sequence-number {
+            background: var(--accent-blue);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .flow-sequence-content {
+            flex: 1;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .flow-sequence-label {
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-right: 0.5rem;
+        }
+
+        .diagram-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+        }
+
+        .legend-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+
+        .legend-box.frontend {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .legend-box.api {
+            background: rgba(20, 184, 166, 0.2);
+            border-color: var(--accent-teal);
+        }
+
+        .legend-box.integration {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: var(--accent-purple);
+        }
+
+        .legend-box.data {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--accent-green);
+        }
+
+        .legend-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .decision-tree {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .decision-node {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .decision-node.success {
+            border-color: var(--accent-green);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
+        }
+
+        .decision-node.error {
+            border-color: var(--accent-red);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.03));
+        }
+
+        .decision-node.retry {
+            border-color: var(--accent-yellow);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.03));
+        }
+
+        .decision-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .decision-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .parallel-flows {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .parallel-flow-box {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .parallel-flow-title {
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .parallel-flow-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .parallel-flow-status.independent {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+        }
+
+        .parallel-flow-status.dependent {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+        }
     </style>
 </head>
 <body>
@@ -364,33 +649,89 @@
     <div class="content-container">
         <a href="../requirements/" class="back-button">← Back to Requirements</a>
 
+        <!-- Visual Elements Guide -->
+        <section class="content-section">
+            <h2 class="content-section-title">How to Read the Visual Diagrams</h2>
+            <div class="visual-flow-container" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));">
+                <div class="diagram-title">Visual Elements Legend</div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                    <div class="tier-box tier-frontend">
+                        <div class="tier-box-title">Frontend Layer (Blue)</div>
+                        <div class="tier-box-content">
+                            Represents user-facing components, React code, and client-side SDK integrations
+                        </div>
+                    </div>
+
+                    <div class="tier-box tier-api">
+                        <div class="tier-box-title">API Gateway (Teal)</div>
+                        <div class="tier-box-content">
+                            Backend endpoints, authentication, validation, and request/response handling
+                        </div>
+                    </div>
+
+                    <div class="tier-box tier-integration">
+                        <div class="tier-box-title">Third-Party Services (Purple)</div>
+                        <div class="tier-box-content">
+                            External API integrations (Plaid, TRUV, Prove) and their specific operations
+                        </div>
+                    </div>
+
+                    <div class="tier-box tier-data">
+                        <div class="tier-box-title">Data Layer (Green)</div>
+                        <div class="tier-box-content">
+                            Database storage, encryption, URLA mapping, and data persistence operations
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="color: var(--accent-teal); margin-bottom: 1rem;">Visual Flow Elements</h4>
+                    <div style="display: grid; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="flow-sequence-number">1</div>
+                            <span style="color: var(--text-secondary);">Numbered sequence items show step-by-step progression</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="dependency-arrow" style="margin: 0;">↓</div>
+                            <span style="color: var(--text-secondary);">Arrows indicate data flow direction and dependencies</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="legend-box frontend"></div>
+                            <span style="color: var(--text-secondary);">Color-coded legend boxes match tier categories</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Table of Contents -->
         <section class="content-section">
             <h2 class="content-section-title">Table of Contents</h2>
             <div class="card-grid">
                 <div class="card">
                     <h3 class="card-title">1. Overview & Architecture</h3>
-                    <p class="card-description">Integration overview, system architecture, and vendor comparison</p>
+                    <p class="card-description">Integration overview, visual architecture diagram, and vendor comparison</p>
                 </div>
                 <div class="card">
                     <h3 class="card-title">2. Plaid VOA</h3>
-                    <p class="card-description">Asset verification through bank account linking</p>
+                    <p class="card-description">Asset verification with complete visual flow diagram and code examples</p>
                 </div>
                 <div class="card">
                     <h3 class="card-title">3. TRUV VOIE</h3>
-                    <p class="card-description">Income and employment verification</p>
+                    <p class="card-description">Income and employment verification with step-by-step visual flow</p>
                 </div>
                 <div class="card">
                     <h3 class="card-title">4. Prove Identity</h3>
-                    <p class="card-description">Phone-centric identity verification</p>
+                    <p class="card-description">Phone-centric identity verification with trust score flow diagram</p>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">5. Security & Compliance</h3>
-                    <p class="card-description">API security, PII handling, encryption standards</p>
+                    <h3 class="card-title">5. Error Handling</h3>
+                    <p class="card-description">Decision tree for retry logic, fallback paths, and error recovery</p>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">6. Deployment & Testing</h3>
-                    <p class="card-description">Environment setup, testing strategies, go-live checklist</p>
+                    <h3 class="card-title">6. Dependency Graph</h3>
+                    <p class="card-description">Parallel processing strategy and integration dependencies</p>
                 </div>
             </div>
         </section>
@@ -569,6 +910,130 @@
                         <li><strong>Data Minimization:</strong> Only retrieve and store necessary PII fields required for mortgage processing</li>
                         <li><strong>Audit Logging:</strong> All API calls and data access logged for compliance and debugging</li>
                     </ul>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Integration Architecture Diagram</h3>
+            <div class="visual-flow-container">
+                <div class="diagram-title">Smart App 2.0 - Complete Integration Architecture</div>
+
+                <div class="architecture-grid">
+                    <div class="tier-box tier-frontend">
+                        <div class="tier-box-title">
+                            <span>🎨</span>
+                            Frontend Layer - React Components
+                        </div>
+                        <div class="tier-box-content">
+                            <ul>
+                                <li>User Interface Components (Application Forms, Dashboard)</li>
+                                <li>Plaid Link SDK Integration</li>
+                                <li>TRUV Bridge SDK Integration</li>
+                                <li>Prove Identity Widget</li>
+                                <li>State Management (Redux/Context)</li>
+                                <li>Form Validation & User Feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dependency-arrow">↓</div>
+
+                    <div class="tier-box tier-api">
+                        <div class="tier-box-title">
+                            <span>🔌</span>
+                            API Gateway Layer - Smart App Backend
+                        </div>
+                        <div class="tier-box-content">
+                            <ul>
+                                <li>REST API Endpoints (/api/plaid/*, /api/truv/*, /api/prove/*)</li>
+                                <li>Authentication & Authorization (JWT, OAuth)</li>
+                                <li>Request Validation & Sanitization</li>
+                                <li>Rate Limiting & Throttling</li>
+                                <li>Error Handling & Logging</li>
+                                <li>Webhook Receivers & Signature Validation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dependency-arrow">↓</div>
+
+                    <div class="tier-box tier-integration">
+                        <div class="tier-box-title">
+                            <span>🔗</span>
+                            Integration Services Layer - Third-Party APIs
+                        </div>
+                        <div class="tier-box-content">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                                <div>
+                                    <strong style="color: var(--accent-blue);">Plaid VOA</strong>
+                                    <ul style="margin-top: 0.5rem;">
+                                        <li>Link Token Creation</li>
+                                        <li>Token Exchange</li>
+                                        <li>Account Data Retrieval</li>
+                                        <li>Balance Verification</li>
+                                        <li>Asset Report Generation</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--accent-teal);">TRUV VOIE</strong>
+                                    <ul style="margin-top: 0.5rem;">
+                                        <li>Bridge Token Creation</li>
+                                        <li>Employment Verification</li>
+                                        <li>Income Verification</li>
+                                        <li>Pay History Retrieval</li>
+                                        <li>Report Generation</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--accent-purple);">Prove Identity</strong>
+                                    <ul style="margin-top: 0.5rem;">
+                                        <li>Phone Verification</li>
+                                        <li>Identity Match</li>
+                                        <li>Trust Score Calculation</li>
+                                        <li>Risk Signal Analysis</li>
+                                        <li>Ownership Validation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dependency-arrow">↓</div>
+
+                    <div class="tier-box tier-data">
+                        <div class="tier-box-title">
+                            <span>💾</span>
+                            Data Layer - Persistence & Processing
+                        </div>
+                        <div class="tier-box-content">
+                            <ul>
+                                <li>Encrypted Token Storage (Access Tokens, Item IDs)</li>
+                                <li>Verified Data Storage (Accounts, Employment, Identity)</li>
+                                <li>URLA Field Mapping & Transformation</li>
+                                <li>Audit Logs & Compliance Records</li>
+                                <li>Cache Layer (Redis for Session Data)</li>
+                                <li>Database (PostgreSQL/MySQL for Application Data)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagram-legend">
+                    <div class="legend-item">
+                        <div class="legend-box frontend"></div>
+                        <span class="legend-label">Frontend Layer</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box api"></div>
+                        <span class="legend-label">API Gateway</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box integration"></div>
+                        <span class="legend-label">Third-Party Services</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box data"></div>
+                        <span class="legend-label">Data & Storage</span>
+                    </div>
                 </div>
             </div>
 
@@ -856,6 +1321,180 @@ PLAID_WEBHOOK_SECRET=your_webhook_verification_secret</div>
                 <div class="flow-step">
                     <div class="flow-number">15</div>
                     <div class="flow-text"><strong>Backend → Frontend:</strong> Return success with account summary</div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">2.3.1 Visual Flow Diagram - Plaid VOA Process</h3>
+            <div class="visual-flow-container">
+                <div class="diagram-title">Plaid VOA - Complete Verification Flow</div>
+
+                <div class="flow-sequence">
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">1</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Borrower:</span>
+                            Clicks "Connect Bank Account" button in Smart App UI
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">2</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend → Backend:</span>
+                            POST /api/plaid/create-link-token with user ID
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">3</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Plaid API:</span>
+                            POST /link/token/create with client credentials
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">4</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Plaid → Backend:</span>
+                            Returns link_token (expires in 30 minutes)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">5</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Frontend:</span>
+                            Returns link_token to initialize Plaid Link SDK
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">6</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Plaid Link UI:</span>
+                            Opens modal - Borrower searches for and selects bank
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">7</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Borrower → Bank:</span>
+                            Enters online banking credentials (OAuth or direct)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">8</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Bank Authentication:</span>
+                            Validates credentials, may require MFA (SMS, email, security questions)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">9</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Account Selection:</span>
+                            Borrower selects which accounts to connect (checking, savings)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">10</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Plaid Link:</span>
+                            Returns public_token to frontend on successful connection
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">11</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend → Backend:</span>
+                            POST /api/plaid/exchange-token with public_token
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">12</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Plaid API:</span>
+                            POST /item/public_token/exchange to get access_token
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">13</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Plaid → Backend:</span>
+                            Returns access_token and item_id (secure, permanent credentials)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">14</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend Processing:</span>
+                            Encrypts and stores access_token in database
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">15</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Plaid API:</span>
+                            POST /accounts/get to retrieve account details and balances
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">16</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Data Mapping:</span>
+                            Maps Plaid account data to URLA fields (AssetType, AssetCashOrMarketValueAmount, etc.)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">17</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Application Stored:</span>
+                            Saves verified asset data to borrower's mortgage application
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">18</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Frontend:</span>
+                            Returns success response with account summary
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">19</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend Display:</span>
+                            Shows borrower their connected accounts with verified balances
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <div class="info-box-title">
+                        <span>⏱️</span>
+                        Typical Completion Time
+                    </div>
+                    <div class="info-box-content">
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                            <li><strong>Average User Flow:</strong> 45-90 seconds (including bank login and MFA)</li>
+                            <li><strong>API Token Exchange:</strong> < 500ms</li>
+                            <li><strong>Account Data Retrieval:</strong> 1-2 seconds</li>
+                            <li><strong>Total Integration Time:</strong> Under 2 minutes from click to verified data</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -1804,23 +2443,542 @@ module.exports = { rateLimitedPlaidCall, plaidLimiter };</div>
 
         </section>
 
-        <!-- Continue button for Part 2 -->
-        <div class="info-box" style="margin: 3rem 0;">
+        <!-- Section 3: TRUV VOIE Integration -->
+        <section class="content-section">
+            <h2 class="content-section-title">3. TRUV VOIE Integration</h2>
+
+            <h3 class="content-section-subtitle">3.1 TRUV VOIE Visual Flow Diagram</h3>
+            <div class="visual-flow-container">
+                <div class="diagram-title">TRUV VOIE - Employment & Income Verification Flow</div>
+
+                <div class="flow-sequence">
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">1</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Borrower:</span>
+                            Clicks "Verify Employment" button in Smart App
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">2</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend → Backend:</span>
+                            POST /api/truv/create-bridge-token with user details
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">3</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → TRUV API:</span>
+                            POST /v1/bridge-tokens with product types (employment, income)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">4</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">TRUV → Backend:</span>
+                            Returns bridge_token with tracking ID
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">5</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend:</span>
+                            Initializes TRUV Bridge SDK with bridge_token
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">6</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">TRUV Bridge UI:</span>
+                            Borrower searches for employer or payroll provider
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">7</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Employer Selection:</span>
+                            Selects employer from 8,000+ supported companies/payroll systems
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">8</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Borrower → Payroll System:</span>
+                            Enters payroll portal credentials (ADP, Paychex, Workday, etc.)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">9</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">TRUV Data Fetch:</span>
+                            Retrieves employment status, income, pay history (up to 24 months)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">10</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">TRUV Bridge:</span>
+                            Returns task_id to frontend on successful connection
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">11</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend → Backend:</span>
+                            POST /api/truv/retrieve-data with task_id
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">12</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → TRUV API:</span>
+                            GET /v1/tasks/{task_id} to retrieve verification status
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">13</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → TRUV API:</span>
+                            GET /v1/employment and /v1/income for detailed data
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">14</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Data Mapping:</span>
+                            Maps TRUV data to URLA fields (EmploymentStatus, MonthlyIncome, etc.)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">15</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Application Stored:</span>
+                            Saves verified employment and income data to mortgage application
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">16</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Frontend:</span>
+                            Returns employment summary and income verification
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box success" style="margin-top: 1.5rem;">
+                    <div class="info-box-title">
+                        <span>✅</span>
+                        Data Retrieved from TRUV
+                    </div>
+                    <div class="info-box-content">
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                            <li><strong>Employment:</strong> Current status, hire date, job title, employer name</li>
+                            <li><strong>Income:</strong> Base salary, hourly rate, overtime, bonuses, commissions</li>
+                            <li><strong>Pay History:</strong> Last 24 months of pay stubs with gross/net pay</li>
+                            <li><strong>Tax Documents:</strong> W-2 forms (if available)</li>
+                            <li><strong>Employment History:</strong> Previous employers and dates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Prove Identity Integration -->
+        <section class="content-section">
+            <h2 class="content-section-title">4. Prove Identity Integration</h2>
+
+            <h3 class="content-section-subtitle">4.1 Prove Identity Visual Flow Diagram</h3>
+            <div class="visual-flow-container">
+                <div class="diagram-title">Prove Identity - Phone-Centric Verification Flow</div>
+
+                <div class="flow-sequence">
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">1</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Borrower:</span>
+                            Enters phone number in Smart App application form
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">2</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend → Backend:</span>
+                            POST /api/prove/verify-identity with phone and borrower details
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">3</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Prove API:</span>
+                            POST /v1/verify with phone number, name, address, DOB
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">4</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Prove Processing:</span>
+                            Analyzes phone intelligence data (carrier, tenure, device)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">5</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Identity Match:</span>
+                            Compares borrower PII against phone ownership records
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">6</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Trust Score Calculation:</span>
+                            Generates Trust Score (0-1000) based on phone reputation
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">7</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Risk Signal Analysis:</span>
+                            Checks for fraud indicators (VOIP, prepaid, recent port-outs)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">8</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Prove → Backend:</span>
+                            Returns verification result with Trust Score and identity match
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">9</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend Processing:</span>
+                            Evaluates Trust Score against threshold (typically 700+)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">10</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Optional: SMS Challenge:</span>
+                            If score borderline, sends SMS OTP for additional verification
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">11</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Borrower:</span>
+                            Enters OTP code if challenged
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">12</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Prove API:</span>
+                            POST /v1/verify/otp to validate code
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">13</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Application Stored:</span>
+                            Saves identity verification status and Trust Score
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">14</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Backend → Frontend:</span>
+                            Returns verification result (pass/fail/challenge)
+                        </div>
+                    </div>
+
+                    <div class="flow-sequence-item">
+                        <div class="flow-sequence-number">15</div>
+                        <div class="flow-sequence-content">
+                            <span class="flow-sequence-label">Frontend Display:</span>
+                            Shows verification status and allows borrower to proceed
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <div class="info-box-title">
+                        <span>🎯</span>
+                        Trust Score Interpretation
+                    </div>
+                    <div class="info-box-content">
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                            <li><strong>800-1000:</strong> High confidence - Auto-approve identity</li>
+                            <li><strong>700-799:</strong> Medium confidence - Approve with monitoring</li>
+                            <li><strong>600-699:</strong> Low confidence - Request SMS OTP challenge</li>
+                            <li><strong>Below 600:</strong> Very low confidence - Require manual review or alternative verification</li>
+                            <li><strong>Typical Completion:</strong> < 2 seconds (no user interaction required)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Error Handling Visual Flow -->
+        <section class="content-section">
+            <h2 class="content-section-title">5. Error Handling & Recovery Flow</h2>
+
+            <h3 class="content-section-subtitle">5.1 Error Handling Decision Tree</h3>
+            <div class="visual-flow-container">
+                <div class="diagram-title">Integration Error Handling - Retry Logic & Fallback Paths</div>
+
+                <div class="decision-tree">
+                    <div class="decision-node">
+                        <div class="decision-label">API Call Initiated</div>
+                        <div class="decision-description">Request sent to third-party integration</div>
+                    </div>
+
+                    <div class="dependency-arrow">↓</div>
+
+                    <div class="decision-node">
+                        <div class="decision-label">Check Response Status</div>
+                        <div class="decision-description">Analyze HTTP status code and error type</div>
+                    </div>
+
+                    <div class="dependency-arrow">↓</div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+                        <div>
+                            <div class="decision-node success">
+                                <div class="decision-label">2XX Success</div>
+                                <div class="decision-description">Process response data</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div class="decision-node success">
+                                <div class="decision-label">Map to URLA</div>
+                                <div class="decision-description">Transform and store data</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div class="decision-node success">
+                                <div class="decision-label">Return Success</div>
+                                <div class="decision-description">Display to borrower</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="decision-node retry">
+                                <div class="decision-label">429 Rate Limit</div>
+                                <div class="decision-description">Too many requests</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div class="decision-node retry">
+                                <div class="decision-label">Exponential Backoff</div>
+                                <div class="decision-description">Wait 1s, 2s, 4s, 8s...</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div class="decision-node retry">
+                                <div class="decision-label">Retry (Max 3x)</div>
+                                <div class="decision-description">Attempt request again</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-top: 0.5rem;">
+                                If success → Process<br>If failed → Error Path
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="decision-node error">
+                                <div class="decision-label">4XX/5XX Error</div>
+                                <div class="decision-description">Client or server error</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div class="decision-node error">
+                                <div class="decision-label">Check Error Type</div>
+                                <div class="decision-description">ITEM_ERROR, AUTH_ERROR, etc.</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div class="decision-node error">
+                                <div class="decision-label">User Action Required?</div>
+                                <div class="decision-description">Login required, locked, etc.</div>
+                            </div>
+                            <div class="dependency-arrow">↓</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-top: 0.5rem;">
+                                Yes → Notify User<br>No → Log & Alert Support
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning" style="margin-top: 1.5rem;">
+                    <div class="info-box-title">
+                        <span>⚠️</span>
+                        Common Error Scenarios & Handling
+                    </div>
+                    <div class="info-box-content">
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                            <li><strong>ITEM_LOGIN_REQUIRED (Plaid):</strong> User credentials changed → Trigger re-authentication flow</li>
+                            <li><strong>TASK_FAILED (TRUV):</strong> Employer not supported → Offer manual upload fallback</li>
+                            <li><strong>TRUST_SCORE_LOW (Prove):</strong> Phone verification weak → Request SMS OTP or alternative ID</li>
+                            <li><strong>RATE_LIMIT_EXCEEDED:</strong> Too many requests → Queue request with exponential backoff</li>
+                            <li><strong>TIMEOUT_ERROR:</strong> Slow response → Retry with increased timeout (max 30s)</li>
+                            <li><strong>NETWORK_ERROR:</strong> Connection failed → Retry immediately, then with backoff</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Integration Dependency Graph -->
+        <section class="content-section">
+            <h2 class="content-section-title">6. Integration Dependency Graph</h2>
+
+            <h3 class="content-section-subtitle">6.1 Parallel vs Sequential Processing</h3>
+            <div class="visual-flow-container">
+                <div class="diagram-title">Integration Dependencies - Which Verifications Can Run in Parallel</div>
+
+                <div class="parallel-flows">
+                    <div class="parallel-flow-box" style="border-color: var(--accent-green);">
+                        <div class="parallel-flow-title">Plaid VOA</div>
+                        <div class="parallel-flow-status independent">Independent</div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; line-height: 1.6;">
+                            Can run in parallel with other verifications. No dependencies on TRUV or Prove.
+                        </p>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">DEPENDS ON</div>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">None</div>
+                        </div>
+                    </div>
+
+                    <div class="parallel-flow-box" style="border-color: var(--accent-green);">
+                        <div class="parallel-flow-title">TRUV VOIE</div>
+                        <div class="parallel-flow-status independent">Independent</div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; line-height: 1.6;">
+                            Can run in parallel with other verifications. No dependencies on Plaid or Prove.
+                        </p>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">DEPENDS ON</div>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">None</div>
+                        </div>
+                    </div>
+
+                    <div class="parallel-flow-box" style="border-color: var(--accent-green);">
+                        <div class="parallel-flow-title">Prove Identity</div>
+                        <div class="parallel-flow-status independent">Independent</div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; line-height: 1.6;">
+                            Can run immediately on form submission. Fastest verification (< 2s).
+                        </p>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">DEPENDS ON</div>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Phone number input only</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box success" style="margin-top: 2rem;">
+                    <div class="info-box-title">
+                        <span>🚀</span>
+                        Recommended Execution Strategy
+                    </div>
+                    <div class="info-box-content">
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                            <li><strong>Step 1 (Immediate):</strong> Trigger Prove Identity verification as soon as phone number is entered - provides instant fraud check</li>
+                            <li><strong>Step 2 (User-Initiated):</strong> Plaid VOA and TRUV VOIE can be triggered by user clicks at any point - these are independent</li>
+                            <li><strong>Parallel Processing:</strong> All three integrations can run simultaneously without conflicts</li>
+                            <li><strong>Performance Optimization:</strong> Use Promise.all() in backend to fire multiple API calls concurrently when fetching data</li>
+                            <li><strong>User Experience:</strong> Show progress indicators for each verification independently</li>
+                            <li><strong>Error Isolation:</strong> Failure in one integration should not block others from completing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">Parallel Execution Code Example</h4>
+                <div class="code-header">server/controllers/verificationController.js</div>
+                <div class="code-block has-header">async function runAllVerifications(userId, applicationId) {
+  try {
+    <span class="comment">// Run all three verifications in parallel using Promise.all</span>
+    const [plaidResult, truvResult, proveResult] = await Promise.allSettled([
+      verifyAssetsWithPlaid(userId, applicationId),
+      verifyIncomeWithTruv(userId, applicationId),
+      verifyIdentityWithProve(userId, applicationId),
+    ]);
+
+    <span class="comment">// Process results - each can succeed or fail independently</span>
+    const results = {
+      plaid: {
+        status: plaidResult.status,
+        data: plaidResult.status === 'fulfilled' ? plaidResult.value : null,
+        error: plaidResult.status === 'rejected' ? plaidResult.reason : null,
+      },
+      truv: {
+        status: truvResult.status,
+        data: truvResult.status === 'fulfilled' ? truvResult.value : null,
+        error: truvResult.status === 'rejected' ? truvResult.reason : null,
+      },
+      prove: {
+        status: proveResult.status,
+        data: proveResult.status === 'fulfilled' ? proveResult.value : null,
+        error: proveResult.status === 'rejected' ? proveResult.reason : null,
+      },
+    };
+
+    <span class="comment">// Calculate overall completion percentage</span>
+    const successCount = Object.values(results).filter(r => r.status === 'fulfilled').length;
+    const completionPercentage = (successCount / 3) * 100;
+
+    return {
+      completionPercentage,
+      results,
+      message: `${successCount}/3 verifications completed successfully`,
+    };
+
+  } catch (error) {
+    console.error('Error running parallel verifications:', error);
+    throw error;
+  }
+}</div>
+            </div>
+        </section>
+
+        <!-- Documentation Summary -->
+        <div class="info-box success" style="margin: 3rem 0;">
             <div class="info-box-title">
-                <span>📄</span>
-                Documentation Continues
+                <span>✅</span>
+                Visual Flow Diagrams Complete
             </div>
             <div class="info-box-content">
-                This is Part 1 of the comprehensive integration guide. The following sections cover:
+                <p style="margin-bottom: 1rem;">This comprehensive integration guide now includes 6 detailed visual flow diagrams:</p>
                 <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                    <li><strong>Section 3:</strong> TRUV VOIE Integration (Income & Employment Verification)</li>
-                    <li><strong>Section 4:</strong> Prove Identity Integration (Phone-centric Verification)</li>
-                    <li><strong>Section 5:</strong> Security & Compliance (PII Handling, Encryption, GLBA)</li>
-                    <li><strong>Section 6:</strong> Deployment & Testing (Environment Setup, Go-Live Checklist)</li>
-                    <li><strong>Section 7:</strong> Troubleshooting & Support (Common Issues, Debug Guide)</li>
-                    <li><strong>Section 8:</strong> Cost Analysis & Pricing (Vendor Comparison, Budget Planning)</li>
+                    <li><strong>Integration Architecture Diagram:</strong> Hierarchical view of all system layers (Frontend, API Gateway, Integration Services, Data Layer)</li>
+                    <li><strong>Plaid VOA Flow Diagram:</strong> 19-step detailed flow from bank connection to verified asset data</li>
+                    <li><strong>TRUV VOIE Flow Diagram:</strong> 16-step employment and income verification sequence</li>
+                    <li><strong>Prove Identity Flow Diagram:</strong> 15-step phone-centric identity verification with Trust Score analysis</li>
+                    <li><strong>Error Handling Decision Tree:</strong> Visual guide for retry logic, exponential backoff, and fallback paths</li>
+                    <li><strong>Integration Dependency Graph:</strong> Shows parallel processing strategy with code examples</li>
                 </ul>
-                <p style="margin-top: 1rem; color: var(--text-secondary);">The remaining sections will be added to complete this comprehensive technical guide.</p>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">All diagrams use color-coded tier boxes, dependency arrows, and comprehensive legends to make the integration flows easy to understand and implement.</p>
             </div>
         </div>
 

@@ -38,24 +38,27 @@ function initializeResearchChart() {
         type: 'doughnut',
         data: {
             labels: [
+                'Initial Research (28)',
+                'Concept Testing (10)',
+                'Presentations (3)',
                 'LO Interviews (7)',
-                'Product/Dev Interviews (6)',
-                'Concept Testing (4)',
-                'Presentations (3)'
+                'Stakeholder Meetings (5)'
             ],
             datasets: [{
-                data: [7, 6, 4, 3],
+                data: [28, 10, 3, 7, 5],
                 backgroundColor: [
                     'rgba(59, 130, 246, 0.8)',
                     'rgba(20, 184, 166, 0.8)',
                     'rgba(139, 92, 246, 0.8)',
-                    'rgba(16, 185, 129, 0.8)'
+                    'rgba(16, 185, 129, 0.8)',
+                    'rgba(245, 158, 11, 0.8)'
                 ],
                 borderColor: [
                     'rgba(59, 130, 246, 1)',
                     'rgba(20, 184, 166, 1)',
                     'rgba(139, 92, 246, 1)',
-                    'rgba(16, 185, 129, 1)'
+                    'rgba(16, 185, 129, 1)',
+                    'rgba(245, 158, 11, 1)'
                 ],
                 borderWidth: 2
             }]
@@ -71,12 +74,37 @@ function initializeResearchChart() {
                         padding: 15,
                         font: {
                             family: "'Plus Jakarta Sans', sans-serif",
-                            size: 12
+                            size: 11
                         }
                     }
                 },
                 title: {
-                    display: false
+                    display: true,
+                    text: '53 Total Research Artifacts',
+                    color: '#f1f5f9',
+                    font: {
+                        family: "'Plus Jakarta Sans', sans-serif",
+                        size: 14,
+                        weight: '600'
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(26, 34, 52, 0.95)',
+                    titleColor: '#f1f5f9',
+                    bodyColor: '#94a3b8',
+                    borderColor: '#334155',
+                    borderWidth: 1,
+                    padding: 12,
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((context.parsed / total) * 100).toFixed(1);
+                            return context.label + ' (' + percentage + '%)';
+                        }
+                    }
                 }
             }
         }
