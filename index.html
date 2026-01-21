@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart App 2.0 - Strategy Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="label">SMART APP 2.0</div>
+                <h1>Strategy Hub & Command Center</h1>
+                <p class="subtitle">Comprehensive project dashboard for the Smart App 2.0 reimagined digital mortgage application</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">63</div>
+                        <div class="stat-label">Total Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">14</div>
+                        <div class="stat-label">Requirement Modules</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">17</div>
+                        <div class="stat-label">Research Sessions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5.2GB</div>
+                        <div class="stat-label">Data Repository</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick Links Section -->
+        <section class="section">
+            <h2 class="section-title">🚀 PROTOTYPES & DEMOS</h2>
+            <div class="tiles-grid">
+                <a href="https://streamlined-digital-a1nj.bolt.host/" class="tile" target="_blank">
+                    <div class="tile-icon">🎯</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Live POC - Borrower Experience</h3>
+                        <p class="tile-description">Interactive prototype showcasing the complete borrower journey with Prove integration, multi-step forms, and team collaboration features</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Live Demo</span>
+                            <span class="badge">Bolt Platform</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.figma.com/board/T7KV8XnyZwutyW3GB0tR5L/Refinance-Buying-Flow?node-id=0-1&t=NzFZGj9TPQo2T2ne-1" class="tile" target="_blank">
+                    <div class="tile-icon">🎨</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Refinance & Buying Flow</h3>
+                        <p class="tile-description">Complete user flow design in Figma showing refinance and home buying journeys</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-design">Figma Board</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://miro.com/app/board/uXjVJw_CSEw=/?moveToWidget=3458764652941704263&cot=14" class="tile" target="_blank">
+                    <div class="tile-icon">🗺️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Miro Collaboration Board</h3>
+                        <p class="tile-description">Strategic planning and workshop collaboration board with team insights</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">Miro Board</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Requirements Framework Section -->
+        <section class="section">
+            <h2 class="section-title">📋 REQUIREMENTS FRAMEWORK</h2>
+            <div class="tiles-grid">
+                <div class="tile" onclick="toggleDetails('requirements-details')">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Complete Requirements Matrix</h3>
+                        <p class="tile-description">14 comprehensive requirement modules covering all aspects of Smart App 2.0 functionality</p>
+                        <div class="tile-meta">
+                            <span class="badge">14 Modules</span>
+                            <span class="badge">3 Key Documents</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile tile-highlight">
+                    <div class="tile-icon">🔑</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Core Features & Integrations</h3>
+                        <p class="tile-description">Essential third-party integrations and feature specifications</p>
+                        <div class="features-list">
+                            <div class="feature-item">✓ Prove Identity Verification</div>
+                            <div class="feature-item">✓ Plaid VOA (Verification of Assets)</div>
+                            <div class="feature-item">✓ TRUV VOIE (Verification of Income & Employment)</div>
+                            <div class="feature-item">✓ OTP Authentication</div>
+                            <div class="feature-item">✓ Soft Pull Credit</div>
+                            <div class="feature-item">✓ AI Assistant Implementation</div>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">6 Integrations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">⚙️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">LO Configuration System</h3>
+                        <p class="tile-description">Loan Officer level toggles and configuration options for customizing borrower experience</p>
+                        <div class="tile-meta">
+                            <span class="badge">Toggle System</span>
+                            <span class="badge">UI Controls</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🎭</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Borrower Scenario Logic</h3>
+                        <p class="tile-description">Comprehensive UI scenarios matrix covering all borrower pathways and decision trees</p>
+                        <div class="tile-meta">
+                            <span class="badge">UI Scenarios</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📝</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">URLA Data Gap Analysis</h3>
+                        <p class="tile-description">Complete matrix of URLA 2020 fields with gap analysis and data mapping</p>
+                        <div class="tile-meta">
+                            <span class="badge">Data Matrix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">✅</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Data Tasks Matrix</h3>
+                        <p class="tile-description">Structured task breakdown for all data collection and processing requirements</p>
+                        <div class="tile-meta">
+                            <span class="badge">Task Matrix</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expandable Details -->
+            <div id="requirements-details" class="details-section" style="display: none;">
+                <div class="details-content">
+                    <h3>All Requirements Modules</h3>
+                    <div class="module-grid">
+                        <div class="module-item">01 - URLA Data Gap</div>
+                        <div class="module-item">02 - Data Tasks</div>
+                        <div class="module-item">03 - Plaid VOA</div>
+                        <div class="module-item">04 - TRUV VOIE</div>
+                        <div class="module-item">05 - Prove</div>
+                        <div class="module-item">06 - OTP</div>
+                        <div class="module-item">07 - Soft Pull Credit</div>
+                        <div class="module-item">08 - Invite Borrower</div>
+                        <div class="module-item">09 - Smart App Configs (LO Level)</div>
+                        <div class="module-item">10 - Smart App Configs (LO UI)</div>
+                        <div class="module-item">11 - LO Take Over</div>
+                        <div class="module-item">12 - Point of Submit</div>
+                        <div class="module-item">13 - Borrower Scenario Logic</div>
+                        <div class="module-item">14 - AI Assistant Implementation</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section class="section">
+            <h2 class="section-title">🔬 RESEARCH & INSIGHTS</h2>
+            <div class="tiles-grid">
+                <div class="tile tile-large">
+                    <div class="tile-icon">👥</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Initial Research - LO Interviews</h3>
+                        <p class="tile-description">7 in-depth interviews with Loan Officers capturing real-world insights and pain points</p>
+                        <div class="interview-list">
+                            <div class="interview-item">• Andrea Wine - Interview & Testing</div>
+                            <div class="interview-item">• CJ Nelson - Interview & Testing</div>
+                            <div class="interview-item">• Josh Campbell - Interview & Testing</div>
+                            <div class="interview-item">• Tim Loss - Interview & Testing</div>
+                            <div class="interview-item">• Christopher Minjarez & Elizabeth McClellan</div>
+                            <div class="interview-item">• Diedra Schaefer</div>
+                            <div class="interview-item">• Stephanie Pereira</div>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge">7 LO Interviews</span>
+                            <span class="badge">With Recordings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">💻</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Product & Dev Interviews</h3>
+                        <p class="tile-description">Cross-functional discovery sessions with product and development stakeholders</p>
+                        <div class="interview-list">
+                            <div class="interview-item">• Ashwin (XD Download)</div>
+                            <div class="interview-item">• Brooke (XD Download)</div>
+                            <div class="interview-item">• Cathy (XD Download)</div>
+                            <div class="interview-item">• Cory (XD Download)</div>
+                            <div class="interview-item">• David (XD Download)</div>
+                            <div class="interview-item">• Phil (XD Download)</div>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge">6 Stakeholder Sessions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🧪</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Concept Testing Results</h3>
+                        <p class="tile-description">4 comprehensive testing sessions with LOs validating design concepts and user flows</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">4 Test Sessions</span>
+                            <span class="badge">Results Documented</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile tile-highlight">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Research Synthesis Presentations</h3>
+                        <p class="tile-description">High-level findings and insights synthesized into actionable presentations</p>
+                        <div class="presentation-list">
+                            <div class="presentation-item">📑 High Level Research Synthesis</div>
+                            <div class="presentation-item">📑 SmartApp 3.0 Workshop Results</div>
+                            <div class="presentation-item">📑 SmartApp Re-Imagined Paul Presentation</div>
+                        </div>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">3 Presentations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scoping & Timeline Section -->
+        <section class="section">
+            <h2 class="section-title">📅 SCOPING & TIMELINE</h2>
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🗓️</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">SmartApp Re-Imagined Gantt Chart</h3>
+                        <p class="tile-description">Complete project timeline with phases, milestones, and delivery dates</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-warning">Timeline</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🎯</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">SmartApp 2.0 Workshop Plan</h3>
+                        <p class="tile-description">Strategic workshop planning and execution details</p>
+                        <div class="tile-meta">
+                            <span class="badge">Workshop Plan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">❓</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Questions & Decisions Log</h3>
+                        <p class="tile-description">Comprehensive log of all project questions and key decisions made throughout development</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">Decision Log</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🧭</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Design Research Overview</h3>
+                        <p class="tile-description">SmartApp Redesign design research overview and methodology</p>
+                        <div class="tile-meta">
+                            <span class="badge">Research Plan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Documents Section -->
+        <section class="section">
+            <h2 class="section-title">📄 KEY DOCUMENTS & FINDINGS</h2>
+            <div class="tiles-grid">
+                <div class="tile">
+                    <div class="tile-icon">🔍</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">FlueID Findings</h3>
+                        <p class="tile-description">Comprehensive findings and analysis from FlueID research</p>
+                        <div class="tile-meta">
+                            <span class="badge">Research Doc</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">💬</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Bolt Feedback Synthesis</h3>
+                        <p class="tile-description">Synthesized feedback from Paul, Yaz, and Kelli on Bolt prototype demo</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-success">Stakeholder Feedback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">🎤</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">CX Platform Intake Meeting</h3>
+                        <p class="tile-description">Recurring CX Platform Intake and Prioritization meeting notes from Bolt demo (Dec 17)</p>
+                        <div class="tile-meta">
+                            <span class="badge">Meeting Notes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile-icon">📋</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">SmartApp Features List</h3>
+                        <p class="tile-description">Master feature list with priorities and specifications</p>
+                        <div class="tile-meta">
+                            <span class="badge badge-info">Feature Matrix</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Suggestions Section -->
+        <section class="section">
+            <h2 class="section-title">🤖 AI SUGGESTIONS & RECOMMENDATIONS</h2>
+            <div class="tiles-grid">
+                <div class="tile tile-ai">
+                    <div class="tile-icon">✨</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Smart Recommendations</h3>
+                        <div class="ai-suggestions">
+                            <div class="suggestion-item">
+                                <span class="suggestion-priority high">HIGH</span>
+                                <span class="suggestion-text">Implement progressive disclosure in forms to reduce cognitive load - research shows LOs prefer cleaner interfaces</span>
+                            </div>
+                            <div class="suggestion-item">
+                                <span class="suggestion-priority high">HIGH</span>
+                                <span class="suggestion-text">Leverage Prove integration data to auto-populate more fields beyond basic identity - reduce borrower effort</span>
+                            </div>
+                            <div class="suggestion-item">
+                                <span class="suggestion-priority medium">MED</span>
+                                <span class="suggestion-text">Add real-time validation feedback to improve data quality at point of entry</span>
+                            </div>
+                            <div class="suggestion-item">
+                                <span class="suggestion-priority medium">MED</span>
+                                <span class="suggestion-text">Consider mobile-first design patterns - many borrowers start applications on mobile devices</span>
+                            </div>
+                            <div class="suggestion-item">
+                                <span class="suggestion-priority low">LOW</span>
+                                <span class="suggestion-text">Explore gamification elements for progress tracking to improve completion rates</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile tile-ai">
+                    <div class="tile-icon">🎯</div>
+                    <div class="tile-content">
+                        <h3 class="tile-title">Next Steps & Priorities</h3>
+                        <div class="priority-list">
+                            <div class="priority-item">1. Finalize integration specs for Prove, Plaid, and TRUV</div>
+                            <div class="priority-item">2. Complete borrower scenario logic documentation</div>
+                            <div class="priority-item">3. Implement LO configuration UI controls</div>
+                            <div class="priority-item">4. Design AI Assistant interaction patterns</div>
+                            <div class="priority-item">5. Create comprehensive testing plan for beta release</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="section">
+            <h2 class="section-title">📈 PROJECT METRICS & VISUALIZATION</h2>
+            <div class="tiles-grid">
+                <div class="tile tile-chart">
+                    <div class="tile-content">
+                        <h3 class="tile-title">Research Data Distribution</h3>
+                        <canvas id="researchChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="tile tile-chart">
+                    <div class="tile-content">
+                        <h3 class="tile-title">Requirements Framework Coverage</h3>
+                        <canvas id="requirementsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="tile tile-chart">
+                    <div class="tile-content">
+                        <h3 class="tile-title">Project Phase Timeline</h3>
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Smart App 2.0 Strategy Hub • Built with data-driven insights • <span id="lastUpdated"></span></p>
+                <div class="footer-links">
+                    <a href="https://streamlined-digital-a1nj.bolt.host/" target="_blank">Live POC</a>
+                    <a href="https://miro.com/app/board/uXjVJw_CSEw=/?moveToWidget=3458764652941704263&cot=14" target="_blank">Miro Board</a>
+                    <a href="https://www.figma.com/board/T7KV8XnyZwutyW3GB0tR5L/Refinance-Buying-Flow?node-id=0-1&t=NzFZGj9TPQo2T2ne-1" target="_blank">Figma Flows</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
