@@ -1,0 +1,2850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation Roadmap - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .roadmap-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .roadmap-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roadmap-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal), var(--accent-purple));
+        }
+
+        .roadmap-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .roadmap-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin: 0;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .quarter-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .quarter-badge.q1 { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .quarter-badge.q2 { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+        .quarter-badge.q3 { background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); }
+        .quarter-badge.q4 { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .priority-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .priority-badge.p0 { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+        .priority-badge.p1 { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+        .priority-badge.p2 { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+        .priority-badge.p3 { background: rgba(100, 116, 139, 0.2); color: var(--text-muted); }
+
+        .confidence-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .confidence-badge.high { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .confidence-badge.medium { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+        .confidence-badge.low { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+        .epic-badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent-purple);
+        }
+
+        .horizon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .horizon-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .horizon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
+        }
+
+        .horizon-card.now { border-color: var(--accent-green); }
+        .horizon-card.next { border-color: var(--accent-blue); }
+        .horizon-card.later { border-color: var(--accent-purple); }
+
+        .horizon-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .horizon-card.now .horizon-title { color: var(--accent-green); }
+        .horizon-card.next .horizon-title { color: var(--accent-blue); }
+        .horizon-card.later .horizon-title { color: var(--accent-purple); }
+
+        .horizon-timeframe {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .horizon-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .horizon-items li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .horizon-items li:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-green), var(--accent-blue), var(--accent-purple), var(--accent-yellow));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 2;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: auto;
+            right: 50%;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: var(--accent-blue);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .user-story-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .user-story-list li {
+            padding: 0.75rem 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 3px solid var(--accent-blue);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .success-criteria {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .success-criteria h4 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .success-criteria ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .success-criteria li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .success-criteria li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .risk-box {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .risk-box h4 {
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .risk-item {
+            padding: 0.75rem;
+            background: rgba(239, 68, 68, 0.05);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .risk-label {
+            font-weight: 600;
+            color: var(--accent-red);
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .risk-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .epic-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .epic-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .epic-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .epic-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .epic-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .epic-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .epic-feature-item {
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .dependency-diagram {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .dependency-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+        }
+
+        .dependency-feature {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .dependency-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: var(--bg-secondary);
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-teal);
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .okr-card {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .okr-objective {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .okr-key-results {
+            list-style: none;
+            padding: 0;
+        }
+
+        .okr-key-results li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .okr-key-results li::before {
+            content: 'KR';
+            position: absolute;
+            left: 0;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .resource-role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-count {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin: 1rem 0;
+        }
+
+        .resource-allocation {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateX(-4px);
+        }
+
+        @media (max-width: 1024px) {
+            .horizon-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="roadmap-container">
+        <a href="../index.html" class="back-link">← Back to Strategy Hub</a>
+
+        <!-- Hero Section -->
+        <div class="roadmap-hero">
+            <div class="label">STRATEGIC PLANNING</div>
+            <h1>Implementation Roadmap</h1>
+            <p class="roadmap-subtitle">Comprehensive product roadmap for Smart App 2.0 from MVP to market leadership (2025-2026)</p>
+        </div>
+
+        <!-- Executive Summary -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">Executive Summary</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Vision & Strategy</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Smart App 2.0 represents a fundamental reimagining of the digital mortgage application experience. Our roadmap is designed to deliver value incrementally while building toward a comprehensive platform that serves borrowers, loan officers, and the broader organization. This roadmap balances aggressive innovation with pragmatic execution, ensuring we can deliver an MVP in Q1 2025 while laying the foundation for long-term market leadership.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                    <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">Primary Goal</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Increase application completion rates from 42% to 75%+ while reducing time-to-complete from 45 minutes to under 15 minutes.</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.3);">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Strategic Approach</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Progressive enhancement through third-party integrations, AI-powered assistance, and intelligent automation while maintaining compliance and data quality.</p>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(139, 92, 246, 0.1); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3);">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.75rem;">Success Metrics</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">670% projected ROI, 134% completion rate improvement, 42% LO productivity gain, and 89% borrower satisfaction target.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Methodology -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h2 class="section-title">Roadmap Methodology</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Planning Approach</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Our roadmap follows an evidence-based planning methodology that combines user research insights, competitive analysis, technical feasibility assessments, and business impact projections. We employ a hybrid planning model that balances waterfall planning for compliance-critical features with agile iteration for UX enhancements.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem;">
+                    <div style="padding: 1.25rem; background: var(--bg-secondary); border-radius: 8px; border-left: 3px solid var(--accent-blue);">
+                        <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Research-Driven Prioritization</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Features are prioritized based on 25+ user interviews, 42 participant concept tests, and quantitative data from existing application analytics.</p>
+                    </div>
+                    <div style="padding: 1.25rem; background: var(--bg-secondary); border-radius: 8px; border-left: 3px solid var(--accent-teal);">
+                        <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">RICE Scoring Framework</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Reach × Impact × Confidence ÷ Effort scoring ensures objective feature prioritization aligned with business objectives and user needs.</p>
+                    </div>
+                    <div style="padding: 1.25rem; background: var(--bg-secondary); border-radius: 8px; border-left: 3px solid var(--accent-purple);">
+                        <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Dependency Mapping</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Technical and functional dependencies are mapped to ensure logical sequencing and minimize rework or integration challenges.</p>
+                    </div>
+                    <div style="padding: 1.25rem; background: var(--bg-secondary); border-radius: 8px; border-left: 3px solid var(--accent-green);">
+                        <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Continuous Validation</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Beta testing feedback loops and analytics monitoring allow for roadmap adjustments based on real-world performance data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Multi-Horizon Roadmap -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🗺️</span>
+                <h2 class="section-title">Multi-Horizon Roadmap</h2>
+            </div>
+
+            <div class="horizon-grid">
+                <div class="horizon-card now">
+                    <div class="horizon-title">
+                        <span>🚀</span>
+                        <span>NOW</span>
+                    </div>
+                    <div class="horizon-timeframe">Q1 2025 (Jan - Mar)</div>
+                    <ul class="horizon-items">
+                        <li>MVP Foundation & Core Features</li>
+                        <li>Prove Identity Integration</li>
+                        <li>Plaid VOA Integration</li>
+                        <li>TRUV VOIE Integration</li>
+                        <li>OTP Authentication System</li>
+                        <li>Progressive Disclosure UI</li>
+                        <li>Co-Borrower Collaboration</li>
+                        <li>Basic LO Dashboard</li>
+                        <li>LOS Integration (Point of Submit)</li>
+                        <li>Internal Beta Launch</li>
+                    </ul>
+                </div>
+
+                <div class="horizon-card next">
+                    <div class="horizon-title">
+                        <span>📈</span>
+                        <span>NEXT</span>
+                    </div>
+                    <div class="horizon-timeframe">Q2-Q3 2025 (Apr - Sep)</div>
+                    <ul class="horizon-items">
+                        <li>External Beta Testing Program</li>
+                        <li>AI Assistant Implementation</li>
+                        <li>Soft Credit Pull Integration</li>
+                        <li>Enhanced LO Configuration</li>
+                        <li>LO Application Take Over</li>
+                        <li>Real-time Validation & Guidance</li>
+                        <li>Mobile Optimization</li>
+                        <li>Advanced Analytics Dashboard</li>
+                        <li>Performance Optimization</li>
+                        <li>Public Launch Preparation</li>
+                    </ul>
+                </div>
+
+                <div class="horizon-card later">
+                    <div class="horizon-title">
+                        <span>🔮</span>
+                        <span>LATER</span>
+                    </div>
+                    <div class="horizon-timeframe">Q4 2025 - Q1 2026 (Oct - Mar)</div>
+                    <ul class="horizon-items">
+                        <li>Document Intelligence & OCR</li>
+                        <li>Predictive Application Insights</li>
+                        <li>Advanced AI Recommendations</li>
+                        <li>Multi-Language Support</li>
+                        <li>White-Label Platform Capabilities</li>
+                        <li>Advanced Compliance Automation</li>
+                        <li>Marketplace Integrations</li>
+                        <li>API Platform for Partners</li>
+                        <li>Enterprise Features & SSO</li>
+                        <li>Market Leadership Position</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q1 2025: MVP Foundation -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">Q1 2025: MVP Foundation</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>January - March 2025</span>
+                    </h3>
+                    <span class="quarter-badge q1">Q1 2025</span>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    Q1 focuses on building the foundational MVP that delivers immediate value while establishing the technical architecture for future enhancements. The goal is to create a production-ready application that demonstrates 50%+ completion rate improvement over the legacy system and sets the stage for beta testing.
+                </p>
+
+                <h4 style="color: var(--accent-blue); margin: 2rem 0 1.5rem;">Core Features (15 Features)</h4>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">1. Prove Identity Integration</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Phone-centric identity verification that auto-populates borrower PII (name, address, DOB, SSN) in under 30 seconds. Eliminates manual data entry for 85% of borrowers.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> OTP Auth, Database Schema<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">2. Plaid VOA Integration</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Bank account linking for instant asset verification. Replaces 2+ weeks of manual document collection with 2-minute automated process. Reduces abandonment by 40%.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Asset Data Model, URLA Mapping<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">3. TRUV VOIE Integration</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Payroll-linked income and employment verification. Auto-fills employer details, income history, and employment dates. Eliminates paystub uploads for 70% of W2 borrowers.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Income Data Model, URLA Mapping<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">4. OTP Authentication System</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Passwordless authentication via SMS/email one-time passcodes. Reduces friction at entry point while maintaining security. 98% delivery success rate.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Twilio/AWS SNS Integration<br>
+                            <strong>Effort:</strong> 1.5 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">5. Progressive Disclosure UI</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Step-by-step wizard that reveals information progressively. Reduces perceived complexity and cognitive load. Research shows 134% completion improvement.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> UI Component Library<br>
+                            <strong>Effort:</strong> 3 weeks (2 FE devs, 1 Designer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">6. Co-Borrower Collaboration Flow</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Real-time collaboration allowing co-borrowers to complete their sections independently. Email/SMS invitations, progress tracking, and merge logic. +28% completion for joint applications.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Auth System, WebSocket Infrastructure<br>
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">7. LO Dashboard (Basic)</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Real-time monitoring dashboard for LOs to track borrower progress, receive alerts on stalled applications, and view completion metrics. Essential for LO buy-in.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> WebSocket Server, Analytics Pipeline<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">8. LO Invitation System</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            LO-initiated borrower invitations via email/SMS with personalized messaging and branded templates. Tracking of invitation delivery, opens, and conversion rates.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Email Service, LO Dashboard<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">9. Point of Submit Integration</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Final validation and submission to LOS (Encompass/Byte). URLA 2020 format export, field mapping, error handling, and submission confirmation workflow.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> LOS API Access, URLA Mapper<br>
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 1 QA)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">10. Borrower Scenario Logic</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Dynamic form rendering based on loan purpose, property type, employment status, and income sources. Shows only relevant fields, reducing form length by 40% on average.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Rules Engine, Form Builder<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">11. Data Validation Engine</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Real-time client-side and server-side validation with contextual error messages. Prevents invalid submissions and improves data quality for downstream systems.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Validation Library, URLA Rules<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">12. Progress Tracking & Save</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Visual progress indicators, auto-save functionality, and resume capability. Borrowers can save and return without losing data. Critical for mobile users with interruptions.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Session Management, Database<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">13. LO Configuration System</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Backend configuration system allowing LOs to enable/disable features, customize branding, set notification preferences, and configure integration settings.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Admin API, Database Schema<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">14. Analytics & Instrumentation</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 5</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Event tracking, funnel analytics, and performance monitoring. Captures user behavior, completion rates, drop-off points, and system performance metrics for optimization.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Analytics Platform (Mixpanel/Amplitude)<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 Data Engineer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">15. Security & Compliance Foundation</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            SOC 2 compliance, data encryption at rest and in transit, audit logging, consent management, and GDPR/CCPA privacy controls. Non-negotiable for production launch.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> AWS Infrastructure, Legal Review<br>
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 1 Security Engineer)
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">User Stories</h4>
+                <ul class="user-story-list">
+                    <li>As a borrower, I want to verify my identity with my phone number so I don't have to manually type my personal information.</li>
+                    <li>As a borrower, I want to link my bank account so I can prove my assets without uploading documents.</li>
+                    <li>As a borrower, I want to connect my payroll account so I don't have to find and scan my paystubs.</li>
+                    <li>As a co-borrower, I want to complete my section independently so my partner and I can work in parallel.</li>
+                    <li>As a borrower, I want to save my progress and return later so I'm not forced to complete everything in one sitting.</li>
+                    <li>As a loan officer, I want to see which borrowers are stuck so I can proactively offer help.</li>
+                    <li>As a loan officer, I want to send personalized invitations to my borrowers so they know it's from me.</li>
+                    <li>As a loan officer, I want the application to submit directly to Encompass so I don't have to re-enter data.</li>
+                </ul>
+
+                <h4 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">Technical Infrastructure Work</h4>
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">AWS Infrastructure:</strong> ECS/Fargate for containers, RDS PostgreSQL for database, ElastiCache Redis for sessions, S3 for documents, CloudFront CDN
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">Backend Services:</strong> Node.js/Express API, GraphQL gateway, WebSocket server for real-time features, Background job processing (Bull/Agenda)
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">Frontend Stack:</strong> React 18, TypeScript, Tailwind CSS, React Query for state, React Hook Form for forms, Framer Motion for animations
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">Database Schema:</strong> 42 tables covering borrowers, applications, integrations, LO settings, audit logs, analytics events
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">CI/CD Pipeline:</strong> GitHub Actions for builds, automated testing, security scanning, and deployment to staging/production environments
+                        </li>
+                        <li style="padding: 0.75rem 0; color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">Monitoring & Observability:</strong> DataDog for APM, Sentry for error tracking, LogRocket for session replay, CloudWatch for infrastructure metrics
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="success-criteria">
+                    <h4>Success Criteria</h4>
+                    <ul>
+                        <li>50%+ application completion rate (baseline: 42%)</li>
+                        <li>Average time to complete under 20 minutes (baseline: 45 minutes)</li>
+                        <li>85%+ of borrowers successfully use Prove for identity verification</li>
+                        <li>70%+ of eligible borrowers connect Plaid or TRUV</li>
+                        <li>Zero critical security vulnerabilities</li>
+                        <li>99.5% uptime during beta period</li>
+                        <li>LOS submission success rate >95%</li>
+                        <li>Internal beta with 25+ LOs and 200+ applications</li>
+                        <li>NPS >50 from LOs and borrowers</li>
+                        <li>Pass security and compliance audits</li>
+                    </ul>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">Team Allocation</h4>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-role">Backend Engineers</div>
+                        <div class="resource-count">4</div>
+                        <div class="resource-allocation">100% allocated</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Frontend Engineers</div>
+                        <div class="resource-count">4</div>
+                        <div class="resource-allocation">100% allocated</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Product Designer</div>
+                        <div class="resource-count">1</div>
+                        <div class="resource-allocation">80% allocated</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">QA Engineers</div>
+                        <div class="resource-count">2</div>
+                        <div class="resource-allocation">100% allocated</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Product Manager</div>
+                        <div class="resource-count">1</div>
+                        <div class="resource-allocation">100% allocated</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">DevOps Engineer</div>
+                        <div class="resource-count">1</div>
+                        <div class="resource-allocation">60% allocated</div>
+                    </div>
+                </div>
+
+                <div class="risk-box">
+                    <h4>Risk Factors & Mitigation</h4>
+                    <div class="risk-item">
+                        <div class="risk-label">Third-Party Integration Delays</div>
+                        <div class="risk-description"><strong>Risk:</strong> Prove, Plaid, or TRUV integration takes longer than expected due to API changes or sandbox limitations. <strong>Mitigation:</strong> Start integration work in Week 1, build abstraction layers to swap providers, have manual fallback workflows ready.</div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-label">LOS Integration Complexity</div>
+                        <div class="risk-description"><strong>Risk:</strong> Encompass/Byte API limitations or undocumented behaviors cause submission failures. <strong>Mitigation:</strong> Early spike work with LOS team, comprehensive field mapping documentation, extensive testing with sample data.</div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-label">Security/Compliance Blockers</div>
+                        <div class="risk-description"><strong>Risk:</strong> Security audit uncovers issues requiring significant rework before beta launch. <strong>Mitigation:</strong> Security review in Sprint 3, pen testing in Sprint 5, compliance consultation from Day 1.</div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-label">Scope Creep from Stakeholders</div>
+                        <div class="risk-description"><strong>Risk:</strong> Additional feature requests from LOs or executives delay MVP. <strong>Mitigation:</strong> Clear MVP definition with stakeholder sign-off, strict change control process, backlog for post-MVP features.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q2 2025: Beta & Iteration -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🧪</span>
+                <h2 class="section-title">Q2 2025: Beta & Iteration</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>April - June 2025</span>
+                    </h3>
+                    <span class="quarter-badge q2">Q2 2025</span>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    Q2 focuses on expanding the beta program to external users, iterating based on real-world feedback, and building out the AI Assistant capabilities. The goal is to achieve 65%+ completion rates and prepare for public launch in Q3.
+                </p>
+
+                <h4 style="color: var(--accent-blue); margin: 2rem 0 1.5rem;">Features Planned</h4>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">16. AI Assistant (MVP)</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 4</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Claude-powered contextual assistance providing help text, answering questions, and guiding borrowers through complex sections. Reduces LO support calls by estimated 35%.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Anthropic API, Context Management<br>
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">17. Soft Credit Pull Integration</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Early credit assessment without impacting borrower's score. Provides instant rate estimates and pre-qualification feedback. Increases conversion by providing immediate value.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Credit Bureau API, Consent Flow<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 1 FE dev, Compliance)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">18. LO Take Over Mode</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            LO ability to jump into stalled applications, edit on behalf of borrower, add notes, and guide completion via screen sharing. Critical for rescuing abandoned apps.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> LO Dashboard, Permission System<br>
+                            <strong>Effort:</strong> 3 weeks (2 BE devs, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">19. Enhanced LO Configuration UI</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Self-service configuration interface for LOs to manage settings without admin intervention. Feature toggles, branding customization, notification preferences, integration management.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> LO Configuration System<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">20. Mobile Optimization</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Mobile-first responsive design with touch-optimized inputs, native camera integration for documents, and offline capability. 60% of borrowers start on mobile.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Design System, PWA Infrastructure<br>
+                            <strong>Effort:</strong> 4 weeks (3 FE devs, 1 Designer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">21. Real-Time Validation & Guidance</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Inline validation with contextual help, smart suggestions (e.g., address autocomplete), and proactive error prevention. Reduces validation errors by 60%.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Validation Rules, Google Places API<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">22. Document Upload & Management</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Secure document upload with drag-and-drop, mobile camera capture, file preview, and categorization. Critical for supporting non-W2 borrowers and additional documentation needs.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> S3 Storage, Virus Scanning<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">23. Enhanced Analytics Dashboard</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 5</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Comprehensive analytics for product team and executives. Funnel analysis, cohort reports, A/B test results, integration usage, performance metrics, and ROI tracking.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Data Warehouse, BI Tool Integration<br>
+                            <strong>Effort:</strong> 3 weeks (1 Data Engineer, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">24. Notification System</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Multi-channel notifications (email, SMS, in-app) for application status updates, LO messages, document requests, and deadline reminders. Reduces abandonment by re-engaging users.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> SendGrid, Twilio, Notification Preferences<br>
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">25. E-Consent & Disclosures</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Electronic consent collection for credit pulls, data sharing, disclosures, and regulatory requirements. Audit trail, version control, and compliance reporting. Regulatory requirement.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Dependencies:</strong> Legal Review, Audit Logging<br>
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 1 FE dev, Compliance)
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">Beta Testing Program Details</h4>
+                <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div>
+                            <h5 style="color: var(--accent-teal); margin-bottom: 0.75rem;">Phase 1: Internal Beta (Q1)</h5>
+                            <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                                <li style="padding: 0.5rem 0;">• 25 LOs from pilot team</li>
+                                <li style="padding: 0.5rem 0;">• 200 test applications</li>
+                                <li style="padding: 0.5rem 0;">• Weekly feedback sessions</li>
+                                <li style="padding: 0.5rem 0;">• Rapid iteration on critical issues</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Phase 2: Controlled Beta (Apr-May)</h5>
+                            <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                                <li style="padding: 0.5rem 0;">• 100 LOs across regions</li>
+                                <li style="padding: 0.5rem 0;">• 1,000+ real applications</li>
+                                <li style="padding: 0.5rem 0;">• Bi-weekly surveys</li>
+                                <li style="padding: 0.5rem 0;">• A/B testing framework active</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--accent-purple); margin-bottom: 0.75rem;">Phase 3: Open Beta (Jun)</h5>
+                            <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                                <li style="padding: 0.5rem 0;">• All LOs opt-in enabled</li>
+                                <li style="padding: 0.5rem 0;">• 5,000+ applications expected</li>
+                                <li style="padding: 0.5rem 0;">• Public feedback channels</li>
+                                <li style="padding: 0.5rem 0;">• Performance at scale validation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">Iteration Priorities Based on Feedback</h4>
+                <div style="background: rgba(59, 130, 246, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2); margin-bottom: 2rem;">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 1rem; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--accent-blue);">Top Priority:</strong> Fix any completion blockers (integration failures, validation errors, submission issues)
+                        </li>
+                        <li style="padding: 1rem; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--accent-blue);">High Priority:</strong> Address usability friction points identified in user testing (confusing labels, unclear instructions, poor mobile UX)
+                        </li>
+                        <li style="padding: 1rem; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                            <strong style="color: var(--accent-blue);">Medium Priority:</strong> Performance optimizations (page load times, API response times, rendering optimizations)
+                        </li>
+                        <li style="padding: 1rem; color: var(--text-secondary);">
+                            <strong style="color: var(--accent-blue);">Low Priority:</strong> Nice-to-have enhancements that don't impact completion (visual polish, additional help text, minor feature requests)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="success-criteria">
+                    <h4>Success Criteria</h4>
+                    <ul>
+                        <li>65%+ application completion rate</li>
+                        <li>Average time to complete under 18 minutes</li>
+                        <li>Beta participation from 100+ LOs across all regions</li>
+                        <li>1,000+ real applications processed end-to-end</li>
+                        <li>NPS >60 from borrowers, >70 from LOs</li>
+                        <li>LO adoption rate >50% (opt-in to use Smart App 2.0)</li>
+                        <li>LOS submission success rate >97%</li>
+                        <li>AI Assistant engagement rate >40%</li>
+                        <li>Mobile completion rate within 5% of desktop</li>
+                        <li>Zero P0 bugs, <10 P1 bugs in production</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q3 2025: Scale & Performance -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">⚡</span>
+                <h2 class="section-title">Q3 2025: Scale & Performance</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>July - September 2025</span>
+                    </h3>
+                    <span class="quarter-badge q3">Q3 2025</span>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    Q3 marks the public launch and focuses on scaling infrastructure, optimizing performance, and onboarding the full LO population. Target is 75%+ completion rates and handling 10,000+ monthly applications.
+                </p>
+
+                <h4 style="color: var(--accent-blue); margin: 2rem 0 1.5rem;">Features Planned</h4>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">26. Performance Optimization Suite</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Code splitting, lazy loading, image optimization, CDN utilization, database query optimization, caching strategies. Target: <2s initial load, <200ms API response times.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 FE devs, 2 BE devs, 1 DevOps)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">27. Auto-Scaling Infrastructure</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p0">P0 - Must Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Horizontal scaling for API servers, database read replicas, Redis cluster mode, load balancer optimization. Handle 10x traffic spikes without degradation.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 3 weeks (1 DevOps, 1 BE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">28. Advanced AI Assistant Features</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 4</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Proactive assistance, document analysis, field auto-fill suggestions, scenario-specific guidance, and personalized recommendations based on borrower profile.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 1 FE dev, 1 ML Engineer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">29. LO Productivity Analytics</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 5</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Individual LO performance dashboards showing completion rates, time savings, borrower satisfaction, and productivity metrics. Gamification elements and leaderboards.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 3 weeks (1 Data Engineer, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">30. Smart Field Prefill Engine</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 4</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            ML-powered field predictions based on borrower profile, historical data, and integration data. Auto-suggest likely values to reduce manual entry further.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (1 ML Engineer, 2 BE devs, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">31. Advanced LO Collaboration Tools</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Internal messaging with borrowers, task assignment to team members, application hand-off workflows, and team collaboration features for larger organizations.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 3 weeks (2 BE devs, 2 FE devs)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">32. A/B Testing Framework</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 5</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Built-in experimentation platform for testing UI variations, flow changes, and feature flags. Statistical significance testing and automated result analysis.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 1 FE dev, 1 Data Engineer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">33. Accessibility Enhancements (WCAG 2.1 AA)</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Screen reader optimization, keyboard navigation, color contrast compliance, ARIA labels, and assistive technology support. Expands addressable market and ensures compliance.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 FE devs, 1 Designer, 1 Accessibility Consultant)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">34. Integration Health Monitoring</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Real-time monitoring of third-party integrations (Prove, Plaid, TRUV, LOS) with automatic fallback workflows, alerting, and status dashboards for operations team.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 2 weeks (1 BE dev, 1 DevOps)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">35. Borrower Portal V2</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p2">P2 - Nice to Have</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Enhanced borrower dashboard showing loan status, milestones, document requirements, LO contact info, and real-time updates. Improves transparency and reduces support inquiries.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 3 weeks (1 BE dev, 2 FE devs, 1 Designer)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-criteria">
+                    <h4>Success Criteria</h4>
+                    <ul>
+                        <li>75%+ application completion rate (approaching industry-leading)</li>
+                        <li>10,000+ applications per month processed</li>
+                        <li>99.9% uptime during business hours</li>
+                        <li>Page load time <2 seconds on 4G mobile</li>
+                        <li>API response time p95 <200ms</li>
+                        <li>LO adoption rate >80%</li>
+                        <li>NPS >70 from borrowers, >75 from LOs</li>
+                        <li>AI Assistant usage rate >60%</li>
+                        <li>Zero critical production incidents</li>
+                        <li>Integration uptime >99.5% for all partners</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q4 2025: Enhancement & Expansion -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <h2 class="section-title">Q4 2025: Enhancement & Expansion</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>October - December 2025</span>
+                    </h3>
+                    <span class="quarter-badge q4">Q4 2025</span>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    Q4 focuses on advanced features, new integrations, and establishing market differentiation. Goal is to achieve 80%+ completion rates and position Smart App 2.0 as industry-leading platform.
+                </p>
+
+                <h4 style="color: var(--accent-blue); margin: 2rem 0 1.5rem;">Features Planned</h4>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">36. Document Intelligence & OCR</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 4</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            AI-powered document classification, data extraction from uploaded docs (paystubs, bank statements, tax returns), and auto-population of relevant fields. 50% reduction in manual review time.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 6 weeks (2 ML Engineers, 2 BE devs, 1 FE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">37. Predictive Application Insights</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 5</span>
+                                    <span class="confidence-badge low">Low Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            ML models predicting likelihood of application completion, approval probability, and optimal intervention points for LOs. Enables proactive support for at-risk applications.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 6 weeks (2 ML Engineers, 1 Data Scientist, 1 BE dev)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">38. Multi-Language Support (Spanish)</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 1</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Complete Spanish localization including UI, help text, AI Assistant responses, and LO communications. Expands addressable market by 15%+ and improves completion for Spanish-speaking borrowers.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 FE devs, 1 BE dev, Translation Services)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">39. Advanced Compliance Automation</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Automated TRID compliance checks, HMDA reporting, QC validation rules, and regulatory requirement tracking. Reduces compliance risk and manual review burden.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 5 weeks (2 BE devs, 1 Compliance Specialist)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">40. Third-Party Integration Marketplace</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p2">P2 - Nice to Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge low">Low Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Platform for LOs to discover and enable additional integrations (additional VOA/VOE providers, title companies, appraisal services, insurance providers). Creates ecosystem.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 6 weeks (3 BE devs, 2 FE devs, 1 Product Manager)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">41. White-Label Platform Capabilities</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p2">P2 - Nice to Have</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Comprehensive white-labeling allowing lenders to brand the entire experience with their logos, colors, domains, and custom messaging. Enterprise feature for large lenders.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 FE devs, 1 BE dev, 1 Designer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">42. API Platform for Partners</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p2">P2 - Nice to Have</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Public API for partners to integrate Smart App 2.0 into their platforms, embed application flows, and access application data. Developer portal with documentation and SDK.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 6 weeks (3 BE devs, 1 Technical Writer, 1 DevRel)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">43. Enterprise SSO & Admin</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p2">P2 - Nice to Have</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge high">High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            SAML/OAuth SSO integration, enterprise admin console for user management, role-based permissions, audit logging, and compliance reporting. Enterprise requirement.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 1 FE dev, 1 Security Engineer)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">44. Advanced Rate Quote Integration</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p1">P1 - High Value</span>
+                                    <span class="epic-badge">Epic 3</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Real-time rate quotes integrated into application flow, product comparison tools, and scenario modeling. Helps borrowers make informed decisions and increases engagement.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 4 weeks (2 BE devs, 2 FE devs, Pricing Team)
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div>
+                                <div class="feature-title">45. Video Chat with LO</div>
+                                <div class="feature-meta">
+                                    <span class="priority-badge p2">P2 - Nice to Have</span>
+                                    <span class="epic-badge">Epic 2</span>
+                                    <span class="confidence-badge medium">Medium Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="feature-description">
+                            Embedded video calling for borrowers to connect with their LO directly from the application. Screen sharing, co-browsing, and session recording capabilities.
+                        </p>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <strong>Effort:</strong> 5 weeks (2 BE devs, 2 FE devs, Twilio Video)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-criteria">
+                    <h4>Success Criteria</h4>
+                    <ul>
+                        <li>80%+ application completion rate (industry-leading)</li>
+                        <li>15,000+ applications per month</li>
+                        <li>Average time to complete <12 minutes</li>
+                        <li>Document OCR accuracy >95%</li>
+                        <li>Spanish language adoption >20% in target markets</li>
+                        <li>LO adoption rate >90%</li>
+                        <li>NPS >75 from borrowers, >80 from LOs</li>
+                        <li>670% ROI validated with actual data</li>
+                        <li>Zero regulatory compliance issues</li>
+                        <li>Enterprise pilot with 2+ large lenders launched</li>
+                    </ul>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">New Integrations</h4>
+                <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                        <div style="padding: 1.25rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Alternative VOA Providers</h5>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Finicity, Yodlee as alternatives to Plaid</p>
+                            <span class="priority-badge p1">P1</span>
+                        </div>
+                        <div style="padding: 1.25rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Additional VOE Providers</h5>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Argyle, Atomic as alternatives to TRUV</p>
+                            <span class="priority-badge p1">P1</span>
+                        </div>
+                        <div style="padding: 1.25rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">E-Sign Integration</h5>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">DocuSign, Adobe Sign for disclosures</p>
+                            <span class="priority-badge p1">P1</span>
+                        </div>
+                        <div style="padding: 1.25rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Appraisal Services</h5>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Mercury Network, ServiceLink integration</p>
+                            <span class="priority-badge p2">P2</span>
+                        </div>
+                        <div style="padding: 1.25rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Title & Settlement</h5>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Title companies and closing services</p>
+                            <span class="priority-badge p2">P2</span>
+                        </div>
+                        <div style="padding: 1.25rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h5 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Insurance Providers</h5>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">Homeowners insurance quotes and binding</p>
+                            <span class="priority-badge p2">P2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Categorization by Priority -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2 class="section-title">Feature Prioritization Framework</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="card">
+                    <h3 style="color: var(--accent-red); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span class="priority-badge p0">P0</span>
+                        <span>Must-Have for MVP</span>
+                    </h3>
+                    <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Prove Identity Integration</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Plaid VOA Integration</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">TRUV VOIE Integration</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">OTP Authentication</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Progressive Disclosure UI</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Co-Borrower Collaboration</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">LO Dashboard</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Point of Submit</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Borrower Scenario Logic</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Data Validation</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Progress Tracking</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">LO Configuration</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Analytics & Instrumentation</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Security & Compliance</li>
+                        <li style="padding: 0.5rem 0;">E-Consent & Disclosures</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--accent-yellow); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span class="priority-badge p1">P1</span>
+                        <span>High-Value, Post-MVP</span>
+                    </h3>
+                    <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">AI Assistant</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Soft Credit Pull</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">LO Take Over Mode</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Enhanced LO Config UI</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Mobile Optimization</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Real-time Validation</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Document Upload</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Enhanced Analytics</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Notification System</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Performance Optimization</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Document Intelligence/OCR</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Multi-Language Support</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Advanced Compliance</li>
+                        <li style="padding: 0.5rem 0;">Rate Quote Integration</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span class="priority-badge p2">P2</span>
+                        <span>Nice-to-Have, Future</span>
+                    </h3>
+                    <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Borrower Portal V2</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Integration Marketplace</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">White-Label Platform</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Public API Platform</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Enterprise SSO/Admin</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Video Chat with LO</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Additional Integrations</li>
+                        <li style="padding: 0.5rem 0;">Advanced Gamification</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text-muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span class="priority-badge p3">P3</span>
+                        <span>Backlog/Someday</span>
+                    </h3>
+                    <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">AR/VR Property Tours</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Blockchain Document Verification</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Voice-Driven Application</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Social Media Integration</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">Cryptocurrency Asset Verification</li>
+                        <li style="padding: 0.5rem 0;">Advanced Biometric Auth</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Epics & Themes -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🎭</span>
+                <h2 class="section-title">Themes & Epics</h2>
+            </div>
+
+            <div class="epic-section">
+                <div class="epic-header">
+                    <div class="epic-number">1</div>
+                    <div>
+                        <h3 class="epic-title">Epic 1: Borrower Self-Service Experience</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Empower borrowers to complete applications independently with minimal friction</p>
+                    </div>
+                </div>
+                <p class="epic-description">
+                    This epic focuses on creating an intuitive, guided experience that enables borrowers to complete mortgage applications without LO assistance. Key themes include reducing cognitive load through progressive disclosure, providing contextual help via AI, and leveraging integrations to minimize manual data entry.
+                </p>
+                <div class="epic-features">
+                    <div class="epic-feature-item">Progressive Disclosure UI</div>
+                    <div class="epic-feature-item">OTP Authentication</div>
+                    <div class="epic-feature-item">Co-Borrower Collaboration</div>
+                    <div class="epic-feature-item">Data Validation Engine</div>
+                    <div class="epic-feature-item">Progress Tracking & Save</div>
+                    <div class="epic-feature-item">Borrower Scenario Logic</div>
+                    <div class="epic-feature-item">Mobile Optimization</div>
+                    <div class="epic-feature-item">Real-time Validation & Guidance</div>
+                    <div class="epic-feature-item">Document Upload</div>
+                    <div class="epic-feature-item">Notification System</div>
+                    <div class="epic-feature-item">Accessibility (WCAG 2.1 AA)</div>
+                    <div class="epic-feature-item">Multi-Language Support</div>
+                </div>
+            </div>
+
+            <div class="epic-section">
+                <div class="epic-header">
+                    <div class="epic-number">2</div>
+                    <div>
+                        <h3 class="epic-title">Epic 2: LO Productivity Tools</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Give loan officers tools to monitor, manage, and accelerate application completion</p>
+                    </div>
+                </div>
+                <p class="epic-description">
+                    This epic delivers tools that make LOs more productive by providing real-time visibility, enabling proactive intervention, and streamlining configuration. The goal is to increase LO capacity from 15 to 25+ applications per month while improving quality.
+                </p>
+                <div class="epic-features">
+                    <div class="epic-feature-item">LO Dashboard (Basic)</div>
+                    <div class="epic-feature-item">LO Invitation System</div>
+                    <div class="epic-feature-item">LO Configuration System</div>
+                    <div class="epic-feature-item">LO Take Over Mode</div>
+                    <div class="epic-feature-item">Enhanced LO Configuration UI</div>
+                    <div class="epic-feature-item">LO Productivity Analytics</div>
+                    <div class="epic-feature-item">Advanced LO Collaboration Tools</div>
+                    <div class="epic-feature-item">White-Label Platform</div>
+                    <div class="epic-feature-item">Enterprise SSO & Admin</div>
+                    <div class="epic-feature-item">Video Chat with LO</div>
+                </div>
+            </div>
+
+            <div class="epic-section">
+                <div class="epic-header">
+                    <div class="epic-number">3</div>
+                    <div>
+                        <h3 class="epic-title">Epic 3: Integration Platform</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Build robust integration layer for third-party services and internal systems</p>
+                    </div>
+                </div>
+                <p class="epic-description">
+                    This epic establishes Smart App 2.0 as an integration hub that connects borrowers, LOs, and third-party verification services. Focus is on reliability, fallback handling, and expanding the integration ecosystem over time.
+                </p>
+                <div class="epic-features">
+                    <div class="epic-feature-item">Prove Identity Integration</div>
+                    <div class="epic-feature-item">Plaid VOA Integration</div>
+                    <div class="epic-feature-item">TRUV VOIE Integration</div>
+                    <div class="epic-feature-item">Point of Submit (LOS)</div>
+                    <div class="epic-feature-item">Soft Credit Pull Integration</div>
+                    <div class="epic-feature-item">Security & Compliance Foundation</div>
+                    <div class="epic-feature-item">E-Consent & Disclosures</div>
+                    <div class="epic-feature-item">Auto-Scaling Infrastructure</div>
+                    <div class="epic-feature-item">Integration Health Monitoring</div>
+                    <div class="epic-feature-item">Advanced Compliance Automation</div>
+                    <div class="epic-feature-item">Integration Marketplace</div>
+                    <div class="epic-feature-item">API Platform for Partners</div>
+                    <div class="epic-feature-item">Rate Quote Integration</div>
+                    <div class="epic-feature-item">Alternative VOA/VOE Providers</div>
+                    <div class="epic-feature-item">E-Sign, Appraisal, Title, Insurance</div>
+                </div>
+            </div>
+
+            <div class="epic-section">
+                <div class="epic-header">
+                    <div class="epic-number">4</div>
+                    <div>
+                        <h3 class="epic-title">Epic 4: AI & Automation</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Leverage AI to provide intelligent assistance, predictions, and automation</p>
+                    </div>
+                </div>
+                <p class="epic-description">
+                    This epic uses AI and machine learning to reduce borrower effort, provide proactive guidance, and automate manual tasks. From Claude-powered assistance to document OCR to predictive insights, AI becomes a competitive differentiator.
+                </p>
+                <div class="epic-features">
+                    <div class="epic-feature-item">AI Assistant (MVP)</div>
+                    <div class="epic-feature-item">Advanced AI Assistant Features</div>
+                    <div class="epic-feature-item">Smart Field Prefill Engine</div>
+                    <div class="epic-feature-item">Document Intelligence & OCR</div>
+                    <div class="epic-feature-item">Predictive Application Insights</div>
+                </div>
+            </div>
+
+            <div class="epic-section">
+                <div class="epic-header">
+                    <div class="epic-number">5</div>
+                    <div>
+                        <h3 class="epic-title">Epic 5: Analytics & Insights</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Build data infrastructure to measure, optimize, and validate ROI</p>
+                    </div>
+                </div>
+                <p class="epic-description">
+                    This epic creates the data foundation for continuous improvement. Comprehensive analytics enable product teams to identify friction points, validate features through A/B testing, and demonstrate ROI to stakeholders.
+                </p>
+                <div class="epic-features">
+                    <div class="epic-feature-item">Analytics & Instrumentation</div>
+                    <div class="epic-feature-item">Enhanced Analytics Dashboard</div>
+                    <div class="epic-feature-item">LO Productivity Analytics</div>
+                    <div class="epic-feature-item">A/B Testing Framework</div>
+                    <div class="epic-feature-item">Predictive Application Insights</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dependency Mapping -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🔗</span>
+                <h2 class="section-title">Feature Dependency Mapping</h2>
+            </div>
+
+            <div class="dependency-diagram">
+                <h3 style="color: var(--accent-teal); margin-bottom: 2rem;">Critical Path Dependencies</h3>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">Database Schema & Infrastructure</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">All Features</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">OTP Authentication</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">Prove Identity Integration</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">Prove Identity</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">Progressive Disclosure UI</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">URLA Data Model</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">Plaid VOA & TRUV VOIE</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">WebSocket Infrastructure</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">LO Dashboard & Co-Borrower Collab</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">LO Dashboard</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">LO Take Over & Configuration UI</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">URLA Mapper</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">Point of Submit (LOS Integration)</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">Analytics Infrastructure</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">A/B Testing & ML Features</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">Document Upload</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">Document Intelligence/OCR</div>
+                </div>
+
+                <div class="dependency-row">
+                    <div class="dependency-feature">AI Assistant MVP</div>
+                    <div class="dependency-arrow">→</div>
+                    <div class="dependency-feature">Advanced AI Features</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Debt & Innovation Time -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <h2 class="section-title">Technical Debt & Innovation Budget</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Technical Debt Management</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                    We allocate 15% of engineering capacity each quarter to addressing technical debt, refactoring, and infrastructure improvements. This prevents debt accumulation and maintains code quality as the platform scales.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <h4 style="color: var(--accent-red); margin-bottom: 0.75rem;">Q1 Focus</h4>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; padding-left: 1.25rem;">
+                            <li>API performance optimization</li>
+                            <li>Database query tuning</li>
+                            <li>Test coverage >80%</li>
+                            <li>Documentation standards</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.3);">
+                        <h4 style="color: var(--accent-yellow); margin-bottom: 0.75rem;">Q2 Focus</h4>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; padding-left: 1.25rem;">
+                            <li>Code refactoring</li>
+                            <li>Component library cleanup</li>
+                            <li>Security hardening</li>
+                            <li>Monitoring improvements</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(139, 92, 246, 0.1); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3);">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.75rem;">Q3 Focus</h4>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; padding-left: 1.25rem;">
+                            <li>Architecture review</li>
+                            <li>Dependency updates</li>
+                            <li>Performance profiling</li>
+                            <li>Load testing improvements</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">Q4 Focus</h4>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin: 0; padding-left: 1.25rem;">
+                            <li>Tech stack upgrades</li>
+                            <li>Scalability refactors</li>
+                            <li>DevOps automation</li>
+                            <li>Documentation updates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--accent-blue); margin: 2rem 0 1.5rem;">Innovation & Experimentation Time</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                    10% of engineering time is dedicated to innovation projects, proof-of-concepts, and emerging technology exploration. This keeps the team engaged and ensures we stay ahead of market trends.
+                </p>
+
+                <div style="background: rgba(139, 92, 246, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3);">
+                    <h4 style="color: var(--accent-purple); margin-bottom: 1rem;">Innovation Project Ideas</h4>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; padding-left: 1.25rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Voice-driven application:</strong> Explore voice UI for hands-free data entry</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Blockchain verification:</strong> POC for tamper-proof document verification</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>AR property visualization:</strong> Virtual property tours integrated into application</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Advanced ML models:</strong> Fraud detection, approval prediction, churn prevention</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Edge computing:</strong> Offline-first PWA with sync capabilities</li>
+                        <li><strong>Quantum-ready encryption:</strong> Future-proof security architecture</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Release Planning & Versioning -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🚢</span>
+                <h2 class="section-title">Release Planning & Versioning Strategy</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Release Strategy</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    We follow a continuous deployment model with bi-weekly sprint releases to staging and monthly releases to production. Major versions align with quarterly milestones.
+                </p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Release Date</th>
+                                <th>Milestone</th>
+                                <th>Key Features</th>
+                                <th>Audience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>v0.9 (Alpha)</strong></td>
+                                <td>Feb 2025</td>
+                                <td>Internal Testing</td>
+                                <td>Core integrations, basic UI</td>
+                                <td>Internal QA team</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v1.0 (MVP)</strong></td>
+                                <td>Mar 2025</td>
+                                <td>Internal Beta</td>
+                                <td>All P0 features, LO dashboard</td>
+                                <td>25 pilot LOs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v1.1</strong></td>
+                                <td>Apr 2025</td>
+                                <td>Controlled Beta</td>
+                                <td>AI Assistant, soft credit</td>
+                                <td>100 LOs, select regions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v1.2</strong></td>
+                                <td>May 2025</td>
+                                <td>Iteration</td>
+                                <td>Mobile optimization, LO takeover</td>
+                                <td>Expanding beta</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v1.5</strong></td>
+                                <td>Jun 2025</td>
+                                <td>Open Beta</td>
+                                <td>Enhanced config, notifications</td>
+                                <td>All LOs (opt-in)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v2.0</strong></td>
+                                <td>Jul 2025</td>
+                                <td>Public Launch</td>
+                                <td>Performance suite, scaling</td>
+                                <td>All LOs (default)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v2.5</strong></td>
+                                <td>Sep 2025</td>
+                                <td>Enhancement</td>
+                                <td>Advanced AI, analytics</td>
+                                <td>Full production</td>
+                            </tr>
+                            <tr>
+                                <td><strong>v3.0</strong></td>
+                                <td>Dec 2025</td>
+                                <td>Platform</td>
+                                <td>Doc intelligence, multi-language</td>
+                                <td>Enterprise features</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- OKRs by Quarter -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">OKRs by Quarter</h2>
+            </div>
+
+            <div class="okr-card">
+                <div class="okr-objective">Q1 2025: Build & Validate MVP</div>
+                <ul class="okr-key-results">
+                    <li>Launch internal beta with 25 LOs and 200+ test applications by March 31</li>
+                    <li>Achieve 50%+ completion rate (vs. 42% baseline) in beta testing</li>
+                    <li>Reduce average application time from 45 min to under 20 min</li>
+                    <li>85%+ of borrowers successfully use Prove for identity verification</li>
+                    <li>Pass security audit with zero critical vulnerabilities</li>
+                </ul>
+            </div>
+
+            <div class="okr-card">
+                <div class="okr-objective">Q2 2025: Expand Beta & Iterate</div>
+                <ul class="okr-key-results">
+                    <li>Expand to 100 LOs processing 1,000+ real applications</li>
+                    <li>Achieve 65%+ completion rate through iteration</li>
+                    <li>Launch AI Assistant with 40%+ engagement rate</li>
+                    <li>Achieve NPS >60 from borrowers, >70 from LOs</li>
+                    <li>Mobile completion rate within 5% of desktop</li>
+                </ul>
+            </div>
+
+            <div class="okr-card">
+                <div class="okr-objective">Q3 2025: Scale & Launch Publicly</div>
+                <ul class="okr-key-results">
+                    <li>Public launch with 80%+ LO adoption rate</li>
+                    <li>Process 10,000+ applications per month</li>
+                    <li>Achieve 75%+ completion rate at scale</li>
+                    <li>99.9% uptime during business hours</li>
+                    <li>Page load time <2 seconds on 4G mobile</li>
+                </ul>
+            </div>
+
+            <div class="okr-card">
+                <div class="okr-objective">Q4 2025: Enhance & Differentiate</div>
+                <ul class="okr-key-results">
+                    <li>Achieve 80%+ completion rate (industry-leading)</li>
+                    <li>Process 15,000+ applications per month</li>
+                    <li>Launch document intelligence with >95% OCR accuracy</li>
+                    <li>Validate 670% ROI with actual performance data</li>
+                    <li>Launch enterprise features with 2+ large lender pilots</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Resource & Budget Allocation -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">💰</span>
+                <h2 class="section-title">Resource & Budget Allocation</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-blue); margin-bottom: 1.5rem;">Quarterly Resource Requirements</h3>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Q1 2025</th>
+                                <th>Q2 2025</th>
+                                <th>Q3 2025</th>
+                                <th>Q4 2025</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Backend Engineers</strong></td>
+                                <td>4 FTE</td>
+                                <td>4 FTE</td>
+                                <td>5 FTE</td>
+                                <td>5 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Frontend Engineers</strong></td>
+                                <td>4 FTE</td>
+                                <td>4 FTE</td>
+                                <td>5 FTE</td>
+                                <td>5 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ML Engineers</strong></td>
+                                <td>0 FTE</td>
+                                <td>1 FTE</td>
+                                <td>2 FTE</td>
+                                <td>2 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>QA Engineers</strong></td>
+                                <td>2 FTE</td>
+                                <td>2 FTE</td>
+                                <td>3 FTE</td>
+                                <td>3 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product Designers</strong></td>
+                                <td>1 FTE</td>
+                                <td>1 FTE</td>
+                                <td>2 FTE</td>
+                                <td>2 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product Managers</strong></td>
+                                <td>1 FTE</td>
+                                <td>1 FTE</td>
+                                <td>2 FTE</td>
+                                <td>2 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DevOps Engineers</strong></td>
+                                <td>1 FTE</td>
+                                <td>1 FTE</td>
+                                <td>2 FTE</td>
+                                <td>2 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Engineers</strong></td>
+                                <td>0 FTE</td>
+                                <td>1 FTE</td>
+                                <td>1 FTE</td>
+                                <td>2 FTE</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Security Engineers</strong></td>
+                                <td>0.5 FTE</td>
+                                <td>0.5 FTE</td>
+                                <td>1 FTE</td>
+                                <td>1 FTE</td>
+                            </tr>
+                            <tr style="background: rgba(59, 130, 246, 0.1); font-weight: 600;">
+                                <td><strong>TOTAL TEAM</strong></td>
+                                <td><strong>13.5 FTE</strong></td>
+                                <td><strong>15.5 FTE</strong></td>
+                                <td><strong>23 FTE</strong></td>
+                                <td><strong>24 FTE</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="color: var(--accent-blue); margin: 3rem 0 1.5rem;">Quarterly Budget Allocation</h3>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Q1 2025</th>
+                                <th>Q2 2025</th>
+                                <th>Q3 2025</th>
+                                <th>Q4 2025</th>
+                                <th>Total 2025</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Personnel (Salaries & Benefits)</strong></td>
+                                <td>$540K</td>
+                                <td>$620K</td>
+                                <td>$920K</td>
+                                <td>$960K</td>
+                                <td>$3.04M</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Third-Party Services (APIs)</strong></td>
+                                <td>$25K</td>
+                                <td>$45K</td>
+                                <td>$75K</td>
+                                <td>$95K</td>
+                                <td>$240K</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cloud Infrastructure (AWS)</strong></td>
+                                <td>$30K</td>
+                                <td>$50K</td>
+                                <td>$85K</td>
+                                <td>$110K</td>
+                                <td>$275K</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tools & Software</strong></td>
+                                <td>$15K</td>
+                                <td>$15K</td>
+                                <td>$20K</td>
+                                <td>$20K</td>
+                                <td>$70K</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Research & Testing</strong></td>
+                                <td>$20K</td>
+                                <td>$30K</td>
+                                <td>$25K</td>
+                                <td>$15K</td>
+                                <td>$90K</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compliance & Legal</strong></td>
+                                <td>$40K</td>
+                                <td>$20K</td>
+                                <td>$25K</td>
+                                <td>$30K</td>
+                                <td>$115K</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contingency (10%)</strong></td>
+                                <td>$67K</td>
+                                <td>$78K</td>
+                                <td>$115K</td>
+                                <td>$123K</td>
+                                <td>$383K</td>
+                            </tr>
+                            <tr style="background: rgba(59, 130, 246, 0.1); font-weight: 600;">
+                                <td><strong>QUARTERLY TOTAL</strong></td>
+                                <td><strong>$737K</strong></td>
+                                <td><strong>$858K</strong></td>
+                                <td><strong>$1.265M</strong></td>
+                                <td><strong>$1.353M</strong></td>
+                                <td><strong>$4.21M</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3); margin-top: 2rem;">
+                    <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">ROI Projection</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Total 2025 investment: <strong>$4.21M</strong><br>
+                        Projected annual value (based on research): <strong>$28.2M</strong><br>
+                        <strong style="color: var(--accent-green); font-size: 1.1rem;">ROI: 670%</strong>
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
+                        Value drivers: Increased application volume (42% more completions), reduced LO support time ($8.2M savings), faster time-to-close ($4.1M value), improved borrower satisfaction (retention value $6.3M), competitive advantage ($9.6M market share value).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Mitigation -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">⚠️</span>
+                <h2 class="section-title">Risk Mitigation by Quarter</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem;">Q1 2025 Risks</h3>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Integration delays with Prove/Plaid/TRUV</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Start integration work in Week 1, allocate dedicated resources, build abstraction layer for provider swapping, maintain close contact with vendor support teams, have manual fallback workflows documented.</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: LOS (Encompass/Byte) API complexity</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Early technical spike with LOS team, comprehensive URLA field mapping documentation, extensive testing with sample data, build retry logic and error handling, allocate buffer time in timeline.</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Security/compliance audit failures</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Security review in Sprint 3, pen testing in Sprint 5, compliance consultation from Day 1, allocate dedicated security engineer, build compliance checklist into definition of done.</div>
+                </div>
+
+                <h3 style="color: var(--accent-red); margin: 2rem 0 1.5rem;">Q2 2025 Risks</h3>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Low beta participation/feedback</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Executive sponsorship for beta program, LO incentives for participation, dedicated PM for beta management, weekly feedback sessions, rapid iteration on critical issues.</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Mobile UX not meeting expectations</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Mobile-first design from start, device testing lab, user testing on real devices, progressive enhancement approach, continuous performance monitoring.</div>
+                </div>
+
+                <h3 style="color: var(--accent-red); margin: 2rem 0 1.5rem;">Q3 2025 Risks</h3>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Infrastructure can't handle scale</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Load testing starting Q2, auto-scaling configured early, performance budgets enforced, database optimization continuous, CDN and caching aggressive, monitoring and alerting comprehensive.</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Production incidents during launch</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Phased rollout by region, feature flags for instant rollback, war room during launch week, on-call rotation established, runbooks documented, chaos engineering testing.</div>
+                </div>
+
+                <h3 style="color: var(--accent-red); margin: 2rem 0 1.5rem;">Q4 2025 Risks</h3>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: ML/AI features underperform</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> MVP approach with manual fallbacks, A/B testing before full rollout, quality metrics monitoring, human-in-the-loop for critical decisions, continuous model retraining.</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-label">RISK: Feature bloat reducing focus</div>
+                    <div class="risk-description"><strong>Mitigation:</strong> Strict prioritization framework (RICE scoring), ruthless backlog grooming, say no to low-value requests, focus on core metrics, quarterly roadmap reviews with stakeholders.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Confidence Levels -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2 class="section-title">Roadmap Confidence Levels</h2>
+            </div>
+
+            <div class="card">
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    Confidence levels reflect our certainty in timing, scope, and resource requirements for each horizon of the roadmap. Confidence decreases with time horizon, which is expected and healthy.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div style="padding: 2rem; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 2px solid var(--accent-green);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="color: var(--accent-green); margin: 0;">Q1 2025 NOW</h3>
+                            <span class="confidence-badge high" style="font-size: 0.9rem; padding: 0.5rem 1rem;">HIGH CONFIDENCE</span>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.2); height: 12px; border-radius: 6px; margin-bottom: 1rem;">
+                            <div style="background: var(--accent-green); height: 100%; width: 90%; border-radius: 6px;"></div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                            <strong>90% confidence</strong> - All features scoped, dependencies mapped, resources committed, vendors engaged
+                        </p>
+                    </div>
+
+                    <div style="padding: 2rem; background: rgba(59, 130, 246, 0.1); border-radius: 12px; border: 2px solid var(--accent-blue);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="color: var(--accent-blue); margin: 0;">Q2 2025 NEXT</h3>
+                            <span class="confidence-badge high" style="font-size: 0.9rem; padding: 0.5rem 1rem;">HIGH CONFIDENCE</span>
+                        </div>
+                        <div style="background: rgba(59, 130, 246, 0.2); height: 12px; border-radius: 6px; margin-bottom: 1rem;">
+                            <div style="background: var(--accent-blue); height: 100%; width: 80%; border-radius: 6px;"></div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                            <strong>80% confidence</strong> - Features defined, estimates solid, some dependencies uncertain
+                        </p>
+                    </div>
+
+                    <div style="padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 12px; border: 2px solid var(--accent-yellow);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="color: var(--accent-yellow); margin: 0;">Q3 2025 NEXT</h3>
+                            <span class="confidence-badge medium" style="font-size: 0.9rem; padding: 0.5rem 1rem;">MEDIUM CONFIDENCE</span>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.2); height: 12px; border-radius: 6px; margin-bottom: 1rem;">
+                            <div style="background: var(--accent-yellow); height: 100%; width: 65%; border-radius: 6px;"></div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                            <strong>65% confidence</strong> - Direction clear, priorities may shift based on Q2 learnings
+                        </p>
+                    </div>
+
+                    <div style="padding: 2rem; background: rgba(139, 92, 246, 0.1); border-radius: 12px; border: 2px solid var(--accent-purple);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="color: var(--accent-purple); margin: 0;">Q4 2025 LATER</h3>
+                            <span class="confidence-badge medium" style="font-size: 0.9rem; padding: 0.5rem 1rem;">MEDIUM CONFIDENCE</span>
+                        </div>
+                        <div style="background: rgba(139, 92, 246, 0.2); height: 12px; border-radius: 6px; margin-bottom: 1rem;">
+                            <div style="background: var(--accent-purple); height: 100%; width: 50%; border-radius: 6px;"></div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                            <strong>50% confidence</strong> - Strategic themes set, specific features will be refined based on market feedback
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(59, 130, 246, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2); margin-top: 2rem;">
+                    <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">Roadmap Review Cadence</h4>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; padding-left: 1.25rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Weekly:</strong> Sprint planning and backlog grooming with engineering team</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Bi-weekly:</strong> Product review with stakeholders on progress and blockers</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Monthly:</strong> Roadmap review with executive team to align on priorities</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Quarterly:</strong> Major roadmap refresh incorporating learnings and market changes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div style="margin-top: 6rem; padding: 3rem 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-radius: 24px 24px 0 0; text-align: center;">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Smart App 2.0 Implementation Roadmap • Last Updated: January 2025</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="../index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">← Back to Strategy Hub</a>
+                <a href="../requirements/" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">View Requirements</a>
+                <a href="../research/index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">Research Insights</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

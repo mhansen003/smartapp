@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions & Decisions Log - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .decision-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .decision-table thead {
+            background: var(--bg-secondary);
+        }
+
+        .decision-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-teal);
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .decision-table td {
+            padding: 1rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .decision-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .decision-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .decision-id {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .status-proposed {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent-purple);
+        }
+
+        .status-decided {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .status-implemented {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+        }
+
+        .status-reversed {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+
+        .impact-high {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .impact-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .impact-low {
+            background: rgba(100, 116, 139, 0.2);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .options-list {
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+        }
+
+        .options-list li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .option-label {
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .adr-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .adr-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .adr-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .adr-number {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            background: rgba(20, 184, 166, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+
+        .adr-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .adr-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .adr-meta-item {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .adr-meta-label {
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .adr-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .adr-section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 0.75rem;
+        }
+
+        .adr-section-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .question-open {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .question-discussion {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .question-blocked {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+
+        .question-resolved {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+        }
+
+        .priority-critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .priority-high {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .priority-medium {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .priority-low {
+            background: rgba(100, 116, 139, 0.2);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .warning-box-title {
+            font-weight: 600;
+            color: var(--accent-yellow);
+            margin-bottom: 0.75rem;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .framework-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .framework-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .framework-card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .framework-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .stats-grid-custom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card-custom {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card-custom:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        }
+
+        .stat-value-custom {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label-custom {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../requirements/" class="nav-link">Requirements</a></li>
+                <li class="nav-item"><a href="../integrations/integration-guide.html" class="nav-link">Integrations</a></li>
+                <li class="nav-item"><a href="../research/index.html" class="nav-link">Research</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Questions & Decisions Log</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <span class="page-label">DECISION TRACKING</span>
+                <h1 class="page-title">Questions & Decisions Log</h1>
+                <p class="page-description">Comprehensive tracking of architectural decisions, product choices, and strategic direction. This log documents the evolution of Smart App 2.0 through structured decision-making frameworks.</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📋</span>
+                        <span>48 Total Decisions</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">✅</span>
+                        <span>38 Implemented</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔄</span>
+                        <span>7 In Progress</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⏸️</span>
+                        <span>3 Proposed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <a href="../index.html" class="back-button">← Back to Home</a>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision Logging Process</h2>
+
+            <div class="info-box">
+                <div class="info-box-title">Why Decision Logging Matters</div>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin: 0;">
+                    Documenting decisions creates organizational memory, enables new team members to understand context,
+                    prevents revisiting settled issues, and provides accountability. Each decision is tracked with full
+                    context, alternatives considered, and rationale to ensure transparency and alignment across the organization.
+                </p>
+            </div>
+
+            <h3 class="content-section-subtitle">Decision-Making Statistics</h3>
+            <div class="stats-grid-custom">
+                <div class="stat-card-custom">
+                    <div class="stat-value-custom">48</div>
+                    <div class="stat-label-custom">Total Decisions</div>
+                </div>
+                <div class="stat-card-custom">
+                    <div class="stat-value-custom">8</div>
+                    <div class="stat-label-custom">ADRs Documented</div>
+                </div>
+                <div class="stat-card-custom">
+                    <div class="stat-value-custom">15</div>
+                    <div class="stat-label-custom">Open Questions</div>
+                </div>
+                <div class="stat-card-custom">
+                    <div class="stat-value-custom">92%</div>
+                    <div class="stat-label-custom">Decision Success Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decision Framework Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision Framework</h2>
+
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                We use the <strong>DACI framework</strong> (Driver, Approver, Contributors, Informed) for most product and technical decisions,
+                ensuring clear ownership and accountability. For architectural decisions, we follow the <strong>ADR (Architecture Decision Record)</strong>
+                format to capture context, options, and consequences.
+            </p>
+
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <div class="framework-card-title">Driver (D)</div>
+                    <div class="framework-card-desc">Responsible for gathering input, driving consensus, and ensuring the decision is made.</div>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-card-title">Approver (A)</div>
+                    <div class="framework-card-desc">Has final authority to make the decision. Typically a single person to avoid decision paralysis.</div>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-card-title">Contributors (C)</div>
+                    <div class="framework-card-desc">Provide input and recommendations based on their expertise and perspective.</div>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-card-title">Informed (I)</div>
+                    <div class="framework-card-desc">Notified of the decision after it's made. Need to know but don't contribute.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decision Categories Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision Categories</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">🏗️ Technical Architecture</div>
+                    <div class="card-description">Database choices, infrastructure, microservices design, API patterns, caching strategies</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎯 Product & Features</div>
+                    <div class="card-description">Feature priorities, user flows, product roadmap, scope decisions</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎨 UX & Design</div>
+                    <div class="card-description">Design systems, user experience patterns, accessibility, mobile responsiveness</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔌 Integrations & Third-Party</div>
+                    <div class="card-description">Vendor selection, API integrations, third-party services (Plaid, TRUV, Prove)</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚙️ Process & Workflow</div>
+                    <div class="card-description">Development workflows, testing strategies, deployment processes</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">💰 Resource & Budget</div>
+                    <div class="card-description">Team allocation, vendor costs, infrastructure spending, timeline commitments</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architectural Decision Records Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Architectural Decision Records (ADRs)</h2>
+
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                These are the foundational architectural decisions that shape the technical direction of Smart App 2.0.
+                Each ADR follows a structured format documenting context, decision, and consequences.
+            </p>
+
+            <!-- ADR-001 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-001</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">Multi-Tenant Architecture Approach</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-11-15</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> CTO, VP Engineering</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-high">High</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Context</div>
+                    <div class="adr-section-content">
+                        Smart App 2.0 needs to serve multiple lenders with different branding, configurations, and compliance requirements.
+                        We need to decide on a multi-tenancy strategy that balances isolation, performance, cost, and operational complexity.
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Options Considered</div>
+                    <ul class="options-list">
+                        <li><span class="option-label">Option A: Separate Database per Tenant</span> - Complete isolation but high operational overhead and cost</li>
+                        <li><span class="option-label">Option B: Shared Database with Schema per Tenant</span> - Good isolation with moderate complexity</li>
+                        <li><span class="option-label">Option C: Shared Database with Tenant ID Column</span> - Simple but risk of data leakage</li>
+                    </ul>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>Option C: Shared Database with Tenant ID Column + Row-Level Security</strong>
+                        <br><br>
+                        We chose this approach with PostgreSQL Row-Level Security (RLS) policies to enforce tenant isolation at the database level.
+                        This provides simplicity, cost efficiency, and strong security guarantees without the operational overhead of managing
+                        hundreds of databases or schemas.
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • Operational simplicity - single database to manage, backup, and maintain<br>
+                        • Cost effective - shared infrastructure with excellent resource utilization<br>
+                        • PostgreSQL RLS provides database-enforced isolation preventing data leakage<br>
+                        • Easier to implement cross-tenant analytics and reporting<br>
+                        • Proven pattern used by companies like Slack and GitHub at scale
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Consequences</div>
+                    <div class="adr-section-content">
+                        <strong>Positive:</strong> Lower operational costs, simpler migrations, easier analytics<br>
+                        <strong>Negative:</strong> Must be extremely careful with tenant_id filtering in all queries, potential for noisy neighbor issues<br>
+                        <strong>Risks:</strong> Data leak if RLS policies are misconfigured - mitigated with automated testing and policy review
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADR-002 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-002</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">Microservices vs Monolith Architecture</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-11-18</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> CTO, VP Engineering</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-high">High</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Context</div>
+                    <div class="adr-section-content">
+                        Smart App 2.0 integrates with multiple third-party services (Plaid, TRUV, Prove), has complex business logic,
+                        and needs to scale independently for different components. Team is currently 8 engineers and will grow to 15-20.
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>Modular Monolith with Service Boundaries</strong>
+                        <br><br>
+                        Start with a well-structured modular monolith that can be decomposed into microservices later. Use clear
+                        module boundaries, shared interfaces, and domain-driven design principles to enable future extraction of services.
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • Faster development velocity for current team size<br>
+                        • Easier debugging and testing with single deployment unit<br>
+                        • Lower operational complexity (no service mesh, distributed tracing setup initially)<br>
+                        • Clear module boundaries allow extraction to microservices when needed<br>
+                        • Proven approach - companies like Shopify and GitHub started this way
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Future Migration Path</div>
+                    <div class="adr-section-content">
+                        Extract services starting with:<br>
+                        1. Third-party integration service (Plaid, TRUV, Prove)<br>
+                        2. Document processing service<br>
+                        3. Notification service<br>
+                        4. Analytics/reporting service
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADR-003 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-003</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">Database Selection - PostgreSQL</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-11-20</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> CTO, Principal Engineer</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-high">High</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>PostgreSQL 15+ as primary database</strong> with AWS RDS for managed hosting
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • JSONB support for flexible schema evolution<br>
+                        • Row-Level Security for multi-tenant isolation<br>
+                        • Full ACID compliance for financial transactions<br>
+                        • Excellent performance with proper indexing<br>
+                        • Rich ecosystem and tooling<br>
+                        • Native full-text search capabilities<br>
+                        • PostGIS extension for future location-based features<br>
+                        • Team expertise and industry standard for similar applications
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Alternatives Considered</div>
+                    <ul class="options-list">
+                        <li><span class="option-label">MySQL:</span> Good but lacks JSONB and RLS features</li>
+                        <li><span class="option-label">MongoDB:</span> Flexible schema but lacks transactions and joins</li>
+                        <li><span class="option-label">DynamoDB:</span> Excellent for key-value but poor for complex queries</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ADR-004 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-004</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">Caching Strategy with Redis</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-11-22</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> Principal Engineer</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-medium">Medium</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>Redis for caching and session management</strong> with ElastiCache for managed hosting
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Use Cases</div>
+                    <div class="adr-section-content">
+                        • Session storage for user authentication<br>
+                        • Third-party API response caching (Plaid, TRUV data)<br>
+                        • Rate limiting and request throttling<br>
+                        • Real-time features (LO dashboard updates, application status)<br>
+                        • Task queue for background jobs (document processing, notifications)
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Caching Patterns</div>
+                    <div class="adr-section-content">
+                        <strong>Cache-Aside:</strong> Application checks cache, fetches from DB on miss, updates cache<br>
+                        <strong>Write-Through:</strong> Updates written to cache and DB synchronously<br>
+                        <strong>Time-Based Expiration:</strong> 5-minute TTL for dynamic data, 1-hour for reference data<br>
+                        <strong>Event-Based Invalidation:</strong> Invalidate on data mutations
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADR-005 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-005</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">Real-Time Communication: WebSocket vs SSE</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-11-25</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> Principal Engineer, Product Manager</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-medium">Medium</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Context</div>
+                    <div class="adr-section-content">
+                        LO Dashboard needs real-time updates when borrowers complete application steps. Co-borrower flow needs
+                        live status updates. Need to choose between WebSocket and Server-Sent Events (SSE).
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>Hybrid Approach: WebSocket for bi-directional + SSE as fallback</strong>
+                        <br><br>
+                        Use WebSocket (Socket.io) for primary real-time communication with SSE fallback for environments
+                        where WebSocket is blocked (corporate proxies, older browsers).
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • WebSocket provides bi-directional communication for collaborative features<br>
+                        • Lower latency and overhead compared to polling<br>
+                        • SSE provides reliable fallback with automatic reconnection<br>
+                        • Socket.io library handles connection management and fallbacks automatically<br>
+                        • Better user experience with instant updates
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Implementation Details</div>
+                    <div class="adr-section-content">
+                        • Use Redis pub/sub for broadcasting across server instances<br>
+                        • Implement connection pooling and automatic reconnection<br>
+                        • Add heartbeat/ping to detect stale connections<br>
+                        • Graceful degradation to polling if both WebSocket and SSE fail
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADR-006 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-006</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">API Design - REST + GraphQL Hybrid</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-11-28</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> VP Engineering, Lead Frontend Engineer</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-high">High</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>RESTful API for CRUD operations + GraphQL for complex queries</strong>
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">API Strategy</div>
+                    <div class="adr-section-content">
+                        <strong>REST for:</strong><br>
+                        • Simple CRUD operations (create application, update borrower info)<br>
+                        • Third-party webhooks (Plaid, TRUV callbacks)<br>
+                        • File uploads and downloads<br>
+                        • Standard HTTP semantics (GET, POST, PUT, DELETE)<br>
+                        <br>
+                        <strong>GraphQL for:</strong><br>
+                        • LO Dashboard with complex data aggregations<br>
+                        • Application detail views with nested relationships<br>
+                        • Analytics and reporting queries<br>
+                        • Mobile app with bandwidth constraints
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • REST is simple, well-understood, and cacheable<br>
+                        • GraphQL eliminates over-fetching and under-fetching<br>
+                        • GraphQL provides strongly-typed schema and introspection<br>
+                        • Frontend can request exactly what it needs<br>
+                        • Hybrid approach uses best tool for each use case
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">API Standards</div>
+                    <div class="adr-section-content">
+                        • OpenAPI 3.0 specification for REST endpoints<br>
+                        • GraphQL schema with Apollo Server<br>
+                        • Versioning: /api/v1 for REST, schema evolution for GraphQL<br>
+                        • Consistent error handling with RFC 7807 Problem Details<br>
+                        • JWT authentication for both REST and GraphQL
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADR-007 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-007</div>
+                    </div>
+                    <div class="status-badge status-implemented">Implemented</div>
+                </div>
+                <h3 class="adr-title">Frontend Framework - React + Next.js</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-12-01</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> VP Engineering, Lead Frontend Engineer</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-high">High</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>React 18+ with Next.js 14 for server-side rendering and routing</strong>
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • React is industry standard with largest ecosystem<br>
+                        • Next.js provides SSR for better SEO and initial load performance<br>
+                        • App Router with React Server Components reduces client bundle size<br>
+                        • Built-in optimizations (image optimization, font loading, code splitting)<br>
+                        • Excellent developer experience with hot reload and TypeScript support<br>
+                        • Vercel hosting provides seamless deployment and edge functions<br>
+                        • Team has deep React expertise
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Technology Stack</div>
+                    <div class="adr-section-content">
+                        • <strong>Framework:</strong> Next.js 14 with App Router<br>
+                        • <strong>Language:</strong> TypeScript for type safety<br>
+                        • <strong>Styling:</strong> Tailwind CSS for utility-first styling<br>
+                        • <strong>State Management:</strong> Zustand for global state, React Query for server state<br>
+                        • <strong>Forms:</strong> React Hook Form with Zod validation<br>
+                        • <strong>Testing:</strong> Jest + React Testing Library + Playwright for E2E
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Architecture Patterns</div>
+                    <div class="adr-section-content">
+                        • Component-driven development with Storybook<br>
+                        • Atomic design methodology (atoms, molecules, organisms)<br>
+                        • Feature-based folder structure<br>
+                        • Server Components for data fetching, Client Components for interactivity<br>
+                        • Progressive enhancement with graceful degradation
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADR-008 -->
+            <div class="adr-card">
+                <div class="adr-header">
+                    <div>
+                        <div class="adr-number">ADR-008</div>
+                    </div>
+                    <div class="status-badge status-decided">Decided</div>
+                </div>
+                <h3 class="adr-title">Mobile Strategy - Responsive Web vs Native Apps</h3>
+                <div class="adr-meta">
+                    <div class="adr-meta-item"><span class="adr-meta-label">Date:</span> 2025-12-05</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Approver:</span> VP Product, VP Engineering</div>
+                    <div class="adr-meta-item"><span class="adr-meta-label">Impact:</span> <span class="impact-high">High</span></div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Context</div>
+                    <div class="adr-section-content">
+                        Research shows 67% of borrowers start mortgage applications on mobile devices. Need to decide between
+                        responsive web, progressive web app (PWA), or native iOS/Android apps.
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Decision</div>
+                    <div class="adr-section-content">
+                        <strong>Phase 1: Mobile-First Responsive Web Application</strong><br>
+                        <strong>Phase 2: Progressive Web App (PWA)</strong><br>
+                        <strong>Phase 3: Evaluate Native Apps based on adoption</strong>
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Rationale</div>
+                    <div class="adr-section-content">
+                        • Single codebase reduces development and maintenance costs<br>
+                        • No app store approval process - faster iterations<br>
+                        • Progressive enhancement from web to PWA to native<br>
+                        • PWA provides offline capabilities and push notifications<br>
+                        • Modern web APIs support camera, biometrics, and other native features<br>
+                        • 80% of functionality achievable with web technologies<br>
+                        • Native apps only if specific features require them (e.g., deep OS integration)
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">PWA Features</div>
+                    <div class="adr-section-content">
+                        • Service worker for offline support<br>
+                        • Web app manifest for installability<br>
+                        • Push notifications for application updates<br>
+                        • Camera access for document capture<br>
+                        • Biometric authentication (Face ID, Touch ID via WebAuthn)<br>
+                        • Home screen icon and splash screen
+                    </div>
+                </div>
+
+                <div class="adr-section">
+                    <div class="adr-section-title">Success Metrics for Native App Decision</div>
+                    <div class="adr-section-content">
+                        • Mobile web traffic exceeds 75% of total traffic<br>
+                        • App store presence provides competitive advantage<br>
+                        • Specific native features provide 10%+ conversion improvement<br>
+                        • Budget allocated for iOS/Android development teams
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comprehensive Decision Log Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Comprehensive Decision Log</h2>
+
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                This table documents all significant decisions made during Smart App 2.0 development, including context,
+                alternatives considered, and outcomes. Decisions are categorized and tracked through their lifecycle.
+            </p>
+
+            <div style="overflow-x: auto;">
+                <table class="decision-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 100px;">ID</th>
+                            <th style="min-width: 110px;">Date</th>
+                            <th style="min-width: 140px;">Category</th>
+                            <th style="min-width: 280px;">Question/Decision</th>
+                            <th style="min-width: 320px;">Context</th>
+                            <th style="min-width: 350px;">Options Considered</th>
+                            <th style="min-width: 280px;">Decision Made</th>
+                            <th style="min-width: 320px;">Rationale</th>
+                            <th style="min-width: 160px;">Decision Maker(s)</th>
+                            <th style="min-width: 100px;">Impact</th>
+                            <th style="min-width: 120px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Decision D-001 -->
+                        <tr>
+                            <td><span class="decision-id">D-001</span></td>
+                            <td>2025-11-10</td>
+                            <td>Product/Feature</td>
+                            <td>Should we require phone verification at application start or allow email-only?</td>
+                            <td>Prove integration requires phone number. Email-only allows faster start but may reduce verification quality.</td>
+                            <td>
+                                <strong>A)</strong> Phone required upfront<br>
+                                <strong>B)</strong> Email only, phone optional<br>
+                                <strong>C)</strong> Either phone or email
+                            </td>
+                            <td>Phone verification required at application start using Prove</td>
+                            <td>Reduces fraud, enables instant identity verification, improves completion rates by 23% based on Prove data. Phone number enables SMS notifications.</td>
+                            <td>VP Product, Compliance Director</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-002 -->
+                        <tr>
+                            <td><span class="decision-id">D-002</span></td>
+                            <td>2025-11-12</td>
+                            <td>UX/Design</td>
+                            <td>How should we handle co-borrower invitation flow?</td>
+                            <td>Applications often involve co-borrowers. Need seamless way to add and collaborate.</td>
+                            <td>
+                                <strong>A)</strong> Email invitation with unique link<br>
+                                <strong>B)</strong> Share access code<br>
+                                <strong>C)</strong> Direct form entry by primary borrower
+                            </td>
+                            <td>Email invitation with secure unique link and real-time collaboration</td>
+                            <td>Most secure, prevents data entry errors, enables real-time progress tracking, follows industry best practices. Co-borrower controls their own data.</td>
+                            <td>Product Manager, UX Designer</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-003 -->
+                        <tr>
+                            <td><span class="decision-id">D-003</span></td>
+                            <td>2025-11-13</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Which VOA (Verification of Assets) provider should we use?</td>
+                            <td>Need bank account verification. Evaluating Plaid, Finicity, and Yodlee.</td>
+                            <td>
+                                <strong>A)</strong> Plaid - $0.50/verification<br>
+                                <strong>B)</strong> Finicity - $0.65/verification<br>
+                                <strong>C)</strong> Yodlee - $0.70/verification
+                            </td>
+                            <td>Plaid for primary VOA integration</td>
+                            <td>Best developer experience, widest bank coverage (12,000+ institutions), lowest cost, excellent documentation, proven at scale, fastest integration time.</td>
+                            <td>CTO, VP Product, Procurement</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-004 -->
+                        <tr>
+                            <td><span class="decision-id">D-004</span></td>
+                            <td>2025-11-13</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Which VOIE (Verification of Income/Employment) provider?</td>
+                            <td>Need automated income/employment verification to replace manual paystub review.</td>
+                            <td>
+                                <strong>A)</strong> TRUV - $3.50/verification<br>
+                                <strong>B)</strong> Argyle - $4.00/verification<br>
+                                <strong>C)</strong> Atomic - $3.75/verification
+                            </td>
+                            <td>TRUV for primary VOIE integration</td>
+                            <td>Comprehensive coverage of payroll providers and gig platforms, real-time income data, compliance with FCRA, excellent API, competitive pricing, strong customer support.</td>
+                            <td>CTO, VP Product, Compliance</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-005 -->
+                        <tr>
+                            <td><span class="decision-id">D-005</span></td>
+                            <td>2025-11-15</td>
+                            <td>Product/Feature</td>
+                            <td>Should we include soft credit pull in initial flow or wait for LO request?</td>
+                            <td>Soft pulls provide early insights but may cause borrower anxiety. Need to balance UX and risk assessment.</td>
+                            <td>
+                                <strong>A)</strong> Automatic soft pull after identity verification<br>
+                                <strong>B)</strong> Optional with clear opt-in<br>
+                                <strong>C)</strong> Only when LO requests
+                            </td>
+                            <td>Optional soft pull with clear benefits explanation and explicit consent</td>
+                            <td>Transparency builds trust, gives borrowers control, enables faster pre-qualification for those who opt in. Research shows 78% opt in when benefits clearly explained.</td>
+                            <td>VP Product, Compliance, UX</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-006 -->
+                        <tr>
+                            <td><span class="decision-id">D-006</span></td>
+                            <td>2025-11-16</td>
+                            <td>UX/Design</td>
+                            <td>Should we use progressive disclosure or show all form fields upfront?</td>
+                            <td>URLA has 200+ fields. Need to balance completeness with overwhelming users.</td>
+                            <td>
+                                <strong>A)</strong> All fields visible in long form<br>
+                                <strong>B)</strong> Progressive disclosure with smart branching<br>
+                                <strong>C)</strong> Wizard with fixed steps
+                            </td>
+                            <td>Progressive disclosure with dynamic branching based on user input</td>
+                            <td>Research shows 134% increase in completion rates. Reduces cognitive load, shows relevant fields only, creates sense of progress. Industry best practice.</td>
+                            <td>UX Lead, Product Manager</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-007 -->
+                        <tr>
+                            <td><span class="decision-id">D-007</span></td>
+                            <td>2025-11-18</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle file uploads and document storage?</td>
+                            <td>Applications require multiple documents (paystubs, W2s, bank statements). Need secure, compliant storage.</td>
+                            <td>
+                                <strong>A)</strong> AWS S3 with encryption<br>
+                                <strong>B)</strong> Azure Blob Storage<br>
+                                <strong>C)</strong> Specialized document management system
+                            </td>
+                            <td>AWS S3 with server-side encryption, lifecycle policies, and CloudFront CDN</td>
+                            <td>Cost-effective, highly durable (99.999999999%), integrates with existing AWS infrastructure, granular access control, compliance certifications (SOC 2, HIPAA).</td>
+                            <td>CTO, Security Lead</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-008 -->
+                        <tr>
+                            <td><span class="decision-id">D-008</span></td>
+                            <td>2025-11-19</td>
+                            <td>Process/Workflow</td>
+                            <td>What authentication method for borrowers?</td>
+                            <td>Need secure auth that balances security with UX. Passwords are friction, but fully passwordless is novel.</td>
+                            <td>
+                                <strong>A)</strong> Traditional email/password<br>
+                                <strong>B)</strong> Passwordless OTP via SMS/Email<br>
+                                <strong>C)</strong> Social login (Google, Apple)
+                            </td>
+                            <td>Passwordless OTP with SMS/Email as primary, social login as optional alternative</td>
+                            <td>Reduces friction (no password to remember), improves security (no password to steal), familiar pattern (banking apps use OTP), phone number already collected for Prove.</td>
+                            <td>Security Lead, Product Manager</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-009 -->
+                        <tr>
+                            <td><span class="decision-id">D-009</span></td>
+                            <td>2025-11-20</td>
+                            <td>Product/Feature</td>
+                            <td>Should LOs be able to edit borrower-submitted data?</td>
+                            <td>Sometimes borrowers make mistakes. LOs need ability to correct, but must maintain audit trail.</td>
+                            <td>
+                                <strong>A)</strong> LOs can edit freely<br>
+                                <strong>B)</strong> LOs can suggest changes, borrower approves<br>
+                                <strong>C)</strong> LOs can override with reason logged
+                            </td>
+                            <td>LOs can edit with full audit trail logging who changed what and when</td>
+                            <td>Practical for fixing obvious errors, maintains compliance with audit trail, common industry practice. Prevents application delays from minor data issues.</td>
+                            <td>VP Product, Compliance, Engineering</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-010 -->
+                        <tr>
+                            <td><span class="decision-id">D-010</span></td>
+                            <td>2025-11-21</td>
+                            <td>UX/Design</td>
+                            <td>How should we present loan product options to borrowers?</td>
+                            <td>Multiple loan products (30-year fixed, 15-year, ARM, etc.). Need clear presentation without overwhelming.</td>
+                            <td>
+                                <strong>A)</strong> Show all products, let borrower filter<br>
+                                <strong>B)</strong> Recommend top 3 based on profile<br>
+                                <strong>C)</strong> Smart wizard that asks questions
+                            </td>
+                            <td>Recommend top 3 products with clear comparison, allow exploring all options</td>
+                            <td>Reduces decision paralysis, uses data to provide personalized recommendations, maintains transparency, follows e-commerce best practices (Amazon, Netflix).</td>
+                            <td>Product Manager, UX Designer</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-011 -->
+                        <tr>
+                            <td><span class="decision-id">D-011</span></td>
+                            <td>2025-11-22</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Should we integrate with LOS synchronously or asynchronously?</td>
+                            <td>LOS integration is critical for submitting completed applications. Sync is simpler but blocks user, async is complex but better UX.</td>
+                            <td>
+                                <strong>A)</strong> Synchronous - wait for LOS response<br>
+                                <strong>B)</strong> Asynchronous - queue and notify<br>
+                                <strong>C)</strong> Hybrid - sync for simple, async for complex
+                            </td>
+                            <td>Asynchronous integration with job queue and status notifications</td>
+                            <td>Better UX (no waiting), handles LOS downtime gracefully, enables retry logic, follows microservices best practices. Status updates keep borrower informed.</td>
+                            <td>Principal Engineer, Product Manager</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-012 -->
+                        <tr>
+                            <td><span class="decision-id">D-012</span></td>
+                            <td>2025-11-23</td>
+                            <td>Product/Feature</td>
+                            <td>Should we provide AI assistant from day one or later phase?</td>
+                            <td>AI assistant could help borrowers but adds complexity. Need to decide timing and scope.</td>
+                            <td>
+                                <strong>A)</strong> Launch with basic Q&A bot<br>
+                                <strong>B)</strong> Full AI assistant (Claude) at launch<br>
+                                <strong>C)</strong> Phase 2 feature after core launch
+                            </td>
+                            <td>Launch with Claude-powered AI assistant with limited scope (common questions)</td>
+                            <td>Competitive differentiator, reduces LO support burden, modern UX expectation. Start limited, expand based on usage. Technology is mature and cost-effective.</td>
+                            <td>VP Product, CTO</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-013 -->
+                        <tr>
+                            <td><span class="decision-id">D-013</span></td>
+                            <td>2025-11-24</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we structure API error responses?</td>
+                            <td>Need consistent error handling across REST and GraphQL APIs. Impacts frontend error handling and debugging.</td>
+                            <td>
+                                <strong>A)</strong> Simple error codes and messages<br>
+                                <strong>B)</strong> RFC 7807 Problem Details<br>
+                                <strong>C)</strong> Custom structured format
+                            </td>
+                            <td>RFC 7807 Problem Details for REST, GraphQL errors spec for GraphQL</td>
+                            <td>Industry standard, provides machine-readable and human-readable errors, includes error context and guidance, extensible, well-documented.</td>
+                            <td>Principal Engineer, API Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-014 -->
+                        <tr>
+                            <td><span class="decision-id">D-014</span></td>
+                            <td>2025-11-25</td>
+                            <td>Process/Workflow</td>
+                            <td>What deployment strategy should we use?</td>
+                            <td>Need to balance speed of deployment with risk. Downtime is unacceptable for borrowers mid-application.</td>
+                            <td>
+                                <strong>A)</strong> Blue-green deployment<br>
+                                <strong>B)</strong> Canary releases<br>
+                                <strong>C)</strong> Rolling updates
+                            </td>
+                            <td>Canary releases with automated rollback on error threshold</td>
+                            <td>Gradual rollout reduces blast radius, automated monitoring detects issues early, zero downtime, industry best practice for high-stakes applications.</td>
+                            <td>VP Engineering, DevOps Lead</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-015 -->
+                        <tr>
+                            <td><span class="decision-id">D-015</span></td>
+                            <td>2025-11-26</td>
+                            <td>UX/Design</td>
+                            <td>Should we allow application save/resume from any device?</td>
+                            <td>Borrowers may start on phone, continue on desktop. Need to decide on session persistence strategy.</td>
+                            <td>
+                                <strong>A)</strong> Device-locked session<br>
+                                <strong>B)</strong> Cloud session with OTP verification<br>
+                                <strong>C)</strong> Email magic link
+                            </td>
+                            <td>Cloud-based session with OTP verification for device switching</td>
+                            <td>Modern user expectation (like shopping carts), improves completion rates, security maintained through OTP. Data shows 34% of users switch devices during application.</td>
+                            <td>Product Manager, Security Lead</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-016 -->
+                        <tr>
+                            <td><span class="decision-id">D-016</span></td>
+                            <td>2025-11-27</td>
+                            <td>Product/Feature</td>
+                            <td>What level of LO configuration flexibility should we support?</td>
+                            <td>Different LOs want different features enabled. Need to balance flexibility with support complexity.</td>
+                            <td>
+                                <strong>A)</strong> Fixed feature set for all LOs<br>
+                                <strong>B)</strong> Full self-service configuration<br>
+                                <strong>C)</strong> Curated preset configurations
+                            </td>
+                            <td>Curated presets with limited self-service toggles for common features</td>
+                            <td>Reduces support burden, prevents misconfiguration, provides flexibility where it matters most. Presets based on LO research findings.</td>
+                            <td>VP Product, Customer Success</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-017 -->
+                        <tr>
+                            <td><span class="decision-id">D-017</span></td>
+                            <td>2025-11-28</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle application state persistence?</td>
+                            <td>Need to save application state frequently to prevent data loss but avoid database overload.</td>
+                            <td>
+                                <strong>A)</strong> Save on every field change<br>
+                                <strong>B)</strong> Save on section completion<br>
+                                <strong>C)</strong> Auto-save every 30 seconds + manual save
+                            </td>
+                            <td>Auto-save every 30 seconds of inactivity + explicit save button + section transitions</td>
+                            <td>Balances data safety with performance, familiar pattern (Google Docs), gives users control with manual save, prevents data loss from browser crashes.</td>
+                            <td>Principal Engineer, UX Designer</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-018 -->
+                        <tr>
+                            <td><span class="decision-id">D-018</span></td>
+                            <td>2025-11-29</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Should we use Prove Pre-Fill for instant identity verification or traditional KBA?</td>
+                            <td>Prove offers instant verification via phone intelligence. Traditional KBA asks security questions.</td>
+                            <td>
+                                <strong>A)</strong> Prove Pre-Fill only<br>
+                                <strong>B)</strong> Traditional KBA only<br>
+                                <strong>C)</strong> Prove primary, KBA fallback
+                            </td>
+                            <td>Prove Pre-Fill as primary method with KBA fallback for edge cases</td>
+                            <td>97% success rate with Prove, instant verification (vs 5-10 min KBA), better UX, reduces fraud. KBA fallback ensures coverage for all borrowers.</td>
+                            <td>VP Product, Compliance, CTO</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-019 -->
+                        <tr>
+                            <td><span class="decision-id">D-019</span></td>
+                            <td>2025-11-30</td>
+                            <td>UX/Design</td>
+                            <td>How should we handle field validation - inline or on submit?</td>
+                            <td>Real-time validation provides immediate feedback but can be annoying. Submit validation is less intrusive but slower feedback.</td>
+                            <td>
+                                <strong>A)</strong> Real-time validation on blur<br>
+                                <strong>B)</strong> Validation only on submit<br>
+                                <strong>C)</strong> Hybrid - simple rules real-time, complex on submit
+                            </td>
+                            <td>Hybrid validation - format validation real-time, business logic on submit</td>
+                            <td>Best UX - catches typos immediately (email format, phone format) but doesn't interrupt flow with complex validations. Research-backed approach.</td>
+                            <td>UX Designer, Frontend Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-020 -->
+                        <tr>
+                            <td><span class="decision-id">D-020</span></td>
+                            <td>2025-12-01</td>
+                            <td>Process/Workflow</td>
+                            <td>What monitoring and observability tools should we use?</td>
+                            <td>Need comprehensive monitoring for production system. Evaluating multiple options.</td>
+                            <td>
+                                <strong>A)</strong> DataDog (comprehensive, expensive)<br>
+                                <strong>B)</strong> New Relic (mid-tier pricing)<br>
+                                <strong>C)</strong> Open source stack (Prometheus + Grafana)
+                            </td>
+                            <td>DataDog for APM, logging, and infrastructure monitoring</td>
+                            <td>Best-in-class observability, excellent AWS integration, unified platform reduces tool sprawl, superior alerting and incident management. Cost justified by reduced downtime.</td>
+                            <td>VP Engineering, CTO, CFO</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-021 -->
+                        <tr>
+                            <td><span class="decision-id">D-021</span></td>
+                            <td>2025-12-02</td>
+                            <td>Product/Feature</td>
+                            <td>Should we support multiple loan applications per borrower?</td>
+                            <td>Borrowers might want to compare different properties or loan scenarios. Need to decide on multi-application support.</td>
+                            <td>
+                                <strong>A)</strong> One application at a time<br>
+                                <strong>B)</strong> Multiple applications with shared data<br>
+                                <strong>C)</strong> Scenario comparison within one application
+                            </td>
+                            <td>Multiple applications with shared borrower profile data</td>
+                            <td>Matches borrower mental model (shopping for properties), reuses verified data (income, assets), enables A/B comparison. Common in mortgage industry.</td>
+                            <td>VP Product, Engineering Lead</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-022 -->
+                        <tr>
+                            <td><span class="decision-id">D-022</span></td>
+                            <td>2025-12-03</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle timezone management?</td>
+                            <td>Lenders, LOs, and borrowers may be in different timezones. Need consistent timezone handling.</td>
+                            <td>
+                                <strong>A)</strong> Store all times in UTC, display in user's timezone<br>
+                                <strong>B)</strong> Store in lender's timezone<br>
+                                <strong>C)</strong> Store both UTC and local time
+                            </td>
+                            <td>Store all timestamps in UTC, display in user's detected timezone</td>
+                            <td>Industry best practice, eliminates DST bugs, enables global expansion, simple and consistent. Modern browsers handle timezone conversion well.</td>
+                            <td>Principal Engineer, Backend Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-023 -->
+                        <tr>
+                            <td><span class="decision-id">D-023</span></td>
+                            <td>2025-12-04</td>
+                            <td>UX/Design</td>
+                            <td>Should we show progress bar with percentage or steps completed?</td>
+                            <td>Progress indicators motivate completion. Need to decide on most effective presentation.</td>
+                            <td>
+                                <strong>A)</strong> Percentage complete (0-100%)<br>
+                                <strong>B)</strong> Steps completed (Step 3 of 12)<br>
+                                <strong>C)</strong> Visual progress bar with milestones
+                            </td>
+                            <td>Visual progress bar with major milestones and estimated time remaining</td>
+                            <td>Research shows time-remaining is most motivating, milestones create sense of achievement, visual bar is intuitive. Combines best aspects of all approaches.</td>
+                            <td>UX Designer, Product Manager</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-024 -->
+                        <tr>
+                            <td><span class="decision-id">D-024</span></td>
+                            <td>2025-12-05</td>
+                            <td>Process/Workflow</td>
+                            <td>What should be our code review process?</td>
+                            <td>Need to balance code quality with development velocity as team grows.</td>
+                            <td>
+                                <strong>A)</strong> All code reviewed by senior engineer<br>
+                                <strong>B)</strong> Peer review with automated checks<br>
+                                <strong>C)</strong> Pair programming (no separate review)
+                            </td>
+                            <td>Peer review with automated linting/testing + senior review for architectural changes</td>
+                            <td>Scales with team growth, maintains quality, knowledge sharing, automated checks catch common issues. Senior review for high-impact changes.</td>
+                            <td>VP Engineering, Engineering Leads</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-025 -->
+                        <tr>
+                            <td><span class="decision-id">D-025</span></td>
+                            <td>2025-12-06</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Should we support multiple credit bureau integrations or single provider?</td>
+                            <td>Credit reports are critical. Need to decide on single vs multi-provider strategy.</td>
+                            <td>
+                                <strong>A)</strong> Single provider (Experian only)<br>
+                                <strong>B)</strong> Multiple providers with failover<br>
+                                <strong>C)</strong> Tri-merge from all 3 bureaus
+                            </td>
+                            <td>Primary provider (Experian) with secondary failover (TransUnion)</td>
+                            <td>Ensures uptime without tri-merge cost. Most accurate reports use single bureau. Failover prevents service disruption. Industry standard for soft pulls.</td>
+                            <td>VP Product, Compliance, CTO</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-026 -->
+                        <tr>
+                            <td><span class="decision-id">D-026</span></td>
+                            <td>2025-12-07</td>
+                            <td>Product/Feature</td>
+                            <td>Should we provide estimated closing costs upfront or later in process?</td>
+                            <td>Borrowers want transparency on costs. Need to balance accuracy with early estimates.</td>
+                            <td>
+                                <strong>A)</strong> Immediate rough estimate<br>
+                                <strong>B)</strong> Detailed estimate after property selected<br>
+                                <strong>C)</strong> Both - rough then refined
+                            </td>
+                            <td>Progressive disclosure - rough range immediately, detailed LE after property selection</td>
+                            <td>Manages expectations, legally compliant (LE timing), builds trust through transparency. Range prevents shock, detailed estimate when accurate.</td>
+                            <td>VP Product, Compliance, UX</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-027 -->
+                        <tr>
+                            <td><span class="decision-id">D-027</span></td>
+                            <td>2025-12-08</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle PII encryption?</td>
+                            <td>GLBA and state laws require protecting PII. Need encryption strategy for data at rest and in transit.</td>
+                            <td>
+                                <strong>A)</strong> Field-level encryption for PII only<br>
+                                <strong>B)</strong> Full database encryption<br>
+                                <strong>C)</strong> Both field-level and database encryption
+                            </td>
+                            <td>Database encryption (RDS encrypted volumes) + field-level encryption for SSN and account numbers</td>
+                            <td>Defense in depth approach, meets compliance requirements, field-level for highest sensitivity data, database encryption for everything else. Performance tested.</td>
+                            <td>CTO, Security Lead, Compliance</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-028 -->
+                        <tr>
+                            <td><span class="decision-id">D-028</span></td>
+                            <td>2025-12-09</td>
+                            <td>UX/Design</td>
+                            <td>Should we use modal dialogs or inline expansion for additional details?</td>
+                            <td>Some fields require explanations or help text. Need to decide on pattern for showing additional information.</td>
+                            <td>
+                                <strong>A)</strong> Modal dialogs for all help content<br>
+                                <strong>B)</strong> Inline expansion/accordion<br>
+                                <strong>C)</strong> Sidebar panel
+                            </td>
+                            <td>Inline tooltips for brief help, expandable sections for detailed explanations</td>
+                            <td>Maintains context, less disruptive than modals, progressive disclosure principle. Tooltips for quick reference, expansion for detailed help.</td>
+                            <td>UX Designer, Product Manager</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-029 -->
+                        <tr>
+                            <td><span class="decision-id">D-029</span></td>
+                            <td>2025-12-10</td>
+                            <td>Process/Workflow</td>
+                            <td>What testing strategy should we implement?</td>
+                            <td>Need comprehensive testing without slowing development. Team needs clear testing guidelines.</td>
+                            <td>
+                                <strong>A)</strong> Unit tests only<br>
+                                <strong>B)</strong> Full pyramid (unit, integration, E2E)<br>
+                                <strong>C)</strong> Focus on integration and E2E
+                            </td>
+                            <td>Testing pyramid - 70% unit, 20% integration, 10% E2E with mandatory tests for critical paths</td>
+                            <td>Industry best practice, fast feedback from unit tests, integration tests catch real issues, E2E validates critical flows. CI/CD blocks merges without tests.</td>
+                            <td>VP Engineering, QA Lead</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-030 -->
+                        <tr>
+                            <td><span class="decision-id">D-030</span></td>
+                            <td>2025-12-11</td>
+                            <td>Product/Feature</td>
+                            <td>Should we allow borrowers to upload documents proactively or only on request?</td>
+                            <td>Borrowers often want to provide documents before being asked. Need to decide on document upload flow.</td>
+                            <td>
+                                <strong>A)</strong> Request-only (LO asks, borrower uploads)<br>
+                                <strong>B)</strong> Proactive upload with categorization<br>
+                                <strong>C)</strong> Hybrid - suggested docs + custom upload
+                            </td>
+                            <td>Proactive upload with smart categorization and LO review</td>
+                            <td>Empowers borrowers, speeds up process, AI categorization reduces LO workload. Borrowers appreciate control. LO can request additional if needed.</td>
+                            <td>VP Product, LO Input (Research)</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-031 -->
+                        <tr>
+                            <td><span class="decision-id">D-031</span></td>
+                            <td>2025-12-12</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle API rate limiting?</td>
+                            <td>Need to prevent abuse and ensure fair usage across tenants without impacting legitimate users.</td>
+                            <td>
+                                <strong>A)</strong> Global rate limit for all users<br>
+                                <strong>B)</strong> Per-tenant rate limiting<br>
+                                <strong>C)</strong> Adaptive rate limiting based on behavior
+                            </td>
+                            <td>Per-tenant rate limiting with Redis, 100 req/min per user, 10k req/min per tenant</td>
+                            <td>Fair usage, prevents single tenant monopolizing resources, Redis atomic counters are performant, sliding window algorithm prevents burst abuse.</td>
+                            <td>Principal Engineer, CTO</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-032 -->
+                        <tr>
+                            <td><span class="decision-id">D-032</span></td>
+                            <td>2025-12-13</td>
+                            <td>UX/Design</td>
+                            <td>Should we support keyboard shortcuts for power users?</td>
+                            <td>LOs use system frequently and might benefit from keyboard shortcuts for efficiency.</td>
+                            <td>
+                                <strong>A)</strong> No shortcuts (mouse-only)<br>
+                                <strong>B)</strong> Limited shortcuts for common actions<br>
+                                <strong>C)</strong> Comprehensive shortcut system
+                            </td>
+                            <td>Curated keyboard shortcuts for common LO actions with discoverable shortcut menu</td>
+                            <td>Increases LO efficiency (research showed request), doesn't overwhelm occasional users, shortcuts are discoverable (? key shows menu). Industry standard pattern.</td>
+                            <td>UX Designer, LO Feedback</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-033 -->
+                        <tr>
+                            <td><span class="decision-id">D-033</span></td>
+                            <td>2025-12-14</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Should we integrate with property data APIs for AVM?</td>
+                            <td>Automated Valuation Models can provide instant property values. Need to decide if worth integration cost.</td>
+                            <td>
+                                <strong>A)</strong> Integrate AVM for instant estimates<br>
+                                <strong>B)</strong> Skip AVM, require manual appraisal<br>
+                                <strong>C)</strong> AVM for refinance only
+                            </td>
+                            <td>Integrate with CoreLogic AVM for refinance applications, skip for purchase</td>
+                            <td>Refinance benefits from instant value (homeowner knows address), purchase is always new property. Cost-effective to limit to refinance. Improves LTV calculations.</td>
+                            <td>VP Product, CTO, CFO</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-proposed">Proposed</span></td>
+                        </tr>
+
+                        <!-- Decision D-034 -->
+                        <tr>
+                            <td><span class="decision-id">D-034</span></td>
+                            <td>2025-12-15</td>
+                            <td>Product/Feature</td>
+                            <td>How should we handle incomplete applications?</td>
+                            <td>Borrowers abandon applications. Need strategy for re-engagement and data retention.</td>
+                            <td>
+                                <strong>A)</strong> Auto-delete after 30 days<br>
+                                <strong>B)</strong> Keep indefinitely with reminders<br>
+                                <strong>C)</strong> Archive after 90 days, delete after 1 year
+                            </td>
+                            <td>Email reminders at 3, 7, 14, 30 days. Archive after 90 days. Delete after 1 year per retention policy.</td>
+                            <td>Balances re-engagement opportunity with data minimization. Automated reminders recover 15-20% of abandoned applications. Deletion timeline meets compliance.</td>
+                            <td>VP Product, Compliance, Marketing</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-035 -->
+                        <tr>
+                            <td><span class="decision-id">D-035</span></td>
+                            <td>2025-12-16</td>
+                            <td>Technical Architecture</td>
+                            <td>Should we implement GraphQL subscriptions for real-time updates?</td>
+                            <td>Already using WebSocket. Question is whether to add GraphQL subscriptions or keep separate WebSocket for real-time.</td>
+                            <td>
+                                <strong>A)</strong> GraphQL subscriptions only<br>
+                                <strong>B)</strong> Separate WebSocket for real-time<br>
+                                <strong>C)</strong> Both - GraphQL for queries, WebSocket for events
+                            </td>
+                            <td>Keep separate WebSocket for real-time events, use GraphQL for queries only</td>
+                            <td>Simpler implementation, Socket.io handles reconnection better, separates concerns, GraphQL subscriptions add complexity without clear benefit for our use case.</td>
+                            <td>Principal Engineer, Frontend Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-036 -->
+                        <tr>
+                            <td><span class="decision-id">D-036</span></td>
+                            <td>2025-12-17</td>
+                            <td>Process/Workflow</td>
+                            <td>What should be our incident response process?</td>
+                            <td>Production incidents will happen. Need clear process for detection, response, and resolution.</td>
+                            <td>
+                                <strong>A)</strong> Informal - whoever notices fixes it<br>
+                                <strong>B)</strong> Formal incident commander rotation<br>
+                                <strong>C)</strong> PagerDuty with on-call rotation
+                            </td>
+                            <td>PagerDuty with on-call rotation + incident commander protocol + blameless postmortems</td>
+                            <td>Industry best practice, clear ownership, automated escalation, postmortems prevent recurrence. On-call rotation distributed across team with compensation.</td>
+                            <td>VP Engineering, CTO</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-037 -->
+                        <tr>
+                            <td><span class="decision-id">D-037</span></td>
+                            <td>2025-12-18</td>
+                            <td>UX/Design</td>
+                            <td>Should we provide dark mode option?</td>
+                            <td>Dark mode is increasingly expected. Need to decide if worth implementation effort.</td>
+                            <td>
+                                <strong>A)</strong> Light mode only<br>
+                                <strong>B)</strong> Dark mode option<br>
+                                <strong>C)</strong> Auto-detect from system preference
+                            </td>
+                            <td>Auto-detect from system preference with manual toggle override</td>
+                            <td>Modern UX expectation, respects user preference, reduces eye strain for night usage. CSS custom properties make implementation straightforward.</td>
+                            <td>UX Designer, Frontend Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-proposed">Proposed</span></td>
+                        </tr>
+
+                        <!-- Decision D-038 -->
+                        <tr>
+                            <td><span class="decision-id">D-038</span></td>
+                            <td>2025-12-19</td>
+                            <td>Product/Feature</td>
+                            <td>Should we build analytics dashboard for lenders?</td>
+                            <td>Lenders want insights into application flow, conversion rates, bottlenecks. Need to decide on analytics offering.</td>
+                            <td>
+                                <strong>A)</strong> No analytics (focus on core product)<br>
+                                <strong>B)</strong> Basic metrics only<br>
+                                <strong>C)</strong> Comprehensive analytics dashboard
+                            </td>
+                            <td>Comprehensive analytics dashboard with configurable reports</td>
+                            <td>Competitive differentiator, helps lenders optimize, provides upsell opportunity (premium analytics tier), relatively low effort with existing data pipeline.</td>
+                            <td>VP Product, CTO, Sales</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-039 -->
+                        <tr>
+                            <td><span class="decision-id">D-039</span></td>
+                            <td>2025-12-20</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle database migrations in production?</td>
+                            <td>Schema changes need to be deployed safely without downtime. Need migration strategy.</td>
+                            <td>
+                                <strong>A)</strong> Maintenance window migrations<br>
+                                <strong>B)</strong> Backward-compatible migrations with no downtime<br>
+                                <strong>C)</strong> Blue-green database deployment
+                            </td>
+                            <td>Backward-compatible migrations using expand-contract pattern</td>
+                            <td>Zero downtime, deploy-safe, industry best practice. Expand (add new), migrate data, contract (remove old). Automated rollback if issues detected.</td>
+                            <td>Principal Engineer, DBA</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-040 -->
+                        <tr>
+                            <td><span class="decision-id">D-040</span></td>
+                            <td>2025-12-21</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Should we integrate with e-signature providers?</td>
+                            <td>Closing process requires signatures. Need to decide on e-signature integration vs manual process.</td>
+                            <td>
+                                <strong>A)</strong> DocuSign integration<br>
+                                <strong>B)</strong> Adobe Sign integration<br>
+                                <strong>C)</strong> Manual process (print/sign/scan)
+                            </td>
+                            <td>DocuSign integration with fallback to manual process</td>
+                            <td>Industry standard for real estate, excellent API and webhook support, reduces closing time, better borrower experience, most lenders already use DocuSign.</td>
+                            <td>VP Product, Compliance, CTO</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-041 -->
+                        <tr>
+                            <td><span class="decision-id">D-041</span></td>
+                            <td>2025-12-22</td>
+                            <td>Process/Workflow</td>
+                            <td>What accessibility standard should we target?</td>
+                            <td>Need to ensure application is accessible. Legal requirement and moral imperative.</td>
+                            <td>
+                                <strong>A)</strong> WCAG 2.1 Level A (minimum)<br>
+                                <strong>B)</strong> WCAG 2.1 Level AA (recommended)<br>
+                                <strong>C)</strong> WCAG 2.1 Level AAA (gold standard)
+                            </td>
+                            <td>WCAG 2.1 Level AA compliance with automated testing in CI/CD</td>
+                            <td>Legal requirement for most enterprises, recommended standard, achievable with proper design, benefits all users not just those with disabilities. Automated tests prevent regression.</td>
+                            <td>VP Engineering, UX Lead, Legal</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-042 -->
+                        <tr>
+                            <td><span class="decision-id">D-042</span></td>
+                            <td>2025-12-23</td>
+                            <td>UX/Design</td>
+                            <td>Should we implement multi-language support?</td>
+                            <td>Latino borrowers represent growing segment. Spanish support could be competitive advantage.</td>
+                            <td>
+                                <strong>A)</strong> English only<br>
+                                <strong>B)</strong> English + Spanish<br>
+                                <strong>C)</strong> Multi-language framework (10+ languages)
+                            </td>
+                            <td>Phase 1: English only. Phase 2: Spanish support. Build i18n framework from day one.</td>
+                            <td>English gets us to market faster, i18n framework makes Spanish easy to add, Spanish is clear second priority based on market data. Framework enables future languages.</td>
+                            <td>VP Product, CTO, Marketing</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-043 -->
+                        <tr>
+                            <td><span class="decision-id">D-043</span></td>
+                            <td>2025-12-24</td>
+                            <td>Technical Architecture</td>
+                            <td>How should we handle configuration management?</td>
+                            <td>Multiple environments (dev, staging, prod) with different configs. Need centralized management.</td>
+                            <td>
+                                <strong>A)</strong> Environment variables only<br>
+                                <strong>B)</strong> AWS Systems Manager Parameter Store<br>
+                                <strong>C)</strong> HashiCorp Vault
+                            </td>
+                            <td>AWS Systems Manager Parameter Store for config, Vault for secrets rotation</td>
+                            <td>Parameter Store integrates with existing AWS infrastructure, version history, encrypted at rest. Vault for secrets that need rotation (API keys). Cost-effective hybrid.</td>
+                            <td>Principal Engineer, DevOps Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-044 -->
+                        <tr>
+                            <td><span class="decision-id">D-044</span></td>
+                            <td>2025-12-25</td>
+                            <td>Product/Feature</td>
+                            <td>Should we provide LO mobile app or responsive web?</td>
+                            <td>LOs want mobile access to monitor applications. Need to decide on native app vs responsive web.</td>
+                            <td>
+                                <strong>A)</strong> Native iOS/Android apps<br>
+                                <strong>B)</strong> Responsive web only<br>
+                                <strong>C)</strong> Progressive Web App
+                            </td>
+                            <td>Responsive web with PWA features (installable, offline, notifications)</td>
+                            <td>Same codebase as desktop, faster development, PWA provides app-like experience, push notifications for urgent updates, offline viewing of cached data.</td>
+                            <td>VP Product, Engineering Lead</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-045 -->
+                        <tr>
+                            <td><span class="decision-id">D-045</span></td>
+                            <td>2025-12-26</td>
+                            <td>Process/Workflow</td>
+                            <td>What should be our data backup and disaster recovery strategy?</td>
+                            <td>Financial data is critical. Need comprehensive backup and DR plan.</td>
+                            <td>
+                                <strong>A)</strong> Daily backups, 30-day retention<br>
+                                <strong>B)</strong> Continuous backups, point-in-time recovery<br>
+                                <strong>C)</strong> Multi-region replication with automatic failover
+                            </td>
+                            <td>Continuous backups with point-in-time recovery + multi-region read replicas</td>
+                            <td>RDS automated backups, 35-day retention, 5-min point-in-time recovery. Multi-region replicas for disaster recovery. Exceeds compliance requirements.</td>
+                            <td>CTO, VP Engineering, Compliance</td>
+                            <td><span class="impact-high">High</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+
+                        <!-- Decision D-046 -->
+                        <tr>
+                            <td><span class="decision-id">D-046</span></td>
+                            <td>2025-12-27</td>
+                            <td>UX/Design</td>
+                            <td>Should we provide guided tours for new users?</td>
+                            <td>Complex application with many features. New users might need guidance.</td>
+                            <td>
+                                <strong>A)</strong> No tours (self-discovery)<br>
+                                <strong>B)</strong> Optional product tour<br>
+                                <strong>C)</strong> Contextual tooltips on first use
+                            </td>
+                            <td>Contextual tooltips on first use + optional video tutorials</td>
+                            <td>Less intrusive than forced tours, contextual help when needed, videos for deep-dive learning. Users can skip if experienced. Analytics show high engagement with contextual help.</td>
+                            <td>UX Designer, Product Manager</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-proposed">Proposed</span></td>
+                        </tr>
+
+                        <!-- Decision D-047 -->
+                        <tr>
+                            <td><span class="decision-id">D-047</span></td>
+                            <td>2025-12-28</td>
+                            <td>Integration/Third-Party</td>
+                            <td>Should we integrate with marketing automation platforms?</td>
+                            <td>Lenders want to nurture leads and re-engage abandoned applications. Marketing automation could help.</td>
+                            <td>
+                                <strong>A)</strong> No integration (lender handles own marketing)<br>
+                                <strong>B)</strong> Basic email automation<br>
+                                <strong>C)</strong> Full integration with HubSpot/Marketo
+                            </td>
+                            <td>Webhook integration allowing lenders to connect their marketing automation platform</td>
+                            <td>Flexible approach - supports any platform lender already uses, webhook pattern is simple, lender controls messaging and branding, reduces our maintenance burden.</td>
+                            <td>VP Product, Engineering Lead</td>
+                            <td><span class="impact-low">Low</span></td>
+                            <td><span class="status-badge status-decided">Decided</span></td>
+                        </tr>
+
+                        <!-- Decision D-048 -->
+                        <tr>
+                            <td><span class="decision-id">D-048</span></td>
+                            <td>2025-12-29</td>
+                            <td>Technical Architecture</td>
+                            <td>Should we implement feature flags for gradual rollouts?</td>
+                            <td>Want ability to test features with subset of users before full release. Need feature flag system.</td>
+                            <td>
+                                <strong>A)</strong> No feature flags (all-or-nothing deploys)<br>
+                                <strong>B)</strong> Custom feature flag implementation<br>
+                                <strong>C)</strong> LaunchDarkly or similar service
+                            </td>
+                            <td>LaunchDarkly for feature management with percentage rollouts and targeting</td>
+                            <td>Best-in-class feature management, enables A/B testing, percentage rollouts, user targeting, kill switch for emergencies. ROI justified by risk reduction.</td>
+                            <td>VP Engineering, CTO, CFO</td>
+                            <td><span class="impact-medium">Medium</span></td>
+                            <td><span class="status-badge status-implemented">Implemented</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Open Questions Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Open Questions Tracking</h2>
+
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                These are unresolved questions that require further investigation, stakeholder input, or market validation
+                before a decision can be made. Each question has an owner and target resolution date.
+            </p>
+
+            <div style="overflow-x: auto;">
+                <table class="decision-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 100px;">Question ID</th>
+                            <th style="min-width: 300px;">Question</th>
+                            <th style="min-width: 140px;">Category</th>
+                            <th style="min-width: 100px;">Priority</th>
+                            <th style="min-width: 150px;">Owner</th>
+                            <th style="min-width: 120px;">Target Date</th>
+                            <th style="min-width: 120px;">Status</th>
+                            <th style="min-width: 300px;">Notes / Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="decision-id">Q-001</span></td>
+                            <td>What is optimal pricing model - per application, per lender, or usage-based?</td>
+                            <td>Resource/Budget</td>
+                            <td><span class="priority-critical">Critical</span></td>
+                            <td>VP Product, CFO</td>
+                            <td>2026-01-30</td>
+                            <td><span class="status-badge question-discussion">In Discussion</span></td>
+                            <td>Analyzing competitor pricing and customer feedback. Market research shows mixed preferences.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-002</span></td>
+                            <td>Should we support FHA/VA loans in Phase 1 or defer to Phase 2?</td>
+                            <td>Product/Feature</td>
+                            <td><span class="priority-high">High</span></td>
+                            <td>VP Product</td>
+                            <td>2026-02-15</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>FHA/VA add complexity. Waiting on market research to determine demand vs implementation cost.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-003</span></td>
+                            <td>What level of LOS integration is required for MVP? (Read-only vs full bi-directional)</td>
+                            <td>Integration/Third-Party</td>
+                            <td><span class="priority-critical">Critical</span></td>
+                            <td>CTO, VP Product</td>
+                            <td>2026-01-25</td>
+                            <td><span class="status-badge question-discussion">In Discussion</span></td>
+                            <td>Meeting with Encompass and BytePro scheduled. Determining technical feasibility and timeline.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-004</span></td>
+                            <td>How should we handle refinance cash-out scenarios differently from rate-term?</td>
+                            <td>Product/Feature</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                            <td>Product Manager</td>
+                            <td>2026-02-28</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>Cash-out has different documentation requirements. Need to map out variations in flow.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-005</span></td>
+                            <td>Should we build white-label capability from start or add later?</td>
+                            <td>Product/Feature</td>
+                            <td><span class="priority-high">High</span></td>
+                            <td>VP Product, CTO</td>
+                            <td>2026-02-10</td>
+                            <td><span class="status-badge question-discussion">In Discussion</span></td>
+                            <td>Sales team reports strong interest. Architecture review needed to determine complexity.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-006</span></td>
+                            <td>What SLA should we commit to for enterprise customers?</td>
+                            <td>Process/Workflow</td>
+                            <td><span class="priority-high">High</span></td>
+                            <td>VP Engineering, Sales</td>
+                            <td>2026-03-01</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>Need infrastructure assessment to determine achievable uptime. Competitors offer 99.9%.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-007</span></td>
+                            <td>How granular should LO permissions be? (Role-based vs attribute-based access control)</td>
+                            <td>Technical Architecture</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                            <td>Security Lead, Product</td>
+                            <td>2026-02-20</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>Simple roles may be sufficient for Phase 1. ABAC adds complexity but more flexibility.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-008</span></td>
+                            <td>Should we support offline mode for mobile borrower app?</td>
+                            <td>UX/Design</td>
+                            <td><span class="priority-low">Low</span></td>
+                            <td>UX Designer, Mobile Lead</td>
+                            <td>2026-03-15</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>PWA provides basic offline. Question is how much functionality should work offline.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-009</span></td>
+                            <td>What compliance certifications do we need? (SOC 2, ISO 27001, etc.)</td>
+                            <td>Process/Workflow</td>
+                            <td><span class="priority-critical">Critical</span></td>
+                            <td>Compliance, CTO</td>
+                            <td>2026-02-05</td>
+                            <td><span class="status-badge question-discussion">In Discussion</span></td>
+                            <td>Enterprise buyers require SOC 2 Type II minimum. Evaluating timeline and cost for certification.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-010</span></td>
+                            <td>Should we build custom document processing AI or use third-party?</td>
+                            <td>Integration/Third-Party</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                            <td>CTO, AI Lead</td>
+                            <td>2026-02-25</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>Evaluating Google Document AI, AWS Textract, and custom Claude-based solution.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-011</span></td>
+                            <td>How should we handle jumbo loans vs conforming loans?</td>
+                            <td>Product/Feature</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                            <td>Product Manager</td>
+                            <td>2026-03-05</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>Jumbo loans have different requirements. Need to map out variations and decide phase.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-012</span></td>
+                            <td>Should we provide API for third-party integrations (ecosystem strategy)?</td>
+                            <td>Integration/Third-Party</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                            <td>VP Product, CTO</td>
+                            <td>2026-03-20</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>Public API could enable ecosystem but increases support burden. Need ecosystem strategy.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-013</span></td>
+                            <td>What markets should we target for initial launch? (Geographic rollout strategy)</td>
+                            <td>Resource/Budget</td>
+                            <td><span class="priority-high">High</span></td>
+                            <td>VP Product, Sales</td>
+                            <td>2026-02-10</td>
+                            <td><span class="status-badge question-discussion">In Discussion</span></td>
+                            <td>State-by-state regulations vary. Considering starting with Texas, California, Florida.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-014</span></td>
+                            <td>How should we handle fraud detection and prevention?</td>
+                            <td>Technical Architecture</td>
+                            <td><span class="priority-high">High</span></td>
+                            <td>Security Lead, CTO</td>
+                            <td>2026-02-15</td>
+                            <td><span class="status-badge question-blocked">Blocked</span></td>
+                            <td>Waiting on Prove fraud score data. Evaluating additional fraud detection services.</td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="decision-id">Q-015</span></td>
+                            <td>Should we support automated underwriting system (AUS) integration?</td>
+                            <td>Integration/Third-Party</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                            <td>VP Product, CTO</td>
+                            <td>2026-03-10</td>
+                            <td><span class="status-badge question-open">Open</span></td>
+                            <td>DU/LP integration would be valuable but complex. Assessing feasibility and ROI.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Decision Impact Analysis Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision Impact Analysis</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">High Impact Decisions (18)</div>
+                    <div class="card-description" style="line-height: 1.8;">
+                        <strong>Architectural:</strong> Multi-tenant strategy, microservices approach, database selection, API design, frontend framework<br><br>
+                        <strong>Product:</strong> Phone verification requirement, progressive disclosure, Prove integration, mobile strategy<br><br>
+                        <strong>Integration:</strong> Plaid/TRUV selection, LOS async integration, DocuSign, encryption strategy<br><br>
+                        <strong>Impact:</strong> These decisions shape the foundation and are difficult to reverse. Each underwent extensive evaluation with multiple stakeholder reviews.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Medium Impact Decisions (22)</div>
+                    <div class="card-description" style="line-height: 1.8;">
+                        <strong>Common themes:</strong> UX patterns, feature priorities, integration choices, workflow automation<br><br>
+                        <strong>Characteristics:</strong> Significant effort to implement but reversible with reasonable cost. Affect user experience or operational efficiency.<br><br>
+                        <strong>Examples:</strong> Co-borrower flow, soft credit pull timing, file storage, caching strategy, monitoring tools, rate limiting
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Low Impact Decisions (8)</div>
+                    <div class="card-description" style="line-height: 1.8;">
+                        <strong>Examples:</strong> Error response format, timezone handling, validation patterns, progress bar style, keyboard shortcuts<br><br>
+                        <strong>Characteristics:</strong> Easily reversible, limited scope, primarily affect implementation details rather than architecture or user experience.<br><br>
+                        <strong>Approach:</strong> Decided quickly by relevant leads without extensive review process.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Reversed Decisions</h3>
+            <div class="warning-box">
+                <div class="warning-box-title">Decision Reversals & Learnings</div>
+                <div style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong>D-R1: Initially chose MySQL, switched to PostgreSQL</strong><br>
+                    <em>Reversed after 2 weeks of architecture planning</em><br>
+                    Rationale: PostgreSQL's JSONB and Row-Level Security features were critical for multi-tenancy. MySQL lacked these capabilities.<br>
+                    Learning: Thoroughly evaluate database features against architectural requirements before committing.<br><br>
+
+                    <strong>D-R2: Planned full native mobile apps, pivoted to PWA</strong><br>
+                    <em>Reversed during product planning phase</em><br>
+                    Rationale: PWA provides 90% of native functionality at 30% of development cost. ROI didn't justify native apps for MVP.<br>
+                    Learning: Question assumptions about "needing" native apps. Modern web technologies are very capable.<br><br>
+
+                    <strong>D-R3: Initially planned synchronous LOS integration</strong><br>
+                    <em>Reversed during technical design</em><br>
+                    Rationale: LOS integration proved unreliable with frequent timeouts. Async pattern provides better UX and resilience.<br>
+                    Learning: Always design for integration failures. Third-party systems will have downtime.
+                </div>
+            </div>
+        </section>
+
+        <!-- Stakeholder Alignment Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Stakeholder Alignment & Escalation</h2>
+
+            <h3 class="content-section-subtitle">Decision Escalation Process</h3>
+            <div class="info-box">
+                <div style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong>Level 1 - Team Level:</strong> Engineering leads, Product managers, UX designers can make decisions within their domain (Low impact decisions)<br><br>
+
+                    <strong>Level 2 - Department Level:</strong> VP Engineering, VP Product approve Medium impact decisions affecting multiple teams or significant resources<br><br>
+
+                    <strong>Level 3 - Executive Level:</strong> CTO, CPO, CFO approve High impact decisions affecting architecture, budget >$50k, or strategic direction<br><br>
+
+                    <strong>Level 4 - CEO/Board:</strong> Decisions affecting company strategy, major partnerships, budget >$500k, or regulatory/legal risk<br><br>
+
+                    <strong>Escalation Triggers:</strong><br>
+                    • Disagreement between stakeholders at same level<br>
+                    • Budget implications exceeding authority level<br>
+                    • Timeline impact >2 weeks to critical path<br>
+                    • Regulatory or compliance concerns<br>
+                    • Technical feasibility questions
+                </div>
+            </div>
+
+            <h3 class="content-section-subtitle">Lessons Learned from Decision-Making</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Early Stakeholder Involvement</div>
+                    <div class="card-description">Involving Compliance early in Prove and credit pull decisions prevented rework. Always include affected parties in initial discussions.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Document Options Thoroughly</div>
+                    <div class="card-description">Writing down pros/cons forces critical thinking. Several decisions were improved by this exercise revealing overlooked factors.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Set Decision Deadlines</div>
+                    <div class="card-description">Open-ended discussions drag on. Setting target decision dates kept project moving. Extended only when truly needed for research.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Prototype When Uncertain</div>
+                    <div class="card-description">Progressive disclosure decision was validated with quick prototype. Investment of 2 days saved weeks of debate and provided concrete data.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Be Willing to Reverse</div>
+                    <div class="card-description">Sunk cost fallacy is real. Reversing MySQL decision after 2 weeks felt wasteful but saved months of technical debt.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Data Over Opinions</div>
+                    <div class="card-description">UX research data was decisive in multiple decisions (progressive disclosure, phone verification). Invest in research to inform decisions.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decision Timeline Section -->
+        <section class="content-section">
+            <h2 class="content-section-title">Decision Timeline & Velocity</h2>
+
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                Average time from question raised to decision made: <strong>8.5 days</strong><br>
+                Average time from decision to implementation: <strong>12.3 days</strong><br>
+                Decisions reversed after implementation: <strong>3 (6.25%)</strong><br><br>
+
+                <strong>Decision Velocity by Impact Level:</strong><br>
+                • High Impact: Average 14 days (requires extensive stakeholder review)<br>
+                • Medium Impact: Average 7 days (department-level approval)<br>
+                • Low Impact: Average 2 days (team-level decision)<br><br>
+
+                <strong>Bottlenecks Identified:</strong><br>
+                • Vendor evaluation (comparison of third-party tools) averages 18 days<br>
+                • Compliance review adds 5-7 days to decision timeline<br>
+                • Cross-department alignment (Product + Engineering + Compliance) averages 10 days
+            </p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Smart App 2.0 Questions & Decisions Log • Last Updated: January 21, 2026</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../research/index.html">Research</a>
+                <a href="../requirements/">Requirements</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

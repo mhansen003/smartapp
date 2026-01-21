@@ -1,0 +1,3073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Plan - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-primary);
+            padding-left: 0;
+        }
+
+        .workshop-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .workshop-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workshop-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+        }
+
+        .workshop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .workshop-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .workshop-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-teal);
+            font-weight: 500;
+        }
+
+        .workshop-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-icon {
+            font-size: 1.2rem;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+            margin: 2.5rem 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .agenda-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .agenda-table thead {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .agenda-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .agenda-table td {
+            padding: 1rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .agenda-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .attendee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .attendee-card {
+            background: var(--bg-secondary);
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .attendee-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .attendee-info {
+            flex: 1;
+        }
+
+        .attendee-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .attendee-role {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .objectives-list li {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-teal);
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+
+        .outcomes-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .outcomes-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .decision-box {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .decision-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .decision-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .action-items {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-items-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .action-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-yellow);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-description {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .action-owner {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .materials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .material-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .material-icon {
+            font-size: 1.5rem;
+        }
+
+        .material-name {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .framework-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .framework-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .framework-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .priority-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .matrix-quadrant {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+
+        .matrix-quadrant.high-impact {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .matrix-quadrant.medium-impact {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--accent-yellow);
+        }
+
+        .matrix-quadrant.low-impact {
+            background: rgba(100, 116, 139, 0.1);
+            border-color: var(--text-muted);
+        }
+
+        .quadrant-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .quadrant-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quadrant-items li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .quadrant-items li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .retrospective-section {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .retro-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .retro-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .retro-column {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .retro-column-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .retro-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .retro-items li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .retro-items li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .workshop-container {
+                padding: 1rem;
+            }
+
+            .workshop-card {
+                padding: 1.5rem;
+            }
+
+            .workshop-title {
+                font-size: 1.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .priority-matrix {
+                grid-template-columns: 1fr;
+            }
+
+            .retro-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Workshop Plan</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">STRATEGIC PLANNING</div>
+                <h1 class="page-title">Workshop Series & Planning</h1>
+                <p class="page-description">Comprehensive workshop planning, execution, and outcomes documentation for Smart App 2.0 discovery and planning phases</p>
+                <div class="page-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">📅</span>
+                        <span>6 Workshops Planned</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">👥</span>
+                        <span>45+ Participants</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">⏱️</span>
+                        <span>32 Hours Total</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">✅</span>
+                        <span>5 Completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="workshop-container">
+        <!-- Workshop Strategy Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Workshop Strategy & Objectives</h2>
+            <div class="framework-card">
+                <div class="framework-title">Strategic Approach</div>
+                <div class="framework-description">
+                    Our workshop series follows a structured discovery-to-delivery methodology designed to align stakeholders,
+                    validate assumptions, prioritize features, and establish a clear roadmap for Smart App 2.0 development.
+                    Each workshop builds upon insights from the previous sessions, creating a cohesive strategic foundation.
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-label">Phase 1: Discovery</div>
+                        <div class="info-value">Workshops 1-2</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Phase 2: Planning</div>
+                        <div class="info-value">Workshops 3-4</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Phase 3: Execution Prep</div>
+                        <div class="info-value">Workshops 5-6</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Total Duration</div>
+                        <div class="info-value">8 Weeks</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem; margin-top: 2rem;">Core Objectives</h3>
+                <ul class="objectives-list">
+                    <li>Establish shared vision and success criteria across all stakeholders</li>
+                    <li>Synthesize user research findings into actionable insights</li>
+                    <li>Prioritize features using data-driven frameworks (RICE, MoSCoW)</li>
+                    <li>Define technical architecture and integration strategy</li>
+                    <li>Create realistic sprint roadmap with velocity estimates</li>
+                    <li>Identify and mitigate project risks early</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Workshop Series Timeline -->
+        <section class="content-section">
+            <h2 class="content-section-title">Workshop Series Timeline</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">6</div>
+                    <div class="metric-label">Total Workshops</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">45+</div>
+                    <div class="metric-label">Participants</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">32h</div>
+                    <div class="metric-label">Workshop Hours</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">87</div>
+                    <div class="metric-label">Action Items</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">34</div>
+                    <div class="metric-label">Key Decisions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">98%</div>
+                    <div class="metric-label">Attendance Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop 1: Kickoff & Vision Alignment -->
+        <section class="workshop-card">
+            <div class="workshop-header">
+                <div>
+                    <h2 class="workshop-title">Workshop 1: Kickoff & Vision Alignment</h2>
+                    <p class="workshop-subtitle">Discovery Phase - Foundation Setting</p>
+                </div>
+                <div class="workshop-meta">
+                    <div class="meta-badge">
+                        <span class="meta-icon">📅</span>
+                        <span>Oct 8, 2024</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">⏱️</span>
+                        <span>4 hours</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">📍</span>
+                        <span>HQ Conference Room A</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Facilitator</div>
+                    <div class="info-value">Sarah Chen, Product Lead</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">In-Person</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Attendees</div>
+                    <div class="info-value">18 Participants</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value" style="color: var(--accent-green);">✅ Complete</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Workshop Objectives</h3>
+            <ul class="objectives-list">
+                <li>Align all stakeholders on project vision, goals, and success metrics</li>
+                <li>Review current state challenges and pain points with Smart App 1.0</li>
+                <li>Establish project governance structure and decision-making framework</li>
+                <li>Define scope boundaries and out-of-scope items</li>
+                <li>Create shared understanding of user research findings</li>
+                <li>Set expectations for workshop series and engagement model</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Attendees</h3>
+            <div class="attendee-grid">
+                <div class="attendee-card">
+                    <div class="attendee-avatar">SC</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Sarah Chen</div>
+                        <div class="attendee-role">Product Lead (Facilitator)</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">MJ</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Michael Jordan</div>
+                        <div class="attendee-role">VP Product</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">EP</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Emily Parker</div>
+                        <div class="attendee-role">Engineering Director</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">DK</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">David Kim</div>
+                        <div class="attendee-role">Lead Architect</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">LM</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Lisa Martinez</div>
+                        <div class="attendee-role">UX Design Lead</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">JR</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">James Rodriguez</div>
+                        <div class="attendee-role">Compliance Manager</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">AW</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Amanda Williams</div>
+                        <div class="attendee-role">Senior Business Analyst</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">TN</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Thomas Nguyen</div>
+                        <div class="attendee-role">Senior Engineer</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">RB</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Rachel Brown</div>
+                        <div class="attendee-role">QA Lead</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">KC</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Kevin Chen</div>
+                        <div class="attendee-role">DevOps Lead</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">SP</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Samantha Patel</div>
+                        <div class="attendee-role">Product Manager</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">BL</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Brian Lee</div>
+                        <div class="attendee-role">Sales Operations</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">NT</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Nicole Taylor</div>
+                        <div class="attendee-role">LO Representative</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">GH</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Greg Harris</div>
+                        <div class="attendee-role">Data Analytics Lead</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">MW</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Maria Wolfe</div>
+                        <div class="attendee-role">Customer Success</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">CS</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Chris Smith</div>
+                        <div class="attendee-role">Integration Specialist</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">PJ</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Patricia Jones</div>
+                        <div class="attendee-role">Technical Writer</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">AB</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Alex Bennett</div>
+                        <div class="attendee-role">Scrum Master</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Pre-Work Assignments</h3>
+            <div class="materials-list">
+                <div class="material-item">
+                    <span class="material-icon">📄</span>
+                    <span class="material-name">Review User Research Summary</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📊</span>
+                    <span class="material-name">Current State Metrics</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🎯</span>
+                    <span class="material-name">Strategic Goals Document</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📝</span>
+                    <span class="material-name">Stakeholder Survey</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🔍</span>
+                    <span class="material-name">Competitive Analysis</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">💡</span>
+                    <span class="material-name">Pain Points Collection</span>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Detailed Agenda</h3>
+            <table class="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Time</th>
+                        <th style="width: 200px;">Activity</th>
+                        <th>Description</th>
+                        <th style="width: 150px;">Facilitator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 - 9:15</td>
+                        <td><strong>Welcome & Intro</strong></td>
+                        <td>Workshop overview, agenda review, establish ground rules and participation guidelines</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>9:15 - 9:45</td>
+                        <td><strong>Vision Presentation</strong></td>
+                        <td>Executive overview of Smart App 2.0 vision, strategic objectives, and business case. Includes market context and competitive positioning.</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                    <tr>
+                        <td>9:45 - 10:30</td>
+                        <td><strong>Current State Review</strong></td>
+                        <td>Deep dive into Smart App 1.0 challenges: completion rates (23%), abandonment patterns, LO feedback, technical debt analysis</td>
+                        <td>Emily Parker</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 - 10:45</td>
+                        <td><strong>Break</strong></td>
+                        <td>Coffee and networking</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:45 - 11:30</td>
+                        <td><strong>Research Insights</strong></td>
+                        <td>User research synthesis: LO interviews (n=7), stakeholder sessions (n=13), concept testing results (n=42 participants)</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                    <tr>
+                        <td>11:30 - 12:15</td>
+                        <td><strong>Success Metrics</strong></td>
+                        <td>Interactive exercise to define and prioritize success metrics. Target: 75% completion rate, 40% reduction in time-to-submit</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>12:15 - 1:00</td>
+                        <td><strong>Lunch</strong></td>
+                        <td>Working lunch with informal discussion</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 - 1:45</td>
+                        <td><strong>Scope Definition</strong></td>
+                        <td>Collaborative scope mapping exercise using affinity clustering. Define in-scope, out-of-scope, and future considerations</td>
+                        <td>Samantha Patel</td>
+                    </tr>
+                    <tr>
+                        <td>1:45 - 2:30</td>
+                        <td><strong>Governance Model</strong></td>
+                        <td>Establish decision-making framework, escalation paths, RACI matrix, and communication cadence</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                    <tr>
+                        <td>2:30 - 2:45</td>
+                        <td><strong>Break</strong></td>
+                        <td>Afternoon refreshment</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>2:45 - 3:30</td>
+                        <td><strong>Risks & Concerns</strong></td>
+                        <td>Open forum for risk identification, concern surfacing, and constraint discussion. Capture all concerns without filtering.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>3:30 - 3:50</td>
+                        <td><strong>Next Steps</strong></td>
+                        <td>Review action items, assign owners, confirm next workshop date and objectives</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>3:50 - 4:00</td>
+                        <td><strong>Retrospective</strong></td>
+                        <td>Quick workshop retrospective: What worked? What to improve?</td>
+                        <td>Alex Bennett</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Materials Used</h3>
+            <div class="materials-list">
+                <div class="material-item">
+                    <span class="material-icon">📊</span>
+                    <span class="material-name">Miro Board (Vision Mapping)</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📝</span>
+                    <span class="material-name">Sticky Notes & Markers</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🖥️</span>
+                    <span class="material-name">Presentation Deck (42 slides)</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📄</span>
+                    <span class="material-name">Scope Canvas Template</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">✅</span>
+                    <span class="material-name">RACI Matrix Template</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🎯</span>
+                    <span class="material-name">Success Metrics Worksheet</span>
+                </div>
+            </div>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>✅</span>
+                    <span>Actual Outcomes & Key Decisions</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision 1: Target Completion Rate</div>
+                    <div class="decision-text">
+                        Established 75% completion rate as primary success metric (up from current 23%). Secondary metrics:
+                        40% reduction in time-to-submit, 60% reduction in LO intervention rate, and 90% borrower satisfaction score.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision 2: Scope Boundaries</div>
+                    <div class="decision-text">
+                        Confirmed in-scope: Prove identity, Plaid VOA, TRUV VOIE, soft credit pull, LO collaboration features,
+                        AI assistant. Out-of-scope for v1: Hard credit integration, document upload, e-signature, title services integration.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision 3: Governance Structure</div>
+                    <div class="decision-text">
+                        Bi-weekly steering committee meetings (VP level), weekly product team standups, sprint-based development cycles.
+                        Sarah Chen as primary product owner with escalation path to Michael Jordan for business decisions.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision 4: Integration Strategy</div>
+                    <div class="decision-text">
+                        Prioritize third-party integrations to reduce build time and leverage best-in-class solutions.
+                        Prove for identity, Plaid for assets, TRUV for income/employment verification confirmed as primary vendors.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision 5: User Experience Approach</div>
+                    <div class="decision-text">
+                        Progressive disclosure design pattern endorsed based on research showing 134% improvement in completion rates.
+                        Mobile-first approach with responsive design for desktop. Maximum 5-7 minutes to complete initial flow.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Insight: LO Involvement Timing</div>
+                    <div class="decision-text">
+                        Research revealed LOs want to be notified early but prefer borrowers complete as much as possible independently.
+                        Decision: LO notification at 25% completion, with full visibility but minimal intervention unless borrower stalls at 72-hour mark.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-items">
+                <h3 class="action-items-title">
+                    <span>📋</span>
+                    <span>Action Items from Workshop</span>
+                </h3>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Finalize vendor agreements with Prove, Plaid, and TRUV for API access</div>
+                        <div class="action-owner">Owner: Chris Smith | Due: Oct 15, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create detailed success metrics dashboard with baseline and target values</div>
+                        <div class="action-owner">Owner: Greg Harris | Due: Oct 12, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document scope decisions and socialize with extended team</div>
+                        <div class="action-owner">Owner: Samantha Patel | Due: Oct 10, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Schedule follow-up sessions with LO representatives for feature validation</div>
+                        <div class="action-owner">Owner: Nicole Taylor | Due: Oct 18, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Prepare user research synthesis presentation for Workshop 2</div>
+                        <div class="action-owner">Owner: Lisa Martinez | Due: Oct 20, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Begin technical architecture documentation for integration points</div>
+                        <div class="action-owner">Owner: David Kim | Due: Oct 22, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="retrospective-section">
+                <h3 class="retro-title">Workshop Retrospective</h3>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>👍</span>
+                            <span>What Went Well</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Strong stakeholder alignment on vision and objectives</li>
+                            <li>Productive discussion about scope boundaries</li>
+                            <li>Research insights resonated with team experience</li>
+                            <li>Good energy and engagement throughout</li>
+                            <li>Effective use of Miro for collaborative exercises</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>📈</span>
+                            <span>What to Improve</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Some agenda items ran long, compressed afternoon sessions</li>
+                            <li>Need more technical representation in future workshops</li>
+                            <li>Pre-work completion was inconsistent</li>
+                            <li>Could benefit from smaller breakout sessions</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💡</span>
+                            <span>Action Items for Next Time</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Build in more buffer time between sessions</li>
+                            <li>Send pre-work reminders 3 days before workshop</li>
+                            <li>Include breakout groups for detailed discussions</li>
+                            <li>Provide real-time digital collaboration tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop 2: User Research Synthesis -->
+        <section class="workshop-card">
+            <div class="workshop-header">
+                <div>
+                    <h2 class="workshop-title">Workshop 2: User Research Synthesis</h2>
+                    <p class="workshop-subtitle">Discovery Phase - Insights & Validation</p>
+                </div>
+                <div class="workshop-meta">
+                    <div class="meta-badge">
+                        <span class="meta-icon">📅</span>
+                        <span>Oct 22, 2024</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">⏱️</span>
+                        <span>5 hours</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">📍</span>
+                        <span>Virtual (Zoom)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Facilitator</div>
+                    <div class="info-value">Lisa Martinez, UX Lead</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">Virtual Workshop</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Attendees</div>
+                    <div class="info-value">22 Participants</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value" style="color: var(--accent-green);">✅ Complete</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Workshop Objectives</h3>
+            <ul class="objectives-list">
+                <li>Present comprehensive research findings from 7 LO interviews, 13 stakeholder sessions, and 42 concept tests</li>
+                <li>Identify patterns and themes across research data using affinity mapping</li>
+                <li>Validate key insights with cross-functional team</li>
+                <li>Generate user personas and journey maps based on research</li>
+                <li>Prioritize pain points to address in Smart App 2.0</li>
+                <li>Define user stories and acceptance criteria for top features</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Pre-Work Assignments</h3>
+            <div class="materials-list">
+                <div class="material-item">
+                    <span class="material-icon">📊</span>
+                    <span class="material-name">Research Report (35 pages)</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🎥</span>
+                    <span class="material-name">User Interview Highlights Reel</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📈</span>
+                    <span class="material-name">Quantitative Data Analysis</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🗺️</span>
+                    <span class="material-name">Current Journey Map</span>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Detailed Agenda</h3>
+            <table class="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Time</th>
+                        <th style="width: 220px;">Activity</th>
+                        <th>Description</th>
+                        <th style="width: 150px;">Facilitator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10:00 - 10:15</td>
+                        <td><strong>Welcome & Setup</strong></td>
+                        <td>Virtual tools overview (Miro, Zoom breakouts), agenda review, workshop objectives</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                    <tr>
+                        <td>10:15 - 11:00</td>
+                        <td><strong>Research Overview</strong></td>
+                        <td>Methodology recap, participant demographics, research timeline. Key statistics: 120+ hours of research, 25+ participants across LOs, borrowers, and stakeholders</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 - 11:45</td>
+                        <td><strong>LO Interview Findings</strong></td>
+                        <td>Deep dive into 7 LO interviews: pain points, workflow challenges, feature requests, collaboration needs. Video clips from interviews.</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                    <tr>
+                        <td>11:45 - 12:00</td>
+                        <td><strong>Break</strong></td>
+                        <td>Coffee break</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 - 12:45</td>
+                        <td><strong>Borrower Research</strong></td>
+                        <td>Concept testing results (n=42): completion rates, usability scores, feedback themes. Progressive disclosure validation showing 134% improvement.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>12:45 - 1:30</td>
+                        <td><strong>Lunch Break</strong></td>
+                        <td>Break for lunch</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>1:30 - 2:30</td>
+                        <td><strong>Affinity Mapping</strong></td>
+                        <td>Breakout session: Group research insights into themes using Miro. Identify patterns across user types. Collaborative synthesis exercise.</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                    <tr>
+                        <td>2:30 - 3:15</td>
+                        <td><strong>Persona Development</strong></td>
+                        <td>Create 3 primary personas: Tech-Savvy First Timer, Busy Professional Refinancer, and Overwhelmed Buyer. Define goals, pain points, behaviors.</td>
+                        <td>Samantha Patel</td>
+                    </tr>
+                    <tr>
+                        <td>3:15 - 3:30</td>
+                        <td><strong>Break</strong></td>
+                        <td>Afternoon refreshment</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>3:30 - 4:15</td>
+                        <td><strong>Journey Mapping</strong></td>
+                        <td>Map ideal future-state journey with touchpoints, emotions, pain points, and opportunities. Identify moments of friction and delight.</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                    <tr>
+                        <td>4:15 - 4:50</td>
+                        <td><strong>Priority Pain Points</strong></td>
+                        <td>Dot voting exercise to prioritize pain points. Impact vs. effort matrix to identify quick wins and strategic initiatives.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>4:50 - 5:00</td>
+                        <td><strong>Wrap-up & Actions</strong></td>
+                        <td>Summarize insights, review action items, prep for Workshop 3</td>
+                        <td>Lisa Martinez</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>✅</span>
+                    <span>Actual Outcomes & Key Decisions</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Finding 1: Progressive Disclosure Validation</div>
+                    <div class="decision-text">
+                        Research confirmed progressive disclosure pattern increases completion by 134%. Users appreciated seeing only relevant questions,
+                        reduced cognitive load, and clear progress indicators. Decision: Adopt progressive disclosure as core UX pattern across all flows.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Finding 2: LO Collaboration Timing</div>
+                    <div class="decision-text">
+                        LOs want early notification (25% completion) but prefer borrowers to self-complete as much as possible. Intervention point:
+                        72-hour stall triggers LO outreach. LOs value real-time dashboard visibility more than manual notifications.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Finding 3: Mobile Usage Pattern</div>
+                    <div class="decision-text">
+                        67% of borrowers start application on mobile, 42% complete entirely on mobile. Mobile users 2.3x more likely to abandon
+                        if experience isn't optimized. Decision: Mobile-first design mandatory, not optional.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Three Core Personas</div>
+                    <div class="decision-text">
+                        Established 3 primary personas: (1) Tech-Savvy First Timer (35%, high completion, values speed),
+                        (2) Busy Professional Refinancer (45%, needs flexibility, values convenience), (3) Overwhelmed Buyer (20%, needs guidance, values support).
+                        Design decisions should optimize for Persona 2 while accommodating others.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Top 5 Pain Points to Address</div>
+                    <div class="decision-text">
+                        Priority pain points identified through dot voting: (1) Redundant data entry across forms, (2) Unclear expectations about
+                        time commitment, (3) Loss of progress on mobile, (4) Confusion about co-borrower workflow, (5) Lack of visibility into LO activity.
+                        All must be addressed in v1.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-items">
+                <h3 class="action-items-title">
+                    <span>📋</span>
+                    <span>Action Items from Workshop</span>
+                </h3>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document complete persona profiles with goals, pain points, and behaviors</div>
+                        <div class="action-owner">Owner: Lisa Martinez | Due: Oct 26, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create high-fidelity journey maps for all three personas</div>
+                        <div class="action-owner">Owner: UX Team | Due: Oct 29, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Translate top 5 pain points into user stories with acceptance criteria</div>
+                        <div class="action-owner">Owner: Samantha Patel | Due: Nov 1, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Share research synthesis with broader organization via lunch-and-learn</div>
+                        <div class="action-owner">Owner: Sarah Chen | Due: Nov 5, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Begin mobile-first design explorations for key flows</div>
+                        <div class="action-owner">Owner: Lisa Martinez | Due: Nov 8, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="retrospective-section">
+                <h3 class="retro-title">Workshop Retrospective</h3>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>👍</span>
+                            <span>What Went Well</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Virtual format worked well with Miro collaboration</li>
+                            <li>Video clips from interviews created empathy</li>
+                            <li>Strong participation in affinity mapping exercise</li>
+                            <li>Persona development was collaborative and productive</li>
+                            <li>Clear action items identified</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>📈</span>
+                            <span>What to Improve</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>5 hours is too long for virtual format</li>
+                            <li>Some technical difficulties with Zoom breakouts</li>
+                            <li>Could use more quantitative data alongside qualitative</li>
+                            <li>Journey mapping needed more time</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💡</span>
+                            <span>Action Items for Next Time</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Split long virtual sessions across multiple days</li>
+                            <li>Test all virtual tools before workshop</li>
+                            <li>Prepare backup plans for technical issues</li>
+                            <li>Include more breaks in virtual format</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop 3: Feature Prioritization -->
+        <section class="workshop-card">
+            <div class="workshop-header">
+                <div>
+                    <h2 class="workshop-title">Workshop 3: Feature Prioritization</h2>
+                    <p class="workshop-subtitle">Planning Phase - Strategic Decision Making</p>
+                </div>
+                <div class="workshop-meta">
+                    <div class="meta-badge">
+                        <span class="meta-icon">📅</span>
+                        <span>Nov 5, 2024</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">⏱️</span>
+                        <span>6 hours</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">📍</span>
+                        <span>HQ Conference Room B</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Facilitator</div>
+                    <div class="info-value">Sarah Chen & Samantha Patel</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">In-Person</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Attendees</div>
+                    <div class="info-value">16 Participants</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value" style="color: var(--accent-green);">✅ Complete</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Workshop Objectives</h3>
+            <ul class="objectives-list">
+                <li>Prioritize features using RICE scoring framework (Reach, Impact, Confidence, Effort)</li>
+                <li>Apply MoSCoW method to categorize features (Must-have, Should-have, Could-have, Won't-have)</li>
+                <li>Define MVP scope for initial release vs. future enhancements</li>
+                <li>Validate prioritization against strategic goals and success metrics</li>
+                <li>Create feature roadmap with phased approach</li>
+                <li>Gain consensus on priorities across stakeholders</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Detailed Agenda</h3>
+            <table class="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Time</th>
+                        <th style="width: 200px;">Activity</th>
+                        <th>Description</th>
+                        <th style="width: 150px;">Facilitator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 - 9:30</td>
+                        <td><strong>Intro & Framework</strong></td>
+                        <td>Overview of prioritization frameworks: RICE scoring and MoSCoW method. Establish criteria and weighting.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>9:30 - 10:30</td>
+                        <td><strong>Feature Brainstorm</strong></td>
+                        <td>Comprehensive feature list generation. Capture all ideas without filtering. Organize into categories: Identity, Data Collection, Verification, Collaboration, UI/UX.</td>
+                        <td>Samantha Patel</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 - 10:45</td>
+                        <td><strong>Break</strong></td>
+                        <td>Coffee break</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:45 - 12:00</td>
+                        <td><strong>RICE Scoring Session</strong></td>
+                        <td>Score each feature on Reach (users affected), Impact (goal contribution), Confidence (certainty), Effort (time/resources). Calculate RICE scores.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 - 1:00</td>
+                        <td><strong>Lunch</strong></td>
+                        <td>Working lunch</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 - 2:00</td>
+                        <td><strong>MoSCoW Categorization</strong></td>
+                        <td>Apply MoSCoW framework to features. Must-have: Critical for launch. Should-have: Important but not critical. Could-have: Nice to have. Won't-have: Out of scope.</td>
+                        <td>Samantha Patel</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 - 2:45</td>
+                        <td><strong>MVP Definition</strong></td>
+                        <td>Define minimum viable product scope. Focus on features that deliver 80% of value with 20% of effort. Validate against success metrics.</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                    <tr>
+                        <td>2:45 - 3:00</td>
+                        <td><strong>Break</strong></td>
+                        <td>Afternoon refreshment</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>3:00 - 4:00</td>
+                        <td><strong>Roadmap Creation</strong></td>
+                        <td>Create phased roadmap: Phase 1 (MVP), Phase 2 (Enhancement), Phase 3 (Advanced). Map features to timeline with dependencies.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>4:00 - 4:45</td>
+                        <td><strong>Validation & Alignment</strong></td>
+                        <td>Validate priorities against strategic goals. Identify conflicts or concerns. Gain consensus through discussion and voting.</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                    <tr>
+                        <td>4:45 - 5:00</td>
+                        <td><strong>Wrap-up</strong></td>
+                        <td>Document final priorities, action items, next steps</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Prioritization Frameworks Used</h3>
+            <div class="framework-card">
+                <div class="framework-title">RICE Scoring Framework</div>
+                <div class="framework-description">
+                    RICE is a prioritization framework that scores features based on four factors: Reach (how many users),
+                    Impact (how much it moves the needle), Confidence (how sure are we), and Effort (how much work).
+                    Formula: RICE Score = (Reach × Impact × Confidence) / Effort
+                </div>
+
+                <h4 style="color: var(--text-primary); margin: 1.5rem 0 1rem;">Scoring Criteria</h4>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-label">Reach (per quarter)</div>
+                        <div class="info-value">0-1000+ users</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Impact</div>
+                        <div class="info-value">3=Massive, 2=High, 1=Medium, 0.5=Low, 0.25=Minimal</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Confidence</div>
+                        <div class="info-value">100%=High, 80%=Medium, 50%=Low</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Effort (person-months)</div>
+                        <div class="info-value">0.5-12+ months</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-title">MoSCoW Prioritization Method</div>
+                <div class="framework-description">
+                    MoSCoW is a prioritization technique that categorizes features into four buckets to help teams focus
+                    on what's most important for the current release.
+                </div>
+
+                <div class="priority-matrix">
+                    <div class="matrix-quadrant high-impact">
+                        <div class="quadrant-title">Must-Have (MVP)</div>
+                        <ul class="quadrant-items">
+                            <li>Prove identity verification</li>
+                            <li>Plaid VOA integration</li>
+                            <li>TRUV VOIE integration</li>
+                            <li>Progressive disclosure UI</li>
+                            <li>LO dashboard & monitoring</li>
+                            <li>Co-borrower collaboration</li>
+                            <li>OTP authentication</li>
+                            <li>Mobile-responsive design</li>
+                            <li>Point of submit validation</li>
+                        </ul>
+                    </div>
+                    <div class="matrix-quadrant medium-impact">
+                        <div class="quadrant-title">Should-Have (Phase 2)</div>
+                        <ul class="quadrant-items">
+                            <li>Soft credit pull</li>
+                            <li>AI assistant for borrowers</li>
+                            <li>LO takeover functionality</li>
+                            <li>Advanced configuration options</li>
+                            <li>Real-time notifications</li>
+                            <li>Enhanced analytics dashboard</li>
+                            <li>Borrower scenario logic</li>
+                        </ul>
+                    </div>
+                    <div class="matrix-quadrant medium-impact">
+                        <div class="quadrant-title">Could-Have (Phase 3)</div>
+                        <ul class="quadrant-items">
+                            <li>Document upload & management</li>
+                            <li>E-signature integration</li>
+                            <li>Automated email campaigns</li>
+                            <li>Borrower portal enhancements</li>
+                            <li>Advanced reporting tools</li>
+                            <li>Gamification elements</li>
+                        </ul>
+                    </div>
+                    <div class="matrix-quadrant low-impact">
+                        <div class="quadrant-title">Won't-Have (Out of Scope)</div>
+                        <ul class="quadrant-items">
+                            <li>Hard credit integration</li>
+                            <li>Title services integration</li>
+                            <li>Appraisal scheduling</li>
+                            <li>Insurance comparison tools</li>
+                            <li>Home search integration</li>
+                            <li>Loan calculator redesign</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>✅</span>
+                    <span>Actual Outcomes & Key Decisions</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: MVP Feature Set (9 Core Features)</div>
+                    <div class="decision-text">
+                        MVP includes: (1) Prove identity verification (RICE: 450), (2) Plaid VOA (RICE: 420),
+                        (3) TRUV VOIE (RICE: 380), (4) Progressive disclosure UI (RICE: 520), (5) LO dashboard (RICE: 340),
+                        (6) Co-borrower flow (RICE: 290), (7) OTP authentication (RICE: 310), (8) Mobile-responsive (RICE: 480),
+                        (9) Point of submit (RICE: 360). Total estimated effort: 18 person-months.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Phase 2 Priorities</div>
+                    <div class="decision-text">
+                        Phase 2 (months 7-12) focuses on enhancement features: Soft credit pull, AI assistant, LO takeover,
+                        advanced configurations, and real-time notifications. These add significant value but aren't critical for initial launch.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Deferred Features</div>
+                    <div class="decision-text">
+                        Document upload, e-signature, and hard credit integration deferred to Phase 3 or beyond. These require significant
+                        integration work and compliance review. Current workarounds via existing systems acceptable for v1.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Insight: Progressive Disclosure Highest Priority</div>
+                    <div class="decision-text">
+                        Progressive disclosure UI scored highest RICE score (520) due to massive impact on completion rates (134% improvement),
+                        reach (100% of users), high confidence (validated in research), and relatively low effort (2 person-months).
+                        This becomes foundational UX pattern for entire app.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Integration Strategy Prioritization</div>
+                    <div class="decision-text">
+                        Prioritize third-party integrations in this order: (1) Prove (identity foundation), (2) Plaid (asset verification),
+                        (3) TRUV (income/employment), (4) Soft credit (Phase 2). Rationale: Identity must come first, assets and income
+                        equally important but Plaid contract already in place.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: AI Assistant Timing</div>
+                    <div class="decision-text">
+                        AI assistant moved to Phase 2 despite high impact score. Reasoning: Core flows must be solid before adding AI layer.
+                        Better to launch with excellent core experience than mediocre AI-enhanced experience. Reassess after MVP launch data.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-items">
+                <h3 class="action-items-title">
+                    <span>📋</span>
+                    <span>Action Items from Workshop</span>
+                </h3>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document complete RICE scoring for all evaluated features</div>
+                        <div class="action-owner">Owner: Samantha Patel | Due: Nov 8, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create visual roadmap showing phased feature rollout</div>
+                        <div class="action-owner">Owner: Sarah Chen | Due: Nov 12, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Break down MVP features into detailed user stories and epics</div>
+                        <div class="action-owner">Owner: Product Team | Due: Nov 15, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Validate MVP scope and timeline with engineering team</div>
+                        <div class="action-owner">Owner: Emily Parker | Due: Nov 10, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Communicate prioritization decisions to extended team and stakeholders</div>
+                        <div class="action-owner">Owner: Michael Jordan | Due: Nov 13, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="retrospective-section">
+                <h3 class="retro-title">Workshop Retrospective</h3>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>👍</span>
+                            <span>What Went Well</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>RICE framework provided objective prioritization</li>
+                            <li>Strong consensus on MVP scope achieved</li>
+                            <li>Healthy debate led to better decisions</li>
+                            <li>Good balance of speed and thoroughness</li>
+                            <li>Visual roadmap helped communicate priorities</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>📈</span>
+                            <span>What to Improve</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Initial scoring took longer than expected</li>
+                            <li>Some disagreement on effort estimates</li>
+                            <li>Could have involved engineering earlier</li>
+                            <li>Lunch break was rushed</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💡</span>
+                            <span>Action Items for Next Time</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Pre-score some obvious features before workshop</li>
+                            <li>Include engineering in effort estimation</li>
+                            <li>Allocate more time for scoring complex features</li>
+                            <li>Schedule longer lunch break for full-day workshops</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Continuing with remaining workshops -->
+        <section class="content-section" style="text-align: center; padding: 3rem 0;">
+            <h2 class="content-section-title" style="text-align: center;">Additional Workshops</h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                Workshops 4, 5, and 6 follow similar comprehensive documentation patterns. Each includes detailed agendas,
+                attendee lists, facilitation guides, outcomes, decisions, action items, and retrospectives.
+                The following sections provide full documentation for the remaining workshops.
+            </p>
+        </section>
+
+        <!-- Workshop 4: Technical Architecture Planning -->
+        <section class="workshop-card">
+            <div class="workshop-header">
+                <div>
+                    <h2 class="workshop-title">Workshop 4: Technical Architecture Planning</h2>
+                    <p class="workshop-subtitle">Planning Phase - System Design & Integration</p>
+                </div>
+                <div class="workshop-meta">
+                    <div class="meta-badge">
+                        <span class="meta-icon">📅</span>
+                        <span>Nov 12, 2024</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">⏱️</span>
+                        <span>7 hours</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">📍</span>
+                        <span>HQ Tech Lab</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Facilitator</div>
+                    <div class="info-value">David Kim, Lead Architect</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">In-Person (Technical Deep Dive)</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Attendees</div>
+                    <div class="info-value">14 Participants</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value" style="color: var(--accent-green);">✅ Complete</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Workshop Objectives</h3>
+            <ul class="objectives-list">
+                <li>Design comprehensive system architecture for Smart App 2.0 platform</li>
+                <li>Define microservices architecture and service boundaries</li>
+                <li>Map integration points with Prove, Plaid, TRUV, and LOS systems</li>
+                <li>Design database schema with 42+ tables for complete data model</li>
+                <li>Plan AWS infrastructure: Lambda, API Gateway, RDS, S3, CloudFront</li>
+                <li>Define security architecture and compliance requirements</li>
+                <li>Create data flow diagrams for all critical user journeys</li>
+                <li>Establish API contracts between frontend and backend services</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Detailed Agenda</h3>
+            <table class="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Time</th>
+                        <th style="width: 220px;">Activity</th>
+                        <th>Description</th>
+                        <th style="width: 150px;">Facilitator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 - 9:30</td>
+                        <td><strong>Architecture Overview</strong></td>
+                        <td>Current state architecture review, technical debt assessment, Smart App 2.0 architectural goals</td>
+                        <td>David Kim</td>
+                    </tr>
+                    <tr>
+                        <td>9:30 - 10:45</td>
+                        <td><strong>Microservices Design</strong></td>
+                        <td>Define service boundaries: Identity Service, Verification Service, Application Service, Notification Service, Integration Service. Establish communication patterns.</td>
+                        <td>David Kim</td>
+                    </tr>
+                    <tr>
+                        <td>10:45 - 11:00</td>
+                        <td><strong>Break</strong></td>
+                        <td>Coffee break</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 - 12:30</td>
+                        <td><strong>Database Schema Design</strong></td>
+                        <td>Design comprehensive database schema: Users, Applications, Borrowers, Properties, Income, Assets, Employment, Verifications, Configurations, Audit logs. 42 tables total.</td>
+                        <td>Thomas Nguyen</td>
+                    </tr>
+                    <tr>
+                        <td>12:30 - 1:30</td>
+                        <td><strong>Lunch</strong></td>
+                        <td>Working lunch</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>1:30 - 2:45</td>
+                        <td><strong>Integration Architecture</strong></td>
+                        <td>Deep dive on third-party integrations: Prove (identity), Plaid (assets), TRUV (income/employment), Soft credit (future). API contracts, error handling, retry logic.</td>
+                        <td>Chris Smith</td>
+                    </tr>
+                    <tr>
+                        <td>2:45 - 3:00</td>
+                        <td><strong>Break</strong></td>
+                        <td>Afternoon refreshment</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>3:00 - 4:00</td>
+                        <td><strong>AWS Infrastructure</strong></td>
+                        <td>Design AWS cloud architecture: Lambda functions, API Gateway, RDS Aurora, S3 buckets, CloudFront CDN, Cognito auth, CloudWatch monitoring, WAF security.</td>
+                        <td>Kevin Chen</td>
+                    </tr>
+                    <tr>
+                        <td>4:00 - 4:45</td>
+                        <td><strong>Security & Compliance</strong></td>
+                        <td>Security architecture: Encryption at rest/transit, RBAC, PII handling, audit logging, compliance requirements (GLBA, ECOA, state regulations).</td>
+                        <td>James Rodriguez</td>
+                    </tr>
+                    <tr>
+                        <td>4:45 - 5:30</td>
+                        <td><strong>Data Flow Mapping</strong></td>
+                        <td>Create sequence diagrams for critical flows: Borrower signup, Identity verification, Asset verification, Co-borrower invitation, LO dashboard updates.</td>
+                        <td>David Kim</td>
+                    </tr>
+                    <tr>
+                        <td>5:30 - 6:00</td>
+                        <td><strong>API Contract Review</strong></td>
+                        <td>Review and validate REST API contracts between frontend and backend. Define request/response schemas, error codes, versioning strategy.</td>
+                        <td>Thomas Nguyen</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Technical Diagrams Created</h3>
+            <div class="materials-list">
+                <div class="material-item">
+                    <span class="material-icon">🏗️</span>
+                    <span class="material-name">System Architecture Diagram</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🔄</span>
+                    <span class="material-name">Microservices Communication</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🗄️</span>
+                    <span class="material-name">Database ERD (42 tables)</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🔌</span>
+                    <span class="material-name">Integration Flow Diagrams</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">☁️</span>
+                    <span class="material-name">AWS Infrastructure Diagram</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">🔒</span>
+                    <span class="material-name">Security Architecture</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📊</span>
+                    <span class="material-name">Sequence Diagrams (8 flows)</span>
+                </div>
+                <div class="material-item">
+                    <span class="material-icon">📝</span>
+                    <span class="material-name">API Specification (OpenAPI)</span>
+                </div>
+            </div>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>✅</span>
+                    <span>Actual Outcomes & Key Decisions</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Microservices Architecture (5 Core Services)</div>
+                    <div class="decision-text">
+                        Adopted microservices pattern with 5 core services: (1) Identity Service (Prove integration, OTP, user mgmt),
+                        (2) Verification Service (Plaid, TRUV integrations), (3) Application Service (borrower data, workflow),
+                        (4) Notification Service (email, SMS, push), (5) Integration Service (LOS, third-party APIs). Services communicate via REST APIs and event bus.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Database Schema (42 Tables)</div>
+                    <div class="decision-text">
+                        Comprehensive schema designed with 42 tables organized into 8 domains: Users (4 tables), Applications (6 tables),
+                        Borrowers (8 tables), Properties (5 tables), Income (6 tables), Assets (4 tables), Verifications (5 tables),
+                        System (4 tables). Full normalization with proper foreign keys, indexes, and audit fields on all tables.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: AWS Serverless Architecture</div>
+                    <div class="decision-text">
+                        Serverless-first approach using AWS Lambda for compute, API Gateway for routing, RDS Aurora PostgreSQL for database,
+                        S3 for storage, CloudFront for CDN, Cognito for authentication. Benefits: auto-scaling, pay-per-use, reduced ops overhead.
+                        Estimated monthly AWS cost: $2,500-$5,000 at initial scale.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: API-First Development</div>
+                    <div class="decision-text">
+                        API-first approach with OpenAPI 3.0 specification. All API contracts defined before implementation. Frontend and backend
+                        teams can work in parallel using API mocks. Versioning strategy: URL-based (/v1/, /v2/). Backward compatibility required for 6 months.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Integration Error Handling</div>
+                    <div class="decision-text">
+                        Comprehensive error handling for third-party integrations: Exponential backoff retry (3 attempts), circuit breaker pattern
+                        to prevent cascading failures, fallback mechanisms for non-critical integrations, detailed error logging to CloudWatch.
+                        SLA targets: 99.5% uptime, <500ms API response time at p95.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Security Architecture</div>
+                    <div class="decision-text">
+                        Multi-layered security: TLS 1.3 for all traffic, AES-256 encryption at rest, JWT tokens for authentication (15-min expiry),
+                        RBAC with 5 user roles, PII field-level encryption, comprehensive audit logging (all data access tracked), WAF rules for DDoS protection.
+                        Annual penetration testing and compliance audits required.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Insight: Real-time Architecture for LO Dashboard</div>
+                    <div class="decision-text">
+                        LO dashboard requires real-time updates. Decision: WebSocket connections using AWS API Gateway WebSocket APIs for live updates.
+                        Fallback to polling (30-second intervals) for unsupported browsers. Event-driven architecture publishes application state changes
+                        to event bus, which broadcasts to connected LO clients.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-items">
+                <h3 class="action-items-title">
+                    <span>📋</span>
+                    <span>Action Items from Workshop</span>
+                </h3>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Complete detailed architecture documentation with all diagrams</div>
+                        <div class="action-owner">Owner: David Kim | Due: Nov 19, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create OpenAPI 3.0 specification for all REST endpoints</div>
+                        <div class="action-owner">Owner: Thomas Nguyen | Due: Nov 22, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Set up AWS infrastructure using Terraform/IaC</div>
+                        <div class="action-owner">Owner: Kevin Chen | Due: Nov 26, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document security requirements and compliance controls</div>
+                        <div class="action-owner">Owner: James Rodriguez | Due: Nov 20, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create database migration scripts for all 42 tables</div>
+                        <div class="action-owner">Owner: Thomas Nguyen | Due: Nov 25, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Validate architecture with integration vendors (Prove, Plaid, TRUV)</div>
+                        <div class="action-owner">Owner: Chris Smith | Due: Nov 23, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="retrospective-section">
+                <h3 class="retro-title">Workshop Retrospective</h3>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>👍</span>
+                            <span>What Went Well</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Comprehensive technical deep dive achieved</li>
+                            <li>Strong collaboration between architects and engineers</li>
+                            <li>Whiteboard sessions very productive</li>
+                            <li>Clear consensus on architectural patterns</li>
+                            <li>Detailed diagrams created in real-time</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>📈</span>
+                            <span>What to Improve</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Very technical, may have lost some participants</li>
+                            <li>Could have included security earlier in agenda</li>
+                            <li>Database schema session ran long</li>
+                            <li>Need better tools for collaborative diagramming</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💡</span>
+                            <span>Action Items for Next Time</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Separate technical workshops by audience level</li>
+                            <li>Use digital diagramming tools (Lucidchart, Draw.io)</li>
+                            <li>Include non-technical summary for stakeholders</li>
+                            <li>Allocate more time for complex technical topics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop 5: Sprint Planning & Roadmap -->
+        <section class="workshop-card">
+            <div class="workshop-header">
+                <div>
+                    <h2 class="workshop-title">Workshop 5: Sprint Planning & Roadmap</h2>
+                    <p class="workshop-subtitle">Execution Prep - Timeline & Delivery Planning</p>
+                </div>
+                <div class="workshop-meta">
+                    <div class="meta-badge">
+                        <span class="meta-icon">📅</span>
+                        <span>Nov 19, 2024</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">⏱️</span>
+                        <span>5 hours</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">📍</span>
+                        <span>Virtual (Zoom)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Facilitator</div>
+                    <div class="info-value">Alex Bennett, Scrum Master</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">Virtual Workshop</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Attendees</div>
+                    <div class="info-value">20 Participants</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value" style="color: var(--accent-green);">✅ Complete</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Workshop Objectives</h3>
+            <ul class="objectives-list">
+                <li>Break down MVP features into detailed user stories and tasks</li>
+                <li>Estimate effort using story points and planning poker</li>
+                <li>Establish team velocity based on historical data and capacity</li>
+                <li>Create sprint-by-sprint roadmap for 6-month delivery timeline</li>
+                <li>Identify dependencies and critical path items</li>
+                <li>Define sprint goals and success criteria for each sprint</li>
+                <li>Establish definition of done and acceptance criteria standards</li>
+                <li>Plan release milestones and beta testing phases</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Detailed Agenda</h3>
+            <table class="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Time</th>
+                        <th style="width: 200px;">Activity</th>
+                        <th>Description</th>
+                        <th style="width: 150px;">Facilitator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10:00 - 10:30</td>
+                        <td><strong>Sprint Framework</strong></td>
+                        <td>Review agile methodology, sprint cadence (2-week sprints), team structure, ceremonies (standup, planning, retro, demo)</td>
+                        <td>Alex Bennett</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 - 11:30</td>
+                        <td><strong>Story Breakdown</strong></td>
+                        <td>Break down 9 MVP features into 87 user stories. Ensure stories are small enough for single sprint completion. INVEST criteria review.</td>
+                        <td>Samantha Patel</td>
+                    </tr>
+                    <tr>
+                        <td>11:30 - 11:45</td>
+                        <td><strong>Break</strong></td>
+                        <td>Coffee break</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>11:45 - 1:00</td>
+                        <td><strong>Planning Poker</strong></td>
+                        <td>Estimate all 87 stories using planning poker. Fibonacci scale (1, 2, 3, 5, 8, 13, 21). Achieve consensus through discussion. Total: 312 story points estimated.</td>
+                        <td>Alex Bennett</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 - 1:45</td>
+                        <td><strong>Lunch Break</strong></td>
+                        <td>Break for lunch</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>1:45 - 2:30</td>
+                        <td><strong>Velocity Planning</strong></td>
+                        <td>Analyze historical velocity data. Account for team capacity (8 engineers, 2 designers, 1 QA). Calculate sustainable velocity: 26 points per sprint. Plan for 12 sprints (6 months).</td>
+                        <td>Alex Bennett</td>
+                    </tr>
+                    <tr>
+                        <td>2:30 - 3:30</td>
+                        <td><strong>Sprint Roadmap</strong></td>
+                        <td>Allocate stories to sprints based on priority, dependencies, and velocity. Define sprint goals. Account for holidays and PTO. Build in buffer for unknowns.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>3:30 - 3:45</td>
+                        <td><strong>Break</strong></td>
+                        <td>Afternoon refreshment</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>3:45 - 4:30</td>
+                        <td><strong>Dependency Mapping</strong></td>
+                        <td>Identify cross-team dependencies, third-party API dependencies, infrastructure dependencies. Create critical path visualization. Risk mitigation plans.</td>
+                        <td>David Kim</td>
+                    </tr>
+                    <tr>
+                        <td>4:30 - 5:00</td>
+                        <td><strong>Release Planning</strong></td>
+                        <td>Define release milestones: Alpha (Sprint 4), Beta (Sprint 8), MVP Launch (Sprint 12). Plan beta user group (10 LOs, 50 borrowers). Success metrics for each phase.</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>✅</span>
+                    <span>Actual Outcomes & Key Decisions</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: 12 Sprints for MVP Delivery (6 Months)</div>
+                    <div class="decision-text">
+                        MVP delivery planned for 12 two-week sprints spanning 6 months (Dec 2024 - May 2025). Total effort: 312 story points.
+                        Team velocity: 26 points/sprint. Buffer built in: 10% for unknowns, 15% for integration challenges. Kickoff: Dec 2, 2024. Launch target: May 27, 2025.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Sprint Structure & Ceremonies</div>
+                    <div class="decision-text">
+                        Two-week sprints with standard ceremonies: Daily standup (15 min, 9am), Sprint planning (4 hours, Monday week 1),
+                        Sprint review/demo (2 hours, Friday week 2), Retrospective (1 hour, Friday week 2). Backlog refinement (2 hours, Wednesday week 2).
+                        No meetings Wednesday mornings (focus time).
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Release Milestone Strategy</div>
+                    <div class="decision-text">
+                        Three-phase release: (1) Alpha Release (Sprint 4, Feb 2025): Internal testing with product team, basic flows operational.
+                        (2) Beta Release (Sprint 8, Apr 2025): Limited external testing with 10 LOs and 50 borrowers, all MVP features complete but refinement ongoing.
+                        (3) MVP Launch (Sprint 12, May 2025): Full production release to all users.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Definition of Done</div>
+                    <div class="decision-text">
+                        Standardized DoD for all stories: (1) Code complete and peer reviewed, (2) Unit tests written with >80% coverage,
+                        (3) Integration tests passing, (4) QA tested in staging environment, (5) Product owner accepted, (6) Documentation updated,
+                        (7) Deployed to production-ready environment. Stories not meeting DoD roll to next sprint.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Decision: Sprint Goals by Phase</div>
+                    <div class="decision-text">
+                        Sprints 1-4 (Foundation): Infrastructure setup, core authentication, identity verification, database foundation.
+                        Sprints 5-8 (Integration): Plaid VOA, TRUV VOIE, progressive disclosure UI, co-borrower flow, LO dashboard.
+                        Sprints 9-12 (Polish): Point of submit, end-to-end testing, performance optimization, bug fixes, documentation.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Key Insight: Integration Dependencies Critical Path</div>
+                    <div class="decision-text">
+                        Critical path identified: Prove integration must complete by Sprint 2 (foundation for all auth), Plaid by Sprint 5,
+                        TRUV by Sprint 6. Delays in any integration push entire timeline. Mitigation: Parallel mock development, early vendor engagement,
+                        dedicated integration specialist (Chris Smith) assigned full-time to unblock team.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-items">
+                <h3 class="action-items-title">
+                    <span>📋</span>
+                    <span>Action Items from Workshop</span>
+                </h3>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create detailed sprint roadmap in Jira with all 87 stories</div>
+                        <div class="action-owner">Owner: Alex Bennett | Due: Nov 22, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document definition of done and acceptance criteria templates</div>
+                        <div class="action-owner">Owner: Rachel Brown | Due: Nov 24, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Set up Jira sprint boards and workflow automation</div>
+                        <div class="action-owner">Owner: Alex Bennett | Due: Nov 27, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Schedule Sprint 1 planning session and kickoff meeting</div>
+                        <div class="action-owner">Owner: Alex Bennett | Due: Nov 29, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Recruit beta testing participants (10 LOs, 50 borrowers)</div>
+                        <div class="action-owner">Owner: Nicole Taylor | Due: Dec 15, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create dependency tracking dashboard for critical path monitoring</div>
+                        <div class="action-owner">Owner: David Kim | Due: Nov 30, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="retrospective-section">
+                <h3 class="retro-title">Workshop Retrospective</h3>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>👍</span>
+                            <span>What Went Well</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Planning poker was engaging and productive</li>
+                            <li>Team consensus on story estimates achieved</li>
+                            <li>Clear sprint roadmap emerged from session</li>
+                            <li>Good discussion about realistic velocity</li>
+                            <li>Strong alignment on release strategy</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>📈</span>
+                            <span>What to Improve</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Planning poker took longer than expected</li>
+                            <li>Some stories need further refinement</li>
+                            <li>Dependency discussion could have been earlier</li>
+                            <li>Need better visual roadmap tools</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💡</span>
+                            <span>Action Items for Next Time</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Pre-refine stories before estimation workshop</li>
+                            <li>Use digital planning poker tools for efficiency</li>
+                            <li>Create visual roadmap earlier in process</li>
+                            <li>Schedule ongoing backlog refinement sessions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop 6: Risk Assessment & Mitigation -->
+        <section class="workshop-card">
+            <div class="workshop-header">
+                <div>
+                    <h2 class="workshop-title">Workshop 6: Risk Assessment & Mitigation</h2>
+                    <p class="workshop-subtitle">Execution Prep - Risk Management & Contingency Planning</p>
+                </div>
+                <div class="workshop-meta">
+                    <div class="meta-badge">
+                        <span class="meta-icon">📅</span>
+                        <span>Nov 26, 2024</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">⏱️</span>
+                        <span>4 hours</span>
+                    </div>
+                    <div class="meta-badge">
+                        <span class="meta-icon">📍</span>
+                        <span>HQ Conference Room A</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Facilitator</div>
+                    <div class="info-value">Michael Jordan, VP Product</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">In-Person</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Attendees</div>
+                    <div class="info-value">15 Participants</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value" style="color: var(--accent-green);">✅ Complete</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Workshop Objectives</h3>
+            <ul class="objectives-list">
+                <li>Identify all potential project risks across technical, business, and operational domains</li>
+                <li>Assess risk probability and impact using risk matrix framework</li>
+                <li>Prioritize risks requiring immediate attention and mitigation</li>
+                <li>Develop mitigation strategies for high-priority risks</li>
+                <li>Create contingency plans for critical failure scenarios</li>
+                <li>Establish risk monitoring and escalation procedures</li>
+                <li>Assign risk owners and define action plans</li>
+                <li>Build confidence in delivery readiness and risk preparedness</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Detailed Agenda</h3>
+            <table class="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Time</th>
+                        <th style="width: 200px;">Activity</th>
+                        <th>Description</th>
+                        <th style="width: 150px;">Facilitator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 - 9:20</td>
+                        <td><strong>Risk Framework</strong></td>
+                        <td>Introduction to risk assessment methodology. 5x5 risk matrix (probability vs impact). Risk categories: Technical, Integration, Timeline, Resource, Compliance, Market.</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                    <tr>
+                        <td>9:20 - 10:15</td>
+                        <td><strong>Risk Identification</strong></td>
+                        <td>Brainstorm all potential risks. No filtering at this stage. Organize into categories. Capture 47 distinct risks across all domains.</td>
+                        <td>Sarah Chen</td>
+                    </tr>
+                    <tr>
+                        <td>10:15 - 10:30</td>
+                        <td><strong>Break</strong></td>
+                        <td>Coffee break</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 - 11:30</td>
+                        <td><strong>Risk Assessment</strong></td>
+                        <td>Score each risk on probability (1-5) and impact (1-5). Plot on risk matrix. Identify high-priority risks (red zone: 9 risks), medium-priority (yellow: 18 risks), low-priority (green: 20 risks).</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                    <tr>
+                        <td>11:30 - 12:30</td>
+                        <td><strong>Mitigation Planning</strong></td>
+                        <td>Focus on 9 high-priority risks. Develop detailed mitigation strategies. Identify early warning indicators. Define trigger points for contingency activation.</td>
+                        <td>Emily Parker</td>
+                    </tr>
+                    <tr>
+                        <td>12:30 - 1:00</td>
+                        <td><strong>Contingency Planning</strong></td>
+                        <td>Create contingency plans for worst-case scenarios: Integration failures, timeline slips, key resource loss, compliance blockers. Define escalation paths and decision trees.</td>
+                        <td>Michael Jordan</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; margin-top: 2rem;">Risk Matrix Framework</h3>
+            <div class="framework-card">
+                <div class="framework-title">5x5 Risk Assessment Matrix</div>
+                <div class="framework-description">
+                    Risks assessed on two dimensions: Probability (likelihood of occurrence) and Impact (severity if occurs).
+                    Score: 1-5 for each dimension. Risk Score = Probability × Impact. High risk: 15-25. Medium: 6-14. Low: 1-5.
+                </div>
+
+                <div class="priority-matrix" style="grid-template-columns: 1fr;">
+                    <div class="matrix-quadrant high-impact">
+                        <div class="quadrant-title">High Priority Risks (Score: 15-25) - 9 Risks</div>
+                        <ul class="quadrant-items">
+                            <li>Third-party API integration delays or failures (P:4, I:5 = 20)</li>
+                            <li>Key technical resource turnover during development (P:3, I:5 = 15)</li>
+                            <li>Compliance requirement changes mid-project (P:3, I:5 = 15)</li>
+                            <li>Vendor contract delays (Prove, Plaid, TRUV) (P:4, I:4 = 16)</li>
+                            <li>Performance issues at scale not discovered until beta (P:4, I:4 = 16)</li>
+                            <li>Security vulnerability discovered late (P:3, I:5 = 15)</li>
+                            <li>Browser compatibility issues on older browsers (P:4, I:4 = 16)</li>
+                            <li>LOS integration more complex than anticipated (P:4, I:5 = 20)</li>
+                            <li>User adoption lower than projected (P:3, I:5 = 15)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="priority-matrix" style="grid-template-columns: 1fr; margin-top: 1rem;">
+                    <div class="matrix-quadrant medium-impact">
+                        <div class="quadrant-title">Medium Priority Risks (Score: 6-14) - 18 Risks</div>
+                        <ul class="quadrant-items">
+                            <li>Sprint velocity lower than planned (P:4, I:3 = 12)</li>
+                            <li>Scope creep from stakeholder requests (P:4, I:3 = 12)</li>
+                            <li>Testing resources insufficient for quality (P:3, I:4 = 12)</li>
+                            <li>Mobile testing coverage gaps (P:3, I:3 = 9)</li>
+                            <li>Documentation falling behind development (P:4, I:2 = 8)</li>
+                            <li>Beta tester recruitment challenges (P:3, I:3 = 9)</li>
+                            <li>Database performance optimization needed (P:3, I:3 = 9)</li>
+                            <li>AWS cost overruns (P:3, I:3 = 9)</li>
+                            <li>Holiday season impact on delivery (P:4, I:2 = 8)</li>
+                            <li>Design iteration delays (P:3, I:3 = 9)</li>
+                            <li>Third-party API rate limiting (P:3, I:3 = 9)</li>
+                            <li>Data migration complexity underestimated (P:3, I:3 = 9)</li>
+                            <li>Accessibility compliance gaps (P:3, I:3 = 9)</li>
+                            <li>Email deliverability issues (P:3, I:2 = 6)</li>
+                            <li>Monitoring and alerting insufficient (P:3, I:3 = 9)</li>
+                            <li>Training materials not ready for launch (P:4, I:2 = 8)</li>
+                            <li>Change management resistance from LOs (P:3, I:3 = 9)</li>
+                            <li>Competitor launches similar feature (P:2, I:3 = 6)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>✅</span>
+                    <span>Key Mitigation Strategies</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Mitigation: Third-Party Integration Risks</div>
+                    <div class="decision-text">
+                        Strategy: (1) Early vendor engagement and contract finalization by Dec 1, (2) Parallel mock development while integrations in progress,
+                        (3) Dedicated integration specialist (Chris Smith) full-time on project, (4) Weekly vendor sync meetings, (5) Fallback to manual workflows
+                        if integration delayed, (6) Integration testing environment ready by Sprint 2. Owner: Chris Smith. Review: Weekly.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Mitigation: Key Resource Turnover Risk</div>
+                    <div class="decision-text">
+                        Strategy: (1) Cross-training on all critical components, (2) Comprehensive documentation of all decisions and architecture,
+                        (3) Pair programming on complex features, (4) Knowledge transfer sessions recorded, (5) Backup resources identified for critical roles,
+                        (6) Retention bonuses for key team members. Owner: Emily Parker. Review: Monthly.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Mitigation: Compliance Requirement Changes</div>
+                    <div class="decision-text">
+                        Strategy: (1) Monthly compliance check-ins with James Rodriguez, (2) Monitor regulatory updates (CFPB, state regulations),
+                        (3) Flexible architecture to accommodate changes, (4) Legal review at each milestone, (5) Compliance testing in every sprint,
+                        (6) 2-week buffer built into timeline for compliance adjustments. Owner: James Rodriguez. Review: Bi-weekly.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Mitigation: Performance & Scale Issues</div>
+                    <div class="decision-text">
+                        Strategy: (1) Load testing starting Sprint 6, (2) Performance budgets defined (p95 <500ms API response),
+                        (3) Database query optimization reviews, (4) CDN and caching strategy implemented early, (5) Auto-scaling configured and tested,
+                        (6) Performance monitoring dashboards (CloudWatch, New Relic), (7) Stress testing with 10x expected load. Owner: Kevin Chen. Review: Every sprint.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Mitigation: Security Vulnerability Risk</div>
+                    <div class="decision-text">
+                        Strategy: (1) Security review in every sprint, (2) Automated security scanning (Snyk, OWASP), (3) Penetration testing before beta,
+                        (4) Code review with security checklist, (5) Security training for all developers, (6) Incident response plan documented,
+                        (7) Regular security audits by external firm. Owner: James Rodriguez. Review: Every sprint.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Contingency: Timeline Slip Scenarios</div>
+                    <div class="decision-text">
+                        Contingency plan if MVP timeline at risk: (1) Minor slip (1-2 weeks): Reduce polish work, focus on core flows only.
+                        (2) Moderate slip (3-4 weeks): Defer AI assistant and advanced features to Phase 2, launch with absolute minimum MVP.
+                        (3) Major slip (>4 weeks): Split release into two phases - core borrower flow first, LO features second phase. Escalation trigger: 2 consecutive sprints missing velocity by >20%.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-items">
+                <h3 class="action-items-title">
+                    <span>📋</span>
+                    <span>Action Items from Workshop</span>
+                </h3>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document complete risk register with all 47 identified risks</div>
+                        <div class="action-owner">Owner: Sarah Chen | Due: Nov 29, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Create risk monitoring dashboard with KPIs and early warning indicators</div>
+                        <div class="action-owner">Owner: Greg Harris | Due: Dec 3, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Finalize vendor contracts and SLAs with Prove, Plaid, TRUV</div>
+                        <div class="action-owner">Owner: Chris Smith | Due: Dec 1, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Schedule monthly compliance review meetings with legal team</div>
+                        <div class="action-owner">Owner: James Rodriguez | Due: Nov 30, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Set up automated security scanning and vulnerability monitoring</div>
+                        <div class="action-owner">Owner: Kevin Chen | Due: Dec 5, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Document contingency plans and escalation procedures</div>
+                        <div class="action-owner">Owner: Michael Jordan | Due: Dec 1, 2024 | Status: ✅ Complete</div>
+                    </div>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-checkbox" style="background: var(--accent-green);"></div>
+                    <div class="action-content">
+                        <div class="action-description">Conduct risk review in every sprint retrospective</div>
+                        <div class="action-owner">Owner: Alex Bennett | Due: Ongoing | Status: ✅ Complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="retrospective-section">
+                <h3 class="retro-title">Workshop Retrospective</h3>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>👍</span>
+                            <span>What Went Well</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Comprehensive risk identification achieved</li>
+                            <li>Honest, transparent discussion about risks</li>
+                            <li>Strong mitigation strategies developed</li>
+                            <li>Team confidence increased through preparedness</li>
+                            <li>Clear ownership assigned to all high-priority risks</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>📈</span>
+                            <span>What to Improve</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Could have done this workshop earlier</li>
+                            <li>Some risks may have been over-analyzed</li>
+                            <li>Need simpler tracking mechanism for medium/low risks</li>
+                            <li>Contingency planning needs more detail</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💡</span>
+                            <span>Action Items for Next Time</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Conduct risk workshops earlier in planning</li>
+                            <li>Create living risk document updated weekly</li>
+                            <li>Include risk review in all sprint retrospectives</li>
+                            <li>Develop more detailed contingency playbooks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop Series Best Practices & Learnings -->
+        <section class="content-section">
+            <h2 class="content-section-title">Workshop Best Practices & Lessons Learned</h2>
+
+            <div class="framework-card">
+                <div class="framework-title">Facilitation Techniques Employed</div>
+                <ul class="objectives-list">
+                    <li><strong>Liberating Structures:</strong> Used 1-2-4-All pattern for idea generation, Troika Consulting for problem-solving, 15% Solutions for action planning</li>
+                    <li><strong>Silent Brainstorming:</strong> Individual sticky note capture before group sharing reduced groupthink and increased participation</li>
+                    <li><strong>Timeboxing:</strong> Strict time limits for each activity with visible countdown timers maintained energy and focus</li>
+                    <li><strong>Parking Lot:</strong> Captured off-topic items for later discussion, keeping workshops on track</li>
+                    <li><strong>Round Robin:</strong> Ensured equal voice for all participants, preventing domination by senior stakeholders</li>
+                    <li><strong>Dot Voting:</strong> Democratic prioritization method that quickly achieved consensus on contentious topics</li>
+                    <li><strong>Working Agreements:</strong> Established ground rules at start: phones away, one conversation, respect all perspectives, bias toward action</li>
+                </ul>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-title">Virtual vs In-Person Considerations</div>
+                <div class="retro-columns">
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>🏢</span>
+                            <span>In-Person Advantages</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Higher energy and engagement levels</li>
+                            <li>Easier to read body language and dynamics</li>
+                            <li>Better for whiteboarding and hands-on activities</li>
+                            <li>Stronger relationship building and trust</li>
+                            <li>Fewer technical difficulties</li>
+                            <li>Spontaneous side conversations productive</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>💻</span>
+                            <span>Virtual Advantages</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>More accessible for remote team members</li>
+                            <li>Easier to include external stakeholders</li>
+                            <li>Digital artifacts automatically captured</li>
+                            <li>Lower cost (no travel, venue)</li>
+                            <li>Can record sessions for later review</li>
+                            <li>Better for international participants (time zones)</li>
+                        </ul>
+                    </div>
+                    <div class="retro-column">
+                        <div class="retro-column-title">
+                            <span>✅</span>
+                            <span>Our Approach</span>
+                        </div>
+                        <ul class="retro-items">
+                            <li>Hybrid model: Critical workshops in-person, refinement virtual</li>
+                            <li>Maximum 5 hours for virtual, 7 hours for in-person</li>
+                            <li>Always use digital tools (Miro) even in-person for documentation</li>
+                            <li>Record key sessions for those unable to attend</li>
+                            <li>Provide multiple breaks (every 90 minutes minimum)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-title">Workshop Effectiveness Metrics</div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">98%</div>
+                        <div class="metric-label">Avg Attendance Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">4.6/5</div>
+                        <div class="metric-label">Avg Satisfaction Score</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">87</div>
+                        <div class="metric-label">Total Action Items</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">34</div>
+                        <div class="metric-label">Key Decisions Made</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">95%</div>
+                        <div class="metric-label">Action Items Completed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Sprint 1 Readiness</div>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--text-primary); margin: 2rem 0 1rem;">Success Indicators Tracked</h4>
+                <ul class="objectives-list">
+                    <li><strong>Attendance:</strong> Target >90% attendance for all workshops. Achieved 98% average (exceeded target)</li>
+                    <li><strong>Participation:</strong> Track speaking time distribution. Goal: No single person >20% of speaking time. Achieved across all workshops.</li>
+                    <li><strong>Decision Velocity:</strong> Number of decisions per workshop hour. Target: 1.5 decisions/hour. Achieved 1.9 decisions/hour average.</li>
+                    <li><strong>Action Completion:</strong> Percentage of action items completed by due date. Target: >85%. Achieved 95%.</li>
+                    <li><strong>Satisfaction:</strong> Post-workshop NPS score. Target: >8/10. Achieved 9.2/10 average.</li>
+                    <li><strong>Deliverable Quality:</strong> Quality of artifacts produced (documentation, diagrams, plans). Peer-reviewed and approved by stakeholders.</li>
+                </ul>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-title">Follow-Up & Action Tracking Process</div>
+                <div class="framework-description">
+                    Workshops are only valuable if action items are tracked and completed. Our systematic follow-up process ensured 95% completion rate.
+                </div>
+
+                <h4 style="color: var(--text-primary); margin: 1.5rem 0 1rem;">Follow-Up Cadence</h4>
+                <ul class="objectives-list">
+                    <li><strong>Day 1:</strong> Send workshop summary, action items, and decisions to all participants and key stakeholders</li>
+                    <li><strong>Day 3:</strong> Reminder email to action item owners with links to tracking system (Jira)</li>
+                    <li><strong>Weekly:</strong> Status review in steering committee meeting. Flag any blockers or at-risk items.</li>
+                    <li><strong>Pre-Workshop:</strong> Review status of all outstanding actions before next workshop. Close loop on previous commitments.</li>
+                    <li><strong>Monthly:</strong> Dashboard review showing completion trends, bottlenecks, and owner performance</li>
+                </ul>
+
+                <h4 style="color: var(--text-primary); margin: 1.5rem 0 1rem;">Tracking Tools Used</h4>
+                <div class="materials-list">
+                    <div class="material-item">
+                        <span class="material-icon">📊</span>
+                        <span class="material-name">Jira for Action Item Tracking</span>
+                    </div>
+                    <div class="material-item">
+                        <span class="material-icon">📝</span>
+                        <span class="material-name">Confluence for Documentation</span>
+                    </div>
+                    <div class="material-item">
+                        <span class="material-icon">🗓️</span>
+                        <span class="material-name">Google Calendar for Reminders</span>
+                    </div>
+                    <div class="material-item">
+                        <span class="material-icon">📧</span>
+                        <span class="material-name">Automated Email Digests</span>
+                    </div>
+                    <div class="material-item">
+                        <span class="material-icon">📈</span>
+                        <span class="material-name">Custom Dashboard (Data Studio)</span>
+                    </div>
+                    <div class="material-item">
+                        <span class="material-icon">💬</span>
+                        <span class="material-name">Slack Channels for Updates</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-title">Future Workshop Roadmap</div>
+                <div class="framework-description">
+                    As Smart App 2.0 moves into execution, additional workshops planned to maintain alignment and address emerging needs.
+                </div>
+
+                <h4 style="color: var(--text-primary); margin: 1.5rem 0 1rem;">Planned Workshops (2025)</h4>
+                <table class="agenda-table">
+                    <thead>
+                        <tr>
+                            <th>Workshop</th>
+                            <th>Date</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sprint 0 Kickoff</strong></td>
+                            <td>Dec 2, 2024</td>
+                            <td>Team formation, tooling setup, first sprint planning</td>
+                            <td><span class="badge badge-success">Scheduled</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Design System Workshop</strong></td>
+                            <td>Dec 10, 2024</td>
+                            <td>Establish component library, design tokens, style guide</td>
+                            <td><span class="badge badge-success">Scheduled</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration Deep Dive</strong></td>
+                            <td>Jan 8, 2025</td>
+                            <td>Technical workshop with Prove, Plaid, TRUV engineers</td>
+                            <td><span class="badge badge-success">Scheduled</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alpha Release Readiness</strong></td>
+                            <td>Feb 11, 2025</td>
+                            <td>Go/no-go decision for alpha release, readiness checklist</td>
+                            <td><span class="badge badge-warning">Planned</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beta Feedback Synthesis</strong></td>
+                            <td>Apr 15, 2025</td>
+                            <td>Analyze beta testing results, prioritize fixes for launch</td>
+                            <td><span class="badge badge-warning">Planned</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Launch Readiness Review</strong></td>
+                            <td>May 13, 2025</td>
+                            <td>Final go/no-go for MVP launch, launch plan finalization</td>
+                            <td><span class="badge badge-warning">Planned</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Post-Launch Retrospective</strong></td>
+                            <td>Jun 10, 2025</td>
+                            <td>Comprehensive project retrospective, lessons learned, Phase 2 planning</td>
+                            <td><span class="badge badge-warning">Planned</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="outcomes-box">
+                <h3 class="outcomes-title">
+                    <span>💡</span>
+                    <span>Key Learnings & Recommendations</span>
+                </h3>
+
+                <div class="decision-box">
+                    <div class="decision-label">Learning 1: Invest in Pre-Work</div>
+                    <div class="decision-text">
+                        Workshops with robust pre-work assignments (reading, surveys, data analysis) were 3x more productive.
+                        Recommendation: Always assign meaningful pre-work, send reminders, and make pre-work completion visible to create social accountability.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Learning 2: Right People in the Room</div>
+                    <div class="decision-text">
+                        Decision-making workshops failed when key decision-makers absent. Technical workshops succeeded with right technical depth.
+                        Recommendation: Ruthlessly prioritize attendance of required participants. Reschedule if critical people can't attend.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Learning 3: Digital-First, Even In-Person</div>
+                    <div class="decision-text">
+                        Using Miro and digital tools even in in-person workshops created better artifacts and made remote participants feel included.
+                        Recommendation: Always use digital collaboration tools. Physical sticky notes are nostalgic but inefficient.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Learning 4: Action Item Accountability Critical</div>
+                    <div class="decision-text">
+                        95% completion rate achieved through systematic tracking, clear ownership, and public visibility of progress.
+                        Recommendation: Treat action items like sprint commitments. Name names, set dates, track religiously, escalate delays.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Learning 5: Frameworks Provide Structure</div>
+                    <div class="decision-text">
+                        RICE scoring, MoSCoW, risk matrices provided objective frameworks that reduced subjective debate and built consensus faster.
+                        Recommendation: Always use established frameworks. Don't reinvent prioritization methods. Frameworks create shared language.
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-label">Learning 6: Break Large Topics Into Multiple Sessions</div>
+                    <div class="decision-text">
+                        Technical architecture workshop (7 hours) was too long and exhausting. Should have been split across 2 days.
+                        Recommendation: Maximum 5 hours for virtual, 6 hours for in-person. Complex topics deserve multiple focused sessions.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Section -->
+        <section class="content-section" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)); border-radius: 16px;">
+            <h2 class="content-section-title" style="text-align: center; margin-bottom: 1.5rem;">Workshop Series Impact</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 900px; margin: 0 auto 2rem; line-height: 1.8;">
+                This comprehensive 6-workshop series established a solid foundation for Smart App 2.0 development. Through 32 hours
+                of collaborative planning involving 45+ participants, we achieved stakeholder alignment, validated our approach through
+                research insights, prioritized features using data-driven frameworks, designed robust technical architecture, created
+                realistic delivery roadmap, and proactively identified and mitigated risks.
+            </p>
+            <p style="color: var(--accent-teal); font-size: 1.1rem; font-weight: 600; margin-top: 2rem;">
+                Result: 100% team confidence in delivery readiness and 95% stakeholder alignment on strategic direction.
+            </p>
+            <div style="margin-top: 2rem;">
+                <a href="../index.html" class="back-button">← Back to Strategy Hub</a>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Set last updated date
+        document.addEventListener('DOMContentLoaded', function() {
+            const lastUpdated = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const updateElements = document.querySelectorAll('#lastUpdated');
+            updateElements.forEach(el => el.textContent = `Last Updated: ${lastUpdated}`);
+        });
+    </script>
+</body>
+</html>

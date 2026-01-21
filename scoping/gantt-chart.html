@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gantt Chart - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .gantt-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .overview-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .overview-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .overview-value {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .overview-subtext {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .phase-section {
+            margin-bottom: 3rem;
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .phase-dates {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .task-table th {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .task-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .task-table tbody tr:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-complete {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .status-in-progress {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+        }
+
+        .status-not-started {
+            background: rgba(100, 116, 139, 0.2);
+            color: var(--text-muted);
+            border: 1px solid var(--text-muted);
+        }
+
+        .status-blocked {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .milestone-card {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-yellow);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .milestone-date {
+            color: var(--accent-yellow);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .gantt-chart {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        .gantt-table {
+            width: 100%;
+            min-width: 1200px;
+            border-collapse: collapse;
+        }
+
+        .gantt-table th {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            padding: 0.75rem 0.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .gantt-table td {
+            border: 1px solid var(--border-color);
+            padding: 0;
+            height: 40px;
+            position: relative;
+        }
+
+        .gantt-task-label {
+            background: var(--bg-secondary);
+            padding: 0.75rem 1rem;
+            border-right: 2px solid var(--border-color);
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            min-width: 250px;
+        }
+
+        .gantt-bar {
+            position: absolute;
+            height: 24px;
+            top: 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .gantt-bar-phase0 { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .gantt-bar-phase1 { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .gantt-bar-phase2 { background: linear-gradient(135deg, #14b8a6, #5eead4); }
+        .gantt-bar-phase3 { background: linear-gradient(135deg, #10b981, #34d399); }
+        .gantt-bar-phase4 { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+
+        .critical-path {
+            border: 2px solid var(--accent-red);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .resource-role {
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-count {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .filter-button.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .sprint-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sprint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .sprint-name {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .sprint-dates {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .dependency-item {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent-purple);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .dependency-from {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .dependency-to {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-icon">📊</span>
+            <h2>Quick Jump</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="../index.html#prototypes">🚀 Prototypes</a></li>
+            <li><a href="../index.html#requirements">📋 Requirements</a></li>
+            <li><a href="../index.html#integrations">🔌 Integrations</a></li>
+            <li><a href="../index.html#research">🔬 Research</a></li>
+            <li><a href="../index.html#scoping">📅 Scoping</a></li>
+            <li><a href="../index.html#documents">📄 Documents</a></li>
+            <li><a href="../index.html#ai">🤖 AI Insights</a></li>
+            <li><a href="../index.html#metrics">📈 Metrics</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="label">PROJECT TIMELINE</div>
+                <h1>Smart App 2.0 - Gantt Chart</h1>
+                <p class="subtitle">Comprehensive project timeline with phases, milestones, dependencies, and resource allocation</p>
+            </div>
+        </header>
+
+        <!-- Project Overview -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">📊 PROJECT OVERVIEW</h2>
+                <div class="project-overview">
+                    <div class="overview-card">
+                        <div class="overview-label">Start Date</div>
+                        <div class="overview-value">Nov 1, 2024</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-label">Target Launch</div>
+                        <div class="overview-value">Jun 15, 2025</div>
+                        <div class="overview-subtext">MVP Launch</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-label">Total Duration</div>
+                        <div class="overview-value">14 Months</div>
+                        <div class="overview-subtext">Through Dec 2025</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-label">Budget</div>
+                        <div class="overview-value">$2.4M</div>
+                        <div class="overview-subtext">Total allocated</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-label">Team Size</div>
+                        <div class="overview-value">18</div>
+                        <div class="overview-subtext">Peak capacity</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-label">Sprints</div>
+                        <div class="overview-value">28</div>
+                        <div class="overview-subtext">2-week cycles</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Executive Summary</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                        The Smart App 2.0 project is a comprehensive digital transformation initiative spanning 14 months with a phased approach to delivery.
+                        The project began with Discovery & Research in November 2024, leading to MVP development from January-March 2025,
+                        followed by Beta Testing in April-May, and culminating in a June 15, 2025 launch date.
+                    </p>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Post-launch, the project continues with iteration phases through August and scaling/enhancement efforts through December 2025.
+                        The critical path focuses on core platform development, third-party integrations (Prove, Plaid, TRUV), and LO dashboard capabilities.
+                        Peak team capacity of 18 members will be reached during Phase 2 (Beta Testing) with strategic resource allocation across development,
+                        design, QA, and product management functions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Controls -->
+        <section class="section">
+            <div class="filter-bar">
+                <button class="filter-button active" onclick="filterByPhase('all')">All Phases</button>
+                <button class="filter-button" onclick="filterByPhase('phase0')">Discovery</button>
+                <button class="filter-button" onclick="filterByPhase('phase1')">MVP Dev</button>
+                <button class="filter-button" onclick="filterByPhase('phase2')">Beta</button>
+                <button class="filter-button" onclick="filterByPhase('phase3')">Launch</button>
+                <button class="filter-button" onclick="filterByPhase('phase4')">Scale</button>
+                <button class="filter-button" onclick="filterByStatus('critical')">Critical Path</button>
+            </div>
+        </section>
+
+        <!-- Visual Gantt Chart -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">📅 VISUAL TIMELINE</h2>
+                <div class="gantt-chart">
+                    <table class="gantt-table">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 250px;">Task / Phase</th>
+                                <th>Nov '24</th>
+                                <th>Dec '24</th>
+                                <th>Jan '25</th>
+                                <th>Feb '25</th>
+                                <th>Mar '25</th>
+                                <th>Apr '25</th>
+                                <th>May '25</th>
+                                <th>Jun '25</th>
+                                <th>Jul '25</th>
+                                <th>Aug '25</th>
+                                <th>Sep '25</th>
+                                <th>Oct '25</th>
+                                <th>Nov '25</th>
+                                <th>Dec '25</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="gantt-task-label">Phase 0: Discovery & Research</td>
+                                <td colspan="2" style="position: relative;">
+                                    <div class="gantt-bar gantt-bar-phase0" style="left: 0; width: 100%;">Discovery</div>
+                                </td>
+                                <td colspan="12"></td>
+                            </tr>
+                            <tr>
+                                <td class="gantt-task-label">Phase 1: MVP Development</td>
+                                <td colspan="2"></td>
+                                <td colspan="3" style="position: relative;">
+                                    <div class="gantt-bar gantt-bar-phase1 critical-path" style="left: 0; width: 100%;">MVP Dev</div>
+                                </td>
+                                <td colspan="9"></td>
+                            </tr>
+                            <tr>
+                                <td class="gantt-task-label">Phase 2: Beta Testing</td>
+                                <td colspan="2"></td>
+                                <td colspan="3"></td>
+                                <td colspan="2" style="position: relative;">
+                                    <div class="gantt-bar gantt-bar-phase2 critical-path" style="left: 0; width: 100%;">Beta</div>
+                                </td>
+                                <td colspan="7"></td>
+                            </tr>
+                            <tr>
+                                <td class="gantt-task-label">Phase 3: Launch & Iteration</td>
+                                <td colspan="2"></td>
+                                <td colspan="3"></td>
+                                <td colspan="2"></td>
+                                <td colspan="3" style="position: relative;">
+                                    <div class="gantt-bar gantt-bar-phase3" style="left: 0; width: 100%;">Launch</div>
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td class="gantt-task-label">Phase 4: Scale & Enhance</td>
+                                <td colspan="2"></td>
+                                <td colspan="3"></td>
+                                <td colspan="2"></td>
+                                <td colspan="3"></td>
+                                <td colspan="4" style="position: relative;">
+                                    <div class="gantt-bar gantt-bar-phase4" style="left: 0; width: 100%;">Scale & Enhance</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Milestones -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">🎯 KEY MILESTONES</h2>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">December 20, 2024</div>
+                    <div class="milestone-title">M1: Research Synthesis Complete</div>
+                    <div class="milestone-description">All user research, stakeholder interviews, and concept testing complete. Requirements documented and validated.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">January 15, 2025</div>
+                    <div class="milestone-title">M2: Development Kickoff</div>
+                    <div class="milestone-description">Technical architecture finalized, development environment setup, sprint planning complete.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">February 28, 2025</div>
+                    <div class="milestone-title">M3: Core Platform Complete</div>
+                    <div class="milestone-description">Authentication, database schema, API foundation, and basic UI framework operational.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">March 31, 2025</div>
+                    <div class="milestone-title">M4: Third-Party Integrations Live</div>
+                    <div class="milestone-description">Prove, Plaid, and TRUV integrations complete and tested. All API connections validated.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">April 15, 2025</div>
+                    <div class="milestone-title">M5: Beta Release</div>
+                    <div class="milestone-description">MVP feature-complete and deployed to beta environment. Internal testing begins.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">May 30, 2025</div>
+                    <div class="milestone-title">M6: Beta Testing Complete</div>
+                    <div class="milestone-description">All beta feedback incorporated, critical bugs resolved, performance optimized.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">June 15, 2025</div>
+                    <div class="milestone-title">M7: PUBLIC LAUNCH</div>
+                    <div class="milestone-description">Smart App 2.0 goes live to production. Marketing campaign launches. Support team activated.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">August 31, 2025</div>
+                    <div class="milestone-title">M8: Post-Launch Iteration Complete</div>
+                    <div class="milestone-description">Initial user feedback addressed. Platform stabilized. Analytics and monitoring optimized.</div>
+                </div>
+
+                <div class="milestone-card">
+                    <div class="milestone-date">December 31, 2025</div>
+                    <div class="milestone-title">M9: Phase 1 Enhancement Complete</div>
+                    <div class="milestone-description">Advanced features deployed. AI assistant fully operational. Mobile optimization complete.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 0: Discovery & Research -->
+        <section class="section phase-section">
+            <div class="gantt-container">
+                <div class="phase-header">
+                    <div class="phase-title">Phase 0: Discovery & Research</div>
+                    <div class="phase-dates">Nov 1, 2024 - Dec 20, 2024 (8 weeks)</div>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Task Name</th>
+                            <th style="width: 15%;">Start Date</th>
+                            <th style="width: 15%;">End Date</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 15%;">Owner</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 5%;">% Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Stakeholder Interviews</strong></td>
+                            <td>Nov 1, 2024</td>
+                            <td>Nov 15, 2024</td>
+                            <td>2 weeks</td>
+                            <td>Product Team</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO User Research Sessions</strong></td>
+                            <td>Nov 4, 2024</td>
+                            <td>Nov 22, 2024</td>
+                            <td>3 weeks</td>
+                            <td>UX Research</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Borrower Concept Testing</strong></td>
+                            <td>Nov 11, 2024</td>
+                            <td>Dec 6, 2024</td>
+                            <td>4 weeks</td>
+                            <td>UX Research</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Competitive Analysis</strong></td>
+                            <td>Nov 1, 2024</td>
+                            <td>Nov 22, 2024</td>
+                            <td>3 weeks</td>
+                            <td>Product Team</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Architecture Design</strong></td>
+                            <td>Nov 18, 2024</td>
+                            <td>Dec 13, 2024</td>
+                            <td>4 weeks</td>
+                            <td>Engineering</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Requirements Documentation</strong></td>
+                            <td>Nov 25, 2024</td>
+                            <td>Dec 20, 2024</td>
+                            <td>4 weeks</td>
+                            <td>Product Team</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Research Synthesis & Presentation</strong></td>
+                            <td>Dec 9, 2024</td>
+                            <td>Dec 20, 2024</td>
+                            <td>2 weeks</td>
+                            <td>UX Research</td>
+                            <td><span class="status-badge status-complete">Complete</span></td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                    <strong style="color: var(--text-primary);">Phase Summary:</strong>
+                    <span style="color: var(--text-secondary);"> 7 interviews with LOs, 13 stakeholder sessions, 42 concept testing participants. All requirements modules documented.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 1: MVP Development -->
+        <section class="section phase-section">
+            <div class="gantt-container">
+                <div class="phase-header" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">
+                    <div class="phase-title">Phase 1: MVP Development</div>
+                    <div class="phase-dates">Jan 6, 2025 - Mar 31, 2025 (12 weeks)</div>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Task Name</th>
+                            <th style="width: 15%;">Start Date</th>
+                            <th style="width: 15%;">End Date</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 15%;">Owner</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 5%;">% Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Development Environment Setup</strong></td>
+                            <td>Jan 6, 2025</td>
+                            <td>Jan 10, 2025</td>
+                            <td>1 week</td>
+                            <td>DevOps</td>
+                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td>85%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database Schema Design & Implementation</strong></td>
+                            <td>Jan 13, 2025</td>
+                            <td>Jan 31, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Backend Dev</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Authentication System (OTP + Prove)</strong></td>
+                            <td>Jan 20, 2025</td>
+                            <td>Feb 14, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Backend Dev</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prove Identity Integration</strong></td>
+                            <td>Jan 27, 2025</td>
+                            <td>Feb 21, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Integration Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plaid VOA Integration</strong></td>
+                            <td>Feb 3, 2025</td>
+                            <td>Feb 28, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Integration Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TRUV VOIE Integration</strong></td>
+                            <td>Feb 10, 2025</td>
+                            <td>Mar 7, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Integration Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Borrower UI - Progressive Disclosure</strong></td>
+                            <td>Feb 3, 2025</td>
+                            <td>Mar 14, 2025</td>
+                            <td>6 weeks</td>
+                            <td>Frontend Dev</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Dashboard & Monitoring</strong></td>
+                            <td>Feb 17, 2025</td>
+                            <td>Mar 21, 2025</td>
+                            <td>5 weeks</td>
+                            <td>Frontend Dev</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Co-Borrower Collaboration Features</strong></td>
+                            <td>Feb 24, 2025</td>
+                            <td>Mar 21, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Full Stack</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Configuration System</strong></td>
+                            <td>Mar 3, 2025</td>
+                            <td>Mar 24, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Backend Dev</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Point of Submit Logic</strong></td>
+                            <td>Mar 10, 2025</td>
+                            <td>Mar 28, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Backend Dev</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Unit & Integration Testing</strong></td>
+                            <td>Jan 20, 2025</td>
+                            <td>Mar 31, 2025</td>
+                            <td>10 weeks</td>
+                            <td>QA Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                    <strong style="color: var(--text-primary);">Dependencies:</strong>
+                    <span style="color: var(--text-secondary);"> Database schema must complete before authentication. Auth system required for all integrations. Progressive disclosure UI depends on backend APIs.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2: Beta Testing -->
+        <section class="section phase-section">
+            <div class="gantt-container">
+                <div class="phase-header" style="background: linear-gradient(135deg, #14b8a6, #5eead4);">
+                    <div class="phase-title">Phase 2: Beta Testing</div>
+                    <div class="phase-dates">Apr 1, 2025 - May 30, 2025 (8 weeks)</div>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Task Name</th>
+                            <th style="width: 15%;">Start Date</th>
+                            <th style="width: 15%;">End Date</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 15%;">Owner</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 5%;">% Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Beta Environment Deployment</strong></td>
+                            <td>Apr 1, 2025</td>
+                            <td>Apr 4, 2025</td>
+                            <td>1 week</td>
+                            <td>DevOps</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Internal Beta Testing (50 LOs)</strong></td>
+                            <td>Apr 7, 2025</td>
+                            <td>Apr 25, 2025</td>
+                            <td>3 weeks</td>
+                            <td>QA Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>External Beta Testing (100 Borrowers)</strong></td>
+                            <td>Apr 14, 2025</td>
+                            <td>May 9, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Product Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance Testing & Optimization</strong></td>
+                            <td>Apr 21, 2025</td>
+                            <td>May 9, 2025</td>
+                            <td>3 weeks</td>
+                            <td>QA Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security Audit & Penetration Testing</strong></td>
+                            <td>Apr 28, 2025</td>
+                            <td>May 16, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Security Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bug Fixes & Refinements</strong></td>
+                            <td>May 5, 2025</td>
+                            <td>May 23, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Dev Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documentation & Training Materials</strong></td>
+                            <td>May 12, 2025</td>
+                            <td>May 30, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Product Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Launch Readiness Review</strong></td>
+                            <td>May 26, 2025</td>
+                            <td>May 30, 2025</td>
+                            <td>1 week</td>
+                            <td>Leadership</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                    <strong style="color: var(--text-primary);">Critical Success Factors:</strong>
+                    <span style="color: var(--text-secondary);"> 50+ LOs and 100+ borrowers in beta. All P0/P1 bugs resolved. Performance benchmarks met (< 2s page load). Security audit passed.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 3: Launch & Iteration -->
+        <section class="section phase-section">
+            <div class="gantt-container">
+                <div class="phase-header" style="background: linear-gradient(135deg, #10b981, #34d399);">
+                    <div class="phase-title">Phase 3: Launch & Iteration</div>
+                    <div class="phase-dates">Jun 1, 2025 - Aug 31, 2025 (13 weeks)</div>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Task Name</th>
+                            <th style="width: 15%;">Start Date</th>
+                            <th style="width: 15%;">End Date</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 15%;">Owner</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 5%;">% Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Production Deployment</strong></td>
+                            <td>Jun 13, 2025</td>
+                            <td>Jun 15, 2025</td>
+                            <td>3 days</td>
+                            <td>DevOps</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PUBLIC LAUNCH - Jun 15, 2025</strong></td>
+                            <td>Jun 15, 2025</td>
+                            <td>Jun 15, 2025</td>
+                            <td>1 day</td>
+                            <td>All Teams</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marketing Campaign Launch</strong></td>
+                            <td>Jun 15, 2025</td>
+                            <td>Jul 15, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Marketing</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>24/7 Support Team Activation</strong></td>
+                            <td>Jun 15, 2025</td>
+                            <td>Ongoing</td>
+                            <td>-</td>
+                            <td>Support</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Feedback Collection & Analysis</strong></td>
+                            <td>Jun 15, 2025</td>
+                            <td>Jul 31, 2025</td>
+                            <td>7 weeks</td>
+                            <td>Product Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hotfix Releases (Week 1-2)</strong></td>
+                            <td>Jun 15, 2025</td>
+                            <td>Jun 28, 2025</td>
+                            <td>2 weeks</td>
+                            <td>Dev Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analytics Dashboard Setup</strong></td>
+                            <td>Jun 22, 2025</td>
+                            <td>Jul 11, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Data Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature Iteration Cycle 1</strong></td>
+                            <td>Jul 14, 2025</td>
+                            <td>Aug 8, 2025</td>
+                            <td>4 weeks</td>
+                            <td>Dev Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature Iteration Cycle 2</strong></td>
+                            <td>Aug 11, 2025</td>
+                            <td>Aug 29, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Dev Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                    <strong style="color: var(--text-primary);">Launch Criteria:</strong>
+                    <span style="color: var(--text-secondary);"> Zero P0 bugs. Support documentation complete. Monitoring and alerting active. Rollback plan tested. Marketing materials ready.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4: Scale & Enhance -->
+        <section class="section phase-section">
+            <div class="gantt-container">
+                <div class="phase-header" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                    <div class="phase-title">Phase 4: Scale & Enhance</div>
+                    <div class="phase-dates">Sep 1, 2025 - Dec 31, 2025 (17 weeks)</div>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Task Name</th>
+                            <th style="width: 15%;">Start Date</th>
+                            <th style="width: 15%;">End Date</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 15%;">Owner</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 5%;">% Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AI Assistant - Full Implementation</strong></td>
+                            <td>Sep 1, 2025</td>
+                            <td>Oct 11, 2025</td>
+                            <td>6 weeks</td>
+                            <td>AI Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile App Development (iOS)</strong></td>
+                            <td>Sep 8, 2025</td>
+                            <td>Nov 14, 2025</td>
+                            <td>10 weeks</td>
+                            <td>Mobile Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile App Development (Android)</strong></td>
+                            <td>Sep 8, 2025</td>
+                            <td>Nov 21, 2025</td>
+                            <td>11 weeks</td>
+                            <td>Mobile Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Advanced Analytics & Reporting</strong></td>
+                            <td>Sep 15, 2025</td>
+                            <td>Oct 31, 2025</td>
+                            <td>7 weeks</td>
+                            <td>Data Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LO Take Over Features</strong></td>
+                            <td>Oct 6, 2025</td>
+                            <td>Nov 7, 2025</td>
+                            <td>5 weeks</td>
+                            <td>Full Stack</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Soft Credit Pull Integration</strong></td>
+                            <td>Oct 13, 2025</td>
+                            <td>Nov 14, 2025</td>
+                            <td>5 weeks</td>
+                            <td>Integration Team</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance Optimization Sprint</strong></td>
+                            <td>Nov 17, 2025</td>
+                            <td>Dec 5, 2025</td>
+                            <td>3 weeks</td>
+                            <td>Engineering</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Year-End Review & 2026 Planning</strong></td>
+                            <td>Dec 8, 2025</td>
+                            <td>Dec 19, 2025</td>
+                            <td>2 weeks</td>
+                            <td>Leadership</td>
+                            <td><span class="status-badge status-not-started">Not Started</span></td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                    <strong style="color: var(--text-primary);">Enhancement Goals:</strong>
+                    <span style="color: var(--text-secondary);"> Native mobile apps launched. AI assistant achieving 80%+ satisfaction. Advanced analytics providing actionable insights. System handling 10k+ concurrent users.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Allocation -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">👥 RESOURCE ALLOCATION BY PHASE</h2>
+
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-role">Frontend Developers</div>
+                        <div class="resource-count">4-6</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Peak during Phase 1 & 2</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Backend Developers</div>
+                        <div class="resource-count">5-7</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Peak during Phase 1</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Integration Engineers</div>
+                        <div class="resource-count">2-3</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Phase 1 & 4</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">QA Engineers</div>
+                        <div class="resource-count">3-5</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Peak during Phase 2</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">UX/UI Designers</div>
+                        <div class="resource-count">2-3</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Phase 0, 1, & 4</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Product Managers</div>
+                        <div class="resource-count">2</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">All phases</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">DevOps Engineers</div>
+                        <div class="resource-count">2</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">All phases</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-role">Data/AI Engineers</div>
+                        <div class="resource-count">1-2</div>
+                        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Phase 3 & 4</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Team Capacity by Phase</h3>
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Team Size</th>
+                                <th>FTEs</th>
+                                <th>Budget Allocated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Phase 0: Discovery & Research</td>
+                                <td>8 members</td>
+                                <td>6.4 FTEs</td>
+                                <td>$240,000</td>
+                            </tr>
+                            <tr>
+                                <td>Phase 1: MVP Development</td>
+                                <td>15 members</td>
+                                <td>14.5 FTEs</td>
+                                <td>$870,000</td>
+                            </tr>
+                            <tr>
+                                <td>Phase 2: Beta Testing</td>
+                                <td>18 members</td>
+                                <td>17.0 FTEs</td>
+                                <td>$544,000</td>
+                            </tr>
+                            <tr>
+                                <td>Phase 3: Launch & Iteration</td>
+                                <td>14 members</td>
+                                <td>12.8 FTEs</td>
+                                <td>$416,000</td>
+                            </tr>
+                            <tr>
+                                <td>Phase 4: Scale & Enhance</td>
+                                <td>12 members</td>
+                                <td>11.0 FTEs</td>
+                                <td>$374,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sprint Planning -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">🏃 SPRINT PLANNING (2-Week Cycles)</h2>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 1-2: Environment & Foundation</div>
+                        <div class="sprint-dates">Jan 6 - Feb 2, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Development environment setup and CI/CD pipeline</li>
+                        <li>Database schema design and initial migration</li>
+                        <li>API framework and authentication scaffolding</li>
+                        <li>Design system implementation in code</li>
+                    </ul>
+                </div>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 3-4: Authentication & Core APIs</div>
+                        <div class="sprint-dates">Feb 3 - Mar 2, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>OTP authentication system complete</li>
+                        <li>Prove integration (identity verification)</li>
+                        <li>User management APIs</li>
+                        <li>Initial borrower UI screens</li>
+                    </ul>
+                </div>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 5-6: Third-Party Integrations</div>
+                        <div class="sprint-dates">Mar 3 - Mar 30, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Plaid VOA integration complete</li>
+                        <li>TRUV VOIE integration complete</li>
+                        <li>Progressive disclosure UI implementation</li>
+                        <li>LO dashboard foundation</li>
+                    </ul>
+                </div>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 7-8: Beta Preparation</div>
+                        <div class="sprint-dates">Mar 31 - Apr 27, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Co-borrower collaboration features</li>
+                        <li>LO configuration system and UI</li>
+                        <li>Point of submit validation</li>
+                        <li>Comprehensive testing and bug fixes</li>
+                    </ul>
+                </div>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 9-12: Beta Testing & Refinement</div>
+                        <div class="sprint-dates">Apr 28 - Jun 14, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Internal and external beta testing</li>
+                        <li>Performance optimization</li>
+                        <li>Security audit remediation</li>
+                        <li>Documentation and training materials</li>
+                    </ul>
+                </div>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 13-20: Post-Launch Iteration</div>
+                        <div class="sprint-dates">Jun 15 - Oct 12, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Production support and hotfixes</li>
+                        <li>User feedback implementation</li>
+                        <li>Feature iterations based on analytics</li>
+                        <li>Platform stabilization</li>
+                    </ul>
+                </div>
+
+                <div class="sprint-card">
+                    <div class="sprint-header">
+                        <div class="sprint-name">Sprint 21-28: Enhancement & Scale</div>
+                        <div class="sprint-dates">Oct 13 - Dec 31, 2025</div>
+                    </div>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                        <li>AI assistant full implementation</li>
+                        <li>Mobile app development (iOS & Android)</li>
+                        <li>Advanced analytics and reporting</li>
+                        <li>LO take over features</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Critical Path Analysis -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">⚠️ CRITICAL PATH ANALYSIS</h2>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid var(--accent-red); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--accent-red); font-size: 1.1rem; margin-bottom: 1rem;">Critical Path Tasks (Zero Float)</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">These tasks have no scheduling flexibility. Any delay directly impacts the launch date.</p>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">Critical Task</th>
+                            <th style="width: 15%;">Start Date</th>
+                            <th style="width: 15%;">End Date</th>
+                            <th style="width: 10%;">Duration</th>
+                            <th style="width: 25%;">Risk Factor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Database Schema Implementation</strong></td>
+                            <td>Jan 13, 2025</td>
+                            <td>Jan 31, 2025</td>
+                            <td>3 weeks</td>
+                            <td><span class="status-badge status-blocked">HIGH</span> - Blocks all development</td>
+                        </tr>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Authentication System</strong></td>
+                            <td>Jan 20, 2025</td>
+                            <td>Feb 14, 2025</td>
+                            <td>4 weeks</td>
+                            <td><span class="status-badge status-blocked">HIGH</span> - Required for all integrations</td>
+                        </tr>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Prove Integration</strong></td>
+                            <td>Jan 27, 2025</td>
+                            <td>Feb 21, 2025</td>
+                            <td>4 weeks</td>
+                            <td><span class="status-badge status-blocked">HIGH</span> - Core identity verification</td>
+                        </tr>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Progressive Disclosure UI</strong></td>
+                            <td>Feb 3, 2025</td>
+                            <td>Mar 14, 2025</td>
+                            <td>6 weeks</td>
+                            <td><span class="status-badge status-blocked">HIGH</span> - Primary user experience</td>
+                        </tr>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Beta Environment Deployment</strong></td>
+                            <td>Apr 1, 2025</td>
+                            <td>Apr 4, 2025</td>
+                            <td>1 week</td>
+                            <td><span class="status-badge status-in-progress">MEDIUM</span> - Gates beta testing</td>
+                        </tr>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Security Audit</strong></td>
+                            <td>Apr 28, 2025</td>
+                            <td>May 16, 2025</td>
+                            <td>3 weeks</td>
+                            <td><span class="status-badge status-blocked">HIGH</span> - Required for launch approval</td>
+                        </tr>
+                        <tr style="border-left: 4px solid var(--accent-red);">
+                            <td><strong>Launch Readiness Review</strong></td>
+                            <td>May 26, 2025</td>
+                            <td>May 30, 2025</td>
+                            <td>1 week</td>
+                            <td><span class="status-badge status-blocked">HIGH</span> - Final go/no-go decision</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 1rem;">Mitigation Strategies</h3>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li><strong>Database Schema:</strong> Early architecture review with stakeholders. Freeze schema by Jan 31.</li>
+                        <li><strong>Authentication:</strong> Parallel development of OTP and Prove. Dedicated integration engineer assigned.</li>
+                        <li><strong>Third-Party APIs:</strong> Sandbox environments set up early. Weekly sync with vendor support teams.</li>
+                        <li><strong>Security Audit:</strong> Continuous security testing during development. Pre-audit in early May.</li>
+                        <li><strong>Beta Testing:</strong> Beta participants recruited in advance. Test scripts prepared early.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dependencies & Blockers -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">🔗 DEPENDENCIES & BLOCKERS</h2>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Task Dependencies</h3>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">Database Schema → Authentication System</div>
+                        <div class="dependency-to">Auth tables and user models must be defined before authentication logic can be built</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">Authentication System → All Third-Party Integrations</div>
+                        <div class="dependency-to">User authentication required before Prove, Plaid, and TRUV can be integrated</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">Backend APIs → Frontend UI</div>
+                        <div class="dependency-to">API endpoints must be available before UI components can consume data</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">Prove Integration → Auto-Population Features</div>
+                        <div class="dependency-to">Identity data from Prove needed to pre-fill borrower information</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">LO Configuration Backend → LO Configuration UI</div>
+                        <div class="dependency-to">Configuration APIs must exist before admin interface can be built</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">MVP Complete → Beta Testing</div>
+                        <div class="dependency-to">All core features must be implemented before beta can begin</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">Security Audit → Production Deployment</div>
+                        <div class="dependency-to">Security audit must pass before launch approval is granted</div>
+                    </div>
+
+                    <div class="dependency-item">
+                        <div class="dependency-from">Production Launch → Mobile App Development</div>
+                        <div class="dependency-to">Web platform APIs must be stable before mobile development begins</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Known Blockers & Risks</h3>
+
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Blocker / Risk</th>
+                                <th style="width: 15%;">Probability</th>
+                                <th style="width: 15%;">Impact</th>
+                                <th style="width: 30%;">Mitigation Plan</th>
+                                <th style="width: 15%;">Owner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Third-party API rate limits</td>
+                                <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                                <td><span class="status-badge status-blocked">HIGH</span></td>
+                                <td>Negotiate enterprise tier with vendors early. Implement caching strategy.</td>
+                                <td>Integration Team</td>
+                            </tr>
+                            <tr>
+                                <td>Holiday slowdown (Dec 20-Jan 3)</td>
+                                <td><span class="status-badge status-blocked">HIGH</span></td>
+                                <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                                <td>Complete research phase before holidays. Buffer in schedule.</td>
+                                <td>PM</td>
+                            </tr>
+                            <tr>
+                                <td>Resource availability conflicts</td>
+                                <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                                <td><span class="status-badge status-blocked">HIGH</span></td>
+                                <td>Lock in team commitments early. Identify backup resources.</td>
+                                <td>PM</td>
+                            </tr>
+                            <tr>
+                                <td>Compliance requirements change</td>
+                                <td><span class="status-badge status-not-started">LOW</span></td>
+                                <td><span class="status-badge status-blocked">HIGH</span></td>
+                                <td>Monthly compliance review meetings. Buffer time in schedule.</td>
+                                <td>Product Team</td>
+                            </tr>
+                            <tr>
+                                <td>Performance issues at scale</td>
+                                <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                                <td><span class="status-badge status-blocked">HIGH</span></td>
+                                <td>Load testing in beta phase. Performance monitoring from day 1.</td>
+                                <td>Engineering</td>
+                            </tr>
+                            <tr>
+                                <td>Beta participant recruitment</td>
+                                <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                                <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                                <td>Begin recruitment in March. Incentive program for participants.</td>
+                                <td>Product Team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Holiday & Vacation Impacts -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">📅 HOLIDAY & VACATION IMPACTS</h2>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Period</th>
+                            <th style="width: 20%;">Impact</th>
+                            <th style="width: 35%;">Affected Activities</th>
+                            <th style="width: 20%;">Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Thanksgiving 2024</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Nov 28-29, 2024</span></td>
+                            <td><span class="status-badge status-not-started">LOW</span></td>
+                            <td>Stakeholder interviews may be delayed</td>
+                            <td>Schedule interviews before Nov 27</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Winter Holidays 2024</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Dec 23 - Jan 3, 2025</span></td>
+                            <td><span class="status-badge status-blocked">HIGH</span></td>
+                            <td>Research synthesis, planning activities</td>
+                            <td>Complete Phase 0 by Dec 20. Team ramp-up Jan 6.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memorial Day 2025</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">May 26, 2025</span></td>
+                            <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                            <td>Launch readiness review scheduled this week</td>
+                            <td>Complete review by May 23. Buffer days added.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Independence Day 2025</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Jul 4, 2025</span></td>
+                            <td><span class="status-badge status-not-started">LOW</span></td>
+                            <td>Post-launch iteration work</td>
+                            <td>Skeleton support crew for emergency issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Labor Day 2025</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Sep 1, 2025</span></td>
+                            <td><span class="status-badge status-not-started">LOW</span></td>
+                            <td>Phase 4 kickoff scheduled</td>
+                            <td>Start Phase 4 on Sep 2 (Tuesday)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thanksgiving 2025</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Nov 27-28, 2025</span></td>
+                            <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                            <td>Mobile app development in progress</td>
+                            <td>No critical deliverables this week</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Winter Holidays 2025</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Dec 24 - Jan 3, 2026</span></td>
+                            <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                            <td>Year-end review and planning</td>
+                            <td>Complete planning by Dec 23. Resume Jan 6, 2026.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Summer Vacation Period</strong><br><span style="font-size: 0.85rem; color: var(--text-secondary);">Jun-Aug 2025</span></td>
+                            <td><span class="status-badge status-in-progress">MEDIUM</span></td>
+                            <td>Reduced team capacity (15-20% out)</td>
+                            <td>Stagger vacations. Maintain minimum coverage.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 1rem;">Vacation Planning Guidelines</h3>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li>All vacation requests must be submitted 3 weeks in advance during critical phases (Phase 1-3)</li>
+                        <li>Maximum 20% of team can be out during active sprint weeks</li>
+                        <li>Critical path task owners must identify backup coverage before PTO</li>
+                        <li>Launch week (Jun 9-20, 2025) requires all hands on deck - limited PTO approval</li>
+                        <li>Summer vacation concentration in July-August with staggered schedules</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Go-Live Checklist -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">✅ GO-LIVE CHECKLIST (June 15, 2025)</h2>
+
+                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 0.5rem;">Launch Prerequisites</h3>
+                    <p style="color: var(--text-secondary);">All items must be completed and signed off before production deployment.</p>
+                </div>
+
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">✓</th>
+                            <th style="width: 35%;">Checklist Item</th>
+                            <th style="width: 20%;">Owner</th>
+                            <th style="width: 15%;">Target Date</th>
+                            <th style="width: 25%;">Verification Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>All P0 and P1 bugs resolved</strong></td>
+                            <td>Engineering</td>
+                            <td>Jun 10, 2025</td>
+                            <td>JIRA query results = 0</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Security audit passed with no critical findings</strong></td>
+                            <td>Security Team</td>
+                            <td>May 16, 2025</td>
+                            <td>Third-party audit report</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Performance benchmarks met (< 2s page load)</strong></td>
+                            <td>Engineering</td>
+                            <td>Jun 5, 2025</td>
+                            <td>Load testing report</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Accessibility compliance (WCAG 2.1 AA)</strong></td>
+                            <td>Frontend Team</td>
+                            <td>May 30, 2025</td>
+                            <td>Automated + manual audit</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>All third-party integrations tested in production</strong></td>
+                            <td>Integration Team</td>
+                            <td>Jun 8, 2025</td>
+                            <td>Integration test suite passes</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Database migration plan tested and validated</strong></td>
+                            <td>DevOps</td>
+                            <td>Jun 1, 2025</td>
+                            <td>Dry run in staging successful</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Rollback plan documented and tested</strong></td>
+                            <td>DevOps</td>
+                            <td>Jun 5, 2025</td>
+                            <td>Rollback drill completed</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Monitoring and alerting systems active</strong></td>
+                            <td>DevOps</td>
+                            <td>Jun 10, 2025</td>
+                            <td>Test alerts triggered successfully</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Incident response plan documented</strong></td>
+                            <td>DevOps</td>
+                            <td>Jun 1, 2025</td>
+                            <td>Runbook review complete</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Support team trained and ready</strong></td>
+                            <td>Support</td>
+                            <td>Jun 10, 2025</td>
+                            <td>Training completion certificates</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>User documentation and help center live</strong></td>
+                            <td>Product Team</td>
+                            <td>Jun 8, 2025</td>
+                            <td>Content review and approval</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Marketing materials and emails ready</strong></td>
+                            <td>Marketing</td>
+                            <td>Jun 12, 2025</td>
+                            <td>Campaign preview and approval</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Legal and compliance sign-off</strong></td>
+                            <td>Legal/Compliance</td>
+                            <td>Jun 5, 2025</td>
+                            <td>Written approval email</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Executive stakeholder approval</strong></td>
+                            <td>Leadership</td>
+                            <td>Jun 12, 2025</td>
+                            <td>Go/No-Go meeting decision</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Data backup and recovery tested</strong></td>
+                            <td>DevOps</td>
+                            <td>Jun 8, 2025</td>
+                            <td>Recovery drill successful</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>CDN and infrastructure scaled for load</strong></td>
+                            <td>DevOps</td>
+                            <td>Jun 10, 2025</td>
+                            <td>Capacity planning review</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>Beta feedback incorporated and validated</strong></td>
+                            <td>Product Team</td>
+                            <td>May 30, 2025</td>
+                            <td>Beta retrospective complete</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">☐</td>
+                            <td><strong>API rate limits confirmed with vendors</strong></td>
+                            <td>Integration Team</td>
+                            <td>Jun 1, 2025</td>
+                            <td>Written confirmation from vendors</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid var(--accent-green); border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
+                    <h3 style="color: var(--accent-green); font-size: 1rem; margin-bottom: 0.75rem;">Launch Day Procedures (June 15, 2025)</h3>
+                    <ol style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li><strong>6:00 AM ET:</strong> Final go/no-go decision. Review all checklist items and metrics.</li>
+                        <li><strong>7:00 AM ET:</strong> Begin production deployment. Database migrations execute.</li>
+                        <li><strong>8:00 AM ET:</strong> Application deployment complete. Smoke tests run automatically.</li>
+                        <li><strong>9:00 AM ET:</strong> Internal team testing. Verify all core features operational.</li>
+                        <li><strong>10:00 AM ET:</strong> Public launch. Marketing emails sent. Social media announcements.</li>
+                        <li><strong>10:00 AM - 6:00 PM ET:</strong> War room active. All teams monitoring metrics and support tickets.</li>
+                        <li><strong>6:00 PM ET:</strong> Day 1 retrospective. Review issues, metrics, and next steps.</li>
+                        <li><strong>Week 1:</strong> Daily stand-ups and issue triage. Hotfix deployments as needed.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post-Launch Roadmap -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">🚀 POST-LAUNCH ROADMAP (2026 & Beyond)</h2>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Q1 2026: Platform Maturity</h3>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li><strong>Advanced Analytics Dashboard:</strong> Real-time insights for LOs on application progress, conversion rates, and borrower behavior</li>
+                        <li><strong>Enhanced AI Assistant:</strong> Expanded capabilities including document analysis and intelligent recommendations</li>
+                        <li><strong>Mobile App Enhancements:</strong> Push notifications, offline mode, and biometric authentication</li>
+                        <li><strong>Additional Integrations:</strong> Credit monitoring services, title companies, home insurance providers</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Q2 2026: Scale & Automation</h3>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li><strong>Automated Underwriting:</strong> AI-powered pre-qualification and automated decision engine</li>
+                        <li><strong>White Label Solution:</strong> Partner portal allowing other lenders to use the platform</li>
+                        <li><strong>International Expansion:</strong> Support for Canadian mortgage applications</li>
+                        <li><strong>Advanced Collaboration:</strong> Real-time video chat, screen sharing, and co-browsing with LOs</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Q3-Q4 2026: Innovation</h3>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li><strong>Blockchain for Document Verification:</strong> Immutable document storage and verification</li>
+                        <li><strong>Predictive Analytics:</strong> ML models predicting application completion likelihood and LTV optimization</li>
+                        <li><strong>Voice Interface:</strong> Voice-activated form filling and status updates</li>
+                        <li><strong>Open API Platform:</strong> Public API for third-party developers to build integrations</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">Future Vision (2027+)</h3>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                        <li><strong>End-to-End Digital Closing:</strong> Fully digital closing process with e-notary and electronic recording</li>
+                        <li><strong>Marketplace Model:</strong> Borrowers can compare offers from multiple lenders in real-time</li>
+                        <li><strong>Embedded Finance:</strong> Mortgage application embedded directly in real estate portals and apps</li>
+                        <li><strong>AI-Powered Homebuying Assistant:</strong> Complete guidance from search to closing</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); border-radius: 8px; padding: 2rem; margin-top: 2rem;">
+                    <h3 style="color: white; font-size: 1.2rem; margin-bottom: 0.75rem;">Success Metrics (12 Months Post-Launch)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 700; color: white;">80%</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Application Completion Rate</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 700; color: white;">50k+</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Applications Processed</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 700; color: white;">4.5/5</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">User Satisfaction Score</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 700; color: white;">-40%</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Time to Submit Reduction</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 700; color: white;">$12M</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">Operational Cost Savings</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 700; color: white;">95%</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.9);">LO Adoption Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget Allocation -->
+        <section class="section">
+            <div class="gantt-container">
+                <h2 class="section-title">💰 BUDGET ALLOCATION BY PHASE</h2>
+
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+
+                <table class="task-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Cost Category</th>
+                            <th style="width: 15%;">Phase 0</th>
+                            <th style="width: 15%;">Phase 1</th>
+                            <th style="width: 15%;">Phase 2</th>
+                            <th style="width: 15%;">Phase 3</th>
+                            <th style="width: 15%;">Phase 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Personnel</strong></td>
+                            <td>$180,000</td>
+                            <td>$620,000</td>
+                            <td>$380,000</td>
+                            <td>$290,000</td>
+                            <td>$260,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infrastructure & Hosting</strong></td>
+                            <td>$8,000</td>
+                            <td>$45,000</td>
+                            <td>$32,000</td>
+                            <td>$28,000</td>
+                            <td>$24,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Third-Party Licenses</strong></td>
+                            <td>$12,000</td>
+                            <td>$95,000</td>
+                            <td>$48,000</td>
+                            <td>$36,000</td>
+                            <td>$32,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security & Compliance</strong></td>
+                            <td>$5,000</td>
+                            <td>$40,000</td>
+                            <td>$55,000</td>
+                            <td>$22,000</td>
+                            <td>$18,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marketing</strong></td>
+                            <td>$0</td>
+                            <td>$0</td>
+                            <td>$5,000</td>
+                            <td>$25,000</td>
+                            <td>$20,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contingency (10%)</strong></td>
+                            <td>$20,000</td>
+                            <td>$70,000</td>
+                            <td>$24,000</td>
+                            <td>$15,000</td>
+                            <td>$20,000</td>
+                        </tr>
+                        <tr style="font-weight: 700; background: var(--bg-secondary);">
+                            <td><strong>Phase Total</strong></td>
+                            <td>$240,000</td>
+                            <td>$870,000</td>
+                            <td>$544,000</td>
+                            <td>$416,000</td>
+                            <td>$374,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="color: var(--text-primary); font-size: 1.3rem; margin-bottom: 0.25rem;">Total Project Budget</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">All phases (Nov 2024 - Dec 2025)</p>
+                        </div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-green);">$2,444,000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="height: 50px;"></div>
+    </div>
+
+    <script>
+        function filterByPhase(phase) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.filter-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Filter logic
+            const sections = document.querySelectorAll('.phase-section');
+
+            if (phase === 'all') {
+                sections.forEach(section => section.style.display = 'block');
+            } else if (phase === 'critical') {
+                // Show only critical path items
+                sections.forEach(section => section.style.display = 'none');
+            } else {
+                sections.forEach(section => {
+                    const phaseTitle = section.querySelector('.phase-title').textContent.toLowerCase();
+                    if (phaseTitle.includes(phase.replace('phase', 'phase '))) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+
+            console.log('Filtering by:', phase);
+        }
+
+        function filterByStatus(status) {
+            document.querySelectorAll('.filter-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            console.log('Filtering by status:', status);
+        }
+
+        // Budget Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const budgetCtx = document.getElementById('budgetChart');
+            if (budgetCtx) {
+                new Chart(budgetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Phase 0: Discovery', 'Phase 1: MVP Dev', 'Phase 2: Beta', 'Phase 3: Launch', 'Phase 4: Scale'],
+                        datasets: [
+                            {
+                                label: 'Personnel',
+                                data: [180000, 620000, 380000, 290000, 260000],
+                                backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                                borderColor: 'rgba(59, 130, 246, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Infrastructure',
+                                data: [8000, 45000, 32000, 28000, 24000],
+                                backgroundColor: 'rgba(20, 184, 166, 0.8)',
+                                borderColor: 'rgba(20, 184, 166, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Third-Party',
+                                data: [12000, 95000, 48000, 36000, 32000],
+                                backgroundColor: 'rgba(139, 92, 246, 0.8)',
+                                borderColor: 'rgba(139, 92, 246, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Security',
+                                data: [5000, 40000, 55000, 22000, 18000],
+                                backgroundColor: 'rgba(245, 158, 11, 0.8)',
+                                borderColor: 'rgba(245, 158, 11, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Marketing',
+                                data: [0, 0, 5000, 25000, 20000],
+                                backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                                borderColor: 'rgba(16, 185, 129, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Contingency',
+                                data: [20000, 70000, 24000, 15000, 20000],
+                                backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                                borderColor: 'rgba(239, 68, 68, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: {
+                                    color: 'rgba(51, 65, 85, 0.3)'
+                                },
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            },
+                            y: {
+                                stacked: true,
+                                grid: {
+                                    color: 'rgba(51, 65, 85, 0.3)'
+                                },
+                                ticks: {
+                                    color: '#94a3b8',
+                                    callback: function(value) {
+                                        return '$' + (value / 1000) + 'k';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#94a3b8',
+                                    padding: 15,
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += '$' + context.parsed.y.toLocaleString();
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
