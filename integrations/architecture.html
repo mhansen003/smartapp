@@ -719,6 +719,71 @@
 
         .subnet-public .subnet-label { color: #3b82f6; }
         .subnet-private .subnet-label { color: #f59e0b; }
+
+        /* Tab Navigation Styles */
+        .tabs-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+        }
+
+        .tabs-nav {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: var(--accent-teal);
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .tab-button.active {
+            color: var(--accent-teal);
+            border-bottom-color: var(--accent-teal);
+            background: rgba(20, 184, 166, 0.08);
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .tabs-nav {
+                flex-wrap: wrap;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -803,6 +868,32 @@
                 <strong>Status:</strong> Proposed architecture subject to validation, vendor selection, and stakeholder technical decisions
             </p>
         </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs-container">
+            <div class="tabs-nav" role="tablist">
+                <button class="tab-button active" role="tab" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(event, 'tab-overview')">
+                    🎯 Overview & Layers
+                </button>
+                <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-stack" onclick="switchTab(event, 'tab-stack')">
+                    💻 Tech Stack
+                </button>
+                <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-integrations" onclick="switchTab(event, 'tab-integrations')">
+                    🔌 Integrations & APIs
+                </button>
+                <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-security" onclick="switchTab(event, 'tab-security')">
+                    🔐 Security & Data
+                </button>
+                <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-performance" onclick="switchTab(event, 'tab-performance')">
+                    ⚡ Performance
+                </button>
+                <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-infrastructure" onclick="switchTab(event, 'tab-infrastructure')">
+                    ⚙️ Infrastructure
+                </button>
+            </div>
+
+            <!-- Tab Panel 1: Overview & Layers -->
+            <div id="tab-overview" class="tab-panel active" role="tabpanel">
 
         <!-- System Overview -->
         <section id="overview" class="section">
@@ -1179,6 +1270,12 @@
             </div>
         </section>
 
+            </div>
+            <!-- End Tab Panel 1 -->
+
+            <!-- Tab Panel 2: Tech Stack -->
+            <div id="tab-stack" class="tab-panel" role="tabpanel">
+
         <!-- Technology Stack -->
         <section id="tech-stack" class="section">
             <h2 class="section-title">💻 TECHNOLOGY STACK BREAKDOWN</h2>
@@ -1416,6 +1513,12 @@
                 </table>
             </div>
         </section>
+
+            </div>
+            <!-- End Tab Panel 2 -->
+
+            <!-- Tab Panel 3: Integrations & APIs -->
+            <div id="tab-integrations" class="tab-panel" role="tabpanel">
 
         <!-- Third-Party Integrations -->
         <section id="integrations" class="section">
@@ -1936,6 +2039,12 @@ GET    /api/v1/applications/{id}/documents  # Nested resources</code>
                 </table>
             </div>
         </section>
+
+            </div>
+            <!-- End Tab Panel 3 -->
+
+            <!-- Tab Panel 4: Security & Data Flow -->
+            <div id="tab-security" class="tab-panel" role="tabpanel">
 
         <!-- Authentication & Authorization -->
         <section id="authentication" class="section">
@@ -2548,6 +2657,12 @@ Client auto-reconnects on disconnect</code>
             </div>
         </section>
 
+            </div>
+            <!-- End Tab Panel 4 -->
+
+            <!-- Tab Panel 5: Performance -->
+            <div id="tab-performance" class="tab-panel" role="tabpanel">
+
         <!-- Caching Strategy -->
         <section id="caching" class="section">
             <h2 class="section-title">⚡ CACHING STRATEGY</h2>
@@ -2836,6 +2951,12 @@ app.get('/api/v1/events', authenticate, (req, res) => {
                 </div>
             </div>
         </section>
+
+            </div>
+            <!-- End Tab Panel 5 -->
+
+            <!-- Tab Panel 6: Infrastructure -->
+            <div id="tab-infrastructure" class="tab-panel" role="tabpanel">
 
         <!-- File Storage -->
         <section id="storage" class="section">
@@ -5581,6 +5702,12 @@ Resources:
             </div>
         </section>
 
+            </div>
+            <!-- End Tab Panel 6 -->
+
+        </div>
+        <!-- End Tabs Container -->
+
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
@@ -5593,5 +5720,30 @@ Resources:
             </div>
         </footer>
     </div>
+
+    <script>
+        function switchTab(event, tabId) {
+            // Remove active class from all tab buttons and panels
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+                button.setAttribute('aria-selected', 'false');
+            });
+
+            tabPanels.forEach(panel => {
+                panel.classList.remove('active');
+            });
+
+            // Add active class to clicked button and corresponding panel
+            event.currentTarget.classList.add('active');
+            event.currentTarget.setAttribute('aria-selected', 'true');
+            document.getElementById(tabId).classList.add('active');
+
+            // Scroll to top of tabs container
+            document.querySelector('.tabs-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
 </body>
 </html>
