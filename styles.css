@@ -108,6 +108,34 @@ body::before {
     border-left-color: var(--accent-blue);
 }
 
+/* Sidebar Sub-Navigation */
+.sidebar-subnav {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0.5rem 0;
+}
+
+.sidebar-subnav li {
+    margin: 0;
+}
+
+.sidebar-subnav a {
+    display: block;
+    padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.sidebar-subnav a:hover {
+    color: var(--accent-teal);
+    background: rgba(20, 184, 166, 0.05);
+    border-left-color: var(--accent-teal);
+}
+
 .container {
     position: relative;
     z-index: 1;
