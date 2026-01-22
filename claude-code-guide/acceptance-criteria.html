@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceptance Criteria - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-primary);
+            padding-left: 0;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .checklist-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .checklist-header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .checklist-subtitle {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin: 0;
+        }
+
+        .checklist-items {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .checklist-items li {
+            padding: 0.75rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .checklist-items li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-items li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-size: 1.25rem;
+        }
+
+        .category-badge {
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .category-badge.ux { background: var(--accent-purple); }
+        .category-badge.component { background: var(--accent-blue); }
+        .category-badge.quality { background: var(--accent-green); }
+        .category-badge.technical { background: var(--accent-yellow); }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .bullet-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .bullet-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .code-inline {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="getting-started.html" class="breadcrumb-link">Claude Code Guide</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Acceptance Criteria</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">QUALITY ASSURANCE</div>
+                <h1 class="page-title">Acceptance Criteria & Smoke Test Guide</h1>
+                <p class="page-description">Comprehensive QA checklists for all components and user experiences in Smart App 2.0</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-container">
+        <a href="getting-started.html" class="back-button">← Back to Getting Started</a>
+
+        <!-- Introduction -->
+        <section class="content-section">
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                This document provides comprehensive acceptance criteria (AC) for all common components and user experiences in Smart App 2.0. Use this as a checklist for QA, smoke testing, and ensuring production-ready quality.
+            </p>
+        </section>
+
+        <!-- UX Acceptance Criteria -->
+        <section class="content-section">
+            <h2 class="content-section-title">🎯 User Experience Acceptance Criteria</h2>
+
+            <!-- UX Principle 1 -->
+            <div class="checklist-card">
+                <span class="category-badge ux">UX Principle</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Navigation & Wayfinding</h3>
+                    <p class="checklist-subtitle">Users should always know where they are and how to get back</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>Breadcrumb trail shows complete path from Home to current page</li>
+                    <li>All breadcrumb links are functional</li>
+                    <li>Back button returns to correct parent page</li>
+                    <li>Current page indicated in breadcrumbs (non-clickable, teal color)</li>
+                    <li>Navbar shows current section as "active"</li>
+                    <li>Footer includes contextual next/previous links</li>
+                    <li>URL structure reflects content hierarchy</li>
+                </ul>
+            </div>
+
+            <!-- UX Principle 2 -->
+            <div class="checklist-card">
+                <span class="category-badge ux">UX Principle</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Consistency & Predictability</h3>
+                    <p class="checklist-subtitle">Every page should follow established patterns</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>Navigation bar appears at top of every page</li>
+                    <li>Breadcrumbs appear below navbar on detail pages</li>
+                    <li>Page header format consistent across sections</li>
+                    <li>Back button in same position on all detail pages</li>
+                    <li>Footer appears at bottom of every page</li>
+                    <li>Color scheme matches design system</li>
+                    <li>Typography hierarchy consistent (h1, h2, h3 usage)</li>
+                </ul>
+            </div>
+
+            <!-- UX Principle 3 -->
+            <div class="checklist-card">
+                <span class="category-badge ux">UX Principle</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Responsive Design</h3>
+                    <p class="checklist-subtitle">Works perfectly on mobile, tablet, and desktop</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>Mobile (320px-767px): Single column, stacked elements</li>
+                    <li>Tablet (768px-1023px): Adjusted grid, readable text</li>
+                    <li>Desktop (1024px+): Full layout, all features visible</li>
+                    <li>Touch targets minimum 44x44px on mobile</li>
+                    <li>Text readable without zoom on all devices</li>
+                    <li>Images scale appropriately</li>
+                    <li>Tables scroll horizontally on small screens</li>
+                    <li>No horizontal scroll on any breakpoint</li>
+                </ul>
+            </div>
+
+            <!-- UX Principle 4 -->
+            <div class="checklist-card">
+                <span class="category-badge ux">UX Principle</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Performance & Loading</h3>
+                    <p class="checklist-subtitle">Fast, smooth experience with clear feedback</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>Page loads in &lt;2 seconds on 3G connection</li>
+                    <li>Images lazy-load below fold</li>
+                    <li>No render-blocking resources</li>
+                    <li>Smooth scroll behavior enabled</li>
+                    <li>Animations perform at 60fps</li>
+                    <li>Loading states for async operations</li>
+                    <li>No flash of unstyled content (FOUC)</li>
+                </ul>
+            </div>
+
+            <!-- UX Principle 5 -->
+            <div class="checklist-card">
+                <span class="category-badge ux">UX Principle</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Accessibility</h3>
+                    <p class="checklist-subtitle">Usable by everyone, including assistive technology</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>Semantic HTML elements used correctly</li>
+                    <li>ARIA labels on interactive elements</li>
+                    <li>Keyboard navigation works throughout</li>
+                    <li>Focus indicators visible and clear</li>
+                    <li>Color contrast meets WCAG AA standards (4.5:1)</li>
+                    <li>Alt text on all images</li>
+                    <li>Form labels properly associated with inputs</li>
+                    <li>Screen reader announces page changes</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Component-Level Acceptance Criteria -->
+        <section class="content-section">
+            <h2 class="content-section-title">🧩 Component-Level Acceptance Criteria</h2>
+
+            <!-- Navigation Bar -->
+            <div class="checklist-card">
+                <span class="category-badge component">Component</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Navigation Bar (Navbar)</h3>
+                    <p class="checklist-subtitle">Location: <code class="code-inline">components.css</code> lines 1-71</p>
+                </div>
+
+                <h4 style="color: var(--accent-teal); margin-bottom: 1rem;">Functional Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>Navbar sticky at top when scrolling</li>
+                    <li>Logo/brand links to Home (index.html)</li>
+                    <li>All nav links navigate to correct sections</li>
+                    <li>Active section highlighted visually</li>
+                    <li>Hover states work on all links</li>
+                    <li>Mobile: Hamburger menu icon appears &lt;768px</li>
+                    <li>Navbar doesn't overlap content</li>
+                </ul>
+
+                <h4 style="color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 1rem;">Visual Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>Background color: <code class="code-inline">--bg-card</code> (#1a2234)</li>
+                    <li>Text color: <code class="code-inline">--text-primary</code> (#f1f5f9)</li>
+                    <li>Active link color: <code class="code-inline">--accent-teal</code> (#14b8a6)</li>
+                    <li>Navbar brand icon displays correctly</li>
+                </ul>
+            </div>
+
+            <!-- Breadcrumbs -->
+            <div class="checklist-card">
+                <span class="category-badge component">Component</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Breadcrumbs</h3>
+                    <p class="checklist-subtitle">Location: <code class="code-inline">components.css</code> lines 73-143</p>
+                </div>
+
+                <h4 style="color: var(--accent-teal); margin-bottom: 1rem;">Functional Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>All non-current links are clickable</li>
+                    <li>Current page shown but not clickable</li>
+                    <li>Separator › between each level</li>
+                    <li>Breadcrumb path matches URL hierarchy</li>
+                    <li>Works at all hierarchy levels (2-level, 3-level)</li>
+                </ul>
+
+                <h4 style="color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 1rem;">Visual Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>Links: <code class="code-inline">--accent-blue</code> with hover effect</li>
+                    <li>Current page: <code class="code-inline">--text-muted</code></li>
+                    <li>Separators: <code class="code-inline">--text-muted</code></li>
+                    <li>Container max-width: 1400px</li>
+                </ul>
+            </div>
+
+            <!-- Data Tables -->
+            <div class="checklist-card">
+                <span class="category-badge component">Component</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Data Tables</h3>
+                    <p class="checklist-subtitle">Used throughout for requirements, features, research data</p>
+                </div>
+
+                <h4 style="color: var(--accent-teal); margin-bottom: 1rem;">Functional Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>Table scrolls horizontally on mobile</li>
+                    <li>Headers are sticky on scroll (optional)</li>
+                    <li>Status badges display correctly</li>
+                    <li>Links in tables work properly</li>
+                    <li>Zebra striping helps readability</li>
+                </ul>
+
+                <h4 style="color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 1rem;">Visual Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>Full width with rounded corners</li>
+                    <li>Header background: <code class="code-inline">--bg-secondary</code></li>
+                    <li>Row hover effect visible</li>
+                    <li>Cell padding consistent (1rem)</li>
+                    <li>Border color: <code class="code-inline">--border-color</code></li>
+                </ul>
+            </div>
+
+            <!-- Status Badges -->
+            <div class="checklist-card">
+                <span class="category-badge component">Component</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Status Badges</h3>
+                    <p class="checklist-subtitle">Color-coded status indicators</p>
+                </div>
+
+                <h4 style="color: var(--accent-teal); margin-bottom: 1rem;">Badge Variants:</h4>
+                <ul class="checklist-items">
+                    <li><code class="code-inline">.status-complete</code> - Green background (#10b981)</li>
+                    <li><code class="code-inline">.status-in-progress</code> - Yellow background (#f59e0b)</li>
+                    <li><code class="code-inline">.status-pending</code> - Gray background (#64748b)</li>
+                    <li><code class="code-inline">.badge-success</code> - Green outline</li>
+                    <li><code class="code-inline">.badge-info</code> - Blue outline</li>
+                    <li><code class="code-inline">.badge-warning</code> - Yellow outline</li>
+                </ul>
+
+                <h4 style="color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 1rem;">Visual Acceptance Criteria:</h4>
+                <ul class="checklist-items">
+                    <li>Rounded corners (4px border-radius)</li>
+                    <li>Padding: 0.25rem 0.75rem</li>
+                    <li>Font size: 0.85rem</li>
+                    <li>Font weight: 500</li>
+                    <li>Text transforms to uppercase</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Quality Standards -->
+        <section class="content-section">
+            <h2 class="content-section-title">✅ Quality Standards</h2>
+
+            <div class="checklist-card">
+                <span class="category-badge quality">Quality Standard</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Code Quality</h3>
+                    <p class="checklist-subtitle">Standards for HTML, CSS, and JavaScript</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>HTML validates (no errors in W3C validator)</li>
+                    <li>CSS classes follow naming convention</li>
+                    <li>No inline styles except for dynamic values</li>
+                    <li>JavaScript has error handling</li>
+                    <li>Console has no errors or warnings</li>
+                    <li>No deprecated HTML tags or attributes</li>
+                    <li>Code is readable with proper indentation</li>
+                    <li>Comments explain complex logic</li>
+                </ul>
+            </div>
+
+            <div class="checklist-card">
+                <span class="category-badge technical">Technical Standard</span>
+                <div class="checklist-header">
+                    <h3 class="checklist-title">Deployment & Version Control</h3>
+                    <p class="checklist-subtitle">Git and Vercel standards</p>
+                </div>
+
+                <ul class="checklist-items">
+                    <li>Commit messages are descriptive</li>
+                    <li>Code reviewed before merging</li>
+                    <li>Vercel deployment succeeds</li>
+                    <li>No broken links in production</li>
+                    <li>All images load correctly</li>
+                    <li>HTTPS works correctly</li>
+                    <li>Vercel Analytics enabled</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Smoke Test Checklist -->
+        <section class="content-section">
+            <h2 class="content-section-title">🔥 Quick Smoke Test Checklist</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                Run this quick checklist after every deployment to catch critical issues:
+            </p>
+
+            <div class="checklist-card">
+                <span class="category-badge technical">5-Minute Test</span>
+                <ul class="checklist-items">
+                    <li>Homepage loads without errors</li>
+                    <li>All main navigation links work</li>
+                    <li>Breadcrumbs function correctly</li>
+                    <li>Back buttons return to parent page</li>
+                    <li>Charts render on homepage</li>
+                    <li>Mobile view doesn't break layout</li>
+                    <li>Footer links work</li>
+                    <li>No console errors</li>
+                    <li>Images load properly</li>
+                    <li>Search functionality works (if enabled)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Usage Guide -->
+        <section class="content-section">
+            <h2 class="content-section-title">📖 How to Use This Guide</h2>
+            <ul class="bullet-list">
+                <li><strong>Before committing code</strong> - Review relevant component checklists</li>
+                <li><strong>After deployment</strong> - Run the 5-minute smoke test</li>
+                <li><strong>For new features</strong> - Create feature-specific acceptance criteria</li>
+                <li><strong>During QA</strong> - Use as comprehensive test plan</li>
+                <li><strong>For handoff</strong> - Share with stakeholders to set expectations</li>
+            </ul>
+        </section>
+
+        <!-- Related Resources -->
+        <section class="content-section">
+            <div style="background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)); border-radius: 12px; padding: 2rem;">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem;">🔗 Related Resources</h3>
+                <ul class="bullet-list">
+                    <li><a href="getting-started.html" style="color: var(--accent-blue);">Getting Started</a> - Quick start guide and project overview</li>
+                    <li><a href="architecture.html" style="color: var(--accent-blue);">Architecture</a> - Technical architecture and design philosophy</li>
+                    <li><a href="patterns.html" style="color: var(--accent-blue);">Code Patterns</a> - Reusable component patterns</li>
+                    <li><a href="implementation-prompts.html" style="color: var(--accent-blue);">Implementation Prompts</a> - Ready-to-use prompts for features</li>
+                </ul>
+                <p style="color: var(--text-secondary); margin-top: 1.5rem; margin-bottom: 0;">
+                    Quality is not an act, it is a habit. Use these checklists consistently to maintain excellence! ✨
+                </p>
+            </div>
+        </section>
+
+        <div style="margin-top: 3rem;">
+            <a href="getting-started.html" class="back-button">← Back to Getting Started</a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

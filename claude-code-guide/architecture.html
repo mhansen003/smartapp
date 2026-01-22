@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Architecture - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-primary);
+            padding-left: 0;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            overflow-x: auto;
+            line-height: 1.6;
+            color: var(--text-primary);
+            white-space: pre;
+        }
+
+        .code-inline {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .bullet-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .bullet-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .decision-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(20, 184, 166, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pro-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .con-box {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 4px solid var(--accent-red);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="getting-started.html" class="breadcrumb-link">Claude Code Guide</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Technical Architecture</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">TECHNICAL ARCHITECTURE</div>
+                <h1 class="page-title">Smart App 2.0 - Technical Architecture Overview</h1>
+                <p class="page-description">System architecture, design philosophy, and technical decisions for the knowledge base platform</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-container">
+        <a href="getting-started.html" class="back-button">← Back to Getting Started</a>
+
+        <!-- System Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">System Architecture</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                Smart App 2.0 is a <strong>static site knowledge base</strong> with a focus on simplicity, performance, and maintainability. No framework overhead - just clean HTML, CSS, and vanilla JavaScript.
+            </p>
+
+            <pre class="code-block">┌─────────────────────────────────────────────────────────────┐
+│                        Browser (Client)                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │   HTML       │  │     CSS      │  │  JavaScript  │      │
+│  │  Pages       │  │  Styles      │  │  (Charts)    │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+└────────────────────────────┬────────────────────────────────┘
+                             │ HTTP/HTTPS
+┌────────────────────────────▼────────────────────────────────┐
+│                      Vercel CDN (Edge)                       │
+│  - Global caching                                           │
+│  - Auto HTTPS                                               │
+│  - Instant deploys                                          │
+└────────────────────────────┬────────────────────────────────┘
+                             │ Git Push
+┌────────────────────────────▼────────────────────────────────┐
+│                   GitHub Repository                          │
+│  - Version control                                          │
+│  - CI/CD trigger                                            │
+│  - Collaboration                                            │
+└─────────────────────────────────────────────────────────────┘</pre>
+        </section>
+
+        <!-- Design Philosophy -->
+        <section class="content-section">
+            <h2 class="content-section-title">Design Philosophy</h2>
+
+            <h3 class="content-section-subtitle">1. Simplicity Over Complexity</h3>
+            <ul class="bullet-list">
+                <li>No build process needed</li>
+                <li>No framework dependency</li>
+                <li>Direct file editing</li>
+                <li>Instant preview (open HTML in browser)</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">2. Performance First</h3>
+            <ul class="bullet-list">
+                <li>Static HTML = fast load times</li>
+                <li>Minimal JavaScript (only for charts)</li>
+                <li>CSS variables for theming</li>
+                <li>Lazy loading for images below fold</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">3. Component-Based Architecture</h3>
+            <ul class="bullet-list">
+                <li>Reusable CSS components (<code class="code-inline">components.css</code>)</li>
+                <li>Consistent patterns across pages</li>
+                <li>Design system via CSS variables</li>
+                <li>Copy-paste component usage</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">4. Content-First Approach</h3>
+            <ul class="bullet-list">
+                <li>Markdown-like simplicity in HTML</li>
+                <li>Clear semantic structure</li>
+                <li>Easy to read, easy to maintain</li>
+                <li>Documentation-friendly</li>
+            </ul>
+        </section>
+
+        <!-- File Structure -->
+        <section class="content-section">
+            <h2 class="content-section-title">File Structure & Organization</h2>
+
+            <h3 class="content-section-subtitle">Core Files</h3>
+
+            <div class="decision-box">
+                <strong style="color: var(--accent-blue);">index.html</strong> - Main Dashboard
+                <ul class="bullet-list" style="margin-top: 0.5rem;">
+                    <li>Hub for all sections</li>
+                    <li>Tile-based navigation</li>
+                    <li>Charts and visualizations</li>
+                    <li>Stats overview</li>
+                </ul>
+            </div>
+
+            <div class="decision-box">
+                <strong style="color: var(--accent-teal);">styles.css</strong> - Global Styles
+                <ul class="bullet-list" style="margin-top: 0.5rem;">
+                    <li>CSS variables (design system)</li>
+                    <li>Typography scale</li>
+                    <li>Layout utilities</li>
+                    <li>Responsive breakpoints</li>
+                    <li>Animation definitions</li>
+                </ul>
+            </div>
+
+            <div class="decision-box">
+                <strong style="color: var(--accent-purple);">components.css</strong> - Component Library
+                <ul class="bullet-list" style="margin-top: 0.5rem;">
+                    <li>Navbar, Breadcrumbs, Page headers</li>
+                    <li>Cards and tiles</li>
+                    <li>Tables, Badges and status indicators</li>
+                    <li>Buttons, Footers</li>
+                </ul>
+            </div>
+
+            <div class="decision-box">
+                <strong style="color: var(--accent-yellow);">app.js</strong> - Interactivity
+                <ul class="bullet-list" style="margin-top: 0.5rem;">
+                    <li>Chart.js initialization</li>
+                    <li>Scroll animations</li>
+                    <li>Analytics tracking</li>
+                    <li>Keyboard shortcuts (future)</li>
+                </ul>
+            </div>
+
+            <h3 class="content-section-subtitle">Section Directories</h3>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                Each major section follows the same pattern:
+            </p>
+
+            <pre class="code-block">/section-name/
+  ├── index.html           # Section hub/landing page
+  ├── module-1.html        # Detail page 1
+  ├── module-2.html        # Detail page 2
+  └── ...                  # More detail pages</pre>
+
+            <p style="color: var(--text-secondary); margin-top: 1rem;"><strong>Sections:</strong></p>
+            <ul class="bullet-list">
+                <li><code class="code-inline">/requirements/</code> - 14 requirement modules</li>
+                <li><code class="code-inline">/research/</code> - Research synthesis docs</li>
+                <li><code class="code-inline">/documents/</code> - Strategic documents</li>
+                <li><code class="code-inline">/scoping/</code> - Timeline and planning</li>
+                <li><code class="code-inline">/integrations/</code> - UX patterns & architecture</li>
+                <li><code class="code-inline">/claude-code-guide/</code> - This guide!</li>
+            </ul>
+        </section>
+
+        <!-- Page Architecture Pattern -->
+        <section class="content-section">
+            <h2 class="content-section-title">Page Architecture Pattern</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                Every detail page follows this structure:
+            </p>
+
+            <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;!-- Meta tags --&gt;
+    &lt;!-- CSS links --&gt;
+    &lt;!-- Font imports --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 1. NAVIGATION --&gt;
+    &lt;nav class="navbar"&gt;...&lt;/nav&gt;
+
+    &lt;!-- 2. BREADCRUMBS --&gt;
+    &lt;div class="breadcrumbs"&gt;...&lt;/div&gt;
+
+    &lt;!-- 3. PAGE HEADER --&gt;
+    &lt;header class="page-header"&gt;...&lt;/header&gt;
+
+    &lt;!-- 4. MAIN CONTENT --&gt;
+    &lt;div class="content-container"&gt;
+        &lt;a href="../" class="back-button"&gt;...&lt;/a&gt;
+
+        &lt;!-- Content sections --&gt;
+        &lt;section class="content-section"&gt;...&lt;/section&gt;
+        &lt;section class="content-section"&gt;...&lt;/section&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 5. FOOTER --&gt;
+    &lt;footer class="footer"&gt;...&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </section>
+
+        <!-- CSS Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">CSS Architecture</h2>
+
+            <h3 class="content-section-subtitle">Design System (CSS Variables)</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Located in <code class="code-inline">:root</code> of <code class="code-inline">styles.css</code>:</p>
+
+            <pre class="code-block">:root {
+    /* Colors */
+    --bg-primary: #0a0f1a;
+    --bg-secondary: #111827;
+    --bg-card: #1a2234;
+    --accent-blue: #3b82f6;
+    --accent-teal: #14b8a6;
+    --accent-purple: #8b5cf6;
+    --accent-green: #10b981;
+    --accent-yellow: #f59e0b;
+    --accent-red: #ef4444;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-color: #334155;
+}</pre>
+
+            <h3 class="content-section-subtitle">Component Class Naming</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">BEM-inspired but simplified:</p>
+
+            <pre class="code-block">.component-name { }           /* Block */
+.component-name-element { }   /* Element */
+.component-name--modifier { } /* Modifier */
+
+Examples:
+- .navbar, .navbar-container, .navbar-brand
+- .breadcrumb-list, .breadcrumb-item, .breadcrumb-link
+- .page-header, .page-title, .page-description</pre>
+
+            <h3 class="content-section-subtitle">Responsive Approach</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Mobile-first with progressive enhancement:</p>
+
+            <pre class="code-block">/* Mobile first (default) */
+.component { }
+
+/* Tablet and up */
+@media (min-width: 768px) { }
+
+/* Desktop */
+@media (min-width: 1024px) { }</pre>
+        </section>
+
+        <!-- JavaScript Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">JavaScript Architecture</h2>
+
+            <h3 class="content-section-subtitle">Minimal JavaScript Philosophy</h3>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                Only use JavaScript when HTML/CSS can't achieve the goal:
+            </p>
+            <ul class="bullet-list">
+                <li>Charts (Chart.js library)</li>
+                <li>Scroll animations (IntersectionObserver)</li>
+                <li>Future: Search, filtering, dynamic content</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">Chart.js Integration</h3>
+            <pre class="code-block">// 1. Initialize charts on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    initializeResearchChart();
+    initializeRequirementsChart();
+    initializeTimelineChart();
+});
+
+// 2. Chart initialization functions
+function initializeResearchChart() {
+    const ctx = document.getElementById('researchChart');
+    if (!ctx) return;  // Exit if element doesn't exist
+
+    new Chart(ctx, { /* config */ });
+}
+
+// 3. Scroll animations
+const observer = new IntersectionObserver(/* ... */);</pre>
+
+            <h3 class="content-section-subtitle">Future JavaScript Needs</h3>
+            <ul class="bullet-list">
+                <li><strong>Search functionality</strong> - Client-side search across content</li>
+                <li><strong>Filter/sort</strong> - Data table interactions</li>
+                <li><strong>Form validation</strong> - LO configuration, task workflow</li>
+                <li><strong>State management</strong> - User preferences, progress tracking</li>
+                <li><strong>API integrations</strong> - Prove, FlueID, Truv, Plaid</li>
+            </ul>
+        </section>
+
+        <!-- Navigation Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">Navigation Architecture</h2>
+
+            <h3 class="content-section-subtitle">Three-Level Hierarchy</h3>
+            <pre class="code-block">Level 1: Home (index.html)
+    │
+    ├─► Level 2: Section Hub (/requirements/index.html)
+    │       │
+    │       └─► Level 3: Detail Page (/requirements/urla-gap.html)
+    │
+    ├─► Level 2: Section Hub (/research/index.html)
+    │       │
+    │       └─► Level 3: Detail Page (/research/lo-interviews.html)
+    │
+    └─► ... (more sections)</pre>
+
+            <h3 class="content-section-subtitle">Breadcrumb Strategy</h3>
+            <pre class="code-block">Home                          (Level 1)
+Home › Requirements           (Level 2)
+Home › Requirements › URLA    (Level 3)</pre>
+
+            <p style="color: var(--text-secondary); margin-top: 1rem;">
+                All links functional, current level non-clickable.
+            </p>
+
+            <h3 class="content-section-subtitle">URL Structure</h3>
+            <pre class="code-block">/                              # Home
+/requirements/                 # Section hub
+/requirements/urla-gap.html    # Detail page
+/research/                     # Section hub
+/research/lo-interviews.html   # Detail page</pre>
+
+            <p style="color: var(--text-secondary); margin-top: 1rem;">
+                Clean, predictable, SEO-friendly.
+            </p>
+        </section>
+
+        <!-- Data Flow Architecture -->
+        <section class="content-section">
+            <h2 class="content-section-title">Data Flow Architecture</h2>
+
+            <h3 class="content-section-subtitle">Static Content Workflow</h3>
+            <pre class="code-block">Content Creation
+    ↓
+HTML File Creation
+    ↓
+Git Commit
+    ↓
+Git Push to GitHub
+    ↓
+Vercel Auto-Deploy
+    ↓
+Global CDN Distribution
+    ↓
+User Access (Fast!)</pre>
+
+            <h3 class="content-section-subtitle">Future: Dynamic Data Integration</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">When implementing third-party integrations:</p>
+
+            <pre class="code-block">User Action (browser)
+    ↓
+JavaScript API Call
+    ↓
+Vendor API (Prove/FlueID/Truv/Plaid)
+    ↓
+Response Data
+    ↓
+Update UI (vanilla JS or framework if needed)</pre>
+        </section>
+
+        <!-- Technology Decisions -->
+        <section class="content-section">
+            <h2 class="content-section-title">Technology Decisions</h2>
+
+            <h3 class="content-section-subtitle">Why No Framework?</h3>
+            <div class="pros-cons-grid">
+                <div class="pro-box">
+                    <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">Pros</h4>
+                    <ul class="bullet-list">
+                        <li>Zero build complexity</li>
+                        <li>No dependency updates</li>
+                        <li>Easy to understand</li>
+                        <li>Fast performance</li>
+                        <li>Long-term stability</li>
+                    </ul>
+                </div>
+                <div class="con-box">
+                    <h4 style="color: var(--accent-red); margin-bottom: 0.75rem;">Cons</h4>
+                    <ul class="bullet-list">
+                        <li>Manual DOM manipulation</li>
+                        <li>No reactivity out-of-box</li>
+                        <li>More boilerplate for complex UIs</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <strong>Decision:</strong> For a knowledge base with mostly static content, the simplicity wins.
+            </div>
+
+            <h3 class="content-section-subtitle">Why Static Site?</h3>
+            <div class="pros-cons-grid">
+                <div class="pro-box">
+                    <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">Pros</h4>
+                    <ul class="bullet-list">
+                        <li>Extreme performance</li>
+                        <li>No backend required</li>
+                        <li>Cheap hosting</li>
+                        <li>High security</li>
+                        <li>Easy scaling</li>
+                    </ul>
+                </div>
+                <div class="con-box">
+                    <h4 style="color: var(--accent-red); margin-bottom: 0.75rem;">Cons</h4>
+                    <ul class="bullet-list">
+                        <li>No real-time data</li>
+                        <li>Limited interactivity</li>
+                        <li>No user accounts (yet)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <strong>Decision:</strong> Perfect for documentation hub. Can add dynamic features later as Vercel Functions.
+            </div>
+
+            <h3 class="content-section-subtitle">Why Vercel?</h3>
+            <div class="pros-cons-grid">
+                <div class="pro-box">
+                    <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">Pros</h4>
+                    <ul class="bullet-list">
+                        <li>Git integration</li>
+                        <li>Instant deploys</li>
+                        <li>Global CDN</li>
+                        <li>Free tier generous</li>
+                        <li>Serverless functions available</li>
+                    </ul>
+                </div>
+                <div class="decision-box">
+                    <strong>Alternative:</strong> GitHub Pages, Netlify, AWS S3+CloudFront
+                </div>
+            </div>
+            <div class="highlight-box">
+                <strong>Decision:</strong> Vercel provides best DX and performance for this use case.
+            </div>
+        </section>
+
+        <!-- Future Architecture Evolution -->
+        <section class="content-section">
+            <h2 class="content-section-title">Future Architecture Evolution</h2>
+
+            <div class="decision-box">
+                <h4 style="color: var(--accent-green); margin-bottom: 0.5rem;">✅ Phase 1 (Current): Static Knowledge Base</h4>
+                <ul class="bullet-list">
+                    <li>HTML/CSS/JS only</li>
+                    <li>No backend</li>
+                    <li>Content-focused</li>
+                    <li>Documentation-driven</li>
+                </ul>
+            </div>
+
+            <div class="decision-box">
+                <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">📋 Phase 2: Interactive Features (Planned)</h4>
+                <ul class="bullet-list">
+                    <li>Prove integration (identity verification)</li>
+                    <li>Search functionality</li>
+                    <li>Filter/sort capabilities</li>
+                    <li>Form validation</li>
+                    <li>User preferences (local storage)</li>
+                </ul>
+            </div>
+
+            <div class="decision-box">
+                <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem;">🔮 Phase 3: Dynamic Data (Future)</h4>
+                <ul class="bullet-list">
+                    <li>Serverless API (Vercel Functions)</li>
+                    <li>FlueID integration</li>
+                    <li>Truv/Plaid integrations</li>
+                    <li>Credit pull automation</li>
+                    <li>Database for user data</li>
+                </ul>
+            </div>
+
+            <div class="decision-box">
+                <h4 style="color: var(--accent-teal); margin-bottom: 0.5rem;">🚀 Phase 4: Full Application (Long-term)</h4>
+                <ul class="bullet-list">
+                    <li>User authentication</li>
+                    <li>Task workflow system</li>
+                    <li>LO dashboard</li>
+                    <li>Real-time updates</li>
+                    <li>Mobile app (possibly)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="content-section">
+            <div style="background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)); border-radius: 12px; padding: 2rem; text-align: center;">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem;">Architecture Summary</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong>Current Architecture:</strong> Simple, performant, maintainable static site<br>
+                    <strong>Future Path:</strong> Progressive enhancement with dynamic features as needed<br>
+                    <strong>Philosophy:</strong> Start simple, add complexity only when necessary
+                </p>
+                <p style="color: var(--accent-blue); margin-top: 1.5rem; font-size: 1.1rem;">
+                    This architecture supports the current needs perfectly while allowing future growth! 🚀
+                </p>
+            </div>
+        </section>
+
+        <div style="margin-top: 3rem;">
+            <a href="getting-started.html" class="back-button">← Back to Getting Started</a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Claude Code Engineer Guide</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-primary);
+            padding-left: 0;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            overflow-x: auto;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .code-inline {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .bullet-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .bullet-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Claude Code Guide</span>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Getting Started</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">DEVELOPER GUIDE</div>
+                <h1 class="page-title">Getting Started with Smart App 2.0</h1>
+                <p class="page-description">Claude Code Engineer Guide - Quickly understand the project structure and start implementing features</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-container">
+        <a href="../index.html" class="back-button">← Back to Dashboard</a>
+
+        <!-- Project Overview -->
+        <section class="content-section">
+            <h2 class="content-section-title">Project Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                <strong>Smart App 2.0</strong> is a reimagined digital mortgage application platform designed to streamline the borrower experience through intelligent automation, third-party integrations, and AI-powered assistance. This guide will help you quickly understand the project structure and start implementing features.
+            </p>
+        </section>
+
+        <!-- Project Vision -->
+        <section class="content-section">
+            <h2 class="content-section-title">🎯 Project Vision</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                    Transform the traditional mortgage application process from a long, repetitive form into a <strong>shorter initial intake</strong> followed by <strong>gamified task completion</strong>.
+                </p>
+            </div>
+            <h3 class="content-section-subtitle">Key Principles</h3>
+            <ul class="bullet-list">
+                <li><strong>Separate intake from completion</strong> - Get pre-qualification data fast, then guide through tasks</li>
+                <li><strong>Smart data prefill</strong> - Leverage Prove, FlueID, Truv, Plaid to minimize manual entry</li>
+                <li><strong>AI-powered assistance</strong> - Context-aware help throughout the journey</li>
+                <li><strong>Loan Officer empowerment</strong> - Give LOs visibility and control</li>
+                <li><strong>Mobile-first design</strong> - Most borrowers start on mobile devices</li>
+            </ul>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="content-section">
+            <h2 class="content-section-title">📊 Tech Stack</h2>
+            <ul class="bullet-list">
+                <li><strong>Frontend:</strong> Static HTML/CSS/JavaScript (no framework - intentional simplicity)</li>
+                <li><strong>Styling:</strong> Custom CSS with design system (variables, components)</li>
+                <li><strong>Charts:</strong> Chart.js for data visualization</li>
+                <li><strong>Fonts:</strong> Plus Jakarta Sans (UI), JetBrains Mono (mono/labels)</li>
+                <li><strong>Deployment:</strong> Vercel (automatic deployments from GitHub)</li>
+                <li><strong>Version Control:</strong> GitHub</li>
+            </ul>
+        </section>
+
+        <!-- Repository Structure -->
+        <section class="content-section">
+            <h2 class="content-section-title">📁 Repository Structure</h2>
+            <pre class="code-block">C:\GitHub\smartapp\
+├── index.html              # Main dashboard/hub
+├── styles.css              # Global styles and design system
+├── components.css          # Reusable component styles
+├── app.js                  # Charts and interactions
+├── requirements/           # 14 requirement modules
+│   ├── index.html         # Requirements hub
+│   ├── urla-gap.html      # URLA data gap analysis
+│   ├── data-tasks.html    # Data tasks matrix
+│   └── ...                # 11 more modules
+├── research/              # Research documentation
+│   ├── index.html         # Research hub
+│   ├── lo-interviews.html # LO interview findings
+│   └── ...                # 4 more pages
+├── documents/             # Key strategic documents
+│   ├── index.html         # Documents hub
+│   ├── flueid-findings.html
+│   ├── bolt-feedback.html
+│   └── ...                # 2 more pages
+├── scoping/               # Timeline and planning
+├── integrations/          # UX patterns & architecture
+└── claude-code-guide/     # This guide!</pre>
+        </section>
+
+        <!-- Design System -->
+        <section class="content-section">
+            <h2 class="content-section-title">🎨 Design System</h2>
+            <h3 class="content-section-subtitle">Color Palette (styles.css)</h3>
+            <pre class="code-block">:root {
+    --bg-primary: #0a0f1a;        /* Main background */
+    --bg-secondary: #111827;      /* Secondary sections */
+    --bg-card: #1a2234;           /* Card backgrounds */
+    --accent-blue: #3b82f6;       /* Primary actions */
+    --accent-teal: #14b8a6;       /* Secondary accent */
+    --accent-purple: #8b5cf6;     /* AI/special features */
+    --accent-green: #10b981;      /* Success states */
+    --accent-yellow: #f59e0b;     /* Warning/in-progress */
+    --accent-red: #ef4444;        /* Critical/errors */
+    --text-primary: #f1f5f9;      /* Main text */
+    --text-secondary: #94a3b8;    /* Secondary text */
+    --text-muted: #64748b;        /* Muted text */
+    --border-color: #334155;      /* Borders */
+}</pre>
+
+            <h3 class="content-section-subtitle">Key Components</h3>
+            <ul class="bullet-list">
+                <li><strong>Tiles</strong> - Clickable cards for navigation</li>
+                <li><strong>Tables</strong> - Data presentation with status badges</li>
+                <li><strong>Cards</strong> - Information containers</li>
+                <li><strong>Breadcrumbs</strong> - Navigation trail</li>
+                <li><strong>Status Badges</strong> - Color-coded states</li>
+                <li><strong>Back Buttons</strong> - Consistent navigation</li>
+            </ul>
+        </section>
+
+        <!-- Navigation Pattern -->
+        <section class="content-section">
+            <h2 class="content-section-title">🔗 Navigation Pattern</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                Every detail page follows this structure:
+            </p>
+            <ul class="bullet-list">
+                <li>Navigation bar (sticky)</li>
+                <li>Breadcrumbs (Home › Section › Detail)</li>
+                <li>Page header with metadata</li>
+                <li>Back button to parent</li>
+                <li>Content sections</li>
+                <li>Footer with next/previous links</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">Example Breadcrumb Trail</h3>
+            <div class="code-inline">Home › Requirements › URLA Data Gap</div><br><br>
+            <div class="code-inline">Home › Documents › FlueID Findings</div>
+        </section>
+
+        <!-- Quick Start Guide -->
+        <section class="content-section">
+            <h2 class="content-section-title">🚀 Quick Start Guide</h2>
+
+            <h3 class="content-section-subtitle">Step 1: Repository Setup</h3>
+            <pre class="code-block"># Clone the repository
+git clone https://github.com/your-org/smartapp.git
+cd smartapp
+
+# Open in your code editor
+code .</pre>
+
+            <h3 class="content-section-subtitle">Step 2: Explore the Structure</h3>
+            <ul class="bullet-list">
+                <li>Start at <code class="code-inline">index.html</code> - the main hub that links to all sections</li>
+                <li>Review <code class="code-inline">styles.css</code> - global styles and design tokens</li>
+                <li>Review <code class="code-inline">components.css</code> - reusable component classes</li>
+                <li>Check <code class="code-inline">requirements/</code> - explore 14 requirement modules</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">Step 3: Deploy to Vercel</h3>
+            <ul class="bullet-list">
+                <li>Push your code to GitHub</li>
+                <li>Connect repository to Vercel</li>
+                <li>Automatic deployments on every push to main</li>
+                <li>Preview URLs for PRs</li>
+            </ul>
+        </section>
+
+        <!-- Common Tasks -->
+        <section class="content-section">
+            <h2 class="content-section-title">📝 Common Development Tasks</h2>
+
+            <h3 class="content-section-subtitle">Adding a New Page</h3>
+            <ul class="bullet-list">
+                <li>Copy an existing page as a template (e.g., <code class="code-inline">requirements/template.html</code>)</li>
+                <li>Update the title, breadcrumbs, and page header</li>
+                <li>Add your content using the <code class="code-inline">.content-section</code> class</li>
+                <li>Link to it from the parent hub page</li>
+                <li>Add a tile on the homepage if it's a major section</li>
+            </ul>
+
+            <h3 class="content-section-subtitle">Updating Styles</h3>
+            <ul class="bullet-list">
+                <li><strong>Global changes:</strong> Edit <code class="code-inline">styles.css</code> (affects all pages)</li>
+                <li><strong>Component changes:</strong> Edit <code class="code-inline">components.css</code></li>
+                <li><strong>Page-specific:</strong> Add <code class="code-inline">&lt;style&gt;</code> block in the page's <code class="code-inline">&lt;head&gt;</code></li>
+            </ul>
+
+            <h3 class="content-section-subtitle">Adding Charts/Visualizations</h3>
+            <ul class="bullet-list">
+                <li>Use Chart.js (already included)</li>
+                <li>Add a <code class="code-inline">&lt;canvas&gt;</code> element with a unique ID</li>
+                <li>Initialize chart in a <code class="code-inline">&lt;script&gt;</code> block</li>
+                <li>See <code class="code-inline">metrics/dashboard.html</code> for examples</li>
+            </ul>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="content-section">
+            <h2 class="content-section-title">✅ Best Practices</h2>
+            <div class="highlight-box">
+                <ul class="bullet-list">
+                    <li><strong>Consistent styling:</strong> Use existing CSS classes, don't reinvent components</li>
+                    <li><strong>Semantic HTML:</strong> Use proper heading hierarchy (h1, h2, h3)</li>
+                    <li><strong>Accessibility:</strong> Add alt text, ARIA labels where needed</li>
+                    <li><strong>Mobile-first:</strong> Test on small screens first, then enhance for desktop</li>
+                    <li><strong>Performance:</strong> Keep pages lightweight, lazy-load images if needed</li>
+                    <li><strong>Clear navigation:</strong> Every page needs breadcrumbs + back button</li>
+                    <li><strong>Data sources:</strong> Cite source files when documenting requirements</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="content-section">
+            <h2 class="content-section-title">🎓 Next Steps</h2>
+            <div style="background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)); border-radius: 12px; padding: 2rem; margin-top: 1.5rem;">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem;">Continue Your Journey</h3>
+                <ul class="bullet-list">
+                    <li><a href="architecture.html" style="color: var(--accent-blue);">Architecture Guide</a> - Understand the technical architecture</li>
+                    <li><a href="patterns.html" style="color: var(--accent-blue);">Design Patterns</a> - Common patterns used throughout the codebase</li>
+                    <li><a href="acceptance-criteria.html" style="color: var(--accent-blue);">Acceptance Criteria</a> - Feature requirements and testing guidelines</li>
+                    <li><a href="implementation-prompts.html" style="color: var(--accent-blue);">Implementation Prompts</a> - Ready-to-use prompts for Claude Code</li>
+                </ul>
+            </div>
+        </section>
+
+        <div style="margin-top: 3rem;">
+            <a href="../index.html" class="back-button">← Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

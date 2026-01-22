@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation Prompts - Smart App 2.0</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-primary);
+            padding-left: 0;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .prompt-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .prompt-number {
+            background: var(--accent-teal);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .prompt-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            overflow-x: auto;
+            line-height: 1.6;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+        }
+
+        .priority-badge {
+            background: var(--accent-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .when-to-use {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .bullet-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .bullet-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <span class="navbar-icon">📊</span>
+                Smart App 2.0
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="getting-started.html" class="breadcrumb-link">Claude Code Guide</a>
+                    <span class="breadcrumb-separator">›</span>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current">Implementation Prompts</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-container">
+            <div class="page-header-content">
+                <div class="page-label">READY-TO-USE PROMPTS</div>
+                <h1 class="page-title">Claude Code Implementation Prompts</h1>
+                <p class="page-description">Copy-paste ready prompts for implementing specific Smart App 2.0 features with detailed context</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-container">
+        <a href="getting-started.html" class="back-button">← Back to Getting Started</a>
+
+        <!-- Introduction -->
+        <section class="content-section">
+            <p style="color: var(--text-secondary); line-height: 1.8;">
+                This document contains ready-to-use prompts for implementing specific features in Smart App 2.0. Each prompt includes complete project context, requirements, and implementation guidance. Simply copy the entire prompt and paste into Claude Code to get started with fully detailed context.
+            </p>
+        </section>
+
+        <!-- Prompt 1 -->
+        <div class="prompt-card">
+            <div class="prompt-header">
+                <div class="prompt-number">1</div>
+                <h2 class="prompt-title">Create a New Requirements Module</h2>
+            </div>
+
+            <pre class="code-block">I'm working on the Smart App 2.0 Strategy Hub project. I need to create a new requirements module page following the exact pattern established in the existing modules.
+
+PROJECT CONTEXT:
+- Repository: C:\GitHub\smartapp
+- This is a static HTML/CSS/JS knowledge base
+- Existing example: C:\GitHub\smartapp\requirements\urla-gap.html
+- Design system: C:\GitHub\smartapp\styles.css and components.css
+
+REQUIREMENTS MODULE PATTERN:
+1. Navigation bar at top (navbar)
+2. Breadcrumbs: Home › Requirements › [Module Name]
+3. Page header with:
+   - Module label (e.g., "Module 01")
+   - Large title
+   - Description
+   - Meta items with icons
+4. Back button to /requirements/
+5. Content sections with:
+   - Overview cards
+   - Data tables with status badges
+   - Action items lists
+6. Footer with navigation links
+
+NEW MODULE TO CREATE:
+- Module number: [NUMBER]
+- Title: [TITLE]
+- Description: [DESCRIPTION]
+- Content: [DESCRIBE WHAT TABLES/SECTIONS NEEDED]
+
+INSTRUCTIONS:
+1. Read C:\GitHub\smartapp\requirements\urla-gap.html to understand the complete pattern
+2. Create C:\GitHub\smartapp\requirements\[filename].html following the EXACT same structure
+3. Use the same CSS classes: navbar, breadcrumbs, page-header, data-table, status-badge, etc.
+4. Match the color scheme and spacing exactly
+5. Ensure all navigation links work correctly
+6. Test the breadcrumb trail
+
+EXAMPLE DATA STRUCTURE:
+[Provide table structure or content outline here]
+
+Please create this module with complete, production-ready code.</pre>
+
+            <div class="when-to-use">
+                <strong style="color: var(--accent-blue);">When to use:</strong>
+                <span style="color: var(--text-secondary);"> Creating any new requirements module (Modules 06-14 that are still partial/pending)</span>
+            </div>
+        </div>
+
+        <!-- Prompt 2 -->
+        <div class="prompt-card">
+            <div class="prompt-header">
+                <div class="prompt-number">2</div>
+                <div>
+                    <h2 class="prompt-title">Task Workflow System</h2>
+                    <span class="priority-badge">P0 Priority</span>
+                </div>
+            </div>
+
+            <pre class="code-block">I'm implementing the Task Workflow System for Smart App 2.0 based on Paul Akinmade's critical feedback from the Bolt prototype demo.
+
+PROJECT CONTEXT:
+- Repository: C:\GitHub\smartapp
+- Read C:\GitHub\smartapp\documents\bolt-feedback.html for Paul's complete vision
+- This is the HIGHEST PRIORITY feature from stakeholder feedback
+
+PAUL'S VISION:
+After borrower submits initial application, instead of showing a static task dashboard:
+1. Show "Let's get ahead of some tasks now"
+2. Present tasks ONE AT A TIME in priority order: "Task 1 of 7"
+3. Each task has "Complete" or "Skip for now" options
+4. Track completion progress
+5. On completion: "Thank you for completing 5 of 7 tasks. 2 remaining tasks available in your dashboard."
+
+PRIORITY TASK SEQUENCE:
+1. E-consent setup (Solex integration)
+2. Borrower authorization signing
+3. Pre-disclosure package
+4. Truv verification (allow multiple attempts)
+5. Asset verification (Plaid)
+6. Additional documentation upload
+7. Declarations completion
+
+DESIGN REQUIREMENTS:
+- Gamified feel (progress bar, encouraging messages)
+- "Skip for now" maintains momentum (doesn't feel like failure)
+- Mobile-first design
+- Launch external tools (Solex, Truv, Plaid) and return seamlessly
+- Abandoned task recovery in subsequent sessions
+
+IMPLEMENTATION NEEDS:
+1. Create task workflow component/module
+2. Design one-task-at-a-time interface
+3. Build progress tracking system
+4. Design "skip" pattern
+5. Create completion summary screen
+
+Please read the Bolt Feedback document first, then create a detailed implementation plan with HTML/CSS prototypes for this task workflow system. Focus on the UX flow and visual design that matches our existing component library.</pre>
+
+            <div class="when-to-use">
+                <strong style="color: var(--accent-blue);">When to use:</strong>
+                <span style="color: var(--text-secondary);"> Implementing the post-submission task workflow (P0 priority, highest stakeholder demand)</span>
+            </div>
+        </div>
+
+        <!-- Prompt 3 -->
+        <div class="prompt-card">
+            <div class="prompt-header">
+                <div class="prompt-number">3</div>
+                <div>
+                    <h2 class="prompt-title">Prove Identity Verification</h2>
+                    <span class="priority-badge">P0 Priority</span>
+                </div>
+            </div>
+
+            <pre class="code-block">I need to implement Prove identity verification integration for Smart App 2.0.
+
+PROJECT CONTEXT:
+- Repository: C:\GitHub\smartapp
+- Prove is our identity verification vendor
+- Read C:\GitHub\smartapp\documents\bolt-feedback.html (search for "Prove")
+- Existing prototype: https://streamlined-digital-a1nj.bolt.host/
+
+PROVE INTEGRATION OVERVIEW:
+- Vendor handles identity verification via "magic link" sent to borrower's phone
+- Has agreements with telecom companies for seamless verification
+- Pre-fills: name, email, phone number, SSN
+- <10% no-hit rate (very reliable)
+- Used by DocuSign, Zelle, Experian
+
+USER FLOW:
+1. Borrower enters email, phone, date of birth
+2. System sends magic link via text
+3. Borrower clicks link (telecom auto-verifies)
+4. System receives verified data from Prove API
+5. Pre-fill borrower information fields
+6. Show success message with what was auto-populated
+7. Allow editing of pre-filled data
+
+FALLBACK FLOW:
+If Prove fails (<10% cases):
+- Show friendly error message
+- Provide manual entry form for same fields
+- No degraded experience, just manual input
+
+TECHNICAL REQUIREMENTS:
+1. Form validation for email/phone/DOB
+2. API integration with Prove (document the endpoint structure)
+3. Success/error state handling
+4. Data pre-fill logic
+5. Mobile-first design (many users on mobile)
+
+DESIGN REQUIREMENTS:
+- Match existing Smart App 2.0 component library
+- Clear messaging about why we're using Prove (security, convenience)
+- Loading states during verification
+- Success confirmation showing what was auto-filled
+
+Please create:
+1. HTML form for initial data entry
+2. Success screen design with pre-filled data review
+3. Fallback manual entry form
+4. Integration specification document
+
+Reference the Bolt prototype for UX inspiration but use our design system.</pre>
+
+            <div class="when-to-use">
+                <strong style="color: var(--accent-blue);">When to use:</strong>
+                <span style="color: var(--text-secondary);"> Implementing Prove integration for identity verification (P0 priority)</span>
+            </div>
+        </div>
+
+        <!-- Prompt 4 -->
+        <div class="prompt-card">
+            <div class="prompt-header">
+                <div class="prompt-number">4</div>
+                <h2 class="prompt-title">FlueID Title Data Integration</h2>
+            </div>
+
+            <pre class="code-block">I need to implement FlueID (title data) integration for Smart App 2.0 refinance flows.
+
+PROJECT CONTEXT:
+- Repository: C:\GitHub\smartapp
+- Read C:\GitHub\smartapp\documents\flueid-findings.html for COMPLETE vendor analysis
+- Read C:\GitHub\smartapp\documents\bolt-feedback.html (search for "title data")
+
+FLUEID CAPABILITIES (from research):
+- Property address, type, characteristics
+- Current owner names (critical for co-borrower detection!)
+- Mortgage info: lender, balance, rate, payment
+- Property taxes and HOA fees
+- Liens, judgments, foreclosure status
+- Cost: $5k/month flat fee, unlimited runs
+
+KEY USE CASES:
+1. **Refinance Co-Borrower Detection**: "How did you know John and Bobby were on title with me?" (wow moment!)
+2. **REO Section**: Validate investment properties against title records
+3. **URLA Pre-fill**: 22-28 fields with address only, 40 fields with address + SSN
+4. **Risk Flagging**: Bankruptcy, foreclosure, judgment indicators
+
+REFINANCE FLOW INTEGRATION:
+1. Borrower enters subject property address
+2. Call FlueID API with address
+3. Retrieve title data (owner names, liens, etc.)
+4. Detect co-borrowers on title
+5. Pre-populate: "We found John Smith and Bobby Jones on title. Will they be on the new loan?"
+6. Auto-fill property value, taxes, HOA, current mortgage details
+7. Flag any issues (multiple liens, bankruptcy, etc.)
+
+Please create:
+1. Address input form with validation
+2. FlueID API integration specification
+3. Co-borrower detection and prompt UI
+4. Pre-fill success screen
+5. Risk flagging alert components</pre>
+
+            <div class="when-to-use">
+                <strong style="color: var(--accent-blue);">When to use:</strong>
+                <span style="color: var(--text-secondary);"> Implementing FlueID title data integration for refinance co-borrower detection</span>
+            </div>
+        </div>
+
+        <!-- Additional Prompts Note -->
+        <section class="content-section">
+            <div style="background: rgba(59, 130, 246, 0.05); border-left: 4px solid var(--accent-blue); padding: 1.5rem; border-radius: 8px;">
+                <h3 style="color: var(--accent-blue); margin-top: 0;">📚 Additional Implementation Prompts</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    The complete implementation prompts document includes additional prompts for:
+                </p>
+                <ul class="bullet-list">
+                    <li><strong>TRUV Integration</strong> - Employment and income verification</li>
+                    <li><strong>Plaid Integration</strong> - Asset verification</li>
+                    <li><strong>LO Dashboard</strong> - Loan officer visibility and control interface</li>
+                    <li><strong>Progressive Disclosure</strong> - Multi-step application flow</li>
+                    <li><strong>Data Tasks Matrix</strong> - What we have vs. what we need</li>
+                    <li><strong>And more...</strong> See <code style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9em;">implementation-prompts.md</code> for the complete library</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Usage Tips -->
+        <section class="content-section">
+            <h2 class="content-section-title">🎯 How to Use These Prompts</h2>
+            <ul class="bullet-list">
+                <li><strong>Copy the entire prompt</strong> - Include all context, not just the task description</li>
+                <li><strong>Replace placeholders</strong> - Fill in [BRACKETS] with your specific values</li>
+                <li><strong>Paste into Claude Code</strong> - Use the full prompt in a new Claude Code session</li>
+                <li><strong>Review generated code</strong> - Always test and validate before deploying</li>
+                <li><strong>Iterate as needed</strong> - Ask follow-up questions to refine the implementation</li>
+            </ul>
+        </section>
+
+        <!-- Related Resources -->
+        <section class="content-section">
+            <div style="background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)); border-radius: 12px; padding: 2rem;">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem;">🔗 Related Resources</h3>
+                <ul class="bullet-list">
+                    <li><a href="getting-started.html" style="color: var(--accent-blue);">Getting Started</a> - Quick start guide and project overview</li>
+                    <li><a href="architecture.html" style="color: var(--accent-blue);">Architecture</a> - Technical architecture and design philosophy</li>
+                    <li><a href="patterns.html" style="color: var(--accent-blue);">Code Patterns</a> - Reusable component patterns</li>
+                    <li><a href="acceptance-criteria.html" style="color: var(--accent-blue);">Acceptance Criteria</a> - Quality standards for features</li>
+                </ul>
+            </div>
+        </section>
+
+        <div style="margin-top: 3rem;">
+            <a href="getting-started.html" class="back-button">← Back to Getting Started</a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
