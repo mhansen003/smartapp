@@ -242,17 +242,6 @@
                     </div>
                 </a>
 
-                <!-- Stakeholder Sessions -->
-                <a href="stakeholder-sessions.html" class="card">
-                    <div class="card-icon">💻</div>
-                    <h3 class="card-title">Stakeholder Sessions</h3>
-                    <p class="card-description">Cross-functional discovery sessions with Product, Development, and Technical teams. Understanding system constraints, opportunities, and technical feasibility.</p>
-                    <div class="tile-meta" style="margin-top: 1rem;">
-                        <span class="badge badge-success">6 Sessions</span>
-                        <span class="badge badge-info">Cross-Functional</span>
-                    </div>
-                </a>
-
                 <!-- Concept Testing -->
                 <a href="concept-testing.html" class="card">
                     <div class="card-icon">🧪</div>
@@ -732,18 +721,16 @@
             new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['LO Interviews', 'Stakeholder Sessions', 'Concept Testing', 'Synthesis'],
+                    labels: ['LO Interviews', 'Concept Testing', 'Synthesis'],
                     datasets: [{
-                        data: [7, 6, 4, 3],
+                        data: [7, 4, 3],
                         backgroundColor: [
                             'rgba(59, 130, 246, 0.8)',
-                            'rgba(20, 184, 166, 0.8)',
                             'rgba(139, 92, 246, 0.8)',
                             'rgba(16, 185, 129, 0.8)'
                         ],
                         borderColor: [
                             'rgba(59, 130, 246, 1)',
-                            'rgba(20, 184, 166, 1)',
                             'rgba(139, 92, 246, 1)',
                             'rgba(16, 185, 129, 1)'
                         ],
