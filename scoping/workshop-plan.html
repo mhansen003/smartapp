@@ -516,6 +516,65 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Template Warning Banner */
+        .template-warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
+            border: 2px solid #ef4444;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1400px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .template-warning-icon {
+            font-size: 3rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .template-warning-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .template-warning-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .template-warning-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .template-warning-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .template-warning-content ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .template-warning-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -596,6 +655,31 @@
                 <strong>Last Updated:</strong> January 2026<br>
                 <strong>Contains:</strong> Workshop strategy, agendas, objectives, and stakeholder alignment plans
             </p>
+        </div>
+
+        <!-- Template Warning Banner -->
+        <div class="template-warning-banner">
+            <div class="template-warning-icon">⚠️</div>
+            <div class="template-warning-content">
+                <h2>TEMPLATE: Example Workshop Format with Fabricated Attendees</h2>
+                <p>
+                    This page contains <strong>fabricated example attendee names</strong> (Sarah Chen, Michael Jordan, Emily Parker, David Kim, Lisa Martinez, James Rodriguez, Amanda Williams, Thomas Nguyen, Rachel Brown, Kevin Chen, Samantha Patel, Brian Lee) for demonstration purposes only.
+                </p>
+                <p>
+                    <strong>REAL workshop content and strategy documented in:</strong>
+                </p>
+                <p style="font-size: 1.1rem; margin-left: 1.5rem;">
+                    📄 <strong>SmartApp 2.0 Workshop Plan.docx</strong>
+                </p>
+                <ul>
+                    <li>Actual research was conducted with real LOs (Andrea Wine, CJ Nelson, Josh Campbell, Tim Loss, Christopher Minjarez, Diedra Schaefer, Stephanie Pereira) in Nov-Dec 2025 and Jan 2026</li>
+                    <li>Real product/dev team members: Paul, Yaz, Kelli, Ashwin, Brooke, Cory, Cathy, David (see team directory)</li>
+                    <li>Workshop format and agendas are based on real planning documents</li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <strong>Use this template as a guide - replace example attendee names with actual workshop participants.</strong>
+                </p>
+            </div>
         </div>
 
         <!-- Workshop Strategy Overview -->
